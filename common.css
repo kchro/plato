@@ -1,0 +1,46 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.top-bar {
+  width: 100%;
+  height: 60px;
+  background-color: rgb(17, 5, 110);
+}
+
+.main-content {
+  width: 100%;
+  height: calc(100% - 90px);
+  display: flex;
+}
+
+.side-bar {
+  width: 200px;
+  flex: 0 0 auto;
+  background-color: rgb(108, 123, 131);
+}
+
+.content {
+  flex: 1 0 auto;
+  background-color: rgb(230, 230, 230);
+  padding: 50px;
+}
+
+#plato-app {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+
+.hidden {
+  display: none;
+}
+
+.footer {
+  width: 100%;
+  height: 30px;
+  background-color: rgb(17, 5, 110);
+}

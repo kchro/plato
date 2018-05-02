@@ -1,0 +1,48 @@
+INFO main openproof.plato.controller.Controller -   
+INFO AWT-EventQueue-0 openproof.plato.controller.Controller - 489925ms  
+INFO main openproof.plato.controller.Controller -   
+INFO AWT-EventQueue-0 openproof.plato.controller.Controller - 117273ms  
+INFO main openproof.plato.controller.Controller -   
+INFO AWT-EventQueue-0 openproof.plato.controller.Controller - 229905ms  
+INFO main openproof.plato.controller.Controller -   
+INFO main openproof.plato.controller.Controller -   
+INFO Thread-7 openproof.plato.controller.Controller - ~(Larger(c,d) V Large(b)) <gen> 322ms
+DEBUG AWT-EventQueue-0 openproof.FOLTextEditor.FOLTextArea - Change font to Openproof
+DEBUG AWT-EventQueue-0 openproof.FOLTextEditor.FOLTextArea - Change font to Openproof
+DEBUG AWT-EventQueue-0 openproof.FOLTextEditor.FOLTextArea - Change font to Openproof
+DEBUG AWT-EventQueue-0 openproof.FOLTextEditor.FOLTextArea - Change font to Openproof
+INFO AWT-EventQueue-0 openproof.plato.controller.Controller - ~(Larger(c,d) V Large(b)) <pair><sent>It isn't the case that |c| is larger than |d|, or that |b| is large.</sent><rules></rules></pair> 
+DEBUG AWT-EventQueue-0 openproof.FOLTextEditor.FOLTextArea - Change font to Openproof
+DEBUG AWT-EventQueue-0 openproof.FOLTextEditor.FOLTextArea - Change font to Openproof
+INFO AWT-EventQueue-0 openproof.plato.controller.Controller - ~(Larger(c,d) V Large(b)) <pair><sent>It's not the case that |c| is larger than |d|, or that |b| is large.</sent><rules></rules></pair> 
+INFO Thread-10 openproof.plato.controller.Controller - Dodec(f) V SameCol(d,b) |F| is a dodecahedron, or |d| is in the same column as |b|. 340ms
+DEBUG AWT-EventQueue-0 openproof.FOLTextEditor.FOLTextArea - Change font to Openproof
+DEBUG AWT-EventQueue-0 openproof.FOLTextEditor.FOLTextArea - Change font to Openproof
+DEBUG AWT-EventQueue-0 openproof.FOLTextEditor.FOLTextArea - Change font to Openproof
+DEBUG AWT-EventQueue-0 openproof.FOLTextEditor.FOLTextArea - Change font to Openproof
+INFO AWT-EventQueue-0 openproof.plato.controller.Controller - Dodec(f) V SameCol(d,b) |F| is a dodecahedron, or |d| is in the same column as |b|. 
+DEBUG AWT-EventQueue-0 openproof.FOLTextEditor.FOLTextArea - Change font to Openproof
+DEBUG AWT-EventQueue-0 openproof.FOLTextEditor.FOLTextArea - Change font to Openproof
+INFO AWT-EventQueue-0 openproof.plato.controller.Controller - Dodec(f) V SameCol(d,b) |F| is a dodecahedron or |d| is in the same column as |b|. 
+INFO Thread-13 openproof.plato.controller.Controller - ~Medium(e) V ~~(SameSize(f,e) V SameSize(a,d)) It isn't the case that |e| is medium, or it isn't the case that it isn't the case that |f| is the same size as |e|, or that |a| is the same size as |d|. 90530ms
+DEBUG AWT-EventQueue-0 openproof.FOLTextEditor.FOLTextArea - Change font to Openproof
+DEBUG AWT-EventQueue-0 openproof.FOLTextEditor.FOLTextArea - Change font to Openproof
+DEBUG AWT-EventQueue-0 openproof.FOLTextEditor.FOLTextArea - Change font to Openproof
+DEBUG AWT-EventQueue-0 openproof.FOLTextEditor.FOLTextArea - Change font to Openproof
+INFO AWT-EventQueue-0 openproof.plato.controller.Controller - ~Medium(e) V ~~(SameSize(f,e) V SameSize(a,d)) It is not the case that |e| is medium, or it isn't the case that it isn't the case that |f| is the same size as |e|, or that |a| is the same size as |d|. 
+DEBUG AWT-EventQueue-0 openproof.FOLTextEditor.FOLTextArea - Change font to Openproof
+DEBUG AWT-EventQueue-0 openproof.FOLTextEditor.FOLTextArea - Change font to Openproof
+INFO AWT-EventQueue-0 openproof.plato.controller.Controller - ~Medium(e) V ~~(SameSize(f,e) V SameSize(a,d)) It isn't the case that |e| is medium, or it is not the case that it isn't the case that |f| is the same size as |e|, or that |a| is the same size as |d|. 
+INFO Thread-16 openproof.plato.controller.Controller - ~Small(f) V RightOf(a,a) |A| is to the right of |a|, or it isn't the case that |f| is small. conj-s-rev-neg-gpr 347ms
+DEBUG AWT-EventQueue-0 openproof.FOLTextEditor.FOLTextArea - Change font to Openproof
+DEBUG AWT-EventQueue-0 openproof.FOLTextEditor.FOLTextArea - Change font to Openproof
+DEBUG AWT-EventQueue-0 openproof.FOLTextEditor.FOLTextArea - Change font to Openproof
+DEBUG AWT-EventQueue-0 openproof.FOLTextEditor.FOLTextArea - Change font to Openproof
+INFO AWT-EventQueue-0 openproof.plato.controller.Controller - ~Small(f) V RightOf(a,a) |A| is to the right of |a|, or it is not the case that |f| is small. conj-s-rev-neg-gpr 
+DEBUG AWT-EventQueue-0 openproof.FOLTextEditor.FOLTextArea - Change font to Openproof
+DEBUG AWT-EventQueue-0 openproof.FOLTextEditor.FOLTextArea - Change font to Openproof
+INFO AWT-EventQueue-0 openproof.plato.controller.Controller - ~Small(f) V RightOf(a,a) |A| is to the right of |a|, or it's not the case that |f| is small. conj-s-rev-neg-gpr 
+DEBUG AWT-EventQueue-0 openproof.FOLTextEditor.FOLTextArea - Change font to Openproof
+DEBUG AWT-EventQueue-0 openproof.FOLTextEditor.FOLTextArea - Change font to Openproof
+INFO AWT-EventQueue-0 openproof.plato.controller.Controller - ~Small(f) V RightOf(a,a) |A| is to the right of |a|, or |f| is not small. conj-s-rev-neg-gpr 
+INFO AWT-EventQueue-0 openproof.plato.controller.Controller - 3098940ms  

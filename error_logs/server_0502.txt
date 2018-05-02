@@ -1,0 +1,20 @@
+* Running on http://0.0.0.0:8080/
+sort: cannot read: rules.none: No such file or directory
+/home/danf/erg/openproof/runfolold: line 95: /tmp/out.txt: Permission denied
+paraphrase-op.dat: Permission denied
+inflatemrs.dat: Permission denied
+Traceback (most recent call last):
+ File "scripts/e2e.py", line 23, in <module>
+   print e2e(sys.argv[1])
+ File "scripts/e2e.py", line 14, in e2e
+   tup = tuple_for_polish_expression(ir.split(' '))
+ File "/scratch/danf/logon/lingo/terg/openproof/scripts/list2tuple.py", line 38, in tuple_for_polish_expression
+   return p2t(pe)['tuple']
+ File "/scratch/danf/logon/lingo/terg/openproof/scripts/list2tuple.py", line 19, in p2t
+   'tuple':pred2t(l[0]),
+ File "/scratch/danf/logon/lingo/terg/openproof/scripts/list2tuple.py", line 12, in pred2t
+   l.extend(parts[1].split(','))
+IndexError: list index out of range
+touch: cannot touch '/tmp/folserverlog': Permission denied
+/home/danf/erg/openproof/runfolold: line 112: /tmp/folserverlog: Permission denied
+10.31.229.70 - - [02/May/2018 11:49:46] "GET /ace_all/B HTTP/1.1" 200 -

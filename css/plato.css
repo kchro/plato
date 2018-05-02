@@ -1,0 +1,94 @@
+.plato-body {
+  height: 100%;
+}
+
+.plato-header {
+  width: 100%;
+  height: 50px;
+  color: white;
+  background-color: rgb(17, 5, 110);
+}
+
+.plato-app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.plato-problem {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.plato-problem-header {
+  font-size: 2em;
+}
+
+.plato-translation {
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+}
+
+.plato-prompt {
+  width: 100%;
+  padding: 20px;
+}
+
+.plato-prompt-label {
+  margin-bottom: 10px;
+}
+
+.plato-prompt-text {
+  border: 1px solid gray;
+  padding: 5px;
+}
+
+.plato-answer {
+  width: 100%;
+  padding: 20px;
+}
+
+.plato-answer-label {
+  margin-bottom: 10px;
+}
+
+.plato-answer-text {
+  border: 1px solid gray;
+  width: 100%;
+  padding: 5px;
+}
+
+.plato-submit {
+  margin: 20px;
+}
+
+.plato-analytics-header {
+  font-size: 2em;
+}
+
+.plato-analytics-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.plato-analytics {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.plato-analytics-wrapper svg {
+  margin: 50px;
+}
+
+.plato-progress-bar {
+  width: 100%;
+  flex: 1 0 auto;
+}

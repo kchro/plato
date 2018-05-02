@@ -1,0 +1,153 @@
+; To start Flask server, use script ~/start-op-server which identifies the
+; location of the ERG directory and calls the relevant Python script.  E.g.:
+; cd /home/danf/erg/openproof;
+; python /home/danf/lingo/openproof/Server/server.py
+
+; To connect to Amazon instance
+ssh -i ~/.ssh/Danskey.pem ubuntu@54.191.30.98
+Public DNS for instance: ec2-54-191-30-98.us-west-2.compute.amazonaws.com
+
+wget http://0.0.0.0:5000/ace_one/tet%28a%29--%3Ecube%28b%29
+wget http://ec2-54-191-30-98.us-west-2.compute.amazonaws.com:5000/ace_one/tet%28a%29--%3Ecube%28b%29
+
+
+; AWS website
+aws.amazon.com
+user: openproof-admin+aws@csli.stanford.edu
+
+----------
+To install flask:
+sudo apt-get install python-virtualenv
+cd ~/openproof/Server
+. venv/bin/activate
+pip install Flask
+
+To install apache:
+sudo apt-get install apache2
+sudo /etc/init.d/apache2 restart
+
+To check iptables:
+sudo iptables -L -n
+
+------------------------------------------------------------------------------
+Here's a client that you can play with.  Save the file <someplace> and then run
+        java -cp /home/danf/lingo/openproof/Plato.jar openproof.plato.Plato
+
+You will need to have set up a tunnel (or be running on cypriot).  To set up a tunnel to each of the two relevant machines, use the commands:
+ssh -f danf@cypriot.stanford.edu -L 5000:cypriot.stanford.edu:5000 -N
+
+ssh -f danf@cypriot.stanford.edu -L 3306:playfair.stanford.edu:3306 -N
+
+For me <account on csli machine> is dbp@playfair.stanford.edu, but any login inside the firewall for which you have credentials should work.  The command will prompt for the password for this account.
+
+This connects port 5000 on the local machine to port 5000 on cypriot.  You can test that this is set up correctly by visiting localhost:5000 using a browser, it'll say Hi.  If it does then you can run the client.
+
+------------------------------------------------------------------------------
+cd ~/lingo/openproof/Server
+;; run
+. venv/bin/activate
+python server.py 
+
+;; in browser:
+http://127.0.0.1:5000/ace_test/tet%28a%29--%3Ecube%28b%29
+wget http://127.0.0.1:5000/ace_all/tet%28a%29--%3Ecube%28b%29
+
+
+
+This seems right from my perspective.  We might also want to control for "is a small cube", as opposed to "is small and is a cube".  Adjectivization?  
+
+How does this map onto the generator's dials and switches, and who's going to perform that mapping?  I think that this ought to be in a transducer component in the plumbing, rather than build a dependency on the generator into the client.
+
+-- Dave
+
+Show quoted text - Reply - Reply to All - Forward - More Actions
+From:	Aaron Kalb
+To:	Dave Barker-Plummer
+Cc:	Dan Flickinger
+Nov 17
+I'm looking into the plumbing stuff.
+
+For starters on the
+
+    specification of the things that we are primarily interested in controlling in the generated NL (used in B)
+
+I think we'll have ternary (Required / Allowed / Forbidden) variables for 
+
+    particular instantiations of connectives:
+        implication
+            … if …
+            … only if …
+            … provided (that) …
+        biconditional
+            … just in case …
+    particular instantiations for sub-formulae:
+        … unless …
+        neither … nor …
+        at least one of …
+        none of …
+        all of …
+    linguistic phenomena (which reduce the number of constants in the NL rendering relative to the FOL):
+        aggregation
+        pronominalization
+        ellipsis
+
+
+So, if a student has mastered "If … then …" constructions and we want them to now learn the difference between "P if Q" and "P only if Q", we could set:
+
+    if_then_ = Forbidden
+    _if_ = Allowed
+    _only-if_ = Allowed
+    _provided-that_ = Forbidden
+
+for the generator parameters, and require that the FOL sentence generator use implication connectives.
+
+If we want to have multiple (possibly nested) implications, and want to make sure that at least one of them involves infix-if, we could have the parameters be
+
+    if_then_ = Allowed
+    _if_ = Required
+    _only-if_ = Allowed
+    _provided-that_ = Allowed
+
+
+On Nov 17, 2013, at 4:03 PM, Dave Barker-Plummer <dbp@stanford.edu> wrote:
+
+    Not sure that I really need a road map at all, more a specification of the things that we need.
+
+    The complete architecture of the system involves
+    1. Generating a FOL prompt, on the basis of the user model
+    2. Requesting an NL prompt based on the FOL prompt together with constraints that the NL (not) contain certain words/structures.
+    3. Presenting the prompt and accepting a response, a new FOL sentence, from the student
+    4. Determining whether the FOL sentence is equivalent to original FOL,
+    5. If not, giving feedback to the user, in one of three modes
+    - a. flag (no implications for generation)
+    - b. recasting (more on this later)
+    - c. NL
+
+    5c, In this case we need to
+    6. generate a translation of student FOL, maintaining as much of the structure of the original prompt as possible
+    7, present this feedback and return to 3.
+
+    5b.  When recasting, we do not generate new NL from the student's sentence, but rather we compare the student's FOL sentence to the expected FOL sentence syntactically, and re-present the most salient difference in the language of FOL.  If NL generation resulted in substantial restructuring of the original prompt, E.g. by reordering fragments, then the NL may more readily suggest a different translation than the original FOL prompt.  It is this expected answer that we will need to compare against.  E.g. if the original FOL prompt is A & B, and the NL reorders to "B and A" then "B & A" is the expected student answer, not "A & B".
+
+    The constraints that this places on the NL generator are
+    A (background) the ability to generate a substantial fragment of the language induced by the examples from LPL.
+    B (from 2) the ability to suppress/prioritize the presence of some structures in the generated NL
+    C (from 6) the ability to reuse a representation of a previous generation step to guide generation of another (different) sentence from a different source,
+    D (from 5b) the ability to know what transformations were applied in the generation of NL from the prompt, so that the new expected sentence can be inferred
+
+    We also need to set this up as a network service, which will require some plumbing.
+
+    I will provide a specification of the things that we are primarily interested in controlling in the generated NL (used in B).  I will also need to write code to interpret the response given by D to make the inference of the expected sentence (unless that sentence can be more easily inferred within the generator).  I'll need to get a specification of the response language for D but this is not yet on the critical path.
+
+    Roadmapwise, once we have the server set up in place, we could already build something that works, which would be fun to play with as we iterate on the other stuff.  Is Aaron the most likely candidate to put that together?
+
+
+------------------------------------------------------------------------------
+To use 'screen' for remote processing
+
+; on remote machine, before launching process, do
+screen
+; then before logging out, do
+C-a d       detach
+; after logging back in, do
+screen -r   resume
