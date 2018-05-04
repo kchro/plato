@@ -1,7 +1,13 @@
+/**
+ *
+ */
 function find(root, selector) {
   return $(root).find(selector)[0];
 }
 
+/**
+ *
+ */
 function displayCorrect(translation, state) {
   const alert = document.createElement("div");
   alert.className = "alert alert-success";
@@ -15,6 +21,9 @@ function displayCorrect(translation, state) {
   return alert;
 }
 
+/**
+ *
+ */
 function displayFeedback(translation, state) {
   const alert = document.createElement("div");
   alert.className = "alert alert-danger";
@@ -28,6 +37,9 @@ function displayFeedback(translation, state) {
   return alert;
 }
 
+/**
+ *
+ */
 function displayAnalytics(body, state) {
   const w = 300,                            //width
         h = 300,                            //height
@@ -77,6 +89,67 @@ function displayAnalytics(body, state) {
 
 }
 
+function createCORSRequest(method, url){
+    var xhr = new XMLHttpRequest();
+    if ("withCredentials" in xhr){
+        xhr.open(method, url, true);
+    } else if (typeof XDomainRequest != "undefined"){
+        xhr = new XDomainRequest();
+        xhr.open(method, url);
+    } else {
+        xhr = null;
+    }
+    return xhr;
+}
+
+/**
+ * post
+ */
+function post(fol, params, callback) {
+  // let formData = {
+  //   "sig": fol,
+  //   "rules": params.rules,
+  //   "rulefile": params.rulefile,
+  //   "blockrules": params.blockrules,
+  //   "blockfile": params.blockfile
+  // };
+
+  let formData = new FormData();
+  formData.append("sig", fol);
+  formData.append("rules", params.rules);
+  formData.append("rulefile", params.rulefile);
+  formData.append("blockrules", params.blockrules);
+  formData.append("blockfile", params.blockfile);
+
+  // $.ajax({
+  //   type: 'POST',
+  //   contentType: 'application/json',
+  //   crossOrigin: true,
+  //   data: JSON.stringify(d),
+  //   // dataType: 'json',
+  //   url: 'https://www.cypriot.stanford.edu:8080/ace/',
+  //   success: function(data) {
+  //     console.log(data);
+  //   }
+  // });
+  // window.location.reload(true);
+  // let request = new XMLHttpRequest();
+  let request = createCORSRequest('POST', 'http://cypriot.stanford.edu:8080/ace/');
+  // request.open('POST', 'http://localhost:8000/ace/', true);
+  request.onreadystatechange = function() {
+    if (request.readyState == 4 && request.status == 200) {
+      callback(request);
+    } else {
+      console.log(request);
+    }
+  }
+
+  request.send(formData);
+}
+
+/**
+ *
+ */
 function renderTrans(root, state) {
   const translation = document.createElement("div");
   translation.className = "plato-translation";
@@ -88,7 +161,12 @@ function renderTrans(root, state) {
   promptLabel.innerHTML = "English";
   const promptText = document.createElement("div");
   promptText.className = "plato-prompt-text";
-  promptText.innerHTML = data.problems[state.problem].prompt;
+
+  // promptText.innerHTML = data.problems[state.problem].prompt;
+  post(data.problems[state.problem].answer, data.config, function(response) {
+    promptText.innerHTML = response.responseText;
+  });
+
   prompt.appendChild(promptLabel);
   prompt.appendChild(promptText);
 
@@ -140,6 +218,9 @@ function renderTrans(root, state) {
   return translation;
 }
 
+/**
+ *
+ */
 function renderProgress(state) {
   const value = (state.problem * 100 / data.problems.length).toFixed(2);
 
@@ -155,6 +236,9 @@ function renderProgress(state) {
   return progress;
 }
 
+/**
+ *
+ */
 function renderApp(root, state) {
   const app = document.createElement("div");
   app.className = "plato-app";
@@ -174,6 +258,9 @@ function renderApp(root, state) {
   return app;
 }
 
+/**
+ *
+ */
 function render(root, state) {
   let app, body;
   if (state.init == false) {
@@ -210,6 +297,9 @@ function render(root, state) {
   console.log(root);
 }
 
+/**
+ *
+ */
 $(function() {
   let root = document.getElementById("plato-app");
 

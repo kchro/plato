@@ -4,7 +4,6 @@ from list2tuple import tuple_for_polish_expression
 from fol2umrs import prettyUMRSForTuple
 import sys
 
-
 # takes an infix LPL string like 'dodec(d)|~(cube(a)&larger(f, a))'
 # returns an underspecified MRS
 def e2e(s):

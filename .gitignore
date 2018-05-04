@@ -1,3 +1,6 @@
 .ipynb_checkpoints/
+tmp/
 env/
 openproof/Server/venv/
+data/erg-1214-osx-0.9.26.dat
+erg/ace-0.9.26/

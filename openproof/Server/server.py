@@ -9,7 +9,7 @@ import subprocess
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods=['GET'])
 def hello():
 	return "<h1>Hi!</h1>"
 
@@ -46,12 +46,9 @@ def instr():
 
 @app.route('/ace/', methods=['POST'])
 def ace():
-        sig = request.form.get('sig', '')
-        rules = request.form.get('rules', '')
-	rulefile = request.form.get('rulefile', '')
-        blockrules = request.form.get('blockrules', '')
-	blockfile = request.form.get('blockfile', '')
-        return subprocess.check_output(["./runfol", "-f", sig, "-l", rules, "-r", rulefile, "-b", blockrules, "-x", blockfile])
+	# print request.get_json()
+	print request.data
+	return 'test'
 
 @app.route('/ace_all/<sig>')
 def ace_all(sig):
@@ -61,6 +58,5 @@ def ace_all(sig):
 	return res
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8080, debug=False)
+    app.run(host='0.0.0.0', port=8000, debug=False)
 #    app.run()
-
