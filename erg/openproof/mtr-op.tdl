@@ -1,0 +1,2229 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; OpenProof MRS-inflating and paraphrase rules
+
+;;;; MRS `inflation' rules
+
+openproof_mtr := monotonic_mtr &
+[ INPUT.HOOK.INDEX #index,
+  OUTPUT [ HOOK.INDEX #index & [ E [ TENSE present, ASPECT.PRF - ] ],
+	   ICONS <! !> ] ].
+
+;; "name"
+;;
+named_op_mtr := openproof_mtr &
+[ INPUT [ RELS <! [ PRED "name", LBL #h1, ARG0 #x2, CARG #carg ] !>,
+	  HCONS <! !> ],
+  OUTPUT [ RELS <! [ PRED named_rel, LBL #h1 & handle, ARG0 #x2 & ref-ind, 
+		     CARG #carg ] !>,
+	   HCONS <! !> ],
+  FLAGS.EQUAL < #x2 > ].
+
+;; "cube"
+;;
+pred_noun_gpr := openproof_mtr &
+[ INPUT.RELS <! [ LBL #h2, ARG0 #e3, ARG1 ref-ind & #x4 ] !>,  
+  OUTPUT.RELS <! [ LBL #h2, PRED _be_v_id_rel, 
+		   ARG0 #e3 & event & [ E [ TENSE present, ASPECT.PRF - ] ],
+		   ARG1 #x4, ARG2 #x5 ],
+	         [ LBL handle, ARG0 ref-ind & #x5 ] !> ].
+
+;; "large"
+;;
+adj_op_gpr := openproof_mtr &
+[ INPUT.RELS <! [ LBL #h2, ARG0 #e3, ARG1 ref-ind & #x4 ] !>, 
+  OUTPUT.RELS <! [ LBL #h2, ARG1 #x4,
+		   ARG0 #e3 & 
+		       event & [ E [ TENSE present, ASPECT.PRF - ] ] ] !>,
+  FLAGS.EQUAL < #x4 > ].
+
+;; "samesize"
+;;
+same_noun_op_gpr := openproof_mtr &
+[ INPUT.RELS <! [ LBL #h1, ARG0 #e3, ARG1 ref-ind & #x4, 
+		  ARG2 ref-ind & #x5 ] !>, 
+  OUTPUT.RELS <! [ PRED _be_v_id_rel, LBL #h1, 
+		   ARG0 #e3 &  [ E [ TENSE present, ASPECT [ PRF -, PROGR - ]]],
+		   ARG1 #x4, ARG2 #x6 ],
+	         [ LBL #h2, ARG0 ref-ind & #x6 & [ PNG.PN 3s ] ],
+		 [ PRED "_same_a_as_rel", LBL #h2, 
+		   ARG0 event & #e7 & [ E.TENSE untensed ], ARG1 #x6 ],
+		 [ PRED comp_equal_rel, LBL #h2, ARG0 [ E.TENSE untensed ],
+		   ARG1 #e7, ARG2 #x5 ] !> ].
+
+;; "samecol", "samerow"
+;;
+same_loc_op_gpr := openproof_mtr &
+[ INPUT.RELS <! [ LBL #h1, ARG0 #e3, ARG1 ref-ind & #x4, 
+		  ARG2 ref-ind & #x5 ] !>, 
+  OUTPUT.RELS <! [ PRED _in_p_rel, LBL #h1, ARG0 #e3, ARG1 #x4, ARG2 #x6 ],
+	         [ LBL #h2, ARG0 ref-ind & #x6 & [ PNG.PN 3s ] ],
+	         [ PRED "_same_a_as_rel", LBL #h2, 
+		   ARG0 event & #e7 & [ E.TENSE untensed ], ARG1 #x6 ],
+	         [ PRED comp_equal_rel, LBL #h2, ARG0 [ E.TENSE untensed ],
+		   ARG1 #e7, ARG2 #x5 ] !> ].
+
+openproof_addquant_mtr := openproof_mtr &
+[ OUTPUT [ RELS.LIST < [ LBL #h1 ], [ RSTR #h2 ], ... >, 
+	   HCONS <! qeq & [ HARG #h2, LARG #h1 ] !> ] ].
+
+
+;; "rightof"
+;;
+loc_of_op_gpr := openproof_addquant_mtr &
+[ INPUT.RELS <! [ LBL #h1, ARG0 #e3, ARG1 ref-ind & #x4, 
+		  ARG2 ref-ind & #x5 ] !>, 
+  OUTPUT.RELS <! [ LBL handle, ARG0 #x6, ARG1 #x5 ],
+	         [ PRED _the_q_rel, LBL handle, ARG0 #x6 & ref-ind ],
+		 [ PRED _to_p_rel, LBL #h1, ARG0 #e3, ARG1 #x4, ARG2 #x6 ] !>,
+  FLAGS.EQUAL < #x4, #x5 > ].
+
+;; "backof"
+;;
+prep_op_gpr := openproof_mtr &
+[ INPUT.RELS <! [ LBL #h1, ARG0 #e3, ARG1 ref-ind & #x4, ARG2 ref-ind & #x5] !>,
+  OUTPUT.RELS <! [ LBL #h1, ARG0 #e3, ARG1 #x4, ARG2 #x5 ] !>,
+  FLAGS.EQUAL < #x4, #x5 > ].
+
+;; "between"
+;;
+prep_threearg_op_gpr := openproof_mtr &
+[ INPUT.RELS <! [ LBL #h1, ARG0 #e3, ARG1 ref-ind & #x4, 
+		  ARG2 ref-ind & #x5, ARG3 ref-ind & #x6  ] !>, 
+  OUTPUT.RELS <! [ PRED _and_c_nopr_nrev_rel, LBL handle, 
+		   ARG0 conj_ref-ind & #x7 & [ SORT collective ], 
+		   L-INDEX #x5, R-INDEX #x6 ],
+		 [ LBL #h1, ARG0 #e3, ARG1 #x4, ARG2 #x7 ] !> ].
+
+
+;; "adjoins"
+;;
+verb_op_gpr := openproof_mtr &
+[ INPUT.RELS <! [ LBL #h1, ARG0 #e3, ARG1 ref-ind & #x4, ARG2 ref-ind & #x5] !>,
+  OUTPUT.RELS <! [ LBL #h1, ARG0 #e3 & [ E [ TENSE present, ASPECT no_aspect ]],
+                   ARG1 #x4, ARG2 #x5 ] !>,
+  FLAGS.EQUAL < #x4, #x5 > ].
+
+;; "larger"
+;;
+compar_adj_op_gpr := openproof_mtr &
+[ INPUT.RELS <! [ LBL #h1, ARG0 #e3, ARG1 ref-ind & #x4, 
+		  ARG2 ref-ind & #x5 ] !>, 
+  OUTPUT.RELS <! [ LBL #h1, ARG0 #e3, ARG1 #x4 ],
+	         [ PRED comp_rel, LBL #h1, 
+		   ARG0 event & [ E [ TENSE untensed, ASPECT no_aspect ] ],
+		   ARG1 #e3, ARG2 #x5 ] !>,
+  FLAGS.EQUAL < #h1 > ].
+
+;; Add quantifiers
+;;
+add_quant_mtr := openproof_mtr &
+[ CONTEXT.RELS <! [ LBL handle & #h1, ARG0 #x2 & ref-ind ] !>,
+  FILTER.HCONS <! qeq & [ LARG #h1 ] !>,
+  OUTPUT [ RELS <! [ LBL handle, ARG0 #x2, RSTR handle & #h5, BODY handle ] !>,
+	   HCONS <! qeq & [ HARG handle & #h5, LARG #h1 ] !> ],
+  FLAGS.SUBSUME < #x2 > ].
+
+
+;; Conjunctions
+;;
+conj_op_mtr := openproof_mtr &
+[ INPUT.RELS <! [ LBL #h1 & handle, ARG0 #i2 & individual, 
+		  L-INDEX #i3 & individual, R-INDEX #i4 & individual ] !>,
+  OUTPUT.RELS <! [ LBL #h1 & handle, ARG0 #i2, L-INDEX #i3, R-INDEX #i4] !> ].
+
+;; Add left and right handles for conj-rels with event arguments
+;;
+add_conjunction_handles_mtr := openproof_mtr &
+[ CONTEXT.RELS <! [ LBL #h1 & handle, ARG0 event & #e2 ],
+		  [ LBL #h3 & handle, ARG0 event & #e4 ] !>,
+  INPUT.RELS <! [ PRED conj_rel & #pred, LBL #h5, 
+		  ARG0 #e6 & [ E [ ASPECT.PRF -, TENSE present ], SF prop ], 
+		  L-INDEX #e2, R-INDEX #e4, L-HNDL individual, 
+		  R-HNDL individual ] !>,
+  OUTPUT [ RELS <! [ PRED #pred, LBL #h5, ARG0 #e6, L-INDEX #e2, R-INDEX #e4,
+		   L-HNDL #h10 & handle, R-HNDL #h11 & handle ] !>,
+	   HCONS <! qeq & [ HARG #h10, LARG #h1 ], 
+		    qeq & [ HARG #h11, LARG #h3 ] !> ] ].
+
+adjust_neg_conj_index_mtr := openproof_mtr &
+[ CONTEXT [ RELS <! [ PRED neg_rel, LBL handle, ARG0 event, 
+		      ARG1 #h10 & handle ],
+		    [ LBL #h11 & handle, ARG0 event ] !>,
+	    HCONS <! qeq & [ HARG #h10, LARG #h11 ] !> ],
+  INPUT.RELS <! [ PRED conj_rel & #pred, LBL #h5, ARG0 #e6,
+		  L-HNDL #h7, R-HNDL #h8 ] !>,
+  OUTPUT.RELS <! [ PRED #pred, LBL #h5 & handle, ARG0 #e6,
+		   L-HNDL #h7 & handle, R-HNDL #h8 & handle ] !> ].
+
+adjust_neg_conj_index_left_mtr := adjust_neg_conj_index_mtr &
+[ CONTEXT.RELS <! [ ARG0 #e1 & event ], [ ARG0 #e2 & event ] !>,
+  INPUT.RELS <! [ L-INDEX #e1, R-INDEX #e3 & event ] !>,
+  OUTPUT.RELS <! [ L-INDEX #e2, R-INDEX #e3 ] !> ].
+
+adjust_neg_conj_index_right_mtr := adjust_neg_conj_index_mtr &
+[ CONTEXT.RELS <! [ ARG0 #e1 & event ], [ ARG0 #e2 & event ] !>,
+  INPUT.RELS <! [ LBL #h1, L-INDEX #e3 & event, R-INDEX #e1 ] !>,
+  OUTPUT.RELS <! [ LBL #h1, L-INDEX #e3, R-INDEX #e2 ] !> ].
+
+negation_op_mtr := openproof_mtr &
+[ CONTEXT.RELS <! [ LBL handle & #h1, ARG0 event & #e2 ] !>,
+  INPUT.RELS <! [ PRED "not", LBL #h3, ARG0 #e1, ARG1 #e2 ] !>,
+  OUTPUT [ RELS <! [ PRED neg_rel, LBL #h3 & handle, 
+		     ARG0 #e1 & event & [ E.TENSE untensed ],
+		     ARG1 #h4 & handle ] !>,
+ 	   HCONS <! qeq & [ HARG #h4, LARG #h1 ] !> ],
+  FLAGS.EQUAL < #e1, #e2 > ].
+
+;; if-then
+;;
+if_then_cond_mtr := openproof_mtr &
+[ CONTEXT.RELS <! [ LBL #h5, ARG0 #e3 ],
+		  [ LBL #h6, ARG0 #e4 ] !>,
+  INPUT.RELS <! [ PRED "if", LBL #h1, ARG0 #e2, L-INDEX #e3, R-INDEX #e4 ] !>,
+  OUTPUT [ RELS <! [ PRED "_if_x_then_rel", LBL #h1, 
+		     ARG0 #e2 & event & [ E.TENSE untensed ], 
+		     ARG1 #h7, ARG2 #h8 ],
+		   [ PRED "_then_a_1_rel", LBL #h10, 
+		     ARG0 event & [ E.TENSE untensed ], ARG1 #h11 ] !>,
+	   HCONS <! qeq & [ HARG #h7, LARG #h10 ],
+		    qeq & [ HARG #h11, LARG #h6 ],
+		    qeq & [ HARG #h8, LARG #h5 ] !> ] ].
+
+;; Accommodate variant input with L-INDEX, R-INDEX
+;;
+if_and_only_if_mtr := openproof_mtr &
+[ CONTEXT.RELS <! [ LBL #h5, ARG0 #e3 ],
+		  [ LBL #h6, ARG0 #e4 ] !>,
+  INPUT [ RELS <! [ PRED "iff", LBL #h1, ARG0 #e2, L-INDEX #e3, 
+		    R-INDEX #e4 ] !> ],
+  OUTPUT [ RELS <! [ PRED "_if+and+only+if_x_1_rel", LBL #h1, 
+		     ARG0 #e2 & event & [ E.TENSE untensed ], 
+		     ARG1 #h7, ARG2 #h8 ] !>,
+	   HCONS <! qeq & [ HARG #h7, LARG #h5 ],
+		    qeq & [ HARG #h8, LARG #h6 ] !> ] ].
+
+;; Copied from types-op.tdl
+;;
+conj_paired_rel := conj_rel.
+conj_nopair_rel := conj_rel.
+
+_and_c_pr_rel := _and_c_rel & conj_paired_rel.
+_and_c_nopr_rel := _and_c_rel & conj_nopair_rel.
+_or_c_pr_rel := _or_c_rel & conj_paired_rel.
+_or_c_nopr_rel := _or_c_rel & conj_nopair_rel.
+
+_and_c_nrev_rel := _and_c_rel & conj_nonrev_rel.
+_and_c_rev_rel := _and_c_rel & conj_reversed_rel.
+_or_c_nrev_rel := _or_c_rel & conj_nonrev_rel.
+_or_c_rev_rel := _or_c_rel & conj_reversed_rel.
+_but_c_nrev_rel := _but_c_rel & conj_nonrev_rel.
+_but_c_rev_rel := _but_c_rel & conj_reversed_rel.
+
+_and_c_pr_nrev_rel := _and_c_pr_rel & _and_c_nrev_rel.
+_and_c_nopr_nrev_rel := _and_c_nopr_rel & _and_c_nrev_rel.
+_and_c_pr_rev_rel := _and_c_pr_rel & _and_c_rev_rel.
+_and_c_nopr_rev_rel := _and_c_nopr_rel & _and_c_rev_rel.
+_or_c_pr_nrev_rel := _or_c_pr_rel & _or_c_nrev_rel.
+_or_c_nopr_nrev_rel := _or_c_nopr_rel & _or_c_nrev_rel.
+_or_c_pr_rev_rel := _or_c_pr_rel & _or_c_rev_rel.
+_or_c_nopr_rev_rel := _or_c_nopr_rel & _or_c_rev_rel.
+
+;; Restrict to paired conjunction when the consequent of conditional (disambig)
+;; as in |If P then either Q or R|
+;; This type is similar to the optional paired_conj_gpr below, but is obligatory
+;; and does not introduce a rulename predication
+;;
+paired_conj_ifthen_gpr := monotonic_mtr &
+[ CONTEXT [ RELS <! [ PRED "_if_x_then_rel", ARG1 handle & #h0 ],
+                    [ PRED "_then_a_1_rel", LBL handle & #h1, 
+		      ARG1 handle & #h2 ] !>,
+            HCONS <! qeq & [ HARG #h0, LARG #h1 ],
+	             qeq & [ HARG #h2, LARG #h3 ] !> ],
+  INPUT [ HOOK.INDEX #index,
+	  RELS <! [ PRED _or_c_nopr_rel, LBL #h3, ARG0 #i4, L-INDEX #i10,
+		    R-INDEX #i12, L-HNDL #h20, R-HNDL #h14 ] !>,
+	  HCONS <! !> ],
+  OUTPUT [ HOOK.INDEX #index,
+           RELS <! [ PRED _or_c_pr_rel, LBL #h3, ARG0 #i4, L-INDEX #i10,
+	   	     R-INDEX #i12, L-HNDL #h20, R-HNDL #h14 ] !>,
+	   HCONS <! !> ] ].
+
+;; Wrap "it is the case that" around conj-and S in consequent of conditional
+;; for disambig:
+;; |If P then it is the case both that Q and that R|
+;; This is similar to the optional basic_conj_s_thecase_gpr type below, but
+;; is obligatory and does not introduce a rulename predication, but also
+;; changes the ARG0 of the conj_rel, necessary when it is the outermost pred.
+;;
+cond_and_thecase_gpr := monotonic_mtr &
+[ CONTEXT [ RELS <! [ PRED "_if_x_then_rel", ARG1 handle & #h0 ],
+                    [ PRED "_then_a_1_rel", LBL handle & #h1, 
+		      ARG1 handle & #h2 ] !>,
+            HCONS <! qeq & [ HARG #h0, LARG #h1 ] !> ],
+  INPUT [ HOOK.INDEX #e2,
+          RELS <! [ PRED _and_c_nopr_nrev_rel, LBL #clbl, ARG0 #e4,
+		    L-INDEX #lind, L-HNDL #lh, R-INDEX #rind, R-HNDL #rh ] !>,
+	  HCONS <! qeq & [ HARG #h2, LARG #clbl ] !> ],
+  OUTPUT [ HOOK.INDEX #e2,
+           RELS <! [ PRED "_thecasethat_v_rel", LBL #h3,
+                     ARG0 #e4, ARG1 #arg ],
+		   [ PRED _and_c_nopr_nrev_rel, LBL #clbl, ARG0 conj_event, 
+		    L-INDEX #lind, L-HNDL #lh, R-INDEX #rind, R-HNDL #rh ] !>,
+	   HCONS <! qeq & [ HARG #h2, LARG #h3 ],
+	            qeq & [ HARG #arg, LARG #clbl ] !> ] ].
+
+;;;; OpenProof paraphrase rule types
+
+;; To enable blocking of rules that add a modifier such as "also", we add
+;; a MARKS attribute on individuals, to be used internally in the paraphraser
+
+individual :+
+  [ MARKS marks ].
+
+marks := *avm* &
+  [ ALSO-MARK bool,
+    BOTH-MARK bool,
+    EITHER-MARK bool ].
+
+openproof_omtr := monotonic_mtr & optional_mtr &
+  [ OUTPUT [ HOOK.INDEX #index,
+	     RELS.LIST.FIRST [ PRED "prule_rel", ARG1 #index ] ] ].
+
+;; Coord subj: When given two clauses where the subjects differ but the
+;; VPs are identical, discard the second identical verbal conjunct and create a 
+;; conjoined subject NP whose conj's PRED is the same as the sentence conj PRED.
+;;
+;; A and B are large
+;;
+basic_coord_subj_onearg_op_gpr := openproof_omtr &
+[ CONTEXT.RELS.LIST < [ PRED named_rel, ARG0 ref-ind & #x3 ],
+                      [ ARG0 ref-ind & #x6 ],
+		      [ PRED quant_rel, ARG0 #x6 ], ... >,
+  INPUT [ HOOK.INDEX #index,
+	  RELS.LIST < 
+		  [ LBL handle, ARG0 #e2 & event & [ E.TENSE present ],
+		    ARG1 #x3 & ref-ind, PRED #pred ],
+                  [ LBL handle, ARG0 #e5 & event  & [ E.TENSE present ], 
+		    ARG1 #x6 & ref-ind, PRED #pred ],
+	   	  [ PRED conj_rel, LBL handle, ARG0 #e10 & event,
+		    L-INDEX #e2, R-INDEX #e5, L-HNDL #h21, R-HNDL #h22 ], ... >,
+	  HCONS.LIST < qeq & [ HARG #h21 ], qeq & [ HARG #h22 ], ... > ],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS.LIST < [ ],
+		   [ LBL handle, ARG0 #e10 & event &
+                     [ E [ ASPECT.PRF -, TENSE present ], SF prop ],
+		     ARG1 #x10, PRED #pred ],
+		   [ PRED udef_q_rel, LBL handle, ARG0 #x10 & conj_ref-ind,
+		     RSTR handle & #h11, BODY handle ],
+                   [ PRED conj_rel, LBL handle & #h12, ARG0 #x10 & [ PNG.PN 3 ],
+                     L-INDEX #x3 & ref-ind & [ PNG [ PN 3s ] ],
+		     R-INDEX #x6 & ref-ind ], ... >,
+	   HCONS <! qeq & [ HARG #h11, LARG #h12 ] !> ],
+  FLAGS.SUBSUME < #x3, #x6, ... > ].
+
+;; The INPUT..[ARG2 handle] is a hack to prevent this rule from applying to 
+;; two-arg predications.
+;;
+basic_coord_subj_onearg_pos_op_gpr := basic_coord_subj_onearg_op_gpr &
+[ CONTEXT.RELS <! [ ], [ ], [ ] !>,
+  FILTER.RELS <! [ PRED comp_rel, LBL #h1 ] !>,
+  INPUT [ RELS <! [ LBL #h1, ARG2 handle ], [ LBL #h2 ], [ LBL #h3 ] !>,
+          HCONS <! qeq & [ LARG #h1 ], qeq & [ LARG #h2 ] !> ],
+  OUTPUT.RELS <! [ ], [ LBL #h3 ], [ ], [ ] !>,
+  FLAGS.SUBSUME < semarg, semarg > ].
+
+coord_subj_onearg_pos_op_gpr := basic_coord_subj_onearg_pos_op_gpr &
+[ CONTEXT.RELS <! [ ], [ PRED named_rel ], [ ] !>,
+  INPUT.RELS <! [ ], [ ], [ PRED #cpred, ARG0.SORT #sort ] !>,
+  OUTPUT.RELS <! [ ], [ ], [ ], [ PRED #cpred, ARG0.SORT #sort ] !> ].
+
+coord_subj_onearg_pos_nary_op_gpr := basic_coord_subj_onearg_pos_op_gpr &
+[ CONTEXT.RELS <! [ ], [ PRED conj_rel ], [ ] !>,
+  INPUT.RELS <! [ ], [ ], [ ] !>,
+  OUTPUT.RELS <! [ ], [ ], [ ], [ PRED implicit_conj_rel ] !> ].
+
+;; "A and B are not large"
+;;
+basic_coord_subj_onearg_neg_op_gpr := basic_coord_subj_onearg_op_gpr &
+[ CONTEXT.HCONS <! qeq & [ HARG #h3, LARG #h1 ] !>,
+  FILTER.RELS <! [ PRED comp_rel, LBL #h1 ] !>,
+  INPUT [ RELS <! [ LBL #h1, ARG2 handle ], [ LBL #h2 & handle ], 
+                  [ LBL #h20 & handle ], 
+		  [ PRED neg_rel, LBL #h10 & handle, ARG0 #e1, 
+		    ARG1 #h3 & handle ],
+		  [ PRED neg_rel, LBL #h11 & handle, ARG1 #h4 & handle ] !>,
+	  HCONS <! qeq & [ LARG #h10 ], qeq & [ LARG #h11 ], 
+	           qeq & [ HARG #h4, LARG #h2 ] !> ],
+  OUTPUT.RELS <! [ ], [ LBL #h1 & handle ], [ ], [ ],
+	         [ PRED neg_rel, LBL #h20, ARG0 #e1, ARG1 #h3 & handle ] !>,
+  FLAGS.SUBSUME < semarg, semarg > ].
+
+coord_subj_onearg_neg_op_gpr := basic_coord_subj_onearg_neg_op_gpr &
+[ CONTEXT.RELS <! [ ], [ PRED named_rel ], [ ] !>,
+  INPUT.RELS <! [ ], [ ], 
+                [ PRED #cpred ], [ ], [ ] !>,
+  OUTPUT.RELS <! [ ], [ ], [ ],
+                [ PRED #cpred ], [ ] !> ].
+
+coord_subj_onearg_neg_nary_op_gpr := basic_coord_subj_onearg_neg_op_gpr &
+[ CONTEXT.RELS <! [ ], [ PRED conj_rel ], [ ] !>,
+  INPUT.RELS <! [ ], [ ], [ ], [ ], [ ] !>,
+  OUTPUT.RELS <! [ ], [ ], [ ], 
+                [ PRED implicit_conj_rel ], [ ] !> ].
+
+;; Two-argument common predicates with coord subj
+;;   B and D are smaller than C.
+;;   B and D are cubes
+;;
+basic_coord_subj_twoarg_op_gpr := basic_coord_subj_onearg_op_gpr &
+[ CONTEXT.RELS.LIST < [ ], [ ], [ ],
+		      [ PRED named_rel, ARG0 #x7, CARG #carg ], ... >,
+;  FILTER [ RELS <! [ PRED neg_rel, ARG1 #h10 ] !>,
+;	   HCONS <! qeq & [ HARG #h10 ] !> ],
+  INPUT [ RELS.LIST < [ ], [ ], [ ],
+		      [ PRED named_rel, ARG0 ref-ind & #x8, CARG #carg ],
+		      [ PRED proper_q_rel, LBL handle, ARG0 #x8, 
+			RSTR handle & #h20, BODY handle ], ... >,
+	  HCONS.LIST < qeq, qeq, qeq & [ HARG #h20 ], ... > ],
+   FLAGS.SUBSUME < semarg, semarg, #x7, #x8 > ].
+
+;; B and D are in back of C.
+;;
+coord_subj_twoarg_op_gpr := basic_coord_subj_twoarg_op_gpr &
+[ INPUT.HCONS <! qeq, qeq, qeq !> ].
+
+basic_coord_subj_twoarg_pos_op_gpr := coord_subj_twoarg_op_gpr &
+[ CONTEXT.RELS <! [ ], [ ], [ ], [ ARG0 #x1 ] !>,
+  INPUT.RELS <! [ ARG2 #x1 ], [ ARG2 #x2 ], [ LBL #h2 ], [ ARG0 #x2 ], [ ] !>,
+  OUTPUT.RELS <! [ ], [ LBL #h2, ARG2 #x1 ], [ ], [ ] !> ].
+
+coord_subj_twoarg_pos_op_gpr := basic_coord_subj_twoarg_pos_op_gpr &
+[ CONTEXT.RELS <! [ ], [ PRED named_rel ], [ PRED proper_q_rel ], [ ] !>,
+  INPUT.RELS <! [ ], [ ], [ PRED #cpred, ARG0.SORT #sort ], [ ], [ ] !>,
+  OUTPUT.RELS <! [ ], [ ], [ ], [ PRED #cpred, ARG0.SORT #sort ] !> ].
+
+coord_subj_twoarg_pos_nary_op_gpr := basic_coord_subj_twoarg_pos_op_gpr &
+[ CONTEXT.RELS <! [ ], [ PRED conj_rel ], [ PRED udef_q_rel ], [ ] !>,
+  INPUT.RELS <! [ ], [ ], [ PRED _and_c_nopr_nrev_rel ], [ ], [ ] !>,
+  OUTPUT.RELS <! [ ], [ ], [ ], [ PRED implicit_conj_rel ] !> ].
+
+basic_coord_subj_compar_op_gpr := coord_subj_twoarg_op_gpr &
+[ CONTEXT.RELS <! [ ], [ ], [ ], [ ARG0 #x7 ] !>,
+  INPUT.RELS <! [ LBL #h1 ],
+                [ ARG0 #e5 & event ], [ LBL #h2 ],
+		[ ARG0 #x8 ], [ ], 
+		[ PRED comp_rel, ARG1 #e5, ARG2 #x8 ], 
+		[ PRED comp_rel, LBL handle & #h1, ARG0 #e1, ARG2 #x7 ] !>,
+  OUTPUT.RELS <! [ ], [ LBL #h2, ARG0 #e2 ], [ ], [ ],
+ 		 [ PRED comp_rel, LBL #h2, ARG0 #e1, ARG1 #e2, ARG2 #x7 ] !> ].
+
+coord_subj_compar_op_gpr := basic_coord_subj_compar_op_gpr &
+[ CONTEXT.RELS <! [ ], [ PRED named_rel ], [ PRED proper_q_rel ], [ ] !>,
+  INPUT.RELS <! [ ], [ ], [ PRED #cpred, ARG0.SORT #sort ], [ ], [ ], [ ], [ ] !>,
+  OUTPUT.RELS <! [ ], [ ], [ ], [ PRED #cpred, ARG0.SORT #sort ], [ ] !> ].
+
+coord_subj_compar_nary_op_gpr := basic_coord_subj_compar_op_gpr &
+[ CONTEXT.RELS <! [ ], [ PRED conj_rel ], [ PRED udef_q_rel ], [ ] !>,
+  INPUT.RELS <! [ ], [ ], [ PRED _and_c_nopr_nrev_rel ], [ ], [ ], [ ], [ ] !>,
+  OUTPUT.RELS <! [ ], [ ], [ ], [ PRED implicit_conj_rel ], [ ] !> ].
+
+basic_coord_subj_twoarg_neg_op_gpr := basic_coord_subj_twoarg_op_gpr &
+[ CONTEXT [ RELS <! [ ], [ ], [ ], [ ARG0 #x1 ] !>,
+	    HCONS <! qeq & [ HARG #h3, LARG #h1 ] !> ],
+;  FILTER.HCONS <! qeq & [ LARG #h10 ] !>,
+  INPUT [ RELS <! [ LBL #h1 ], [ LBL #h2, ARG2 #x2 ], [ LBL #h10 ], 
+		  [ ARG0 #x2 ], [ ],
+		  [ PRED neg_rel, ARG0 #e1, ARG1 #h3 ],
+		  [ PRED neg_rel, ARG1 #h4 ] !>,
+	  HCONS <! qeq, qeq, qeq, qeq & [ HARG #h4, LARG #h2 ] !> ],
+  OUTPUT.RELS <! [ ], [ LBL #h1, ARG2 #x1 ], [ ], [ ],
+	         [ PRED neg_rel, LBL #h10, ARG0 #e1, ARG1 #h3 ] !> ].
+
+coord_subj_twoarg_neg_op_gpr := basic_coord_subj_twoarg_neg_op_gpr &
+[ CONTEXT.RELS <! [ ], [ PRED named_rel ], [ PRED proper_q_rel ], [ ] !>,
+  INPUT.RELS <! [ ], [ ], [ PRED #cpred, ARG0.SORT #sort ], [ ], [ ], [ ], [ ] !>,
+  OUTPUT.RELS <! [ ], [ ], [ ], [ PRED #cpred, ARG0.SORT #sort ], [ ] !> ].
+
+coord_subj_twoarg_neg_nary_op_gpr := basic_coord_subj_twoarg_neg_op_gpr &
+[ CONTEXT.RELS <! [ ], [ PRED conj_rel ], [ PRED udef_q_rel ], [ ] !>,
+  INPUT.RELS <! [ ], [ ], [ PRED  _and_c_nopr_nrev_rel ], [ ], [ ], [ ], [ ] !>,
+  OUTPUT.RELS <! [ ], [ ], [ ], [ PRED implicit_conj_rel ], [ ] !> ].
+
+
+;; B and D are cubes
+;; B and D are not cubes
+;;
+coord_subj_twoarg_noprop_op_gpr := basic_coord_subj_onearg_op_gpr &
+[ CONTEXT.RELS <! [ ], [ ], [ ], [ ] !>,
+  INPUT [ RELS.LIST < [ ARG2 #x7 ], [ ARG2 #x8 ], [ ],
+		  [ PRED #pred, ARG0 ref-ind & #x8 ],
+		  [ PRED udef_a_q_rel, LBL handle, ARG0 #x8, 
+		    RSTR handle & #h20, BODY handle ],
+		  [ PRED "~._n_" & #pred, LBL handle & #h4, ARG0 ref-ind & #x7],
+		  [ PRED udef_a_q_rel, LBL #h2 & handle, ARG0 #x7, RSTR #h21, 
+		    BODY #h22 ], ... >,
+	  HCONS.LIST < qeq, qeq, qeq & [ HARG #h20 ], ... > ],
+  OUTPUT.RELS.LIST < [ ], [ LBL handle, ARG1.PNG.PN #pn, 
+			    ARG2 #x7 & [ PNG.PN #pn ] ],
+		     [ ], [ ],
+		     [ PRED #pred, LBL #h4, ARG0 #x7 ],
+		     [ PRED udef_a_q_rel, LBL #h2, ARG0 #x7, 
+		       RSTR #h21, BODY #h22 ], ... >,
+  FLAGS.SUBSUME < semarg, semarg, #x7, #x8 > ].
+
+;; B and D are cubes
+;;
+bsc_crd_subj_twoarg_noprop_pos_op_gpr := coord_subj_twoarg_noprop_op_gpr &
+[ FILTER [ RELS <! [ PRED neg_rel, ARG1 #h1 ] !>,
+	   HCONS <! qeq & [ HARG #h1, LARG #h3 ] !> ],
+  INPUT [ RELS <! [ ], [ LBL #h3 ], [ LBL #h2 ], [ ], [ ], [ ], [ ] !>,
+	  HCONS <! qeq, qeq, qeq !> ],
+  OUTPUT.RELS <! [ ], [ LBL #h2 ], [ ], [ ] !> ].
+
+coord_subj_twoarg_noprop_pos_op_gpr := bsc_crd_subj_twoarg_noprop_pos_op_gpr &
+[ CONTEXT.RELS <! [ ], [ PRED named_rel ], [ PRED proper_q_rel ], [ ] !>,
+  INPUT.RELS <! [ ], [ ], [ PRED #cpred, ARG0.SORT #sort ], [ ], [ ], [ ], [ ] !>,
+  OUTPUT.RELS <! [ ], [ ], [ ], [ PRED #cpred, ARG0.SORT #sort ] !> ].
+
+coord_subj_twoarg_noprop_nary_op_gpr := bsc_crd_subj_twoarg_noprop_pos_op_gpr &
+[ CONTEXT.RELS <! [ ], [ PRED conj_rel ], [ PRED udef_q_rel ], [ ] !>,
+  INPUT.RELS <! [ ], [ ], [ PRED conj_rel ], [ ], [ ], [ ], [ ] !>,
+  OUTPUT.RELS <! [ ], [ ], [ ], [ PRED implicit_conj_rel ] !> ].
+
+
+;; B and D are not cubes
+;;
+bsc_coord_subj_twoarg_noprop_neg_gpr := coord_subj_twoarg_noprop_op_gpr &
+[ CONTEXT.HCONS <! qeq & [ HARG #h3, LARG #h1 ] !>,
+  FILTER [ RELS <! [ PRED neg_rel, ARG1 #h20 ] !>,
+	   HCONS <! qeq & [ HARG #h20, LARG #h10 ] !> ],
+  INPUT [ RELS <! [ LBL #h1 ], [ LBL #h2 ], [ LBL #h10 ], [ ], [ ], [ ], [ ],
+		  [ PRED neg_rel, ARG0 #e1, ARG1 #h3 ],
+		  [ PRED neg_rel, ARG1 #h4 ] !>,
+	  HCONS <! qeq, qeq, qeq, qeq & [ HARG #h4, LARG #h2 ] !> ],
+  OUTPUT.RELS <! [ ], [ LBL #h1 ], [ ], [ ], [ ], [ ],
+	         [ PRED neg_rel, LBL #h10, ARG0 #e1, ARG1 #h3 ] !> ].
+
+coord_subj_twoarg_noprop_neg_gpr := bsc_coord_subj_twoarg_noprop_neg_gpr &
+[ CONTEXT.RELS <! [ ], [ PRED named_rel ], [ PRED proper_q_rel ], [ ] !>,
+  INPUT.RELS <! [ ], [ ], [ PRED #cpred, ARG0.SORT #sort ], [ ], [ ], [ ], [ ], [ ], [ ] !>,
+  OUTPUT.RELS <! [ ], [ ], [ ], [ PRED #cpred, ARG0.SORT #sort ], [ ], [ ], [ ] !> ].
+
+coord_subj_twoarg_noprop_neg_nary_gpr := bsc_coord_subj_twoarg_noprop_neg_gpr &
+[ CONTEXT.RELS <! [ ], [ PRED conj_rel ], [ PRED udef_q_rel ], [ ] !>,
+  INPUT.RELS <! [ ], [ ], [ PRED _and_c_nopr_nrev_rel ], [ ], [ ], [ ], [ ], [ ], [ ] !>,
+  OUTPUT.RELS <! [ ], [ ], [ ], [ PRED implicit_conj_rel ], [ ], [ ], [ ] !> ].
+
+
+;; A and B are between C and D
+;;
+basic_coord_subj_threearg_op_gpr := basic_coord_subj_twoarg_op_gpr &
+[ CONTEXT.RELS <! [ ], [ ], [ ], [ ARG0 #x1 ],
+		  [ PRED _and_c_rel, ARG0 #x8 & conj_ref-ind, 
+		    L-INDEX #x1 & ref-ind, R-INDEX #x9 & ref-ind ],
+		  [ PRED named_rel, ARG0 #x9, CARG #carg ] !>,
+;  FILTER.HCONS <! qeq & [ LARG #h30 ] !>,
+  INPUT [ RELS <! [ PRED _between_p_rel, ARG2 #x8 ], [ ARG2 #x13 ], 
+		  [ LBL #h30 ], [ ARG0 #x11 & ref-ind ], [ ],
+	   	  [ PRED _and_c_rel, ARG0 #x13 & conj_ref-ind, 
+		    L-INDEX #x11, R-INDEX #x12 ],
+		  [ PRED udef_q_rel, ARG0 #x13, RSTR handle & #h21 ],
+		  [ PRED named_rel, ARG0 ref-ind & #x12, CARG #carg ],
+		  [ PRED proper_q_rel, ARG0 #x12, RSTR handle & #h20 ] !>,
+	  HCONS <! qeq, qeq, qeq, qeq & [ HARG #h20 ], qeq & [ HARG #h21 ] !> ],
+  OUTPUT.RELS <! [ ], [ LBL #h30 ], [ ], [ ] !> ].
+
+coord_subj_threearg_op_gpr := basic_coord_subj_threearg_op_gpr &
+[ CONTEXT.RELS <! [ ], [ PRED named_rel ], [ PRED proper_q_rel ], [], [], [] !>,
+  INPUT.RELS <! [ ], [ ], [ PRED #cpred, ARG0.SORT #sort ], [ ], [ ], [ ], [ ], [ ], [ ] !>,
+  OUTPUT.RELS <! [ ], [ ], [ ], [ PRED #cpred, ARG0.SORT #sort ] !> ].
+
+coord_subj_threearg_nary_op_gpr := basic_coord_subj_threearg_op_gpr &
+[ CONTEXT.RELS <! [ ], [ PRED conj_rel ], [ PRED udef_q_rel ], [ ], [ ], [ ] !>,
+  INPUT.RELS <! [ ], [ ], [ PRED _and_c_rel ], [ ], [ ], [ ], [ ], [ ], [ ] !>,
+  OUTPUT.RELS <! [ ], [ ], [ ], [ PRED implicit_conj_rel ] !> ].
+
+
+;; Common subj in coord Ss: note that need to drop the qeqs for L-HNDL, R-HNDL
+;; when doing VP coord.  REVIEW.
+;; B is smaller than C and (is) larger than D.
+;;
+basic_coord_vp_op_gpr := openproof_omtr &
+[ CONTEXT.RELS <! [ ARG0 event & #e1 & [ E.TENSE present ], ARG1 #x1 ],
+		  [ ARG0 #x1 & ref-ind ] !>,
+  INPUT [ HOOK.INDEX #index,
+	  RELS <! [ PRED pos_conj_rel & #pred1, LBL #h14, ARG0 #e7, L-INDEX #e1, 
+		    R-INDEX #e2, L-HNDL #h10 & handle, R-HNDL #h11 & handle ],
+		  [ ARG0 #x2 & ref-ind ],
+		  [ PRED quant_rel, ARG0 #x2, RSTR #h20 ],
+		  [ PRED #pred2, LBL #h4, ARG0 event & #e2, ARG1 #x2 ] !>,
+	  HCONS <! qeq & [ HARG #h20 ], 
+		   qeq & [ HARG #h10, LARG #h12 ],
+		   qeq & [ HARG #h11, LARG #h13 ] !> ],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS <! [ ], 
+		   [ PRED #pred1, LBL #h14, ARG0 #e7, L-INDEX #e1, R-INDEX #e2,
+		     L-HNDL #h12, R-HNDL #h13 ],
+		   [ PRED #pred2, LBL #h4, ARG0 #e2, ARG1 #x1 ] !>,
+	   HCONS <! !> ],
+  FLAGS.SUBSUME < #e2, #x1, #x2, ... > ].
+
+coord_vp_onearg_op_gpr := basic_coord_vp_op_gpr &
+[ CONTEXT.RELS <! [ ], [ PRED named_rel, CARG #carg ] !>,
+  INPUT.RELS <! [], [ PRED named_rel, CARG #carg ], [], [ ARG2 handle ] !>,
+  FLAGS.SUBSUME < semarg, semarg, semarg > ].
+
+coord_vp_twoarg_op_gpr := basic_coord_vp_op_gpr &
+[ CONTEXT.RELS <! [ ], [ PRED named_rel, CARG #carg ] !>,
+  INPUT.RELS <! [], [ PRED named_rel, CARG #carg ], [], 
+	        [ ARG2 #x3 & ref-ind ] !>,
+  OUTPUT.RELS <! [ ], [ ], [ ARG2 #x3 ] !>,
+  FLAGS.SUBSUME < semarg, semarg, semarg, #x3 > ].
+
+;; B and C are large and (they) are not small.
+;;
+coord_vp_prosubj_onearg_op_gpr := basic_coord_vp_op_gpr &
+[ CONTEXT.RELS <! [ ], [ PRED conj_rel ] !>,
+  FILTER.RELS <! [ PRED "_both_a_1_rel" ] !>,
+  INPUT.RELS <! [], [ PRED pron_rel ], [], [ ARG2 handle ] !>,
+  FLAGS.SUBSUME < semarg, semarg, semarg > ].
+
+coord_vp_prosubj_twoarg_op_gpr := basic_coord_vp_op_gpr &
+[ CONTEXT.RELS <! [ ], [ PRED conj_rel ] !>,
+  FILTER.RELS <! [ PRED "_both_a_1_rel" ] !>,
+  INPUT.RELS <! [], [ PRED pron_rel ], [], 
+	        [ ARG2 #x3 & ref-ind ] !>,
+  OUTPUT.RELS <! [ ], [ ], [ ARG2 #x3 ] !>,
+  FLAGS.SUBSUME < semarg, semarg, semarg, #x3 > ].
+
+
+;; Pronominal subjects
+;;
+basic_pro_subj_gpr := openproof_omtr &
+[ CONTEXT.RELS.LIST < [ ARG0 event & [ E.TENSE present ], ARG1 #x1 ],
+		      [ ARG0 event & [ E.TENSE present ], ARG1 #x2 ],
+		      [ ARG0 #x1 & ref-ind ],
+		      [ PRED quant_rel & #qpred, ARG0 #x1 ], ... >,
+  INPUT [ HOOK.INDEX #index,
+	  RELS.LIST < [ LBL #h10, ARG0 #x2 & ref-ind ],
+		    [ PRED #qpred, ARG0 #x2, RSTR #h20 ], ... > ],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS.LIST < [ ], [ LBL #h10, ARG0 #x2 ],
+		       [ LBL handle, ARG0 #x2, RSTR #h20 ], ... > ],
+  FLAGS.SUBSUME < #x2, ... > ].
+
+;; B is a cube, and it is large
+;;
+pro_subj_gpr := basic_pro_subj_gpr &
+[ CONTEXT.RELS.LIST < [ ], [ ],
+		      [ PRED named_rel, CARG #carg ], ... >,
+  INPUT.RELS <! [ PRED named_rel, ARG0.PNG.GEN neut, CARG #carg ], [ ] !>,
+  OUTPUT.RELS.LIST < [ ], [ PRED pron_rel ], [ PRED pronoun_q_rel ], ... >,
+  FLAGS.SUBSUME < semarg > ].
+
+;; B is larger than C, and it is a cube.
+;;
+coord_s_pro_subj_unambig_gpr := pro_subj_gpr &
+[ OUTPUT [ RELS <! [ ], [ ], [ ] !>,
+	   HCONS <! !> ] ].
+
+;; B is larger than C, and it (i.e., B) is a cube.
+;;
+coord_s_pro_subj_ambig_gpr := pro_subj_gpr &
+[ CONTEXT.RELS <! [ ], [ ], [ ], [ ], [ ], [ PRED named_rel ] !>,
+  INPUT.RELS <! [ CARG #carg ], [ ] !>,
+  OUTPUT [ RELS <! [ ], [ LBL #h3, ARG0 #x1 ], [ ], 
+		   [ PRED _i+e_p_rel, LBL #h3, ARG0 event & [ E.TENSE untensed],
+		     ARG1 #x1, ARG2 #x2 ],
+		   [ PRED named_rel, LBL #h5, ARG0 #x2 & ref-ind, CARG #carg ],
+		   [ PRED proper_q_rel, ARG0 #x2, RSTR #h4, BODY handle ] !>,
+	   HCONS <! qeq & [ HARG #h4, LARG #h5 ] !> ] ].
+
+subord_s_pro_subj_gpr := pro_subj_gpr &
+[ CONTEXT [ RELS.LIST < [ ], [ ], [ ], [ ], [ ARG2 #h3 ], ... >,
+	    HCONS.LIST < qeq & [ ],
+		         qeq & [ HARG #h3 ], ... > ] ].
+
+;; If B is a cube then it is large
+;;
+basic_cond_s_pro_subj_gpr := subord_s_pro_subj_gpr &
+[ CONTEXT [ RELS.LIST < [ LBL handle ], [ LBL handle ], [ ], [ ],
+		    [ PRED "_if_x_then_rel", ARG1 #h3 ],
+		    [ LBL #h1, ARG1 #h5 ], ... >,
+	    HCONS.LIST < qeq & [ HARG #h5 ], qeq,
+		         qeq & [ HARG #h3, LARG #h1 ], ... > ],
+  OUTPUT.RELS.LIST < [ ], [ ], [ ], ... > ].
+
+cond_s_pro_subj_gpr := basic_cond_s_pro_subj_gpr &
+[ CONTEXT [ RELS <! [ LBL #h2 ], [ LBL #h4 ], [ ], [ ], [ ], [ ] !>,
+	    HCONS <! qeq & [ LARG #h4 ], qeq & [ LARG #h2 ], [ ] !> ],
+  OUTPUT [ RELS <! [ ], [ ], [ ] !>,
+	   HCONS <! !> ] ].
+
+cond_s_pro_subj_ambig_gpr := basic_cond_s_pro_subj_gpr &
+[ CONTEXT [ RELS <! [ LBL #h2 ], [ LBL #h4 ], [ ], [ ], [ ], [ ],
+		    [ PRED named_rel ] !>,
+	    HCONS <! qeq & [ LARG #h4 ], qeq & [ LARG #h2 ], [ ] !> ],
+  INPUT.RELS <! [ CARG #carg ], [ ] !>,
+  OUTPUT [ RELS <! [ ], [ LBL #h3, ARG0 #x1 ], [ ], 
+		   [ PRED _i+e_p_rel, LBL #h3, ARG0 event & [ E.TENSE untensed],
+		     ARG1 #x1, ARG2 #x2 ],
+		   [ PRED named_rel, LBL #h5, ARG0 #x2 & ref-ind, CARG #carg ],
+		   [ PRED proper_q_rel, ARG0 #x2, RSTR #h14, BODY handle ] !>,
+	   HCONS <! qeq & [ HARG #h14, LARG #h5 ] !> ] ].
+
+;; "B is large if it is a cube" or "... provided that it ..."
+;; Assume this is ordered after "then"-deletion, so we don't produce output
+;; that would have to be generated as "*then B is large if it is a cube".
+;;
+basic_cond_s_pro_subj_rev_gpr := subord_s_pro_subj_gpr &
+[ CONTEXT [ RELS.LIST < [ LBL #h2 ], [ LBL #h4 ], [ ], [ ],
+                          [ ARG1 #h3, ARG2 #h5 ], ... >,
+	    HCONS <! qeq & [ HARG #h3, LARG #h2 ], 
+	             qeq & [ HARG #h5, LARG #h4 ] !> ] ].
+
+cond_s_pro_subj_rev_gpr := basic_cond_s_pro_subj_rev_gpr &
+[ CONTEXT.RELS <! [ ], [ ], [ ], [ ], [ ] !>,
+  OUTPUT [ RELS <! [ ], [ ], [ ] !>,
+	   HCONS <! !> ] ].
+
+cond_s_pro_subj_ambig_rev_gpr := basic_cond_s_pro_subj_rev_gpr &
+[ CONTEXT.RELS <! [ ], [ ], [ ], [ ], [ ],
+		    [ PRED named_rel ] !>,
+  INPUT.RELS <! [ CARG #carg ], [ ] !>,
+  OUTPUT [ RELS <! [ ], [ LBL #h3, ARG0 #x1 ], [ ], 
+		   [ PRED _i+e_p_rel, LBL #h3, ARG0 event & [ E.TENSE untensed],
+		     ARG1 #x1, ARG2 #x2 ],
+		   [ PRED named_rel, LBL #h5, ARG0 #x2 & ref-ind, CARG #carg ],
+		   [ PRED proper_q_rel, ARG0 #x2, RSTR #h14, BODY handle ] !>,
+	   HCONS <! qeq & [ HARG #h14, LARG #h5 ] !> ] ].
+
+;; Embedded consequent
+;; "If B is large, then it is a cube iff C is large"
+;;
+cond_s_pro_subj_embed_cons_gpr := basic_cond_s_pro_subj_gpr &
+[ CONTEXT [ RELS <! [ LBL #h2 ], [ LBL #h4 ], [ ], [ ], [ ], [ ],
+  	            [ LBL #h5 & handle, ARG1 #h6 & handle ] !>,
+	    HCONS <! qeq & [ LARG #h5 ], qeq & [ LARG #h2 ], [ ],
+	             qeq & [ HARG #h6, LARG #h4 ] !> ],
+  OUTPUT [ RELS <! [ ], [ ], [ ] !>,
+	   HCONS <! !> ] ].
+
+;; Embedded negated consequent
+;;
+cond_s_pro_subj_embed_cons_neg_gpr := basic_cond_s_pro_subj_gpr &
+[ CONTEXT [ RELS <! [ LBL #h2 ], [ LBL #h4 ], [ ], [ ], [ ], [ ],
+  	            [ LBL #h5 & handle, ARG1 #h6 & handle ],
+		    [ PRED "_then_a_1_rel", LBL #h12, ARG1 #h13 ],
+		    [ PRED neg_rel, LBL #h10, ARG1 #h11 ] !>,
+	    HCONS <! qeq & [ LARG #h5 ], qeq & [ LARG #h2 ], [ ],
+	             qeq & [ HARG #h6, LARG #h12 ],
+	             qeq & [ HARG #h13, LARG #h10 ],
+		     qeq & [ HARG #h11, LARG #h4 ] !> ],
+  OUTPUT [ RELS <! [ ], [ ], [ ] !>,
+	   HCONS <! !> ] ].
+
+;; Embedded antecedent
+;; "If B is large, then if it is a cube then C is large"
+;;
+cond_s_pro_subj_embed_ant_gpr := basic_cond_s_pro_subj_gpr &
+[ CONTEXT [ RELS <! [ LBL #h2 ], [ LBL #h4 ], [ ], [ ], [ ], [ ],
+  	            [ PRED "_if_x_then_rel", LBL #h5 & handle, 
+		      ARG1 #h7 & handle, ARG2 #h6 & handle ],
+		    [ PRED "_then_a_1_rel", LBL #h8 ] !>,
+	    HCONS <! qeq & [ LARG #h5 ], qeq & [ LARG #h2 ], [ ],
+	             qeq & [ HARG #h6, LARG #h4 ],
+		     qeq & [ HARG #h7, LARG #h8 ] !> ],
+  OUTPUT [ RELS <! [ ], [ ], [ ] !>,
+	   HCONS <! !> ] ].
+
+;; "If B is large, then if it isn't a cube then C is large"
+;; 
+cond_s_pro_subj_embed_ant_neg_gpr := basic_cond_s_pro_subj_gpr &
+[ CONTEXT [ RELS <! [ LBL #h2 ], [ LBL #h4 ], [ ], [ ], [ ], [ ],
+  	            [ PRED "_if_x_then_rel", LBL #h5 & handle, 
+		      ARG1 #h7 & handle, ARG2 #h6 & handle ],
+		    [ PRED "_then_a_1_rel", LBL #h8 ],
+		    [ PRED neg_rel, LBL #h10, ARG1 #h11 ] !>,
+	    HCONS <! qeq & [ LARG #h5 ], qeq & [ LARG #h2 ], [ ],
+	             qeq & [ HARG #h6, LARG #h10 ],
+		     qeq & [ HARG #h7, LARG #h8 ],
+		     qeq & [ HARG #h11, LARG #h4 ] !> ],
+  OUTPUT [ RELS <! [ ], [ ], [ ] !>,
+	   HCONS <! !> ] ].
+
+basic_unless_s_pro_subj_gpr := subord_s_pro_subj_gpr &
+[ CONTEXT [ RELS.LIST < [ LBL handle ], [ LBL handle ], [ ], [ ],
+		    [ PRED "_unless_x_rel" ], ... >,
+	    HCONS <! qeq, qeq !> ],
+  OUTPUT.RELS.LIST < [ ], [ ], [ ], ... > ].
+
+unless_s_pro_subj_gpr := basic_unless_s_pro_subj_gpr &
+[ CONTEXT [ RELS <! [ LBL #h2 ], [ LBL #h4 ], [ ], [ ], [ ] !>,
+	    HCONS <! qeq & [ LARG #h2 ], qeq & [ LARG #h4 ] !> ],
+  OUTPUT [ RELS <! [ ], [ ], [ ] !>,
+	   HCONS <! !> ] ].
+
+unless_s_pro_subj_ambig_gpr := basic_unless_s_pro_subj_gpr &
+[ CONTEXT [ RELS <! [ LBL #h2 ], [ LBL #h4 ], [ ], [ ], [ ],
+		    [ PRED named_rel ] !>,
+	    HCONS <! qeq & [ LARG #h2 ], qeq & [ LARG #h4 ] !> ],
+  INPUT.RELS <! [ CARG #carg ], [ ] !>,
+  OUTPUT [ RELS <! [ ], [ LBL #h3, ARG0 #x1 ], [ ], 
+		   [ PRED _i+e_p_rel, LBL #h3, ARG0 event & [ E.TENSE untensed],
+		     ARG1 #x1, ARG2 #x2 ],
+		   [ PRED named_rel, LBL #h5, ARG0 #x2 & ref-ind, CARG #carg ],
+		   [ PRED proper_q_rel, ARG0 #x2, RSTR #h14, BODY handle ] !>,
+	   HCONS <! qeq & [ HARG #h14, LARG #h5 ] !> ] ].
+
+;; B is a cube only if it is large
+;;
+onlyif_s_pro_subj_gpr := subord_s_pro_subj_gpr &
+[ CONTEXT [ RELS <! [ LBL #h2 ], [ LBL #h4 ], [ ], [ ],
+		    [ ARG1 #h3 ] !>,
+	    HCONS <! [ HARG #h3, LARG #h2 ], [ LARG #h4 ] !> ],
+  OUTPUT [ RELS <! [ ], [ ], [ ] !>,
+	   HCONS <! !> ] ].
+
+
+;; B is a cube if and only if it is large
+;;
+bicond_s_pro_subj_gpr := subord_s_pro_subj_gpr &
+[ CONTEXT [ RELS <! [ LBL #h2 ], [ LBL #h4 ], [ ], [ ],
+		  [ PRED "_if+and+only+if_x_1_rel" ] !>,
+	    HCONS <! [ LARG #h2 ], [ LARG #h4 ] !> ],
+  OUTPUT [ RELS <! [ ], [ ], [ ] !>,
+	   HCONS <! !> ] ].
+
+bicond_s_pro_subj_coordvp_gpr := subord_s_pro_subj_gpr &
+[ CONTEXT [ RELS <! [ LBL #h2 ], [ LBL #h4 ], [ ], [ ],
+		  [ PRED "_if+and+only+if_x_1_rel" ],
+		  [ PRED conj_rel, LBL #h5, L-HNDL #h4 ] !>,
+	    HCONS <! [ LARG #h2 ], [ LARG #h5 ] !> ],
+  OUTPUT [ RELS <! [ ], [ ], [ ] !>,
+	   HCONS <! !> ] ].
+
+;; Coord subj with pronoun
+;;
+;; We specialize the SORT of pronouns to let us keep track of the conjoined 
+;; antecedent of a plural pronoun being either distributive or collective,
+;; so we know whether we can replace `they' with `one of them' or `all of them'.
+;; Note that we also then need multiple lexical entries for `they' and `them', 
+;; each with a specific value for SORT, since the generator needs to have the 
+;; output MRS subsume the input.
+;;
+distrib_collect := basic-entity-or-event.
+distributive := distrib_collect.
+collective := distrib_collect.
+distrib-entity := entity & distributive.
+collect-entity := entity & collective.
+
+;; We also want to distinguish the cardinality of plurals as exactly 2 or 
+;; more than 2, for "both of ..." vs. "all of ..." and for "neither of ..."
+;; vs. "none of ..."
+;;
+;ref-ind :+
+; [ CARD string ].
+
+pro_coord_subj_gpr := basic_pro_subj_gpr &
+[ CONTEXT.RELS.LIST < [ ], [ ], 
+		      [ PRED _and_c_rel, L-INDEX #x1, R-INDEX #x2 ], [ ],
+		      [ PRED named_rel, ARG0 #x1, CARG #carg1 ],
+		      [ PRED named_rel, ARG0 #x2, CARG #carg2 ], ... >,
+  INPUT [ RELS <! [ PRED pos_conj_rel, ARG0 ref-ind & [ SORT #sort ], 
+		    L-INDEX #x3, R-INDEX #x4 ], [ ],
+		  [ PRED named_rel, ARG0 #x3, CARG #carg1 ],
+		  [ PRED named_rel, ARG0 #x4, CARG #carg2 ], 
+		  [ PRED proper_q_rel, ARG0 #x3, RSTR #h20 ],
+		  [ PRED proper_q_rel, ARG0 #x4, RSTR #h21 ] !>,
+	  HCONS <! qeq & [ HARG #h20 ], qeq & [ HARG #h21 ] !> ],
+  OUTPUT [ RELS.LIST < [ ], [ ARG0.SORT #sort ], [ ], ... > ] ].
+
+pro_coord_subj_disj_gpr := basic_pro_subj_gpr &
+[ INPUT.RELS.LIST < [ PRED _or_c_rel ], ... >,
+  OUTPUT [ RELS <! [ ], [ PRED part_of_rel, LBL #h3, ARG0 #x2, ARG1 #x4 ], 
+		   [ PRED udef_q_rel ],
+		   [ PRED card_rel, LBL #h3, ARG0 event & [ E.TENSE untensed ],
+		     ARG1 #x2, CARG "1" ],
+		   [ PRED pron_rel, LBL #h5, ARG0 #x4 & ref-ind & [PNG.PN 3p ]],
+		   [ PRED pronoun_q_rel, LBL handle, ARG0 #x4, RSTR #h6,
+		     BODY handle ] !>,
+	   HCONS <! qeq & [ HARG #h6, LARG #h5 ] !> ] ].
+
+conjnct_pro_coord_subj_gpr := pro_coord_subj_gpr &
+[ CONTEXT.RELS <! [ ARG0 #e1 ], [ ARG0 #e2, ARG1 #x3 ], [ ],
+		  [ ], [ ], [ ], 
+		  [ PRED conj_rel, ARG0.SORT #sort,
+		    L-INDEX #e1, R-INDEX #e2 ] !>,
+  OUTPUT.RELS.LIST < [ ], [ ARG0 #x3 & [ PNG.PN 3p, SORT #sort ] ], ... >,
+  FLAGS.SUBSUME < semarg > ].
+
+conjnct_pro_coord_subj_and_gpr := conjnct_pro_coord_subj_gpr &
+[ INPUT.RELS.LIST < [ PRED _and_c_rel ], ... >,
+  OUTPUT [ RELS <! [ ], [ PRED pron_rel ], [ PRED pronoun_q_rel ] !>,
+	   HCONS <! !> ] ].
+
+conjnct_pro_coord_subj_or_gpr := conjnct_pro_coord_subj_gpr &
+				 pro_coord_subj_disj_gpr.
+
+subord_s_pro_coord_subj_gpr := pro_coord_subj_gpr &
+[ CONTEXT [ RELS.LIST < [ ], [ ], [ ], [ ], [ ], [ ],
+			[ ARG2 #h3 ], ... >,
+	    HCONS.LIST < qeq & [ ],
+		         qeq & [ HARG #h3 ], ... > ] ].
+
+;; If B and C are cubes then they are large
+;
+cond_s_pro_coord_subj_gpr := subord_s_pro_coord_subj_gpr &
+[ CONTEXT [ RELS <! [ LBL #h2 & handle ], [ LBL #h4 & handle ], [ ], [ ],
+		    [ ], [ ], [ PRED "_if_x_then_rel", ARG1 #h3 ],
+		    [ PRED "_then_a_1_rel", LBL #h1, ARG1 #h5 ] !>,
+	    HCONS <! qeq & [ HARG #h5, LARG #h4 ], [ LARG #h2 ],
+		     qeq & [ HARG #h3, LARG #h1 ] !> ] ].
+
+cond_s_pro_coord_subj_and_gpr := cond_s_pro_coord_subj_gpr &
+[ INPUT.RELS.LIST < [ PRED _and_c_rel ], ... >,
+  OUTPUT [ RELS <! [ ], [ PRED pron_rel ], [ PRED pronoun_q_rel ] !>,
+	   HCONS <! !> ] ].
+
+cond_s_pro_coord_subj_or_gpr := cond_s_pro_coord_subj_gpr &
+				pro_coord_subj_disj_gpr.
+
+;; IF B and C are cubes then they are large or small
+cond_s_pro_coord_subj_coord_conseq_gpr := subord_s_pro_coord_subj_gpr &
+[ CONTEXT [ RELS <! [ LBL #h2 & handle ], [ LBL #h4 & handle ], [ ], [ ],
+		    [ ], [ ], [ PRED "_if_x_then_rel", ARG1 #h3 ],
+		    [ PRED "_then_a_1_rel", LBL #h1, ARG1 #h5 ],
+		    [ PRED conj_rel, LBL #h6, L-HNDL #h4 ] !>,
+	    HCONS <! qeq & [ HARG #h5, LARG #h6 ], [ LARG #h2 ],
+		     qeq & [ HARG #h3, LARG #h1 ] !> ] ].
+
+cond_s_pro_coord_subj_crd_cq_and_gpr := cond_s_pro_coord_subj_coord_conseq_gpr &
+[ INPUT.RELS.LIST < [ PRED _and_c_rel ], ... >,
+  OUTPUT [ RELS <! [ ], [ PRED pron_rel ], [ PRED pronoun_q_rel ] !>,
+	   HCONS <! !> ] ].
+
+cond_s_pro_coord_subj_crd_cq_or_gpr := cond_s_pro_coord_subj_coord_conseq_gpr &
+				       pro_coord_subj_disj_gpr.
+
+;; B and C are cubes only if they are large
+;;
+onlyif_s_pro_coord_subj_gpr := subord_s_pro_coord_subj_gpr &
+[ CONTEXT [ RELS <! [ LBL #h2 ], [ LBL #h4 ], [ ], [ ], [ ], [ ],
+		    [ PRED "_only+if_x_rel", ARG1 #h3 ] !>,
+	    HCONS <! [ HARG #h3, LARG #h2 ], [ LARG #h4 ] !> ] ].
+
+onlyif_s_pro_coord_subj_and_gpr := onlyif_s_pro_coord_subj_gpr &
+[ INPUT.RELS.LIST < [ PRED _and_c_rel ], ... >,
+  OUTPUT [ RELS <! [ ], [ PRED pron_rel ], [ PRED pronoun_q_rel ] !>,
+	   HCONS <! !> ] ].
+
+onlyif_s_pro_coord_subj_or_gpr := onlyif_s_pro_coord_subj_gpr &
+				  pro_coord_subj_disj_gpr.
+
+;; B and C are cubes if and only if they are large
+;;
+bicond_s_pro_coord_subj_gpr := subord_s_pro_coord_subj_gpr &
+[ CONTEXT [ RELS <! [ LBL #h2 ], [ LBL #h4 ], [ ], [ ], [ ], [ ],
+		  [ PRED "_if+and+only+if_x_1_rel" ] !>,
+	    HCONS <! [ LARG #h2 ], [ LARG #h4 ] !> ] ].
+
+bicond_s_pro_coord_subj_and_gpr := bicond_s_pro_coord_subj_gpr &
+[ INPUT.RELS.LIST < [ PRED _and_c_rel ], ... >,
+  OUTPUT [ RELS <! [ ], [ PRED pron_rel ], [ PRED pronoun_q_rel ] !>,
+	   HCONS <! !> ] ].
+
+bicond_s_pro_coord_subj_or_gpr := bicond_s_pro_coord_subj_gpr &
+				  pro_coord_subj_disj_gpr.
+
+;; B is in front of or smaller than C
+;;
+basic_shared_dobj_op_gpr := openproof_omtr &
+[ CONTEXT.RELS.LIST < [ LBL #h1, ARG0 event, ARG2 #x1 ],
+		  [ PRED named_rel, ARG0 #x1 & ref-ind, CARG #carg ],
+		  [ PRED conj_rel, L-HNDL #h1, R-HNDL #h2 ], ... >,
+  INPUT [ HOOK.INDEX #index,
+	  RELS <! [ PRED named_rel, ARG0 #x2 & ref-ind, CARG #carg ],
+		  [ PRED proper_q_rel, ARG0 #x2, RSTR #h20 ],
+		  [ PRED #pred, LBL #h2, ARG0 event & #e2, ARG1 #i3,
+		    ARG2 #x2 ] !>,
+	  HCONS <! qeq & [ HARG #h20 ] !> ],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS <! [ ], 
+		   [ PRED #pred, LBL #h2, ARG0 #e2, ARG1 #i3, ARG2 #x1 ] !>,
+	   HCONS <! !> ],
+  FLAGS.EQUAL < #e2, #x1, #x2 > ].
+
+;; "B is in front of or in back of C"
+;;
+shared_dobj_onepred_op_gpr := basic_shared_dobj_op_gpr &
+[ CONTEXT.RELS <! [ ARG0.E.TENSE present, ARG1 #x1 & ref-ind ], [ ], [ ] !>,
+  OUTPUT.RELS <! [ ], [ ARG0.E.TENSE present, ARG1 #x1 ] !> ].
+
+;; "B is larger than or smaller than C"
+;;
+shared_dobj_twopred_op_gpr := basic_shared_dobj_op_gpr &
+[ CONTEXT.RELS <! [ LBL #h1, ARG0.E.TENSE untensed ], [ ], [ ],
+                  [ LBL #h1, ARG0.E.TENSE present, ARG1 #x1 & ref-ind ], 
+		  [ LBL #h2, ARG0.E.TENSE present, ARG1 #x1 ] !>,
+  OUTPUT.RELS <! [ ], [ LBL #h2, ARG0.E.TENSE untensed ] !> ].
+
+;; "B is in front of or smaller than C"
+;;
+shared_dobj_onetwopred_op_gpr := basic_shared_dobj_op_gpr &
+[ CONTEXT.RELS <! [ ARG0.E.TENSE present, ARG1 #x1 ], [ ], [ ],
+		  [ LBL #h2, ARG0.E.TENSE present, ARG1 #x1 & ref-ind ] !>,
+  OUTPUT.RELS <! [ ], [ LBL #h2, ARG0.E.TENSE untensed ] !> ].
+
+;; "B is smaller than or in front of C"
+;;
+shared_dobj_twoonepred_op_gpr := basic_shared_dobj_op_gpr &
+[ CONTEXT.RELS <! [ LBL #h1, ARG0.E.TENSE untensed ], [ ], [ ],
+                  [ LBL #h1, ARG0.E.TENSE present, ARG1 #x1 & ref-ind ] !>,
+  OUTPUT.RELS <! [ ], [ ARG0.E.TENSE present, ARG1 #x1 ] !> ].
+
+;; "B is to the left of or right of C"
+
+shared_noun_obj_op_gpr := openproof_omtr &
+[ CONTEXT.RELS <! [ PRED "~._n_", ARG0 #x1 & ref-ind, ARG1 #x2 ],
+                  [ PRED udef_q_rel, ARG0 #x1 ],
+		  [ PRED named_rel, ARG0 #x2 & ref-ind, CARG #carg ],
+		  [ PRED conj_rel, L-INDEX #x1, R-INDEX #x3 ] !>,
+  INPUT [ HOOK.INDEX #index,
+	  RELS <! [ PRED named_rel, ARG0 #x4 & ref-ind, CARG #carg ],
+		  [ PRED proper_q_rel, ARG0 #x4, RSTR #h20 ],
+		  [ PRED "~._n_" & #pred, LBL #h2, ARG0 #x3, ARG1 #x4 ] !>,
+	  HCONS <! qeq & [ HARG #h20 ] !> ],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS <! [ ], [ PRED #pred, LBL #h2, ARG0 #x3, ARG1 #x2 ] !>,
+	   HCONS <! !> ],
+  FLAGS.SUBSUME < #x1, #x2 > ].
+
+
+;; B is smaller than D or C
+;;
+shared_vp_comp_op_gpr := openproof_omtr &
+[ CONTEXT.RELS <! [ PRED named_rel, ARG0 #x1 & ref-ind ] !>,
+  INPUT [ HOOK.INDEX #index,
+	  RELS <! [ PRED conj_rel & #cpred, LBL #h10, ARG0 #e11 & [ SORT #sort ], 
+		    L-HNDL #h1, R-HNDL #h2 ],
+	        [ PRED "~._a_" & #apred, LBL #h1, ARG0 #e1, ARG1 #x1 ],
+	        [ PRED #pred, LBL #h1, ARG0 #e8, ARG1 #e1, ARG2 #x3 & ref-ind ],
+		[ PRED #apred, LBL #h2, ARG0 #e3, ARG1 #x1 ],
+	        [ PRED #pred, LBL #h2, ARG0 event, ARG1 #e3, ARG2 #x4 ] !>,
+	  HCONS <! !> ],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS <! [ ], 
+		   [ PRED #apred, LBL #h10, ARG1 #x1,
+		     ARG0 #e11 & [ E [ TENSE present, ASPECT.PRF - ] ] ],
+		   [ PRED #pred, LBL #h10, ARG0 #e8, ARG1 #e11, ARG2 #x16 ],
+		   [ PRED #cpred, LBL #h15 & handle, 
+		     ARG0 #x16 & ref-ind & [ SORT #sort ], 
+		     L-INDEX #x3, R-INDEX #x4 & ref-ind ],
+	           [ PRED udef_q_rel, LBL handle, ARG0 #x16 & ref-ind,
+		      RSTR #h21, BODY handle ] !>,
+	   HCONS <! qeq & [ HARG #h21, LARG #h15 ] !> ] ].
+
+;; "B is in the same column as D or C"
+;;
+shared_vp_same_n_op_gpr := openproof_omtr &
+[ CONTEXT.RELS <! [ PRED named_rel, ARG0 #x1 & ref-ind ],
+		  [ PRED "~._n_" & #npred, LBL #h1, ARG0 #x10 ],
+		  [ PRED "~._a_" & #apred, LBL #h1, ARG0 #e2, ARG1 #x10 ] !>,
+  INPUT [ HOOK.INDEX #index,
+	  RELS <! [ PRED conj_rel & #cpred, LBL #h10, ARG0 #e11 & [SORT #sort], 
+		    L-HNDL #h5, R-HNDL #h3 ],
+		[ PRED prep_rel & #ppred, LBL #h5, ARG1 #x1, ARG2 #x10 ],
+		[ PRED #pred, LBL #h1, ARG0 #e4, ARG1 #e2, ARG2 #x11 ],
+		[ PRED prep_rel & #ppred, LBL #h3, ARG1 #x1, ARG2 #x21 ],
+		[ PRED quant_rel, ARG0 #x21, RSTR #h26 ],
+		[ PRED #npred, LBL #h25, ARG0 #x21 ],
+		[ PRED #apred, LBL #h25, ARG0 #e22 & [ E.TENSE untensed ], 
+		  ARG1 #x21 ],
+	        [ PRED #pred, LBL #h25, ARG1 #e22, ARG2 #x12 ] !>,
+	  HCONS <! qeq & [ HARG #h26 ] !> ],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS <! [ ], 
+		   [ PRED #ppred, LBL #h10, ARG1 #x1, ARG2 #x10,
+		     ARG0 #e11 & [ E [ TENSE present, ASPECT.PRF - ] ] ],
+		   [ PRED #pred, LBL #h1, ARG0 #e4, ARG1 #e2, ARG2 #x16 ],
+		   [ PRED #cpred, LBL #h15 & handle, 
+		     ARG0 #x16 & ref-ind & [ SORT #sort ], 
+		     L-INDEX #x11 & ref-ind, R-INDEX #x12 ],
+	           [ PRED udef_q_rel, LBL handle, ARG0 #x16,
+		      RSTR #h21, BODY handle ] !>,
+	   HCONS <! qeq & [ HARG #h21, LARG #h15 ] !> ] ].
+
+
+;; "B is to the right of C and D"
+;;
+shared_vp_dir_op_gpr := openproof_omtr &
+[ CONTEXT.RELS <! [ PRED named_rel, ARG0 #x1 & ref-ind ] !>,
+  INPUT [ HOOK.INDEX #index,
+	  RELS <! [ PRED conj_rel & #cpred, LBL #h10, ARG0 #e11 & [SORT #sort], 
+		    L-HNDL #h12, R-HNDL #h13 ],
+		[ PRED prep_rel & #ppred, LBL #h12, ARG1 #x1, ARG2 #x10 ],
+		[ PRED prep_rel & #ppred, LBL #h13, ARG1 #x1, ARG2 #x21 ],
+		[ PRED "~._n_" & #npred, LBL #h1, ARG0 #x10, ARG1 #x11 ],
+		[ PRED quant_rel, ARG0 #x21, RSTR #h26 ],
+		[ PRED #npred, ARG0 #x21, ARG1 #x12 ] !>,
+	  HCONS <! qeq & [ HARG #h26 ] !> ],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS <! [ ], 
+		   [ PRED #ppred, LBL #h10, ARG1 #x1, ARG2 #x10 & ref-ind,
+		     ARG0 #e11 & [ E [ TENSE present, ASPECT.PRF - ] ] ],
+		   [ PRED #npred, LBL #h1, ARG0 #x10, ARG1 #x16 ],
+		   [ PRED #cpred, LBL #h15 & handle, 
+		     ARG0 #x16 & ref-ind & [ SORT #sort ], 
+		     L-INDEX #x11 & ref-ind, R-INDEX #x12 & ref-ind ],
+	           [ PRED udef_q_rel, LBL handle, ARG0 #x16,
+		      RSTR #h21, BODY handle ] !>,
+	   HCONS <! qeq & [ HARG #h21, LARG #h15 ] !> ] ].
+
+;; B is in front of C or D
+;;
+shared_vp_loc_op_gpr := openproof_omtr &
+[ CONTEXT.RELS <! [ PRED named_rel, ARG0 #x1 & ref-ind ],
+                  [ PRED named_rel, ARG0 #x10 ] !>,
+  INPUT [ HOOK.INDEX #index,
+	  RELS <! [ PRED conj_rel & #cpred, LBL #h10, ARG0 #e11 & [SORT #sort], 
+		    L-HNDL #h5, R-HNDL #h3 ],
+		[ PRED prep_rel & #ppred, LBL #h5, ARG1 #x1, ARG2 #x10 ],
+		[ PRED #ppred, LBL #h3, ARG1 #x1, ARG2 #x21 ] !>,
+	  HCONS <! !> ],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS <! [ ],
+		   [ PRED #ppred, LBL #h10, ARG1 #x1, ARG2 #x16 & ref-ind,
+		     ARG0 #e11 & [ E [ TENSE present, ASPECT.PRF - ] ] ],
+		   [ PRED #cpred, LBL #h15 & handle, 
+		     ARG0 #x16 & ref-ind & [ SORT #sort ], 
+		     L-INDEX #x10 & ref-ind, R-INDEX #x21 & ref-ind ],
+	           [ PRED udef_q_rel, LBL handle, ARG0 #x16,
+		      RSTR #h21, BODY handle ] !>,
+	   HCONS <! qeq & [ HARG #h21, LARG #h15 ] !> ] ].
+
+;; B is not in front of C or D
+;; FIX: need to do this neg variant for the other pred types too
+;;
+shared_vp_loc_neg_op_gpr := openproof_omtr &
+[ CONTEXT [ RELS <! [ PRED named_rel, ARG0 #x1 & ref-ind ],
+                    [ PRED named_rel, ARG0 #x10 ] !>,
+            HCONS <! qeq & [ HARG #h23, LARG #h3 ] !> ],
+  INPUT [ HOOK.INDEX #index,
+	  RELS <! [ PRED _and_c_rel, LBL #h10, ARG0 #e11, 
+		    L-HNDL #h20, R-HNDL #h22 ],
+		  [ PRED neg_rel, LBL #h20, ARG0 #e20, ARG1 #h23 ],
+	  	  [ PRED neg_rel, LBL #h22, ARG1 #h25 ],
+		[ PRED prep_rel & #ppred, LBL #h5, ARG1 #x1, ARG2 #x10 ],
+		[ PRED #ppred, LBL #h3, ARG1 #x1, ARG2 #x21 ] !>,
+	  HCONS <! qeq & [ HARG #h25, LARG #h5 ] !> ],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS <! [ ],
+		   [ PRED #ppred, LBL #h3, ARG1 #x1, ARG2 #x16 & ref-ind,
+		     ARG0 #e11 & [ E [ TENSE present, ASPECT.PRF - ] ] ],
+		   [ PRED _or_c_nopr_rel, LBL #h15 & handle, 
+		     ARG0 #x16 & ref-ind & [ SORT distributive ], 
+		     L-INDEX #x10 & ref-ind, R-INDEX #x21 & ref-ind ],
+	           [ PRED udef_q_rel, LBL handle, ARG0 #x16,
+		      RSTR #h21, BODY handle ],
+	  	  [ PRED neg_rel, LBL #h10, ARG0 #e20, ARG1 #h23 ] !>,
+	   HCONS <! qeq & [ HARG #h21, LARG #h15 ] !> ] ].
+
+;; A is between B and C or D and F
+;;
+shared_vp_threearg_op_gpr := openproof_omtr &
+[ CONTEXT.RELS <! [ PRED named_rel, ARG0 #x1 & ref-ind ] !>,
+  INPUT [ HOOK.INDEX #index,
+	  RELS <! [ PRED conj_rel & #cpred, LBL #h10, ARG0 #e11 & [SORT #sort], 
+		    L-HNDL #h5, R-HNDL #h3 ],
+		  [ PRED _between_p_rel, LBL #h5, ARG1 #x1, ARG2 #x10 ],
+	          [ PRED _between_p_rel, LBL #h3, ARG1 #x1, ARG2 #x21 ] !>,
+	  HCONS <! !> ],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS <! [ ],
+		   [ PRED _between_p_rel, LBL #h10, ARG0 #e11 & event, 
+		     ARG1 #x1, ARG2 #x16 ],
+		   [ PRED #cpred, LBL #h15 & handle, 
+		     ARG0 #x16 & conj_ref-ind & [ SORT #sort ], 
+		     L-INDEX #x10 & conj-ind, R-INDEX #x21 & conj-ind ],
+	           [ PRED udef_q_rel, LBL handle, ARG0 #x16,
+		      RSTR #h21, BODY handle ] !>,
+	   HCONS <! qeq & [ HARG #h21, LARG #h15 ] !> ],
+  FLAGS.EQUAL < #x1 > ].
+
+
+;; B is a cube or a tetrahedron
+;; B is to the right or the left of D
+;;
+shared_pred_op_gpr := openproof_omtr &
+[ CONTEXT.RELS <! [ PRED named_rel, ARG0 ref-ind & #x1 ],
+		  [ PRED "~._n_", ARG0 ref-ind & #x3 ],
+		  [ PRED "~._n_", ARG0 ref-ind & #x4 ] !>,
+  INPUT [ HOOK.INDEX #index,
+	  RELS <! [ PRED conj_rel & #cpred, LBL #h6, ARG0 #e9 & [ SORT #sort ], 
+		    L-INDEX #e5, R-INDEX #e6, L-HNDL #h10 ],
+		[ PRED #vpred, LBL #h10, ARG0 event & #e5, ARG1 #x1, ARG2 #x3 ],
+		[ PRED #vpred, ARG0 event & #e6, ARG1 #x1, ARG2 #x4 ] !>,
+	  HCONS <! !> ],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS <! [ ],
+		   [ PRED #vpred, LBL #h6, ARG1 #x1, ARG2 #x9,
+		     ARG0 #e9 & [ E [ TENSE present, ASPECT.PRF - ] ] ],
+		   [ PRED #cpred, LBL #h20, ARG0 #x9 & [ SORT #sort ], 
+		     L-INDEX #x3 & [ PNG.PN 3s ], R-INDEX #x4 & [ PNG.PN 3s ] ],
+		   [ PRED udef_q_rel, LBL handle, ARG0 #x9 & ref-ind, 
+		     RSTR #h21, BODY handle ] !>,
+	   HCONS <! qeq & [ HARG #h21, LARG #h20 ] !> ] ].
+
+;; "B and C are in the same row"
+;;
+and_same_op_mtr := openproof_omtr &
+[ CONTEXT.RELS <! [ PRED named_rel, LBL handle, ARG0 #x1 & ref-ind ],
+                  [ PRED named_rel, LBL handle, ARG0 #x2 & ref-ind ] !>,
+  FILTER.RELS <! [ PRED pron_rel ] !>,
+  INPUT [ HOOK.INDEX #index,
+	  RELS.LIST <  [ PRED "~._n_" & #pred, LBL #h30, ARG0 #x3 & ref-ind ],
+		     [ PRED quant_rel & #qpred, LBL #h32, ARG0 #x3,
+		       RSTR #h33, BODY #h34 ],
+		     [ PRED "_same_a_as_rel", LBL #h31, ARG0 #e4, ARG1 #x3 ],
+		     [ PRED comp_equal_rel, LBL #h6, ARG0 #e7, ARG1 #e4, 
+		      ARG2 #x2 ], ... > ],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS.LIST < [ ], [ PRED #pred, LBL #h30, ARG0 #x13 ],
+		       [ PRED #qpred, LBL #h32, ARG0 #x13,RSTR #h33, BODY #h34],
+		       [ PRED "_same_a_as_rel", LBL #h31, ARG0 #e4, ARG1 #x13 ],
+		       [ PRED comp_equal_rel, LBL #h6, ARG0 #e7, ARG1 #e4 ],
+		       [ PRED _and_c_nopr_nrev_rel, LBL #h7, 
+			 ARG0 #x8 & ref-ind & [ PNG.PN 3p, SORT collective ], 
+			 L-INDEX #x1, R-INDEX #x2 ],
+		       [ PRED udef_q_rel, LBL handle, ARG0 #x8 & ref-ind, 
+			 RSTR #h21, BODY handle ], ... >,
+	   HCONS <! qeq & [ HARG #h21, LARG #h7 ] !> ] ].
+
+and_same_loc_op_mtr := and_same_op_mtr &
+[ CONTEXT.RELS <! [ ARG0 #x1 ], [ ] !>,
+  INPUT.RELS <! [ ARG0 #x3 ], [ ], [ ], [ ],
+	        [ PRED _in_p_rel, LBL #h5, ARG0 #e6, ARG1 #x1, ARG2 #x3 ] !>,
+  OUTPUT.RELS <! [ ], [ ARG0 #x3 ], [ ], [ ], [ ], [ ARG0 #x8 ], [ ],
+	         [ PRED _in_p_rel, LBL #h5, ARG0 #e6, ARG1 #x8, ARG2 #x3 ] !> ].
+		   
+and_same_size_op_mtr := and_same_op_mtr &
+[ CONTEXT.RELS <! [ ARG0 #x1 ], [ ] !>,
+  INPUT.RELS <! [ ARG0 #x3 ], [ ], [ ], [ ],
+	        [ PRED _be_v_id_rel, LBL #h2, 
+		  ARG0 event & #e4 & [ E.TENSE present ],
+		  ARG1 #x1, ARG2 #x3 ] !>,
+  OUTPUT.RELS <! [ ], [ ARG0 #x13 & ref-ind & [ PNG.PN 3p ] ], [ ], [ ], [ ],
+	         [ ARG0 #x8 ], [ ],
+	         [ PRED _be_v_id_rel, LBL #h2, ARG0 #e4, 
+		   ARG1 #x8, ARG2 #x13 ] !> ].
+
+;; "and" => "but"
+;;
+and_but_op_mtr := monotonic_mtr &
+[ INPUT [ HOOK.INDEX #index,
+	  RELS <! [ PRED _and_c_rel, LBL #h7, ARG0 #e8, L-INDEX #e6, 
+		  R-INDEX #e4, L-HNDL handle & #h15, R-HNDL handle & #h11 ] !>],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS <! [ PRED "prule_rel", ARG1 #index ],
+		   [ PRED _but_c_rel, LBL #h7, ARG0 #e8, L-INDEX #e6, 
+		     R-INDEX #e4, L-HNDL #h15, R-HNDL #h11  ] !> ] ].
+
+and_neg_to_but_op_mtr := and_but_op_mtr &
+[ CONTEXT [ RELS <! [ PRED neg_rel, LBL handle, ARG1 #h2 ],
+		    [ LBL #h3, ARG0 #e4 & event ] !>,
+  	    HCONS <! qeq & [ HARG #h2, LARG #h3 ] !> ],
+  FILTER [ RELS <! [ PRED neg_rel, ARG1 #h20 ],
+		   [ LBL #h21 & handle, ARG0 #e6 & event ] !>,
+	   HCONS <! qeq & [ HARG #h20, LARG #h21 ] !> ],
+  INPUT.RELS <! [ L-INDEX #e6 & non_conj_event, R-INDEX #e4 ] !>,
+  FLAGS.OPTIONAL - ].
+
+;; A is larger than B but smaller than C.
+;;
+and_but_size_op_mtr := and_but_op_mtr &
+[ CONTEXT.RELS <! [ ARG0 #e1 ], [ ARG0 #e2 ],
+	          [ PRED comp_rel, ARG1 #e1 ],
+		  [ PRED comp_rel, ARG1 #e2 ] !>,
+  FILTER [ RELS <! [ PRED neg_rel, ARG1 #h1 ] !>,
+	   HCONS <! qeq & [ HARG #h1 ] !> ],
+  INPUT.RELS <! [ L-INDEX #e1, R-INDEX #e2 ] !>,
+  FLAGS.OPTIONAL - ].
+
+;; B is in the same row as C but in the same column as D
+;;
+and_but_location_op_mtr := and_but_op_mtr &
+[ CONTEXT.RELS <! [ ARG0 #e1 ], [ ARG0 #e2 ],
+	          [ PRED prep_rel, ARG0 #e1 ],
+		  [ PRED prep_rel, LBL #h2 & handle, ARG0 #e2 ] !>,
+  FILTER [ RELS <! [ PRED neg_rel, ARG1 #h1 ] !>,
+	   HCONS <! qeq & [ HARG #h1, LARG #h2 ] !> ],
+  INPUT.RELS <! [ L-INDEX #e1, R-INDEX #e2 ] !>,
+  FLAGS.OPTIONAL - ].
+
+and_but_front_back_op_mtr := and_but_op_mtr &
+[ CONTEXT.RELS <! [ PRED prep_rel, ARG0 #e1, ARG2 #x3 ], 
+		  [ PRED prep_rel, ARG0 #e2 ],
+	          [ PRED named_rel, ARG0 #x3 ] !>,
+  FILTER [ RELS <! [ PRED neg_rel, ARG1 #h1 ] !>,
+	   HCONS <! qeq & [ HARG #h1 ] !> ],
+  INPUT.RELS <! [ L-INDEX #e1, R-INDEX #e2 ] !>,
+  FLAGS.OPTIONAL - ].
+
+
+;; "not" + "or" => "nor"
+;;
+neg_or_to_nor_op_mtr := openproof_omtr &
+[ INPUT [ HOOK.INDEX #index,
+	  RELS <! [ PRED neg_rel, LBL #h1, ARG1 #h2 ],
+		  [ PRED _or_c_rel, LBL #h7, ARG0 #e8, L-INDEX #e6 & event,
+		    R-INDEX #e4 & event, L-HNDL #h3 & handle, 
+		    R-HNDL #h4 & handle ] !>,
+  	  HCONS <! qeq & [ HARG #h2, LARG #h7 ] !> ],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS <! [ ], [ PRED _nor_c_rel, LBL #h1, ARG0 #e8, 
+		     L-INDEX #e6, R-INDEX #e4, L-HNDL #h3, R-HNDL #h4 ]!>,
+	   HCONS <! !> ] ].
+
+;; "not"-NPs + "or" => "nor"
+;; "It's not the case that B or C are cubes" => "Neither B nor C are cubes"
+;;
+neg_nom_or_to_nor_op_mtr := openproof_omtr &
+[ INPUT [ HOOK.INDEX #index,
+	  RELS.LIST < [ PRED neg_rel, LBL #h1, ARG1 #h2 ],
+		 [ PRED _or_c_rel, LBL #h7, ARG0 #x8 & ref-ind, 
+		   L-INDEX #x9 & ref-ind, R-INDEX #x10 & ref-ind ],
+		 [ PRED #pred, LBL #h11, ARG0 #e20 & event & [ E.TENSE present],
+		   ARG1 #x8 ], ... >,
+  	  HCONS <! qeq & [ HARG #h2, LARG #h11 ] !> ],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS.LIST < [ ], [ PRED #pred, LBL #h1, ARG0 #e20, ARG1 #x8 ],
+		       [ PRED _nor_c_rel, LBL #h7, ARG0 #x8, 
+			 L-INDEX #x9, R-INDEX #x10 ], ... >,
+	   HCONS <! !> ] ].
+
+;; Make [ARG2 handle] as the usual hack to exclude two-argument predicates
+;;
+neg_nom_or_to_nor_onearg_op_mtr := neg_nom_or_to_nor_op_mtr &
+[ INPUT.RELS <! [ ], [ ], [ ARG2 handle ] !>,
+  OUTPUT.RELS <! [ ], [ ], [ ] !> ].
+
+neg_nom_or_to_nor_comp_op_mtr := neg_nom_or_to_nor_op_mtr &
+[ INPUT.RELS <! [ ], [ ], 
+	        [ LBL #h1, ARG0 #e2, ARG2 handle ],
+	        [ PRED comp_rel, LBL #h1, ARG0 #e3, ARG1 #e2, 
+		  ARG2 #x4 & ref-ind ] !>,
+  OUTPUT.RELS <! [ ], [ LBL #h5 ], [ ],
+	        [ PRED comp_rel, LBL #h5, ARG0 #e3, ARG1 #e2, ARG2 #x4 ] !>,
+  FLAGS.SUBSUME < #x4 > ].
+
+neg_nom_or_to_nor_twoarg_op_mtr := neg_nom_or_to_nor_op_mtr &
+[ INPUT.RELS <! [ ], [ ], [ ARG2 #i2 & individual ] !>,
+  OUTPUT.RELS <! [ ], [ ARG2 #i2 ], [ ] !>,
+  FLAGS.SUBSUME < #i2 > ].
+
+;; "to the right or to the left of"
+;;
+shared_ppof_op_gpr := openproof_omtr &
+[ CONTEXT.RELS <! [ PRED _to_p_rel, ARG1 #x1, ARG2 #x2 ],
+		  [ ARG0 #x2, ARG1 #x3 & ref-ind ],
+		  [ PRED named_rel, ARG0 #x3, CARG #carg ],
+		  [ PRED _to_p_rel, ARG1 #x1, ARG2 #x5 ],
+		  [ PRED conj_rel ] !>,
+  INPUT [ HOOK.INDEX #index,
+	  RELS <! [ PRED "~._n_" & #pred, LBL #h6, ARG0 #x5, 
+	            ARG1 #x7 & ref-ind ],
+		  [ PRED named_rel, ARG0 #x7, CARG #carg ],
+	          [ PRED quant_rel, ARG0 #x7, RSTR #h8 ] !>,
+	  HCONS <! qeq & [ HARG #h8 ] !> ],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS <! [ ], 
+		   [ PRED "~._n_" & #pred, LBL #h6, ARG0 #x5, ARG1 semarg ] !>,
+	   HCONS <! !> ],
+  FLAGS.SUBSUME < #x3, #x7 > ].
+
+shared_ppof_left_op_gpr := shared_ppof_op_gpr &
+[ CONTEXT.RELS <! [ ARG0 #e2 ], [ ], [ ], [ ARG0 #e1 ], 
+		  [ L-INDEX #e2, R-INDEX #e1 ] !> ].
+
+shared_ppof_right_op_gpr := shared_ppof_op_gpr &
+[ CONTEXT.RELS <! [ ARG0 #e2 ], [ ], [ ], [ ARG0 #e1 ], 
+		  [ L-INDEX #e1, R-INDEX #e2 ] !> ].
+
+;; "to the right or left of"
+;;
+shared_to_the_op_gpr := openproof_omtr &
+[ CONTEXT.RELS <! [ PRED "~._n_", ARG0 #x5, ARG1 ref-ind ] !>,
+  INPUT [ HOOK.INDEX #index,
+	  RELS <! [ PRED conj_rel & #cpred2, LBL #h10, 
+		    ARG0 #e11 & [ SORT #sort ], 
+		    L-INDEX #e12 & event, R-INDEX #e13 & event,
+		    L-HNDL #h20, R-HNDL #h21 ],
+		  [ PRED _to_p_rel, LBL #h20, ARG0 #e12, ARG1 #x1, ARG2 #x2 ],
+		  [ PRED _to_p_rel, LBL #h21, ARG0 #e13, ARG1 #x1, ARG2 #x5 ],
+		  [ PRED _the_q_rel, LBL #h7, ARG0 #x2, RSTR #h8, BODY #h9 ],
+		  [ PRED _the_q_rel, LBL #h17, ARG0 #x5, RSTR #h18, 
+		    BODY #h19 ],
+		  [ PRED "~._n_" & #npred, LBL #h12, ARG0 #x2, ARG1 #x11 ] !>,
+	  HCONS <! !> ],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS <! [ ],
+		   [ PRED conj_rel & #cpred2, LBL #h14, 
+		     ARG0 #x15 & ref-ind & [ SORT #sort ], 
+		    L-INDEX #x2, R-INDEX #x5 ],
+		   [ PRED _to_p_rel, LBL #h10, ARG1 #x1, ARG2 #x15, ARG0 #e11 & 
+		     [ E [ ASPECT [ PRF - ], TENSE present ], SF prop ] ],
+		   [ PRED _the_q_rel, LBL #h7, ARG0 #x15, RSTR #h16, BODY #h9],
+		   [ PRED udef_q_rel, LBL #h17, ARG0 #x5, RSTR #h18, BODY #h19],
+		   [ PRED udef_q_rel, LBL handle, ARG0 #x2, RSTR #h8, 
+		     BODY handle ],
+		  [ PRED "~._n_" & #npred, LBL #h12, ARG0 #x2, ARG1 #x11 ] !>,
+	   HCONS <! qeq & [ HARG #h16, LARG #h14 ] !> ] ].
+
+;; Coord and-S with semicolon + moreover
+;;
+coord_sent_semi_op_gpr := openproof_omtr &
+[ FILTER [ HCONS <! qeq & [ LARG #h14 ] !> ],
+  CONTEXT [ RELS <! [ LBL #h10 & handle, ARG0 event ] !>,
+	    HCONS <! qeq & [ HARG #h22 & handle, LARG #h10 ] !> ],
+  INPUT [ HOOK.INDEX #index,
+	  RELS <! [ PRED conj_rel, LBL handle & #h14, ARG0 #e10 & event, 
+		  L-INDEX #e2 & event, R-INDEX #e5 & event, 
+		  L-HNDL #h21 & handle, R-HNDL #h22 & handle ] !> ],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS <! [ ],
+		   [ PRED implicit_conj_rel, LBL handle & #h14, ARG0 #e10, 
+		     L-INDEX #e2, R-INDEX #e5, L-HNDL #h21, 
+		     R-HNDL #h4 & handle ],
+	           [ LBL #h5 & handle, 
+		     ARG0 event & [ E.TENSE untensed ], ARG1 #h22 ] !>,
+	   HCONS <! qeq & [ HARG #h4, LARG #h5 ] !> ],
+  FLAGS.SUBSUME < #e2, #e5, #e10 > ].
+
+
+;; "if-then" to "only if"
+;;
+if_then_to_only_if_gpr := openproof_omtr &
+[ FILTER.RELS <! [ PRED "_if_x_then_rel", LBL #h12 ] !>,
+  INPUT [ HOOK.INDEX #index,
+	  RELS <! [ PRED "_if_x_then_rel", LBL #h1, ARG0 #e2, 
+		    ARG1 #h7, ARG2 #h8 ],
+		  [ PRED "_then_a_1_rel", LBL #h10, ARG1 #h11 ] !>,
+	  HCONS <! qeq & [ HARG #h7, LARG #h10 ],
+		   qeq & [ HARG #h11, LARG #h12 ] !> ],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS <! [ ], 
+		   [ LBL #h1, ARG0 #e2, 
+		    ARG1 #h8, ARG2 #h7 ] !>,
+	   HCONS <! qeq & [ HARG #h7, LARG #h12 ] !> ],
+  FLAGS.EQUAL < > ].
+
+
+if_not_to_unless_gpr := openproof_omtr &
+[ INPUT [ HOOK.INDEX #index,
+	  RELS <! [ PRED "_if_x_then_rel", LBL #h1, ARG0 #e2, ARG1 #h7 & handle,
+		    ARG2 #h8 & handle ],
+		  [ PRED "_then_a_1_rel", LBL #h10, ARG1 #h11 ],
+		  [ PRED neg_rel, LBL #h13, ARG1 #h14 ] !>,
+	  HCONS <! qeq & [ HARG #h7, LARG #h10 ],
+		   qeq & [ HARG #h11, LARG #h12 ],
+		   qeq & [ HARG #h8, LARG #h13 ],
+		   qeq & [ HARG #h14, LARG #h15 ] !> ],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS <! [ ],
+		   [ PRED "_unless_x_rel", LBL #h1, ARG0 #e2, ARG1 #h7, 
+		     ARG2 #h8 ] !>,
+	   HCONS <! qeq & [ HARG #h7, LARG #h12 ],
+		    qeq & [ HARG #h8, LARG #h15 ] !> ],
+  FLAGS.EQUAL < #h7, #h8 > ].
+
+;; "iff" to "just in case"
+;;
+iff_to_just_in_case_gpr := openproof_omtr &
+[ INPUT [ HOOK.INDEX #index,
+	  RELS <! [ PRED "_if+and+only+if_x_1_rel", LBL #h1 & handle, 
+		  ARG0 #e2 & event, ARG1 #h7 & handle, ARG2 #h8 & handle ] !>],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS <! [ ], 
+		   [ PRED "_in+case_x_rel", LBL #h1, 
+		     ARG0 #e2, ARG1 #h7, ARG2 #h8 ],
+		   [ PRED "_just_x_deg_rel", LBL #h1, 
+		     ARG0 event & [ E.TENSE untensed ], ARG1 #e2 ] !> ],
+  FLAGS.EQUAL < > ].
+
+iff_to_just_in_case_fact_gpr := openproof_omtr &
+[ INPUT [ HOOK.INDEX #index,
+	  RELS <! [ PRED "_if+and+only+if_x_1_rel", LBL #h1 & handle, 
+		  ARG0 #e2 & event, ARG1 #h7 & handle, ARG2 #h8 & handle ] !>],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS <! [ ],
+		 [ PRED "_in+case_x_rel", LBL #h1, 
+		   ARG0 #e2, ARG1 #h7, ARG2 #h18 ],
+		 [ PRED "_just_x_deg_rel", LBL #h1, 
+		   ARG0 event & [ E.TENSE untensed ], ARG1 #e2 ],
+		 [ PRED pron_rel, LBL #h10, 
+		   ARG0 #x11 & [ PNG [ PN 3s, GEN neut ] ] ],
+		 [ PRED pronoun_q_rel, LBL handle, ARG0 #x11 & ref-ind, 
+		   RSTR #h12, BODY handle ],
+		 [ PRED _be_v_id_rel, LBL #h13, ARG0 event & [ E.TENSE present],
+		   ARG1 #x11, ARG2 #x14 ],
+		 [ PRED "_fact_n_1_rel", LBl #h15, ARG0 #x14, ARG1 #h8 ],
+		 [ PRED _a_q_rel, LBL handle, ARG0 #x14 & ref-ind, RSTR #h17, 
+		   BODY handle ] !>,
+           HCONS <! qeq & [ HARG #h18, LARG #h13 ],
+		    qeq & [ HARG #h12, LARG #h10 ],
+	    	    qeq & [ HARG #h17, LARG #h15 ] !> ],
+  FLAGS.EQUAL < > ].
+
+;; "B is a large cube"
+;;
+basic_adj_and_predn_gpr := openproof_omtr &
+[ CONTEXT.RELS <! [ PRED "~._n_", LBL #h6 & handle, ARG0 #x1 & ref-ind ],
+		  [ PRED named_rel, ARG0 #x5, CARG #carg ] !>,
+  INPUT [ HOOK.INDEX #index,
+	  RELS <! [ PRED "~._a_" & #apred, LBL handle, 
+		    ARG0 event & [ E.TENSE tense ], ARG1 #x2 ],
+		  [ PRED "~._v_" & #vpred, LBL handle, 
+		    ARG0 event & [ E.TENSE tense ], ARG1 #x5, ARG2 #x1 ],
+		  [ PRED _and_c_rel, LBL #h14, ARG0 #e2 & event,
+		    L-INDEX event, R-INDEX event, L-HNDL #h10, R-HNDL #h11 ],
+		  [ PRED named_rel, ARG0 #x2, CARG #carg ],
+		  [ PRED proper_q_rel, ARG0 #x2, RSTR #h13 ] !>,
+	  HCONS <! qeq & [ HARG #h10 ], qeq & [ HARG #h11 ], 
+		   qeq & [ HARG #h13 ] !> ],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS <! [ ],
+		   [ PRED #apred, LBL #h6, ARG0 event & [ E.TENSE untensed ],
+		     ARG1 #x1 ], 
+		   [ PRED #vpred, LBL #h14, 
+		     ARG0 #e2 & [ E [ TENSE present, ASPECT.PRF - ] ],
+		     ARG1 #x5, ARG2 #x1 ] !> ],
+  FLAGS.EQUAL < #x1 > ].
+
+adj_and_predn_gpr := basic_adj_and_predn_gpr &
+[ INPUT.RELS <! [ ARG0 #e1 & event ], [ ARG0 #e2 & event ], 
+	        [ L-INDEX #e1, R-INDEX #e2 ], [ ], [ ] !> ].
+
+predn_and_adj_gpr := basic_adj_and_predn_gpr &
+[ INPUT.RELS <! [ ARG0 #e2 & event ], [ ARG0 #e1 & event ], 
+	        [ L-INDEX #e1, R-INDEX #e2 ], [ ], [ ] !> ].
+
+;; For conjoined clausal negation
+;;
+unless_the_case_to_unless_gpr := openproof_omtr &
+[ CONTEXT.RELS <! [ PRED "_unless_x_rel", ARG2 #h1 & handle ],
+		  [ PRED conj_rel, LBL #h4 ] !>,
+  INPUT [ HOOK.INDEX #index,
+	  RELS <! [ PRED "_the+case_a_1_rel" , LBL #h2, ARG1 #h3 ] !>,
+	  HCONS <! qeq & [ HARG #h1, LARG #h2 ],
+	           qeq & [ HARG #h3, LARG #h4 ] !> ],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS <! [ ] !>,
+	   HCONS <! qeq & [ HARG #h1, LARG #h4 ] !> ] ].
+
+;; VP ellipsis
+;; 
+basic_vp_ellipsis_gpr := openproof_omtr &
+[ CONTEXT.RELS.LIST < [ PRED #pred, ARG0 event ], ...>,
+  FILTER.RELS <! [ PRED comp_rel ] !>,
+  INPUT [ HOOK.INDEX #index,
+	  RELS.LIST < [ PRED #pred, LBL #h1 & handle, ARG0 #e2 & event, 
+			ARG1 #x3 & ref-ind ], ... > ],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS <! [ ], [ PRED ellipsis_ref_rel, LBL #h1, 
+			  ARG0 #e2 & [ E.TENSE present ], ARG1 #x3 ] !> ] ].
+
+;; If B is a cube, C is
+;;
+vp_ellipsis_if_pos_gpr := basic_vp_ellipsis_gpr &
+[ CONTEXT [ RELS.LIST < [ LBL #h1 ], 
+		    [ PRED "_if_x_then_rel", ARG1 #h2, ARG2 #h3 ],
+		    [ PRED "_then_a_1_rel", LBL #h5, ARG1 #h6 ], ... >,
+	    HCONS <! qeq & [ HARG #h2, LARG #h5 ], qeq & [ HARG #h6, LARG #h4 ],
+		     qeq & [ HARG #h3, LARG #h1 ] !> ],
+  INPUT.RELS.LIST < [ LBL #h4 ], ... > ].
+
+vp_ellipsis_if_pos_onearg_gpr := vp_ellipsis_if_pos_gpr &
+[ CONTEXT.RELS <! [ ], [ ], [ ] !>,
+  INPUT [ RELS <! [ ARG2 handle ] !>,
+	  HCONS <! !> ] ].
+
+vp_ellipsis_if_neg_gpr := basic_vp_ellipsis_gpr &
+[ CONTEXT [ RELS.LIST < [ LBL #h1 ], 
+		    [ PRED "_if_x_then_rel", ARG1 #h2, ARG2 #h3 ],
+		    [ PRED "_then_a_1_rel", LBL #h5, ARG1 #h6 ],
+		    [ PRED neg_rel, LBL #h7, ARG1 #h8 ], ... >,
+	    HCONS <! qeq & [ HARG #h2, LARG #h5 ], qeq & [ HARG #h6, LARG #h7 ],
+		     qeq & [ HARG #h8, LARG #h4 ],
+		     qeq & [ HARG #h3, LARG #h1 ] !> ],
+  INPUT.RELS.LIST < [ LBL #h4 ], ... > ].
+
+vp_ellipsis_if_neg_onearg_gpr := vp_ellipsis_if_neg_gpr &
+[ CONTEXT.RELS <! [ ], [ ], [ ], [ ] !>,
+  INPUT [ RELS <! [ ARG2 handle ] !>,
+	  HCONS <! !> ] ].
+
+vp_ellipsis_twoarg_gpr := basic_vp_ellipsis_gpr &
+[ INPUT [ RELS.LIST < [ ARG2 #x10 ],
+		      [ LBL #h9 & handle, ARG0 #x10 ], 
+		      [ PRED quant_rel, ARG0 #x10, RSTR #h11 & handle ], ... >,
+	  HCONS.LIST < qeq & [ HARG #h11, LARG #h9 ], ...  > ] ].
+
+vp_ellipsis_if_pos_twoarg_comp_gpr := vp_ellipsis_if_pos_gpr & 
+			  	      vp_ellipsis_twoarg_gpr &
+[ CONTEXT.RELS <! [ LBL #h1 ], [ ], [ ], 
+                  [ PRED #pred, ARG0 #x1 & ref-ind, CARG #carg ],
+		  [ PRED quant_rel, ARG0 #x1 ],
+		  [ PRED comp_rel, LBL #h1, ARG2 #x1 ] !>,
+  INPUT [ RELS <! [ LBL #h2 ], [ PRED #pred, ARG0 #x3, CARG #carg ], [ ],
+		  [ PRED comp_rel, LBL #h2, ARG2 #x3 ] !>,
+	  HCONS <! qeq !> ] ].
+
+vp_ellipsis_if_pos_twoarg_gpr := vp_ellipsis_if_pos_gpr & 
+				 vp_ellipsis_twoarg_gpr &
+[ CONTEXT.RELS <! [ ARG2 #x1 ], [ ], [ ], 
+                  [ PRED #pred, ARG0 #x1 & ref-ind ],
+		  [ PRED quant_rel, ARG0 #x1 ] !>,
+  INPUT [ RELS.LIST < [ ], [ PRED #pred ], ... >,
+	  HCONS <! qeq !> ] ].
+
+vp_ellipsis_if_neg_twoarg_gpr := vp_ellipsis_if_neg_gpr &
+				 vp_ellipsis_twoarg_gpr &
+[ CONTEXT.RELS <! [ ARG2 #x1 ], [ ], [ ], [ ], 
+                  [ PRED #pred, ARG0 #x1 & ref-ind ],
+		  [ PRED quant_rel, ARG0 #x1 ] !>,
+  INPUT [ RELS.LIST < [ ], [ PRED #pred ], ... >,
+	  HCONS <! qeq !> ] ].
+
+;; Ellipsis in the antecedent which follows the consequent
+;; "C is a cube, if B is"
+;;
+vp_ellipsis_if_pos_ante_gpr := basic_vp_ellipsis_gpr &
+[ CONTEXT [ RELS.LIST < [ LBL #h1 ], 
+		    [ PRED "_if_x_then_rel", ARG1 #h2, ARG2 #h3 ], ... >,
+	    HCONS <! qeq & [ HARG #h2, LARG #h1 ],
+		     qeq & [ HARG #h3, LARG #h4 ] !> ],
+  INPUT.RELS.LIST < [ LBL #h4 ], ... > ].
+
+;; C is large if B is
+;;
+vp_ellipsis_if_pos_ante_onearg_gpr := vp_ellipsis_if_pos_ante_gpr &
+[ CONTEXT.RELS <! [ ], [ ] !>,
+  INPUT [ RELS <! [ ARG2 handle ] !>,
+	  HCONS <! !> ] ].
+
+vp_ellipsis_if_pos_ante_twoarg_comp_gpr := vp_ellipsis_if_pos_ante_gpr & 
+					   vp_ellipsis_twoarg_gpr &
+[ CONTEXT.RELS <! [ LBL #h1 ], [ ],
+                  [ PRED #pred, ARG0 #x1 & ref-ind, CARG #carg ],
+		  [ PRED quant_rel, ARG0 #x1 ],
+		  [ PRED comp_rel, LBL #h1, ARG2 #x1 ] !>,
+  INPUT [ RELS <! [ LBL #h2 ], [ PRED #pred, ARG0 #x3, CARG #carg ], [ ],
+		  [ PRED comp_rel, LBL #h2, ARG2 #x3 ] !>,
+	  HCONS <! qeq !> ] ].
+
+vp_ellipsis_if_pos_ante_twoarg_gpr := vp_ellipsis_if_pos_ante_gpr & 
+				      vp_ellipsis_twoarg_gpr &
+[ CONTEXT.RELS <! [ ARG2 #x1 ], [ ],
+                  [ PRED #pred, ARG0 #x1 & ref-ind ],
+		  [ PRED quant_rel, ARG0 #x1 ] !>,
+  INPUT [ RELS.LIST < [ ], [ PRED #pred ], ... >,
+	  HCONS <! qeq !> ] ].
+
+;; VP ellipsis with iff
+;;
+vp_ellipsis_iff_pos_gpr := basic_vp_ellipsis_gpr &
+[ CONTEXT [ RELS.LIST < [ LBL #h1 ], 
+		  [ PRED "_if+and+only+if_x_1_rel", ARG1 #h2, ARG2 #h3 ], ... >,
+	    HCONS <! qeq & [ HARG #h2, LARG #h1 ],
+		     qeq & [ HARG #h3, LARG #h4 ] !> ],
+  INPUT.RELS.LIST < [ LBL #h4 ], ... > ].
+
+vp_ellipsis_iff_pos_onearg_gpr := vp_ellipsis_iff_pos_gpr &
+[ CONTEXT.RELS <! [ ], [ ] !>,
+  INPUT [ RELS <! [ ARG2 handle ] !>,
+	  HCONS <! !> ] ].
+
+vp_ellipsis_iff_neg_gpr := basic_vp_ellipsis_gpr &
+[ CONTEXT [ RELS.LIST < [ LBL #h1 ], 
+		    [ PRED "_if+and+only+if_x_1_rel", ARG1 #h2, ARG2 #h3 ],
+		    [ PRED neg_rel, LBL #h7, ARG1 #h8 ], ... >,
+	    HCONS <! qeq & [ HARG #h2, LARG #h1 ],
+		     qeq & [ HARG #h8, LARG #h4 ],
+		     qeq & [ HARG #h3, LARG #h7 ] !> ],
+  INPUT.RELS.LIST < [ LBL #h4 ], ... > ].
+
+vp_ellipsis_iff_neg_onearg_gpr := vp_ellipsis_iff_neg_gpr &
+[ CONTEXT.RELS <! [ ], [ ], [ ] !>,
+  INPUT [ RELS <! [ ARG2 handle ] !>,
+	  HCONS <! !> ] ].
+
+vp_ellipsis_iff_pos_twoarg_comp_gpr := vp_ellipsis_iff_pos_gpr & 
+			  	      vp_ellipsis_twoarg_gpr &
+[ CONTEXT.RELS <! [ LBL #h1 ], [ ],
+                  [ PRED #pred, ARG0 #x1 & ref-ind, CARG #carg ],
+		  [ PRED quant_rel, ARG0 #x1 ],
+		  [ PRED comp_rel, LBL #h1, ARG2 #x1 ] !>,
+  INPUT [ RELS <! [ LBL #h2 ], [ PRED #pred, ARG0 #x3, CARG #carg ], [ ],
+	          [ PRED comp_rel, LBL #h2, ARG2 #x3 ] !>,
+	  HCONS <! qeq !> ] ].
+
+vp_ellipsis_iff_pos_twoarg_gpr := vp_ellipsis_iff_pos_gpr & 
+				 vp_ellipsis_twoarg_gpr &
+[ CONTEXT.RELS <! [ ARG2 #x1 ], [ ],
+                  [ PRED #pred, ARG0 #x1 & ref-ind ],
+		  [ PRED quant_rel, ARG0 #x1 ] !>,
+  INPUT [ RELS <! [ ], [ PRED #pred ], [ ] !>,
+	  HCONS <! qeq !> ],
+  FLAGS.EQUAL < #x1 > ].
+
+vp_ellipsis_iff_neg_twoarg_gpr := vp_ellipsis_iff_neg_gpr &
+				 vp_ellipsis_twoarg_gpr &
+[ CONTEXT.RELS <! [ ARG2 #x1 ], [ ], [ ],
+                  [ PRED #pred, ARG0 #x1 & ref-ind ],
+		  [ PRED quant_rel, ARG0 #x1 ] !>,
+  INPUT [ RELS <! [ ], [ PRED #pred ], [ ] !>,
+	  HCONS <! qeq !> ] ].
+
+
+vp_ellipsis_coord_pos_gpr := basic_vp_ellipsis_gpr &
+[ CONTEXT [ RELS.LIST < [ LBL #h1 & handle, ARG0 #e6 ], 
+    		        [ PRED conj_rel, LBL handle, L-INDEX #e6,
+			  R-INDEX #e7,
+			  L-HNDL #h2 & handle, R-HNDL #h3 & handle ], ... >,
+	    HCONS.LIST < qeq & [ HARG #h2, LARG #h1 ], 
+	                 qeq & [ HARG #h3, LARG #h4 ], ... > ],
+  INPUT.RELS.LIST < [ LBL #h4 & handle, ARG0 #e7 ], ... > ].
+
+;; The [ ARG2 handle ] is a hack to prevent this rule from applying to two-args.
+;;
+vp_ellipsis_coord_pos_onearg_gpr := vp_ellipsis_coord_pos_gpr &
+[ CONTEXT [ RELS <! [ ARG2 handle ], [ ] !>,
+            HCONS <! [ ], [ ] !> ],
+  INPUT [ RELS <! [ ] !>,
+          HCONS <! !> ] ].
+
+basic_vp_ellipsis_coord_pos_twoarg_gpr := vp_ellipsis_coord_pos_gpr &
+					  vp_ellipsis_twoarg_gpr &
+[ CONTEXT [ RELS.LIST < [ ARG0.E.TENSE present, ARG1 ref-ind, 
+			  ARG2 #x1 & ref-ind ],
+			[ ], 
+			[ PRED #pred, LBL #h5, ARG0 #x1 & ref-ind ],
+			[ PRED quant_rel, ARG0 #x1, RSTR #h4 ], ... >,
+	    HCONS <! qeq, qeq, qeq & [ HARG #h4, LARG #h5 ] !> ],
+  INPUT.RELS.LIST < [ ARG0.E.TENSE present ], 
+		    [ PRED #pred ], ... >,
+  OUTPUT.HCONS <! !> ].
+
+;; "B is a cube, and C is"
+vp_ellipsis_coord_pos_twoarg_gpr := basic_vp_ellipsis_coord_pos_twoarg_gpr &
+[ CONTEXT.RELS <! [ ], [ ], [ ], [ ] !>,
+  INPUT [ RELS <! [ ], [ PRED "~._n_" ], [ ] !>,
+	  HCONS <! qeq !> ] ].
+
+;; "B is between C and D, and F is"
+vp_ellipsis_coord_pos_twoconj_gpr := basic_vp_ellipsis_coord_pos_twoarg_gpr &
+[ CONTEXT.RELS <! [ PRED _between_p_rel ], [ ], 
+		  [ ARG0 conj_ref-ind, L-INDEX #x11, R-INDEX #x12 ], [ ],
+		  [ PRED named_rel, ARG0 #x11, CARG #carg1 ],
+		  [ PRED named_rel, ARG0 #x12, CARG #carg2 ] !>,
+  INPUT [ RELS <! [ ], [ ARG0 conj_ref-ind, L-INDEX #x1, R-INDEX #x2 ], [ ],
+		  [ ARG0 #x1 & ref-ind, CARG #carg1 ], 
+	          [ PRED quant_rel, ARG0 #x1, RSTR #h10 ],
+	          [ ARG0 #x2 & ref-ind, CARG #carg2 ], 
+	          [ PRED quant_rel, ARG0 #x2, RSTR #h11 ] !>,
+	  HCONS <! qeq, qeq & [ HARG #h10 ], qeq & [ HARG #h11 ] !> ] ].
+
+;; Convert [A and [B and C]] to [[A and B] and C]
+rebracket_coord_gpr := monotonic_omtr &
+[ CONTEXT [ RELS <! [ LBL #h1, ARG0 event ], [ LBL #h2, ARG0 #e11 & event ] !>,
+	    HCONS <! qeq & [ HARG #h7, LARG #h1 ],
+		     qeq & [ HARG #h13, LARG #h2 ] !> ],
+  INPUT [ HOOK.INDEX #index,
+	  RELS <! [ PRED _and_c_rel & #pred1, LBL #h3, ARG0 #e4 & event, 
+		    L-INDEX #e5 & event, R-INDEX #e10 & event, L-HNDL #h7, 
+		    R-HNDL #h8 ],
+                  [ PRED _and_c_rel & #pred2, LBL #h9, ARG0 #e10 & event, 
+		    L-INDEX #e11 & event, R-INDEX #e12 & event, 
+		    L-HNDL #h13, R-HNDL #h14 ] !>,
+          HCONS <! qeq & [ HARG #h8, LARG #h9 ] !> ],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS <! [ PRED conj_rel & #pred1, LBL #h9, ARG0 #e10, L-INDEX #e5, 
+		     R-INDEX #e11, L-HNDL #h7, R-HNDL #h13 ],
+                  [ PRED conj_rel & #pred2, LBL #h3, ARG0 #e4, L-INDEX #e10, 
+		    R-INDEX #e12, L-HNDL #h20, R-HNDL #h14 ] !>,
+           HCONS <! qeq & [ HARG #h20, LARG #h9 ] !> ],
+  FLAGS.EQUAL < #e5, #e10 > ].
+
+;; Drop `then' for non-coord consequent
+drop_cond_then_mtr := monotonic_mtr &
+[ CONTEXT.RELS <! [ LBL #h2, ARG0.E.TENSE present, ARG1 #x6 ] !>,
+  INPUT [ HOOK.INDEX #index,
+	  RELS <! [ PRED "_if_x_then_rel", LBL #h10, ARG0 #e11,
+		    ARG1 #h1, ARG2 #h12 ],
+	          [ PRED "_then_a_1_rel", LBL #h3, ARG1 #h4 ] !>,
+	  HCONS <! qeq & [ HARG #h1, LARG #h3 ],
+		   qeq & [ HARG #h4, LARG #h2 ] !> ],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS <! [ PRED "prule_rel", ARG1 #index ],
+		   [ LBL #h10, ARG0 #e11, ARG1 #h1, ARG2 #h12 ] !>,
+  	   HCONS <! qeq & [ HARG #h1, LARG #h2 ] !> ],
+  FLAGS.SUBSUME < #x6 > ].
+
+cond_to_provided_mtr := drop_cond_then_mtr & optional_mtr &
+[ CONTEXT.RELS <! [ ARG1 #x6 ] !>,
+  FILTER.RELS <! [ PRED pron_rel, ARG0 #x6 ] !>,
+  OUTPUT.RELS <! [ ], [ PRED "_provided_x_rel" ] !> ].
+
+;; "(at least) one of A, B, and C" for "A or B or C"
+;;
+one_of_set_mtr := openproof_omtr &
+[ CONTEXT.RELS <! [ PRED implicit_conj_rel, ARG0 #x2 & ref-ind, R-INDEX #x1] !>,
+  FILTER.RELS <! [ PRED part_of_rel ] !>,
+  INPUT [ HOOK.INDEX #index,
+	  RELS <! [ PRED #pred, LBL #h3, ARG0 #e4 & event, ARG1 #x2, ARG2 #i2 ],
+	        [ PRED _or_c_rel, LBL #h20, ARG0 #x1, L-INDEX #x15, 
+		  R-INDEX #x16 ] !> ],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS <! [ ],
+		   [ PRED #pred, LBL #h3, ARG0 #e4, 
+		     ARG1 #x10 & ref-ind, ARG2 #i2 ],
+		   [ PRED udef_q_rel, LBL handle, ARG0 #x10, 
+		     RSTR handle & #h12, BODY handle ],
+		   [ PRED part_of_rel, LBL #h13, ARG0 #x10 & [ PNG.PN 3p ], 
+		     ARG1 #x2 ],
+		   [ PRED card_rel, LBL #h13, ARG0 event,
+		     ARG1 #x10, CARG "1" ],
+		   [ PRED _and_c_nopr_nrev_rel, LBL #h20, ARG0 #x1, 
+		     L-INDEX #x15, R-INDEX #x16 ] !>,
+	   HCONS <! qeq & [ HARG #h12, LARG #h13 ] !> ] ].
+
+one_of_set_twoarg_mtr := one_of_set_mtr &
+[ INPUT.RELS <! [ ARG2 #x1 & ref-ind ], [ ] !>,
+  OUTPUT.RELS.LIST < [ ], [ ARG2 #x1 ], ... >,
+  FLAGS.SUBSUME < #x1 > ].
+
+one_of_set_onearg_mtr := one_of_set_mtr &
+[ INPUT.RELS <! [ ARG2 handle ], [ ] !>,
+  FLAGS.SUBSUME < > ].
+
+;; "either B or C isn't" => "neither is"
+
+basic_either_neither_mtr := openproof_omtr &
+[ CONTEXT.RELS <! [ PRED conj_rel, R-INDEX #e1 ],
+	          [ ARG0 event & #e1, ARG1 #x2 & ref-ind ],
+		  [ PRED named_rel, CARG #carg1 ],
+		  [ PRED named_rel, CARG #carg2 ] !>,
+  INPUT [ HOOK.INDEX #index,
+	  RELS.LIST < [ PRED conj_rel, ARG0 #x2, L-INDEX #x3, R-INDEX #x4 ],
+		  [ PRED udef_q_rel, ARG0 #x2, RSTR #h13 ],
+		  [ PRED named_rel, ARG0 #x3, CARG #carg1 ],
+		  [ PRED quant_rel, ARG0 #x3, RSTR #h5 ],
+		  [ PRED named_rel, ARG0 #x4, CARG #carg2 ],
+		  [ PRED quant_rel, ARG0 #x4, RSTR #h6 ],
+		  [ PRED neg_rel, LBL #h10, ARG1 #h11 ], ... >,
+	  HCONS.LIST < qeq & [ HARG #h5 ], qeq & [ HARG #h6 ], 
+		       qeq & [ HARG #h13 ], qeq & [ HARG #h20, LARG #h10 ], 
+		       qeq & [ HARG #h11 ], ... > ],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS <! [ ],
+		   [ PRED generic_entity_rel, LBL #h7, 
+		     ARG0 #x2 & [ PNG.PN 3s ] ],
+		   [ PRED _neither_q_rel, LBL handle, ARG0 #x2, RSTR #h8 ]!>,
+  	   HCONS <! qeq & [ HARG #h8, LARG #h7 ],
+		    qeq & [ HARG #h20 ] !> ] ].
+
+either_neither_mtr := basic_either_neither_mtr &
+[ CONTEXT.RELS <! [ ], [ LBL #h2 ], [ ], [ ] !>,
+  INPUT [ RELS <! [ ], [ ], [ ], [ ], [ ], [ ], [ ] !>,
+          HCONS <! qeq, qeq, qeq, qeq, qeq & [ LARG #h2 ] !> ],
+  OUTPUT.HCONS <! qeq, qeq & [ LARG #h2 ] !> ].
+
+either_neither_the_case_mtr := basic_either_neither_mtr &
+[ CONTEXT.RELS <! [ ], [ LBL #h2 ], [ ], [ ] !>,
+  INPUT [ RELS <! [ ], [ ], [ ], [ ], [ ], [ ], [ ],
+                  [ PRED "_the+case_a_1_rel", LBL #h3, ARG1 #h4 ] !>,
+	  HCONS <! qeq, qeq, qeq, qeq, qeq & [ LARG #h3 ],
+		   qeq & [ HARG #h4, LARG #h2 ] !> ],
+  OUTPUT.HCONS <! qeq, qeq & [ LARG #h2 ] !> ].
+
+;; "neither of them"
+neither_part_of_op_mtr := openproof_omtr &
+[ CONTEXT.RELS <! [ PRED _neither_q_rel, ARG0 #x1 ] !>,
+  INPUT [ HOOK.INDEX #index,
+          RELS <! [ PRED generic_entity_rel, LBL #h1, ARG0 #x1 ] !> ],
+  OUTPUT [ HOOK.INDEX #index,
+           RELS <! [ ],
+		   [ PRED part_of_rel, LBL #h1, ARG0 #x1, ARG1 #x2 & ref-ind ], 
+	           [ PRED pron_rel, LBL #h2, 
+		     ARG0 #x2 & [ PNG.PN 3p, PT std ] ],
+		   [ PRED pronoun_q_rel, LBL handle, ARG0 #x2, RSTR #h3, 
+		     BODY handle ] !>,
+           HCONS <! qeq & [ HARG #h3, LARG #h2 ] !> ] ].
+
+;; "none of X"
+none_part_of_op_mtr := openproof_omtr &
+[ CONTEXT [ RELS <! [ PRED implicit_conj_rel, ARG0 #x3 & ref-ind ] !>,
+            HCONS <! !> ],
+  INPUT [ HOOK.INDEX #index,
+          RELS <! [ PRED #pred, LBL #h2, ARG0 #e11, ARG1 #x3, ARG2 #x4 ],
+	          [ PRED neg_rel, LBL #h10, ARG1 #h1 ] !>,
+          HCONS <! qeq & [ HARG #h1, LARG #h2 ] !> ],
+  OUTPUT [ HOOK.INDEX #index,
+           RELS <! [ ],
+		   [ PRED #pred, LBL #h10, ARG0 #e11, ARG1 #x5, ARG2 #x4 ],
+	           [ PRED part_of_rel, LBL #h6, ARG0 #x5 & [ PNG.PN 3p ], 
+		     ARG1 #x3 ], 
+	           [ PRED _no_q_rel, LBL handle, ARG0 #x5, RSTR #h7, 
+		     BODY handle ] !>,
+           HCONS <! qeq & [ HARG #h7, LARG #h6 ] !> ] ].
+
+
+;; Add "both" adverb: "B and C are both cubes"
+;; Note: used to block "*B and C aren't both cubes" for -(cube(a)&cube(b))
+;;
+both_adverb_op_mtr := openproof_omtr &
+[ CONTEXT.RELS <! [ PRED _and_c_rel, ARG0 #x1, L-INDEX ref-ind ],
+		  [ LBL #h2, 
+		    ARG0 #e3 & event & [ E.TENSE present, MARKS.BOTH-MARK - ], 
+		    ARG1 #x1 & ref-ind ] !>,
+  INPUT [ HOOK.INDEX #index,
+          RELS <! !> ],
+  OUTPUT [ HOOK.INDEX #index,
+           RELS <! [ ],
+		   [ PRED "_both_a_1_rel", LBL #h2, 
+   		     ARG0 event & [ E.TENSE untensed ], ARG1 #e3 ] !> ],
+  FLAGS.SUBSUME < #x1, #e3 > ].
+
+;; "B is a cube iff it is also large
+;; Note that we need to avoid "also" with disjunctive S-coord:
+;; "*B is a cube or it's also large"
+;;
+also_adverb_op_mtr := openproof_omtr &
+[ CONTEXT [ RELS <! [ ARG0 #x1 & ref-ind ],
+  		    [ LBL #h2, ARG0 #e3 & event & 
+		                    [ E.TENSE present, MARKS.ALSO-MARK - ], 
+		      ARG1 #x1 & ref-ind ],
+		    [ PRED "~._x_", ARG2 #h3 ] !>,
+	    HCONS <! qeq & [ HARG #h3, LARG #h2 ] !> ],
+  INPUT [ HOOK.INDEX #index,
+          RELS <! !> ],
+  OUTPUT [ HOOK.INDEX #index,
+           RELS <! [ ],
+		   [ PRED "_also_a_1_rel", LBL #h2, 
+   		     ARG0 event & [ E.TENSE untensed ], ARG1 #e3 ] !> ],
+  FLAGS.SUBSUME < #x1 > ].
+
+
+;; "if P neg, then Q neg either"
+;;
+either_adverb_op_mtr := openproof_omtr &
+[ CONTEXT [ RELS <! [ PRED "_if_x_then_rel", ARG1 #h1, ARG2 #h2 ],
+		    [ PRED "_then_a_1_rel", LBL #h3, ARG1 #h4 ],
+		    [ PRED neg_rel, LBL #h5, ARG1 #h6 ],
+  		    [ PRED neg_rel, LBL #h7 ],
+		    [ LBL #h9, ARG0 #e10 & event & 
+		               [ E.TENSE present, MARKS.EITHER-MARK - ] ] !>,
+	    HCONS <! qeq & [ HARG #h1, LARG #h3 ],
+		     qeq & [ HARG #h4, LARG #h5 ],
+		     qeq & [ HARG #h2, LARG #h7 ],
+		     qeq & [ HARG #h6, LARG #h9 ] !> ],
+  INPUT [ HOOK.INDEX #index,
+          RELS <! !> ],
+  OUTPUT [ HOOK.INDEX #index,
+           RELS <! [ ],
+		   [ PRED "_either_a_also_rel", LBL #h5,
+   		     ARG0 event & [ E.TENSE untensed ], ARG1 #e10 ] !> ],
+  FLAGS.SUBSUME < #e10 > ].
+
+;; "they" => "one of them", "both of them"
+;;
+partitive_pron_op_mtr := monotonic_mtr &
+[ CONTEXT.RELS <! [ ARG0 event, ARG1 #x2 ] !>,
+  INPUT [ HOOK.INDEX #index,
+	  RELS <! [ PRED pron_rel, LBL #h1, ARG0 #x2 & ref-ind & [ PNG.PN 3p] ],
+		  [ PRED pronoun_q_rel, ARG0 #x2, RSTR #h3 ] !>,
+	  HCONS <! qeq & [ HARG #h3, LARG #h1 ] !> ],
+  OUTPUT [ HOOK.INDEX #index,
+           RELS.LIST < [ PRED "prule_rel", ARG1 #index ],
+		       [ PRED part_of_rel, LBL #h5, ARG0 #x2, 
+			 ARG1 #x4 ],
+		       [ PRED quant_rel, LBL handle, ARG0 #x2, RSTR #h6,
+			 BODY handle ],
+		       [ PRED pron_rel, LBL #h8, 
+			 ARG0 #x4 & ref-ind & [ PNG.PN 3p ] ],
+		       [ PRED pronoun_q_rel, LBL handle, ARG0 #x4, RSTR #h7,
+			 BODY handle ], ... >,
+	   HCONS <! qeq & [ HARG #h6, LARG #h5 ],
+		    qeq & [ HARG #h7, LARG #h8 ] !> ] ].
+
+;; one of them
+;; Make this one obligatory, to avoid paraphrasing
+;; "A and B are cubes, and either A or B is large."
+;; as "A and B are cubes, and they are large."
+;;
+partitive_pron_one_op_mtr := partitive_pron_op_mtr &
+[ INPUT.RELS <! [ ARG0.SORT distrib-entity ], [ ] !>,
+  OUTPUT.RELS <! [ ], [ LBL #h1, ARG0 #x2 ], [ PRED udef_q_rel ], [ ], [ ],
+	         [ PRED card_rel, LBL #h1, ARG0 event & [ E.TENSE untensed ],
+		   ARG1 #x2, CARG "1" ] !>,
+  FLAGS.OPTIONAL - ].
+
+;; both of them
+;;
+partitive_pron_both_op_mtr := partitive_pron_op_mtr & optional_mtr &
+[ CONTEXT.RELS <! [ ] !>,
+  INPUT.RELS <! [ ARG0.SORT collect-entity ], [ ] !>,
+  OUTPUT.RELS <! [ ], [ LBL #h1, ARG0 #x2 ], [ PRED _both_q_rel ], [ ], [ ],
+	         [ PRED card_rel, LBL #h1, ARG0 event & [ E.TENSE untensed ],
+		   ARG1 #x2, CARG "2" ] !> ].
+
+at_least_one_of_mtr := openproof_omtr &
+[ CONTEXT.RELS <! [ PRED udef_q_rel, LBL #h11, ARG0 #x10 ],
+		  [ PRED part_of_rel, ARG0 #x10 ],
+		  [ PRED card_rel, ARG1 #x10, CARG "1" ] !>,
+  FILTER.RELS <! [ PRED "_at+least_x_deg_rel", LBL #h11 ] !>,
+  INPUT [ HOOK.INDEX #index,
+	  RELS <! !>,
+	  HCONS <! !> ],
+  OUTPUT [ HOOK.INDEX #index,
+	   RELS <! [ ], [ PRED "_at+least_x_deg_rel", LBL #h11, 
+			  ARG0.E.TENSE untensed, ARG1 semarg ] !>,
+	   HCONS <! !> ] ].
+
+;; Add "also" with matching predicates
+;; (similar in approach to VP ellipsis tests)
+;; If B is a cube, C is also a cube.
+;;
+also_adverb_common_pred_gpr := openproof_omtr &
+[ CONTEXT.RELS.LIST < [ PRED #pred, ARG0 event ], 
+		      [ PRED #pred, LBL #h1 & handle, 
+			ARG0 #e2 & event & [ MARKS.ALSO-MARK - ], 
+			ARG1 ref-ind ], ...>,
+  INPUT [ HOOK.INDEX #index,
+	  RELS <! !>,
+	  HCONS <! !> ],
+  OUTPUT [ HOOK.INDEX #index,
+           RELS <! [ ],
+		   [ PRED "_also_a_1_rel", LBL #h1, 
+   		     ARG0 event & [ E.TENSE untensed ], 
+		     ARG1 #e2 ] !> ] ].
+
+;; If B is large, then C is also large
+;;
+also_adverb_cond_gpr := also_adverb_common_pred_gpr &
+[ CONTEXT [ RELS.LIST < [ LBL #h1 ], [ LBL #h4 ],
+		    [ PRED "_if_x_then_rel", ARG1 #h2, ARG2 #h3 ],
+		    [ PRED "_then_a_1_rel", LBL #h5, ARG1 #h6 ], ... >,
+	    HCONS <! qeq & [ HARG #h2, LARG #h5 ], 
+		     qeq & [ HARG #h6, LARG #h4 ],
+		     qeq & [ HARG #h3, LARG #h1 ] !> ] ].
+
+also_adverb_cond_onearg_gpr := also_adverb_cond_gpr &
+[ FILTER.RELS <! [ PRED comp_rel ] !>,
+  CONTEXT.RELS <! [ ], [ ARG2 handle ], [ ], [ ] !> ].
+
+also_adverb_twoarg_gpr := also_adverb_common_pred_gpr &
+[ CONTEXT.RELS.LIST < [ ], [ ], [ ], [ ],
+		      [ ARG0 #x10 & ref-ind ], 
+		      [ PRED quant_rel, ARG0 #x10 ], ... >,
+  FLAGS.SUBSUME < #x10, ... > ].
+
+;; If B is larger than C, then D is also larger than C"
+;;
+also_adverb_cond_twoarg_comp_gpr := also_adverb_cond_gpr & 
+				    also_adverb_twoarg_gpr &
+[ CONTEXT.RELS <! [ LBL #h1 ], [ LBL #h2 ], [ ], [ ],
+                  [ PRED #pred, ARG0 #x1, CARG #carg ], [ ],
+		  [ PRED comp_rel, LBL #h1, ARG2 #x1 ],
+		  [ PRED #pred, ARG0 #x3, CARG #carg ], 
+		  [ PRED comp_rel, LBL #h2, ARG2 #x3 ] !>,
+  FLAGS.SUBSUME < semarg, #x3 > ].
+
+;; If B is a cube, then C is also a cube
+;;
+also_adverb_cond_twoarg_gpr := also_adverb_cond_gpr & 
+			       also_adverb_twoarg_gpr &
+[ CONTEXT.RELS <! [ ARG2 #x1 ], [ ARG2 #x2 ], [ ], [ ],
+                  [ PRED #pred, ARG0 #x1, CARG #carg ], [ ],
+		  [ PRED #pred, ARG0 #x2 & ref-ind, CARG #carg ] !>,
+  FLAGS.SUBSUME < semarg, #x2 > ].
+
+;; Redefine from fundamentals.tdl
+;;pos_conj_rel := conj_nopair_rel.
+
+paired_conj_gpr := openproof_omtr &
+[ INPUT [ HOOK.INDEX #index,
+	  RELS <! [ PRED conj_nopair_rel, LBL #h3, ARG0 #i4, L-INDEX #i10,
+		    R-INDEX #i12, L-HNDL #h20, R-HNDL #h14 ] !>,
+	  HCONS <! !> ],
+  OUTPUT [ HOOK.INDEX #index,
+           RELS <! [ ], [ PRED conj_paired_rel, LBL #h3, ARG0 #i4, L-INDEX #i10,
+	   		    R-INDEX #i12, L-HNDL #h20, R-HNDL #h14 ] !>,
+	   HCONS <! !> ] ].
+
+paired_conj_event_gpr := paired_conj_gpr &
+[ INPUT.RELS <! [ ARG0 event ] !> ].
+
+;; Was avoiding both S and S, which will fail to generate, but need
+;; this for |both that S and that S|
+;;
+paired_conj_event_both_gpr := paired_conj_event_gpr &
+[ CONTEXT.RELS <! [ ARG0 #e3 & event ], 
+                  [ ARG0 #e4 & event ] !>,
+  OUTPUT.RELS <! [ ], [ PRED _and_c_pr_nrev_rel, L-INDEX #e3, R-INDEX #e4 ] !>,
+  FLAGS.SUBSUME < #e3, #e4 > ].
+
+paired_conj_refind_gpr := paired_conj_gpr &
+[ INPUT.RELS <! [ L-INDEX #x2 ] !>,
+  CONTEXT.RELS.LIST < [ PRED explicit_or_proper_q_rel, ARG0 #x2 ], ... > ].
+
+paired_conj_refind_or_gpr := paired_conj_refind_gpr &
+[ INPUT.RELS <! [ PRED _or_c_nopr_rel ] !>,
+  CONTEXT.RELS <! [ ] !>,
+  OUTPUT.RELS <! [ ], [ PRED _or_c_pr_rel ] !> ].
+
+;; Avoid applying in two cases, for efficiency:
+;; (1) if the and-coord phrase is the subject of a verb modified by "both"
+;; (2) if the and-coord phrase is the object of "between"
+;; This is awkward since we have to enumerate the roles that the coord phrase
+;; can occupy: ARG1, ARG2, L-INDEX, R-INDEX
+;; Puzzle - For some reason, cannot have the following constraint:
+;;    INPUT.RELS <! [ ARG0 #x1 ] !>,
+;;    FLAGS.SUBSUME < #x1, ... > 
+;; even though it would help avoid wrong application of the ...refind_arg2
+;; variant to |cube(b)&cube(d)|
+;; When imposed, it blocks application of the ...refind_arg2 rule to 
+;; |rightof(b,c)&rightof(b,d)| 
+;; to give |...to the right of both B and D|
+;;
+paired_conj_refind_and_gpr := paired_conj_refind_gpr &
+[ INPUT.RELS <! [ PRED _and_c_nopr_rel ] !>,
+  CONTEXT.RELS <! [ ], [ ARG0 #e3 & event ] !>,
+  OUTPUT.RELS <! [ ], [ PRED _and_c_pr_nrev_rel ] !>,
+  FLAGS.SUBSUME < #e3 > ].
+
+paired_conj_finsbj_gpr := paired_conj_refind_and_gpr &
+[ INPUT.RELS <! [ ARG0 #x1 ] !>,
+  FILTER.RELS <! [ PRED "_both_a_1_rel", LBL #h4 ] !>,
+  CONTEXT.RELS <! [ ], [ ARG0 [ E.TENSE present ], LBL #h4, ARG1 #x1 ] !>,
+  FLAGS.EQUAL < #h4 > ].
+
+paired_conj_nonfin_arg1_gpr := paired_conj_refind_and_gpr &
+[ INPUT.RELS <! [ ARG0 #x1 ] !>,
+  CONTEXT.RELS <! [ ], [ ARG0 [ E.TENSE no_tense ], ARG1 #x1 ] !> ].
+ 
+paired_conj_refind_arg2_gpr := paired_conj_refind_and_gpr &
+[ INPUT.RELS <! [ ARG0 #x1 ] !>,
+  FILTER.RELS <! [ PRED _between_p_rel, ARG2 #x1 ] !>,
+  CONTEXT.RELS <! [ ], [ ARG2 #x1 ] !> ].
+
+#|
+;; These two may not be needed: for |either both A and B or both C and D|
+;;
+paired_conj_refind_lind_gpr := paired_conj_refind_and_gpr &
+[ INPUT.RELS <! [ ARG0 #x1 ] !>,
+  CONTEXT.RELS <! [ ], [ L-INDEX #x1 ] !> ].
+
+paired_conj_refind_rind_gpr := paired_conj_refind_and_gpr &
+[ INPUT.RELS <! [ ARG0 #x1 ] !>,
+  CONTEXT.RELS <! [ ], [ R-INDEX #x1 ] !> ].
+|#
+
+;; Wrap "it is the case that" around conjoined Ss, to enable reduction in
+;; ambiguity
+;;
+basic_conj_s_thecase_gpr := openproof_omtr &
+[ CONTEXT.RELS <! [ PRED conj_rel, LBL #clbl, ARG0 #e1, L-INDEX event ] !>,
+  OUTPUT [ RELS.LIST < [ ], [ PRED "_thecasethat_v_rel",
+                              ARG0 non_conj_event &
+  		                [ E [ ASPECT.PRF -, TENSE present ], SF prop ],
+			      ARG1 #arg ], ... >,
+	   HCONS.LIST < qeq & [ HARG #arg, LARG #clbl ], ... > ],
+  FLAGS.SUBSUME < #e1 > ].
+
+;; The conj-S is outermost, so change INDEX on output: the point of introducing
+;; this new predication is to replace a conj_event index with a non_conj one,
+;; so we can generate from [[B and C] or [D and E]] while blocking overt
+;; conjunction in left member of [S conj S].
+;; Block if conj-S is argument of neg_rel, since dealt with separately via
+;; "it is not the case that ..."
+;;
+#|
+conj_s_thecase_top_gpr := basic_conj_s_thecase_gpr &
+[ FILTER [ RELS <! [ PRED neg_rel, ARG1 #h1 ] !>,
+           HCONS <! qeq & [ HARG #h1, LARG #h2 ] !> ],
+  CONTEXT.RELS <! [ LBL #h2, ARG0 #e1 ] !>,
+  INPUT [ HOOK.INDEX #e1,
+          RELS <! !>,
+	  HCONS <! !> ],
+  OUTPUT [ HOOK.INDEX #e2 & [ E [ ASPECT [ PRF - ], TENSE present ], SF prop ],
+           RELS <! [ ], [ ARG0 #e2 ] !>,
+	   HCONS <! qeq !> ] ].
+|#
+
+;; The conj-S is not outermost, and so must (in our simple universe) be an
+;; argument of a conjunction, left or right, since we already forced this
+;; conversion during inflation if the conjunction is the consequent of a
+;; conditional or the argument of a bi-conditional.
+;;
+conj_s_thecase_nontop_conjarg_gpr := basic_conj_s_thecase_gpr &
+[ INPUT [ HOOK.INDEX #e2,
+          RELS <! [ PRED #pred & conj_rel, LBL #h3, ARG0 #e4 ] !>,
+	  HCONS <! qeq & [ HARG #h7 ] !> ],
+  OUTPUT [ HOOK.INDEX #e2,
+           RELS <! [ ], [ ],
+	           [ PRED #pred, LBL #h3, ARG0 #e4 ] !>,
+           HCONS <! qeq, qeq & [ HARG #h7 ] !> ] ].
+
+;; Also reverse the order of the top-level conjuncts, to avoid remaining ambig
+;; in |iitc that B and C or D|
+conj_s_thecase_nontop_cleft_gpr := conj_s_thecase_nontop_conjarg_gpr &
+[ CONTEXT.RELS <! [ ARG0 #e1 ] !>,
+  INPUT.RELS <! [ L-INDEX #e1, R-INDEX #e3, L-HNDL #h7, R-HNDL #h9 ] !>,
+  OUTPUT [ RELS <! [ ], [ LBL #h5, ARG0 #e6 ],
+                   [ L-INDEX #e3, R-INDEX #e6, L-HNDL #h9, R-HNDL #h7 ] !>,
+           HCONS <! qeq, [ HARG #h7, LARG #h5 ] !> ] ].
+
+conj_s_thecase_nontop_cright_gpr := conj_s_thecase_nontop_conjarg_gpr &
+[ CONTEXT.RELS <! [ ARG0 #e1 ] !>,
+  INPUT.RELS <! [ L-INDEX #e3, R-INDEX #e1, L-HNDL #h8, R-HNDL #h7 ] !>,
+  OUTPUT [ RELS <! [ ], [ LBL #h5, ARG0 #e6 ],
+                   [ L-INDEX #e3, R-INDEX #e6, L-HNDL #h8, R-HNDL #h7 ] !>,
+           HCONS <! qeq, [ HARG #h7, LARG #h5 ] !> ] ].
+
+;; Reverse the order of two nonconjoined clauses: |P and Q| => |Q and P|
+;;
+basic_conj_s_reverse_gpr := monotonic_mtr &
+[ CONTEXT.HCONS <! qeq & [ HARG handle & #h1 ] !>,
+  INPUT [ HOOK.INDEX #index,
+          RELS <! [ PRED conj_nonrev_rel, LBL handle & #clbl, ARG0 event & #e1,
+                    L-INDEX non_conj_event & #e2, L-HNDL #h1,
+	  	    R-INDEX non_conj_event & #e3, R-HNDL handle & #h2 ] !> ],
+  OUTPUT [ HOOK.INDEX #index,
+           RELS <! [ PRED "prule_rel", ARG1 #index ],
+	           [ PRED conj_reversed_rel, LBL #clbl, ARG0 #e1, 
+                     L-INDEX #e3, L-HNDL #h2, R-INDEX #e2, R-HNDL #h1 ] !> ] ].
+
+;; Make this reversal optional as long as the left conjunct is not negated,
+;; to avoid ambiguity for |not P and Q|
+conj_s_reverse_gpr := basic_conj_s_reverse_gpr & openproof_omtr &
+[ FILTER.RELS <! [ PRED neg_rel, LBL handle & #h1 ] !>,
+  CONTEXT.HCONS <! [ LARG #h1 ] !> ].
+
+;; Make the reversal obligatory if the left conjunct is negated, 
+;; so that we change |not P and Q| to |Q and not P|
+;; The reversal is only necessary if the negation is expressed as
+;; |it is not the case that P and Q|, but currently we give this phrasal
+;; negation the same semantics as "not".  Consider FIX with a separate 
+;; paraphrase rule for "it is not the case that", and then only trigger
+;; this obligatory reversal for the phrasal neg.
+;;
+conj_s_reverse_neg_gpr := basic_conj_s_reverse_gpr &
+[ FILTER.RELS <! [ PRED neg_rel ], [ PRED neg_rel ], [ PRED neg_rel ] !>,
+  CONTEXT [ RELS <! [ PRED neg_rel, LBL handle & #h1 ] !>,
+            HCONS <! [ LARG #h1 ] !> ],
+  OUTPUT [ HOOK.INDEX #index,
+  	   RELS.LIST.FIRST [ PRED "prule_rel", ARG1 #index ] ],
+  FLAGS [ EQUAL < #h1 >,
+          OPTIONAL - ] ].

@@ -1,0 +1,435 @@
+;; This type is for "only if" as a patch given that the transfer machinery
+;; currently does not allow reassignment of the top-level INDEX attribute,
+;; where in the paraphrase of "if A then B" as "A only if B" the main clause
+;; shifts.  So here we propagate the new complement's INDEX to be the main
+;; one.
+;;
+p_cp_s-rev_le := noncqrs-h-nab &
+  [ SYNSEM basic_subconj_cp_synsem &
+	   [ LOCAL [ CAT [ HEAD [ PRD -,
+	                          MOD < [ LOCAL.CONT.HOOK.INDEX.SF prop,
+					  PUNCT.RPUNCT no_punct ] > ],
+			   VAL [ SPR < [ --MIN just_only_deg_rel ] >,
+				 COMPS < [ LOCAL 
+					  [ CAT s_cat_unspec & 
+						[ MC +,
+						  HEAD verb & [ VFORM fin ] ],
+					    CONT.HOOK.INDEX #ind &
+						[ SF prop-or-comm ] ],
+					   --SIND.E.TENSE real_tense,
+					   PUNCT.RPUNCT.PSF #iforce,
+					   NONLOC.SLASH 0-dlist,
+					   OPT - ] > ],
+			   POSTHD + ],
+		     CONT.HOOK.INDEX #ind ],
+	     LKEYS.KEYREL.ARG0.SF #iforce ] ].
+
+;; Restrict subord conjs to only attach to S, not also to VP
+;;
+p_cp_s-unsp_le := subconj_word &
+  [ SYNSEM subconj_synsem &
+	   [ LOCAL.CAT [ HEAD [ PRD -,
+				MOD < [ LOCAL.CAT.VAL.SUBJ *olist* ] > ],
+			 VAL.SPR < [ --MIN just_only_deg_rel ] > ] ] ].
+
+;; The normal grammar leaves SF underspecified for if-then sentences, since the
+;; main clause might be a question or a command.  But for OP, everything is
+;; declarative, so we unify SF from head and non-head, to ensure that the SF
+;; value is always specialized to `prop', which makes the generator happy.
+;;
+reg_onearg_subconj_synsem := basic_onearg_subconj_synsem & 
+			      subconj_lex_synsem &
+  [ LOCAL.CAT [ HEAD.MOD < [ --SIND.SF #iforce ] >,
+		VAL.COMPS < [ PUNCT.RPUNCT.PSF #iforce,
+			      NONLOC.SLASH 0-dlist ] > ],
+    LKEYS.KEYREL.ARG0.SF #iforce ].
+
+;; Similary, we change the complement clause constraint to be MC +, to ensure
+;; that the SF value is specialized to `prop', even though in general "if"
+;; can also combine with subjunctive (MC -) clauses.
+;;
+subconj_synsem := subconj_cp_synsem & 
+  [ LOCAL.CAT.VAL.COMPS < [ LOCAL [ CAT s_cat_unspec & 
+					[ MC +,
+					  HEAD verb & [ VFORM fin ] ],
+				    CONT.HOOK.INDEX.SF prop-or-comm ],
+			    --SIND.E.TENSE real_tense ] > ].
+
+
+
+aj_pp-cp_i-it-brdg_le := norm_adj_word &
+  [ SYNSEM adj_atrans_cp_bridge_synsem &
+           [ LOCAL.CAT.VAL.COMPS < [ OPT - ] >,
+	     LKEYS.KEYREL.ARG0.E.TENSE untensed ] ].
+
+adj_atrans_cp_bridge_synsem := isect_synsem & basic_two_arg &
+			       prd_synsem & cp_addin_tam_pn &
+  [ LOCAL [ AGR #agr,
+            CAT [ HEAD basic_adj & [ MINORS [ MIN adj_rel,
+					      ALTMIN norm_rel & #altmin ],
+				     TAM #tam,
+				     MOD < [ LOCAL.CAT.HEAD no_head ] > ],
+		  VAL [ SUBJ < >,
+			SPCMPS < >,
+			SPR < #spr & synsem_min &
+                          [ --MIN degree_rel,
+                            LOCAL
+                            [ CAT [ HEAD.MINORS.ALTMIN #altmin,
+				    VAL [ SPR *olist*,
+                                          SPEC < [ LOCAL.CAT.HS-LEX #hslex ]>],
+                                    MC na ],
+                              CONT.HOOK.LTOP #ltop ],
+                            NONLOC.SLASH 0-dlist,
+                            OPT + ],
+			  anti_synsem_min &
+			  [ --MIN degree_rel ] >,
+			COMPS #comps &
+			     < synsem & #comp &
+				[ LOCAL [ CONT.HOOK [ LTOP #chand,
+						      INDEX #ind &
+							    [ SF basic-prop ] ],
+					  CONJ cnil,
+					  CAT s_cat_fin_or_inf_v_c & 
+						    [ HEAD comp ] ],
+				  NONLOC.SLASH 0-dlist ] >,
+			SPR.FIRST.LOCAL.CONT.HOOK.XARG #arg0,
+			KCMP #comp & [ PUNCT.LPUNCT no_punct ] ],
+		  HS-LEX #hslex ],
+	    CONT [ HOOK [ INDEX #ind & [ E #tam ],
+			  XARG it-ind & #agr ],
+		   RELS <! #keyrel !>,
+		   HCONS <! qeq & [ HARG #arg, LARG #chand ] !>,
+		   ICONS <! !> ],
+	    ARG-S < #spr . #comps > ],
+    MODIFD.LPERIPH bool,
+    LKEYS [ KEYREL #keyrel & it_adj_arg1_relation & 
+		   [ LBL #ltop,
+		     ARG1 handle & #arg,
+		     ARG0 #arg0 & non_conj_event ],
+	    --+ARGIND it-ind ] ].
+
+;; Relax the GENRE for now, to see if we still benefit from using `formal'
+;; for the rest of OP generation
+;;
+contracted_aux_word := word &
+  [ ALTS [ VPELLIP -,
+           SQPNCT -,
+	   CSAI - ],
+    SYNSEM.LOCAL.CAT.VAL.COMPS.FIRST expressed_synsem ].
+
+;; Removed RPERIPH + to allow post-modification, as in "it (i.e. B)"
+;;
+n_-_pr-it_lexent := basic_n_pers_pro_lexent &
+  [ SYNSEM [ LOCAL [ CAT.VAL [ SPR < [ --MIN no_rel ] >,
+			       COMPS < > ],
+                     CONT.RELS <! relation, relation !>,
+                     CTXT.ACTIVATED - ],
+             LKEYS.KEYREL.ARG0 [ PNG png & [ PN 3s,
+                                             GEN neut ],
+                                 PT std ] ] ].
+
+;; Remove LPERIPH + on mother, to allow varied behavior with embedded vs
+;; main-clause "if" for pronouns
+;;
+adj_head_scop_phrase := basic_adj_head_scop_phrase &
+  [ HD-DTR.SYNSEM.LOCAL.CAT.VAL.SPR < >,
+    NH-DTR.SYNSEM [ LOCAL.CAT.VAL.COMPS *olist*,
+		    PUNCT.RPUNCT comma_or_pair_or_no_punct ] ].
+
+;; Constrain PT to not_pron -- maybe push up into regular grammar? FIX
+n_proper_lexent := norm_n_proper_lexent &
+  [ SYNSEM.LOCAL [ CAT.HEAD.MINORS.MIN named_np_rel,
+		   CONT.HOOK.INDEX.PT notpro ] ].
+
+;; Break link between AGR and INDEX PNG, to allow its index to be 3p, but
+;; AGR to be 3s.
+;;
+basic_partitive_num_phrase := unary_phrase & phrasal &
+  [ SYNSEM [ LOCAL [ CAT [ HEAD partn &
+                                [ MOD < >,
+                                  POSS - ],
+                           VAL [ SUBJ < >,
+                                 SPR < synsem &
+                                       [ LOCAL [ CAT.VAL [ SPR  *olist*,
+                                                           COMPS < > ],
+                                                 AGR #index ],
+                                         NONLOC.REL 0-dlist,
+                                         LEX + ], ... >,
+                                 SPEC < anti_synsem_min > ],
+                           HC-LEX - ],
+                     CONT nom-obj,
+                     CONJ cnil,
+                     AGR #agr ] ],
+    ARGS < [ INFLECTD +,
+             SYNSEM 
+	      [ LOCAL 
+		 [ CAT [ HEAD adj_or_intadj &
+			      [ MOD < synsem & [ LOCAL.AGR #agr ] > ],
+			 VAL [ SUBJ < >,
+			       COMPS < > ] ],
+		   CONJ cnil,
+		   CONT.HOOK [ LTOP #nhand,
+			       XARG #index  ] ],
+		PUNCT.LPUNCT pair_or_no_punct ] ] >,
+    ORTH [ FROM #from, TO #to ],
+    C-CONT [ HOOK [ LTOP #nhand,
+                    INDEX #index & overt_non_expl-ind & [ PNG.PN 3p ] ],
+	     RELS.LIST < [ LBL #nhand,
+                           ARG0 #index,
+			   CFROM #from, CTO #to ], ... > ] ].
+
+;; Constrain coord-Ss to exclude subjunctive.
+;; Also prevent conjoined first daughter, to avoid ambig of |B and C or D|
+;; Also ensure that both conjuncts have same HEAD value indirectly (because
+;; of lossy HEAD constraint on embedded coord-S) via CASE, e.g. to block
+;; |It is the case either that |a| is small, or [ |c| is large, and |d| is 
+;; large ]|.
+;; And prevent conjoined second daughter, to avoid ambig of |B or C and D|
+
+s_coord_top_nc_phr := s_coord_top_phr &
+  [ LCONJ-DTR.SYNSEM.LOCAL [ CONT.HOOK.INDEX non_conj_event &
+					     [ E.MOOD indicative ],
+			     CAT.HEAD.CASE #case ],
+    RCONJ-DTR.SYNSEM.LOCAL [ CONT.HOOK.INDEX.E.MOOD indicative,
+			     CAT.HEAD.CASE #case,
+			     CONJ.CREL.R-INDEX non_conj_event ] ].
+
+;; For multi-part coordinate structures where all conjunctions are the same
+;; as in |B and C and D| or |B or C or D|
+s_coord_symm_top_phr := s_coord_top_phr &
+  [ LCONJ-DTR.SYNSEM.LOCAL [ CONT.HOOK.INDEX non_conj_event &
+					     [ E.MOOD indicative ],
+			     CAT.HEAD.CASE #case ],
+    RCONJ-DTR.SYNSEM.LOCAL [ CONT.HOOK.INDEX [ E.MOOD indicative,
+					       SORT #csort ],
+			     CAT.HEAD.CASE #case,
+			     CONJ [ CREL.R-INDEX conj_event &
+						 [ SORT #csort ] ] ] ].
+
+;; Add constraint to prevent |D either's large or is small|
+head_marker_phrase_atomic :+
+  [ ARGS < [ ], [ SYNSEM.MODIFD.LPERIPH na_or_- ] > ].
+
+head_marker_phrase_e_phr :+
+  [ ARGS < [ ], [ SYNSEM.MODIFD.LPERIPH na_or_- ] > ].
+
+;; Add attribute PRORDER to constrain order in which prule names are realized 
+;; in generation
+;;
+cat :+
+ [ PRORDER pr-order ].
+
+prule-head := head.
+
+;; Lexical type for names of paraphrase rules, used to generate the list of
+;; applied rules for each sentence.
+
+x_-_prule_le := word &
+  [ SYNSEM 
+    [ LOCAL [ CAT [ HEAD prule-head & 
+			 [ MINORS.MIN never_unify_rel,
+			   MOD < [ LOCAL intersective_mod &
+					 [ CAT [ HEAD verb_or_conj-s,
+						 MC +,
+						 VAL [ SUBJ *olist*,
+						       COMPS < > ] ],
+					   CONT.HOOK.INDEX #index ] ] > ],
+		    POSTHD +,
+		    MC +,
+		    VAL [ SUBJ < >,
+			  SPR < >,
+			  COMPS < >,
+			  SPCMPS < > ] ],
+	      CONT [ HOOK.INDEX #arg0,
+	             RELS <! #keyrel !>,
+		     HCONS <! !> ],
+	      CONJ cnil ],
+      NONLOC non-local_none,
+      LEX +,
+      LKEYS.KEYREL #keyrel & [ PRED "prule_rel",
+                               ARG0 #arg0,
+			       ARG1 #index,
+			       CARG #orth ],
+      PUNCT.RPUNCT clause_punct,
+      PHON.ONSET con_or_voc ],
+    ORTH.FIRST #orth,
+    INFLECTD + ].
+
+head_adj_prule_rule := isect_mod_phrase & head_initial & rule &
+  [ INFLECTD -,
+    SYNSEM [ LOCAL [ CAT [ VAL [ SPCMPS < >,
+		   	         COMPS < > ],
+			   PRORDER #pord ],	 
+	             CONJ cnil ],
+	     PUNCT.RPUNCT #rpunct,
+             MODIFD #modif ],
+    HD-DTR.SYNSEM [ LOCAL.CAT [ HEAD verb_or_conj-s,
+				MC +,
+                                VAL [ SPR *olist*,
+				      SUBJ *olist*,
+                                      COMPS < > ],
+				PRORDER #prorder ],
+		    PUNCT.RPUNCT #rpunct & clause_punct,
+                    NONLOC non-local_none,
+                    MODIFD #modif ],
+    NH-DTR.SYNSEM [ LOCAL [ CAT.HEAD prule-head &
+                                     [ MOD.FIRST.LOCAL.CAT.PRORDER #prorder ],
+                            CONT.HOOK.INDEX.PORD #pord ],
+		    NONLOC non-local_none ] ].
+
+;; Hack lexical entries for "it is (not) the case that" to improve efficiency
+;; in generation.
+;; Added CASE non_nom so we can block 
+;; |it is the case [it is not the case that S and i-i-n-t-c that S]|
+;;
+;; Similarly, for "it is the case that ...", used for embeded conjoined CP
+;; complements, to provide unambiguous expression of (B or (C and D)) as
+;; |B or it is the case both that C and that D|.
+;;
+v_cp_phrase_lexent := root_marker_word &
+  [ SYNSEM [ LOCAL 
+             [ CAT [ HEAD [ MOD < anti_synsem_min >,
+                            PRD -,
+                            VFORM fin,
+			    CASE non_nom,
+                            MINORS.MIN nonaux_v_rel ],
+                     VAL [ SPR < >,
+			   SUBJ < anti_synsem >,
+			   COMPS < canonical_synsem &
+			           [ LOCAL [ CAT s_cat_v_c & 
+						 [ HEAD comp & [ CASE nom ] ],
+					     CONT.HOOK.LTOP #chand ],
+				     OPT - ] >,
+			   SPCMPS < > ],
+		     MC bool ],
+	       CONT [ HOOK.LTOP #ltop,
+                      RELS <! #keyrel &
+		              [ LBL #ltop,
+				ARG1 #arg ] !>,
+                      HCONS <! qeq & [ HARG #arg,
+				       LARG #chand ] !>,
+		      ICONS <! !> ] ],
+	     LKEYS.KEYREL #keyrel ] ].
+
+v_cp_notthecase_le := v_cp_phrase_lexent &
+  [ SYNSEM [ LOCAL [ CAT.VAL.COMPS < [ --SIND #index ] >,
+		     CONT.HOOK.INDEX #index ],
+	     LKEYS.KEYREL [ PRED neg_rel,
+			    ARG0 event & [ E [ TENSE untensed, 
+			                       ASPECT [ PROGR -, PRF - ] ],
+					   SF prop ] ] ] ].
+
+v_cp_thecase_le := v_cp_phrase_lexent &
+  [ SYNSEM [ LOCAL [ CAT.VAL.COMPS < [ --SIND conj_event & [ E #e ],
+                                       LOCAL.CONJ.LCHEAD atomic-conj ] >, 
+                     CONT.HOOK.INDEX #ind & non_conj_event & 
+				   [ E #e & [ MOOD indicative ] ] ],
+	     LKEYS.KEYREL [ PRED "_thecasethat_v_rel",
+	                    ARG0 #ind ] ] ].
+
+;; Block extraction from complement clauses, for improved generator efficiency
+sor_compl_word :+
+  [ SYNSEM.LOCAL.CAT.VAL.COMPS.FIRST.NONLOC.SLASH 0-dlist ].
+
+;; Block paired marker on conjoined phrase: |both [both B and C]|
+;; for efficiency, even though lose |either both B and C or both D and E|
+;; Seemingly no real generation speed-up to compensate for undergeneration
+;; but want to still avoid |both both ...|, so push down to "both"
+;conj_atomic_lexent :+
+;  [ SYNSEM.LOCAL.CAT.VAL.COMPS.FIRST.--SIND nonconj_indiv ].
+
+;; Block extraction from clausal argumet
+basic_scopal_s_adverb_nospec_synsem :+
+  [ LOCAL.CAT.HEAD.MOD.FIRST.NONLOC.SLASH 0-dlist ].
+
+;; Add contrastive semantics for paired conjunctions either/neither/both
+;;
+
+conj_paired_rel := conj_rel.
+conj_nopair_rel := conj_rel.
+
+_and_c_pr_rel := _and_c_rel & conj_paired_rel.
+_and_c_nopr_rel := _and_c_rel & conj_nopair_rel.
+_or_c_pr_rel := _or_c_rel & conj_paired_rel.
+_or_c_nopr_rel := _or_c_rel & conj_nopair_rel.
+
+_and_c_nrev_rel := _and_c_rel & conj_nonrev_rel.
+_and_c_rev_rel := _and_c_rel & conj_reversed_rel.
+_or_c_nrev_rel := _or_c_rel & conj_nonrev_rel.
+_or_c_rev_rel := _or_c_rel & conj_reversed_rel.
+
+_and_c_pr_nrev_rel := _and_c_pr_rel & _and_c_nrev_rel.
+_and_c_nopr_nrev_rel := _and_c_nopr_rel & _and_c_nrev_rel.
+_and_c_pr_rev_rel := _and_c_pr_rel & _and_c_rev_rel.
+_and_c_nopr_rev_rel := _and_c_nopr_rel & _and_c_rev_rel.
+_or_c_pr_nrev_rel := _or_c_pr_rel & _or_c_nrev_rel.
+_or_c_nopr_nrev_rel := _or_c_nopr_rel & _or_c_nrev_rel.
+_or_c_pr_rev_rel := _or_c_pr_rel & _or_c_rev_rel.
+_or_c_nopr_rev_rel := _or_c_nopr_rel & _or_c_rev_rel.
+
+c_xp_nor_le := conj_complex_lexent &
+  [ SYNSEM.LOCAL [ CONJ lex-conj & [ CHEAD neither ],
+		   CONT.RELS <! [ PRED _nor_c_rel ] !> ] ].
+
+;; For |both that S and that S| but not |both S and S|
+c_xp_both-cp_le := conj_atomic_lexent &
+  [ SYNSEM.LOCAL [ CONJ both,
+		   CAT.VAL.COMPS < [ LOCAL.CAT [ HEAD comp,
+						 VAL.COMPS < >,
+						 MC - ] ] > ] ].
+ctst := cl-cl. ;; cl-cl_crd-that-t_c
+ctss := cl-cl. ;; cl-cl_crd-sym-t_c
+
+;; conj sorts used to detect matching conjunctions in |B and C and D|
+;; and in |B or C and D|.
+;;
+csort := *sort*.
+cand := csort.
+cor := csort.
+
+c_xp_and-nev_le := c_xp_and_le &
+ [ ORTH < "and" >,
+   SYNSEM [ PHON.ONSET voc,
+            LOCAL [ CONJ.CHEAD cnil,
+	            CAT.VAL.COMPS < [ --SIND non_event ] > ],
+            LKEYS.KEYREL.PRED _and_c_nopr_rel ] ].
+
+;; DPF 15-05-19 - Generalized COMPS..CONJ from atomic-conj to cnil_or_atomconj
+;; in order to get |we arise and |d| and |e| arrive|.
+;;
+c_xp_and-ev_le := c_xp_and_le &
+ [ ORTH < "and" >,
+   SYNSEM [ PHON.ONSET voc,
+            LOCAL [ CONJ.CHEAD cnil,
+	            CAT.VAL.COMPS < [ --SIND event,
+		                      LOCAL.CONJ.LCHEAD cnil_or_atomconj ] > ],
+            LKEYS.KEYREL [ PRED _and_c_nopr_rel,
+	                   ARG0.SORT cand ] ] ].
+
+c_xp_and-pr_le := c_xp_and_le &
+ [ ORTH < "and" >,
+   SYNSEM [ PHON.ONSET voc,
+            LOCAL.CONJ.CHEAD both,
+            LKEYS.KEYREL.PRED _and_c_pr_rel ] ].
+
+c_xp_or-nev_le := c_xp_or_le &
+ [ ORTH < "or" >,
+   SYNSEM [ PHON.ONSET voc,
+            LOCAL [ CONJ.CHEAD cnil,
+	            CAT.VAL.COMPS < [ --SIND non_event ] > ],
+            LKEYS.KEYREL.PRED _or_c_nopr_rel ] ].
+
+c_xp_or-ev_le := c_xp_or_le &
+ [ ORTH < "or" >,
+   SYNSEM [ PHON.ONSET voc,
+            LOCAL [ CONJ.CHEAD cnil,
+	            CAT.VAL.COMPS < [ --SIND event,
+		                      LOCAL.CONJ.LCHEAD cnil_or_atomconj ] > ],
+	    LKEYS.KEYREL [ PRED _or_c_nopr_rel,
+	                   ARG0.SORT cor ] ] ].
+
+c_xp_or-pr_le := c_xp_or_le &
+ [ ORTH < "or" >,
+   SYNSEM [ PHON.ONSET voc,
+            LOCAL.CONJ.CHEAD either,
+            LKEYS.KEYREL.PRED _or_c_pr_rel ] ].

@@ -1,0 +1,1318 @@
+a_parens_np := never_unify_le & [].
+b_parens_np := never_unify_le & [].
+c_parens_np := never_unify_le & [].
+d_parens_np := never_unify_le & [].
+b_period_np1 := never_unify_le & [].
+c_period_np1 := never_unify_le & [].
+d_period_np1 := never_unify_le & [].
+e_period_np1 := never_unify_le & [].
+f_period_np1 := never_unify_le & [].
+d_comma_np1 := never_unify_le & [].
+d_period_comma_np1 := never_unify_le & [].
+r_comma_np1 := never_unify_le & [].
+r_period_comma_np1 := never_unify_le & [].
+also_root := never_unify_le & [].
+also_adv2 := never_unify_le & [].
+also_adv3 := never_unify_le & [].
+and_root_post := never_unify_le & [].
+apostrophe_s_nq_lex := never_unify_le & [].
+as_if_c := never_unify_le & [].
+as_though_c := never_unify_le & [].
+;be_c_is_neg_1 := never_unify_le & [].
+;be_c_are_neg_1 := never_unify_le & [].
+be_c_am := never_unify_le & [].
+be_c_am_neg_1 := never_unify_le & [].
+be_c_be := never_unify_le & [].
+be_c_being := never_unify_le & [].
+be_c_been := never_unify_le & [].
+be_c_was := never_unify_le & [].
+be_c_was_neg_1 := never_unify_le & [].
+be_c_was_subj := never_unify_le & [].
+be_c_was_neg_subj_1 := never_unify_le & [].
+be_c_were := never_unify_le & [].
+be_c_were_neg_1 := never_unify_le & [].
+be_c_were_neg_subj_1 := never_unify_le & [].
+be_c_were_subj := never_unify_le & [].
+be_id_am := never_unify_le & [].
+be_id_am_cx_2 := never_unify_le & [].
+be_id_am_neg_1 := never_unify_le & [].
+be_id_be := never_unify_le & [].
+be_id_been := never_unify_le & [].
+be_id_being := never_unify_le & [].
+be_id_was := never_unify_le & [].
+be_id_was_neg_1 := never_unify_le & [].
+be_id_was_neg_subj_1 := never_unify_le & [].
+be_id_was_subj := never_unify_le & [].
+be_id_were := never_unify_le & [].
+be_id_were_neg_1 := never_unify_le & [].
+be_id_were_neg_subj_1 := never_unify_le & [].
+be_id_were_subj := never_unify_le & [].
+be_inv_are_cx := never_unify_le & [].
+be_it_cop_been := never_unify_le & [].
+be_it_cop_being := never_unify_le & [].
+be_it_cop_was := never_unify_le & [].
+be_it_cop_was_subj := never_unify_le & [].
+by_pass_p := never_unify_le & [].
+case_n1 := never_unify_le & [].
+case_n2 := never_unify_le & [].
+case_v1 := never_unify_le & [].
+case_v2 := never_unify_le & [].
+did1_neg_1 := never_unify_le & [].
+do1_pos := never_unify_le & [].
+does1_pos := never_unify_le & [].
+do1_neg_1 := never_unify_le & [].
+does1_neg_1 := never_unify_le & [].
+did1_neg_1 := never_unify_le & [].
+either_adv1 := never_unify_le & [].
+for_c := never_unify_le & [].
+for_nbar_p := never_unify_le & [].
+for_prtcl := never_unify_le & [].
+had_aux := never_unify_le & [].
+had_aux_subj := never_unify_le & [].
+had_aux_cx := never_unify_le & [].
+has_aux := never_unify_le & [].
+hasnt_aux_1 := never_unify_le & [].
+have_aux_prp := never_unify_le & [].
+have_bse_aux := never_unify_le & [].
+have_fin_aux := never_unify_le & [].
+have_fin_aux_neg_1 := never_unify_le & [].
+however_adv2 := never_unify_le & [].
+i_e_p1 := never_unify_le & [].
+i_e_p2 := never_unify_le & [].
+i_e_p3 := never_unify_le & [].
+i_e_p4 := never_unify_le & [].
+i_e_p5 := never_unify_le & [].
+i_e_p6 := never_unify_le & [].
+i_e_p7 := never_unify_le & [].
+it := never_unify_le & [].
+itself := never_unify_le & [].
+like_c := never_unify_le & [].
+medium_n1 := never_unify_le & [].
+moreover_1 := never_unify_le & [].
+moreover_root_post := never_unify_le & [].
+not := never_unify_le & [].
+not_cp := never_unify_le & [].
+not_mrk := never_unify_le & [].
+not_prdp := never_unify_le & [].
+number_sign_av := never_unify_le & [].
+of_nbar_p := never_unify_le & [].
+or_root_post := never_unify_le & [].
+provided_that_subord2 := never_unify_le & [].
+that_c_subj := never_unify_le & [].
+the_case_a1 := never_unify_le & [].
+themselves := never_unify_le & [].
+themselves_adv := never_unify_le & [].
+then_adv2 := never_unify_le & [].
+then_adv4 := never_unify_le & [].
+then_amod_adv1 := never_unify_le & [].
+then_disc_post := never_unify_le & [].
+will_aux_inv := never_unify_le & [].
+will_aux_neg_1 := never_unify_le & [].
+will_aux_pos := never_unify_le & [].
+would_aux_pos_cx := never_unify_le & [].
+
+a_period_np1 := n_-_pn-neut_le &
+ [ ORTH < "|a|" >,
+   SYNSEM [ LOCAL.CAT.HEAD.CASE real_case,
+	    LKEYS.KEYREL.CARG "A",
+            PHON.ONSET voc ] ].
+
+b_lower_np1 := n_-_pn-neut_le &
+ [ ORTH < "|b|" >,
+   SYNSEM [ LOCAL.CAT.HEAD.CASE real_case,
+	    LKEYS.KEYREL.CARG "B",
+            PHON.ONSET con ] ].
+
+c_lower_np1 := n_-_pn-neut_le &
+ [ ORTH < "|c|" >,
+   SYNSEM [ LOCAL [ AGR.PNG.PN 3s,
+		    CAT.HEAD.CASE real_case ],
+            LKEYS.KEYREL.CARG "C",
+            PHON.ONSET con ] ].
+
+d_lower_np1 := n_-_pn-neut_le &
+ [ ORTH < "|d|" >,
+   SYNSEM [ LOCAL.CAT.HEAD.CASE real_case,
+	    LKEYS.KEYREL.CARG "D",
+            PHON.ONSET con ] ].
+
+e_lower_np1 := n_-_pn-neut_le &
+ [ ORTH < "|e|" >,
+   SYNSEM [ LOCAL.CAT.HEAD.CASE real_case,
+	    LKEYS.KEYREL.CARG "E",
+            PHON.ONSET voc ] ].
+
+f_lower_np1 := n_-_pn-neut_le &
+ [ ORTH < "|f|" >,
+   SYNSEM [ LOCAL.CAT.HEAD.CASE real_case,
+	    LKEYS.KEYREL.CARG "F",
+            PHON.ONSET voc ] ].
+
+a_proper_rp_np1 := n_-_pn-neut_le &
+ [ ORTH < "|a|)" >,
+   SYNSEM [ LOCAL.CAT.HEAD.CASE no_case,
+	    LKEYS.KEYREL.CARG "A",
+            PHON.ONSET voc ] ].
+
+b_lower_rp_np1 := n_-_pn-neut_le &
+ [ ORTH < "|b|)" >,
+   SYNSEM [ LOCAL.CAT.HEAD.CASE no_case,
+	    LKEYS.KEYREL.CARG "B",
+            PHON.ONSET con ] ].
+
+c_lower_rp_np1 := n_-_pn-neut_le &
+ [ ORTH < "|c|)" >,
+   SYNSEM [ LOCAL [ CAT.HEAD.CASE no_case,
+		    AGR.PNG.PN 3s ],
+            LKEYS.KEYREL.CARG "C",
+            PHON.ONSET con ] ].
+
+d_lower_rp_np1 := n_-_pn-neut_le &
+ [ ORTH < "|d|)" >,
+   SYNSEM [ LOCAL.CAT.HEAD.CASE no_case,
+	    LKEYS.KEYREL.CARG "D",
+            PHON.ONSET con ] ].
+
+e_lower_rp_np1 := n_-_pn-neut_le &
+ [ ORTH < "|e|)" >,
+   SYNSEM [ LOCAL.CAT.HEAD.CASE no_case,
+	    LKEYS.KEYREL.CARG "E",
+            PHON.ONSET voc ] ].
+
+f_lower_rp_np1 := n_-_pn-neut_le &
+ [ ORTH < "|f|)" >,
+   SYNSEM [ LOCAL.CAT.HEAD.CASE no_case,
+	    LKEYS.KEYREL.CARG "F",
+            PHON.ONSET voc ] ].
+
+also_adv1 := av_-_i-vp-x-only_le &
+ [ ORTH < "also" >,
+   SYNSEM [ LKEYS.KEYREL.PRED "_also_a_1_rel",
+            PHON.ONSET voc ] ].
+
+be_c_are_neg_7 := v_prd_are-n_le &
+ [ ORTH < "are", "not" >,
+   SYNSEM.PHON.ONSET voc ].
+
+be_c_is_neg_1 := v_prd_is-n_le &
+ [ ORTH < "isn't" >,
+   SYNSEM [ LOCAL.CAT.VAL.SUBJ.FIRST.--SIND nonconj_ref-ind,
+            PHON.ONSET voc ] ].
+
+be_c_is_neg_6 := v_prd_is-n_le &
+ [ ORTH < "is", "not" >,
+   SYNSEM [ LOCAL.CAT.VAL.SUBJ.FIRST.--SIND nonconj_ref-ind,
+            PHON.ONSET voc ] ].
+
+be_c_is_neg_7 := v_prd_is-n_le &
+ [ ORTH < "'s", "not" >,
+   SYNSEM [ LOCAL.CAT.VAL.SUBJ.FIRST [ --SIND nonconj_ref-ind,
+                                       --MIN pron_rel,
+				       LEX + ],
+            MODIFD.LPERIPH +,
+            PHON.ONSET voc ] ].
+
+be_c_is_cx_2 := v_prd_is-cx_le &
+ [ ORTH < "'s" >,
+   SYNSEM [ LOCAL.CAT.VAL.SUBJ.FIRST [ LOCAL [ CAT.HEAD partn &
+							[ MINORS.MIN pron_rel ],
+					      CONT.HOOK.INDEX non_conj_sement ],
+				       LEX +,
+				       MODIFD notmod ],
+            MODIFD.LPERIPH +,
+	    PHON.ONSET con ] ].
+
+be_id_is_cx_2 := v_np_is-cx_le &
+ [ ORTH < "'s" >,
+   SYNSEM [ LOCAL.CAT.VAL [ SUBJ.FIRST [ LOCAL [ CAT.HEAD partn &
+							[ MINORS.MIN pron_rel ],
+					       CONT.HOOK.INDEX nonconj_ref-ind],
+					 LEX +,
+					 MODIFD notmod ],
+			    COMPS.FIRST.--SIND.PNG.PN 3s ],
+            MODIFD.LPERIPH +,
+	    PHON.ONSET con ] ].
+
+between := p_np_i_le &
+ [ ORTH < "between" >,
+   SYNSEM [ LOCAL.CAT.VAL.COMPS.FIRST.LOCAL.CONJ.LCHEAD 
+                                                    either_or_neither_or_cnil,
+            LKEYS.KEYREL.PRED _between_p_rel,
+            PHON.ONSET con ] ].
+
+in_case := p_cp_s_le &
+ [ ORTH < "in", "case" >,
+   SYNSEM [ LOCAL.CAT [ POSTHD +,
+			HEAD.MOD < [ PUNCT.RPUNCT no_punct ] > ],
+            LKEYS.KEYREL.PRED "_in+case_x_rel",
+            PHON.ONSET voc ] ].
+
+be_id_are := v_np_are_le &
+ [ ORTH < "are" >,
+   SYNSEM [ LOCAL.CAT.VAL [ SUBJ.FIRST.LOCAL.AGR.PNG.PN #pn,
+                            COMPS.FIRST.LOCAL.AGR.PNG.PN #pn ],
+	    PHON.ONSET voc ] ].
+
+be_id_are_neg_1 := v_np_are-n_le &
+ [ ORTH < "aren't" >,
+   SYNSEM [ LOCAL.CAT.VAL [ SUBJ.FIRST.LOCAL.AGR.PNG.PN #pn,
+                            COMPS.FIRST.LOCAL.AGR.PNG.PN #pn ],
+            PHON.ONSET voc ] ].
+
+be_id_are_neg_6 := v_np_are-n_le &
+ [ ORTH < "are", "not" >,
+   SYNSEM [ LOCAL.CAT.VAL [ SUBJ.FIRST.LOCAL.AGR.PNG.PN #pn,
+                            COMPS.FIRST.LOCAL.AGR.PNG.PN #pn ],
+            PHON.ONSET voc ] ].
+
+be_id_is := v_np_is_le &
+ [ ORTH < "is" >,
+   SYNSEM [ LOCAL.CAT.VAL [ SUBJ.FIRST.LOCAL.AGR.PNG.PN #pn,
+                            COMPS.FIRST.LOCAL.AGR.PNG.PN #pn ],
+	    PHON.ONSET voc ] ].
+
+be_id_is_cx := v_np_is-cx_le &
+ [ ORTH < "s" >,
+   SYNSEM [ LOCAL.CAT.VAL [ SUBJ.FIRST.LOCAL.AGR.PNG.PN #pn,
+                            COMPS.FIRST.LOCAL.AGR.PNG.PN #pn ],
+	    PHON.ONSET voc ] ].
+
+be_id_is_neg_1 := v_np_is-n_le &
+ [ ORTH < "isn't" >,
+   SYNSEM [ LOCAL.CAT.VAL [ SUBJ.FIRST [ LOCAL.AGR.PNG.PN #pn,
+                                         --SIND nonconj_ref-ind ],
+                            COMPS.FIRST.LOCAL.AGR.PNG.PN #pn ],
+	    PHON.ONSET voc ] ].
+
+be_id_is_neg_6 := v_np_is-n_le &
+ [ ORTH < "is", "not" >,
+   SYNSEM [ LOCAL.CAT.VAL [ SUBJ.FIRST [ LOCAL.AGR.PNG.PN #pn,
+                                         --SIND nonconj_ref-ind ],
+                            COMPS.FIRST.LOCAL.AGR.PNG.PN #pn ],
+	    PHON.ONSET voc ] ].
+
+be_id_is_neg_7 := v_np_is-n_le &
+ [ ORTH < "'s", "not" >,
+   SYNSEM [ LOCAL.CAT.VAL [ SUBJ.FIRST [ LOCAL.AGR.PNG.PN #pn,
+                                         --SIND nonconj_ref-ind,
+					 --MIN pron_rel,
+					 LEX + ],
+                            COMPS.FIRST.LOCAL.AGR.PNG.PN #pn ],
+            MODIFD.LPERIPH +,
+	    PHON.ONSET voc ] ].
+
+fact_n2 := n_cp_c-optc_le &
+ [ ORTH < "fact" >,
+   SYNSEM [ LOCAL.CAT.VAL.COMPS.FIRST.LOCAL.CAT.HEAD comp & [ CASE nom ],
+            LKEYS.KEYREL.PRED "_fact_n_1_rel",
+            PHON.ONSET con ] ].
+
+#|
+if_subconj_unspec := p_cp_s-unsp_le &
+ [ ORTH < "if" >,
+   SYNSEM 
+    [ LOCAL.CAT [ POSTHD -,
+		  HEAD.MOD < [ LOCAL.CAT.MC +,
+			       MODIFD notmod_or_rmod ] >,
+		  VAL.COMPS < [ LOCAL [ CAT.HEAD.MINORS.ALTMIN non_ellipt_rel,
+					CONT.HOOK.XARG.PT notpro ] ] >],
+      LKEYS.KEYREL.PRED "_if_x_then_rel",
+      PHON.ONSET voc ] ].
+|#
+if_subconj_unspec := p_cp_s-unsp_le &
+ [ ORTH < "if" >,
+   SYNSEM 
+    [ LOCAL.CAT [ POSTHD -,
+		  VAL.COMPS < [ LOCAL [ CAT.HEAD.MINORS.ALTMIN non_ellipt_rel,
+					CONT.HOOK.XARG.PT notpro ] ] >],
+      LKEYS.KEYREL.PRED "_if_x_then_rel",
+      PHON.ONSET voc ] ].
+
+if_subconj_anaph := p_cp_s-unsp_le &
+ [ ORTH < "if" >,
+   SYNSEM 
+    [ LOCAL.CAT [ POSTHD -,
+		  VAL.COMPS < [ LOCAL [ CAT.HEAD.MINORS.ALTMIN non_ellipt_rel,
+					CONT.HOOK.XARG.PT std ]] >],
+      MODIFD.LPERIPH -,
+      LKEYS.KEYREL.PRED "_if_x_then_rel",
+      PHON.ONSET voc ] ].
+
+if_subconj_unspec_post := p_cp_s-unsp_le &
+ [ ORTH < "if" >,
+   SYNSEM 
+    [ LOCAL.CAT [ POSTHD +,
+		  HEAD.MOD < [ MODIFD notmod_or_rmod,
+			       LOCAL [ CAT.HEAD.MINORS.ALTMIN non_ellipt_rel,
+				       CONT.HOOK.XARG.PT notpro ] ] > ],
+      LKEYS.KEYREL.PRED "_if_x_then_rel",
+      PHON.ONSET voc ] ].
+
+if_and_only_if_subconj := p_cp_s-post_le &
+ [ ORTH < "if", "and", "only", "if" >,
+   SYNSEM [ LKEYS.KEYREL.PRED "_if+and+only+if_x_1_rel",
+	    LOCAL.CAT.HEAD.MOD < [ PUNCT.RPUNCT no_punct ] >,
+            PHON.ONSET voc ] ].
+
+nor_conj := c_xp_nor_le &
+ [ ORTH < "nor" >,
+   SYNSEM [ LOCAL [ CONJ lex-conj & [ CHEAD neither ],
+                    CAT.VAL.COMPS.FIRST.LOCAL.CAT.MC na ],
+            PHON.ONSET con ] ].
+
+of_poss := p_np_i-nm-poss_le &
+ [ ORTH < "of" >,
+   SYNSEM [ LOCAL.CAT.HEAD.MINORS.NORM no_rel,
+            LKEYS.KEYREL.PRED _of_p_rel,
+            PHON.ONSET voc ] ].
+
+only_if_subconj_1 := p_cp_s-rev_le &
+ [ ORTH < "only", "if" >,
+   SYNSEM [ LKEYS.KEYREL.PRED "_only+if_x_rel",
+            PHON.ONSET voc ] ].
+
+provided_subord := p_cp_s-unsp_le &
+ [ ORTH < "provided" >,
+   SYNSEM 
+    [ LOCAL.CAT [ POSTHD +,
+		  HEAD.MOD < [ MODIFD notmod_or_rmod,
+			       LOCAL [ CAT.HEAD.MINORS.ALTMIN non_ellipt_rel,
+				       CONT.HOOK.XARG.PT notpro ] ] > ],
+      LKEYS.KEYREL.PRED "_provided_x_rel",
+      PHON.ONSET con ] ].
+
+provided_that_subord := p_cp_s-unsp_le &
+ [ ORTH < "provided", "that" >,
+   SYNSEM 
+    [ LOCAL.CAT [ POSTHD +,
+		  HEAD.MOD < [ MODIFD notmod_or_rmod,
+			       LOCAL [ CAT.HEAD.MINORS.ALTMIN non_ellipt_rel,
+				       CONT.HOOK.XARG.PT notpro ] ] > ],
+      LKEYS.KEYREL.PRED "_provided_x_rel",
+      PHON.ONSET con ] ].
+
+shape_n1 := n_-_mc-ed_le &
+ [ ORTH < "shape" >,
+   SYNSEM [ LOCAL.AGR.PNG.PN 3s,
+	    LKEYS.KEYREL.PRED "_shape_n_1_rel",
+            PHON.ONSET con ] ].
+
+shape_pl_n1 := n_-_c-pl-ifl_le &
+ [ ORTH < "shape" >,
+   SYNSEM [ LKEYS.KEYREL.PRED "_shape_n_1_rel",
+            PHON.ONSET con ] ].
+
+size_n1 := n_-_mc-ed_le &
+ [ ORTH < "size" >,
+   SYNSEM [ LOCAL.AGR.PNG.PN 3s,
+	    LKEYS.KEYREL.PRED "_size_n_1_rel",
+            PHON.ONSET con ] ].
+
+size_pl_n1 := n_-_c-pl-ifl_le &
+ [ ORTH < "size" >,
+   SYNSEM [ LKEYS.KEYREL.PRED "_size_n_1_rel",
+            PHON.ONSET con ] ].
+
+#|
+;; We have two entries for "the case": one for the EP introduced by paraphrase
+;; rule as a variant of negation for atomic clauses, and the other for the
+;; EP introduced during MRS 'inflation' for negated conjoined clauses, where
+;; no alternative realization is possible for the negation.  We need to be
+;; able to delete this latter if other paraphrase rules conspire to change
+;; a clause conjunction into a single clause, as with "B is not a large cube" or
+;; "A and B are not cubes".  Using two different PRED values avoids the loop
+;; in paraphrase rule application where one rule adds and another deletes.
+;;
+the_case_a1 := aj_pp-cp_i-it-brdg_le &
+ [ ORTH < "the", "case" >,
+   SYNSEM [ LKEYS.KEYREL.PRED "_the+case_a_1_rel",
+            PHON.ONSET con ] ].
+
+the_case_a2 := aj_pp-cp_i-it-brdg_le &
+ [ ORTH < "the", "case" >,
+   SYNSEM [ LKEYS.KEYREL.PRED "_the+case_a_2_rel",
+            PHON.ONSET con ] ].
+|#
+
+;; Block comma attaching, to avoid "if B is large, then, C is small"
+then_adv3 := nonrs-nab &
+ [ ORTH < "then" >,
+   SYNSEM scopal_s_adverb_synsem &
+          [ LOCAL [ CAT [ POSTHD -, 
+	                  HEAD.MOD < [ LOCAL.CAT.MC bool ] > ],
+	            CONJ cnil ],
+	    PUNCT.RPUNCT comma_punct,
+            LKEYS.KEYREL.PRED "_then_a_1_rel",
+            PHON.ONSET con ] ].
+
+unless := p_cp_s-unsp_le &
+ [ ORTH < "unless" >,
+   SYNSEM [ LOCAL.CAT.POSTHD +,
+            LKEYS.KEYREL.PRED "_unless_x_rel",
+            PHON.ONSET voc ] ].
+
+both_adv1 := av_-_i-vp-x_le &
+ [ ORTH < "both" >,
+   SYNSEM 
+   [ LOCAL.CAT.HEAD.MOD.FIRST.LOCAL [ CAT.VAL.SUBJ.FIRST.LOCAL.CONJ.LCHEAD cnil,
+				      CONT.HOOK.INDEX non_conj_event ],
+      LKEYS.KEYREL.PRED "_both_a_1_rel",
+      PHON.ONSET con ] ].
+
+;; Avoid default COMPS..CASE non_nom and instead require no_case to ensure
+;; that parenthesized variants of the named entities appear as its complement,
+;; as in "... and it (i.e., C) is large"
+;;
+i_e_p8 := basic_prep_word &
+ [ ORTH < "(i.e.," >,
+   SYNSEM trans_prep_synsem &
+	  [ LOCAL [ CAT.VAL.COMPS < synsem & 
+                                 [ LOCAL [ CAT nomp_cat_min &
+					       [ HEAD.CASE no_case ],
+                                           CONT.HOOK.INDEX non_expl-ind,
+                                           CONJ cnil ],
+				   OPT - ] >,
+		    CONT.HOOK.INDEX.E.TENSE untensed ],
+	    LKEYS.KEYREL.PRED _i+e_p_rel,
+            PHON.ONSET voc ] ].
+
+;; Hack entries for "it is (not) the case (that)"
+;;
+not_the_case_v1 := v_cp_notthecase_le &
+ [ ORTH < "it", "is", "not", "the", "case" >,
+   SYNSEM.PHON.ONSET voc ].
+
+not_the_case_v2 := v_cp_notthecase_le &
+ [ ORTH < "it", "'s", "not", "the", "case" >,
+   SYNSEM.PHON.ONSET voc ].
+
+not_the_case_v3 := v_cp_notthecase_le &
+ [ ORTH < "it", "isn't", "the", "case" >,
+   SYNSEM.PHON.ONSET voc ].
+
+the_case_v1 := v_cp_thecase_le &
+ [ ORTH < "it", "is", "the", "case" >,
+   SYNSEM.PHON.ONSET voc ].
+
+the_case_v2 := v_cp_thecase_le &
+ [ ORTH < "it", "'s", "the", "case" >,
+   SYNSEM.PHON.ONSET voc ].
+
+;; To block |that S and S| in order to avoid ambiguity in generation,
+;; split into two entries, one that takes non-conjoined Ss and one that allows
+;; its complement S to have either conjoined or non-conjoined VPs.
+;; Note that we distinguish |we arise and we arrive| from |we arise and arrive|
+;; via the hack that conjoined VPs do not impose constraint on SPEC, while
+;; conjoined Ss make SPEC < >.
+;; This currently unwantedly also blocks generation of |that either S or S|,
+;; which is unambiguous in |B and it is the case that either D or D|, but
+;; let's leave it for now.  FIX later?
+;;
+that_c := cm_np-vp_that_le &
+ [ ORTH < "that" >,
+   SYNSEM [ LOCAL.CAT.VAL.COMPS < [ --SIND non_conj_event ] >,
+	    PHON.ONSET con ] ].
+
+that_c_conj := cm_np-vp_that_le &
+ [ ORTH < "that" >,
+   SYNSEM [ LOCAL.CAT.VAL.COMPS < [ --SIND conj_event,
+				    LOCAL.CAT.VAL.SPEC *cons* ] >,
+	    PHON.ONSET con ] ].
+
+;; DPF 2015-06-12 - We have to split these again, into the reversed and
+;; non-reversed variants, so that the generator can produce the specificity
+;; required by the outputs of coord-reversal paraphrase rules that use the 
+;; specialization of conj_rel types to block self-feeding when reversing.
+;;
+and_conj := c_xp_and-nev_le &
+ [ ORTH < "and" >,
+   SYNSEM.LKEYS.KEYREL.PRED _and_c_nopr_nrev_rel ].
+
+and_conj_rev := c_xp_and-nev_le &
+ [ ORTH < "and" >,
+   SYNSEM.LKEYS.KEYREL.PRED _and_c_nopr_rev_rel ].
+
+and_conj_event := c_xp_and-ev_le &
+ [ ORTH < "and" >,
+   SYNSEM.LKEYS.KEYREL.PRED _and_c_nopr_nrev_rel ].
+
+and_conj_rev_event := c_xp_and-ev_le &
+ [ ORTH < "and" >,
+   SYNSEM.LKEYS.KEYREL.PRED _and_c_nopr_rev_rel ].
+
+and_conj_paired := c_xp_and-pr_le &
+ [ ORTH < "and" >,
+   SYNSEM.LKEYS.KEYREL.PRED _and_c_pr_nrev_rel ].
+
+and_conj_paired_rev := c_xp_and-pr_le &
+ [ ORTH < "and" >,
+   SYNSEM.LKEYS.KEYREL.PRED _and_c_pr_rev_rel ].
+
+or_conj_1 := c_xp_or-nev_le &
+ [ ORTH < "or" >,
+   SYNSEM.LKEYS.KEYREL.PRED _or_c_nopr_nrev_rel ].
+
+or_conj_1_rev := c_xp_or-nev_le &
+ [ ORTH < "or" >,
+   SYNSEM.LKEYS.KEYREL.PRED _or_c_nopr_rev_rel ].
+
+or_conj_event := c_xp_or-ev_le &
+ [ ORTH < "or" >,
+   SYNSEM.LKEYS.KEYREL.PRED _or_c_nopr_nrev_rel ].
+
+or_conj_rev_event := c_xp_or-ev_le &
+ [ ORTH < "or" >,
+   SYNSEM.LKEYS.KEYREL.PRED _or_c_nopr_rev_rel ].
+
+or_conj_paired := c_xp_or-pr_le &
+ [ ORTH < "or" >,
+   SYNSEM.LKEYS.KEYREL.PRED _or_c_pr_nrev_rel ].
+
+or_conj_paired_rev := c_xp_or-pr_le &
+ [ ORTH < "or" >,
+   SYNSEM.LKEYS.KEYREL.PRED _or_c_pr_rev_rel ].
+
+nor_conj := c_xp_nor_le &
+ [ ORTH < "nor" >,
+   SYNSEM [ PHON.ONSET con,
+            LOCAL.CONJ.CHEAD neither,
+            LKEYS.KEYREL.PRED _nor_c_rel ] ].
+
+neither_conj := c_xp_neither-mrk_le &
+ [ ORTH < "neither" >,
+   SYNSEM [ PHON.ONSET con,
+            LOCAL.CAT.VAL.COMPS.FIRST.LOCAL.CAT [ HEAD non_noun,
+	                                          VAL.SPR *ocons* ] ] ].
+neither_conj_x := c_xp_neither-mrk_le &
+ [ ORTH < "neither" >,
+   SYNSEM [ PHON.ONSET con,
+            LOCAL.CAT.VAL.COMPS.FIRST.LOCAL.CAT [ HEAD basic_noun,
+	                                          VAL.SPR *olist* ] ] ].
+;; Block |both both ...| and |both either ...|
+;;
+both_conj := c_xp_both-mrk_le &
+ [ ORTH < "both" >,
+   SYNSEM [ LOCAL.CAT.VAL.COMPS.FIRST.--SIND nonconj_indiv,
+            PHON.ONSET con ] ].
+
+;; For |both that S and that S|
+;;
+both_cp_conj := c_xp_both-cp_le &
+ [ ORTH < "both" >,
+   SYNSEM [ LOCAL.CAT.VAL.COMPS.FIRST.--SIND nonconj_indiv,
+            PHON.ONSET con ] ].
+
+;; Entries for names of paraphrase rules.
+
+ifnot-to-unless-gpr := x_-_prule_le &
+ [ ORTH < "ifnot-to-unless-gpr" >,
+   SYNSEM [ --SIND.PORD pr002s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr002 ] ].
+
+unless-the-case-gpr := x_-_prule_le &
+ [ ORTH < "unless-the-case-gpr" >,
+   SYNSEM [ --SIND.PORD pr003s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr003 ] ].
+
+and-not-case-but-op-gpr := x_-_prule_le &
+ [ ORTH < "and-not-case-but-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr004s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr004 ] ].
+
+same-to-and-loc-op-gpr := x_-_prule_le &
+ [ ORTH < "same-to-and-loc-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr005s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr005 ] ].
+
+same-to-and-size-op-gpr := x_-_prule_le &
+ [ ORTH < "same-to-and-size-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr006s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr006 ] ].
+
+coord-subj-comp-op-gpr := x_-_prule_le &
+ [ ORTH < "coord-subj-comp-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr007s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr007 ] ].
+
+coord-subj-three-op-gpr := x_-_prule_le &
+ [ ORTH < "coord-subj-three-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr008s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr008 ] ].
+
+coord-subj-two-neg-op-gpr := x_-_prule_le &
+ [ ORTH < "coord-subj-two-neg-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr009s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr009 ] ].
+
+coord-subj-two-pos-op-gpr := x_-_prule_le &
+ [ ORTH < "coord-subj-two-pos-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr010s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr010 ] ].
+
+coord-subj-two-noprop-neg-op-gpr := x_-_prule_le &
+ [ ORTH < "coord-subj-two-noprop-neg-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr011s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr011 ] ].
+
+coord-subj-two-noprop-op-gpr := x_-_prule_le &
+ [ ORTH < "coord-subj-two-noprop-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr012s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr012 ] ].
+
+coord-subj-one-neg-op-gpr := x_-_prule_le &
+ [ ORTH < "coord-subj-one-neg-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr013s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr013 ] ].
+
+coord-subj-one-pos-op-gpr := x_-_prule_le &
+ [ ORTH < "coord-subj-one-pos-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr014s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr014 ] ].
+
+coord-subj-comp-nary-op-gpr := x_-_prule_le &
+ [ ORTH < "coord-subj-comp-nary-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr015s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr015 ] ].
+
+coord-subj-three-nary-op-gpr := x_-_prule_le &
+ [ ORTH < "coord-subj-three-nary-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr016s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr016 ] ].
+
+coord-subj-two-neg-nary-op-gpr := x_-_prule_le &
+ [ ORTH < "coord-subj-two-neg-nary-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr017s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr017 ] ].
+
+coord-subj-two-pos-nary-op-gpr := x_-_prule_le &
+ [ ORTH < "coord-subj-two-pos-nary-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr018s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr018 ] ].
+
+coord-subj-two-noprop-neg-nary-op-gpr := x_-_prule_le &
+ [ ORTH < "coord-subj-two-noprop-neg-nary-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr019s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr019 ] ].
+
+coord-subj-two-noprop-nary-op-gpr := x_-_prule_le &
+ [ ORTH < "coord-subj-two-noprop-nary-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr020s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr020 ] ].
+
+coord-subj-one-neg-nary-op-gpr := x_-_prule_le &
+ [ ORTH < "coord-subj-one-neg-nary-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr021s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr021 ] ].
+
+coord-subj-one-pos-nary-op-gpr := x_-_prule_le &
+ [ ORTH < "coord-subj-one-pos-nary-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr022s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr022 ] ].
+
+and-neg-but-op-gpr := x_-_prule_le &
+ [ ORTH < "and-neg-but-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr023s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr023 ] ].
+
+notthecase-op-gpr := x_-_prule_le &
+ [ ORTH < "notthecase-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr024s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr024 ] ].
+
+adj-predn-gpr := x_-_prule_le &
+ [ ORTH < "adj-predn-gpr" >,
+   SYNSEM [ --SIND.PORD pr025s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr025 ] ].
+
+predn-adj-gpr := x_-_prule_le &
+ [ ORTH < "predn-adj-gpr" >,
+   SYNSEM [ --SIND.PORD pr026s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr026 ] ].
+
+coord-vp-two-op-gpr := x_-_prule_le &
+ [ ORTH < "coord-vp-two-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr027s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr027 ] ].
+
+coord-vp-one-op-gpr := x_-_prule_le &
+ [ ORTH < "coord-vp-one-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr028s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr028 ] ].
+
+common-vp-comp-op-gpr := x_-_prule_le &
+ [ ORTH < "common-vp-comp-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr029s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr029 ] ].
+
+common-vp-same-n-op-gpr := x_-_prule_le &
+ [ ORTH < "common-vp-same-n-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr030s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr030 ] ].
+
+common-vp-dir-op-gpr := x_-_prule_le &
+ [ ORTH < "common-vp-dir-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr031s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr031 ] ].
+
+common-vp-loc-op-gpr := x_-_prule_le &
+ [ ORTH < "common-vp-loc-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr032s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr032 ] ].
+
+common-vp-loc-neg-op-gpr := x_-_prule_le &
+ [ ORTH < "common-vp-loc-neg-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr033s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr033 ] ].
+
+common-vp-threearg-op-gpr := x_-_prule_le &
+ [ ORTH < "common-vp-threearg-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr034s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr034 ] ].
+
+common-ppof-left-op-gpr := x_-_prule_le &
+ [ ORTH < "common-ppof-left-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr035s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr035 ] ].
+
+common-ppof-right-op-gpr := x_-_prule_le &
+ [ ORTH < "common-ppof-right-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr036s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr036 ] ].
+
+common-to-the-op-gpr := x_-_prule_le &
+ [ ORTH < "common-to-the-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr037s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr037 ] ].
+
+not-the-case-neg-nonconj-gpr := x_-_prule_le &
+ [ ORTH < "not-the-case-neg-nonconj-gpr" >,
+   SYNSEM [ --SIND.PORD pr038s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr038 ] ].
+
+not-the-case-neg-vpconj-gpr := x_-_prule_le &
+ [ ORTH < "not-the-case-neg-vpconj-gpr" >,
+   SYNSEM [ --SIND.PORD pr039s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr039 ] ].
+
+not-or-to-nor-op-gpr := x_-_prule_le &
+ [ ORTH < "not-or-to-nor-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr040s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr040 ] ].
+
+
+not-nom-or-to-nor-one-op-gpr := x_-_prule_le &
+ [ ORTH < "not-nom-or-to-nor-one-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr041s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr041 ] ].
+
+not-nom-or-to-nor-comp-op-gpr := x_-_prule_le &
+ [ ORTH < "not-nom-or-to-nor-comp-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr042s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr042 ] ].
+
+not-nom-or-to-nor-two-op-gpr := x_-_prule_le &
+ [ ORTH < "not-nom-or-to-nor-two-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr043s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr043 ] ].
+
+common-pred-op-gpr := x_-_prule_le &
+ [ ORTH < "common-pred-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr044s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr044 ] ].
+
+ifthen-to-onlyif-gpr := x_-_prule_le &
+ [ ORTH < "ifthen-to-onlyif-gpr" >,
+   SYNSEM [ --SIND.PORD pr045s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr045 ] ].
+
+conj-pro-subj-unamb-gpr := x_-_prule_le &
+ [ ORTH < "conj-pro-subj-unamb-gpr" >,
+   SYNSEM [ --SIND.PORD pr046s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr046 ] ].
+
+conj-pro-subj-ambig-gpr := x_-_prule_le &
+ [ ORTH < "conj-pro-subj-ambig-gpr" >,
+   SYNSEM [ --SIND.PORD pr047s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr047 ] ].
+
+cond-pro-subj-gpr := x_-_prule_le &
+ [ ORTH < "cond-pro-subj-gpr" >,
+   SYNSEM [ --SIND.PORD pr048s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr048 ] ].
+
+cond-pro-subj-ambig-gpr := x_-_prule_le &
+ [ ORTH < "cond-pro-subj-ambig-gpr" >,
+   SYNSEM [ --SIND.PORD pr049s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr049 ] ].
+
+cond-pro-subj-embed-cons-gpr := x_-_prule_le &
+ [ ORTH < "cond-pro-subj-embed-cons-gpr" >,
+   SYNSEM [ --SIND.PORD pr050s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr050 ] ].
+
+cond-pro-subj-embed-cons-neg-gpr := x_-_prule_le &
+ [ ORTH < "cond-pro-subj-embed-cons-neg-gpr" >,
+   SYNSEM [ --SIND.PORD pr051s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr051 ] ].
+
+cond-pro-subj-embed-ant-gpr := x_-_prule_le &
+ [ ORTH < "cond-pro-subj-embed-ant-gpr" >,
+   SYNSEM [ --SIND.PORD pr052s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr052 ] ].
+
+cond-pro-subj-embed-ant-neg-gpr := x_-_prule_le &
+ [ ORTH < "cond-pro-subj-embed-ant-neg-gpr" >,
+   SYNSEM [ --SIND.PORD pr053s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr053 ] ].
+
+unless-pro-subj-gpr := x_-_prule_le &
+ [ ORTH < "unless-pro-subj-gpr" >,
+   SYNSEM [ --SIND.PORD pr054s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr054 ] ].
+
+unless-pro-subj-ambig-gpr := x_-_prule_le &
+ [ ORTH < "unless-pro-subj-ambig-gpr" >,
+   SYNSEM [ --SIND.PORD pr055s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr055 ] ].
+
+onlyif-pro-subj-gpr := x_-_prule_le &
+ [ ORTH < "onlyif-pro-subj-gpr" >,
+   SYNSEM [ --SIND.PORD pr056s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr056 ] ].
+
+iff-pro-subj-gpr := x_-_prule_le &
+ [ ORTH < "iff-pro-subj-gpr" >,
+   SYNSEM [ --SIND.PORD pr057s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr057 ] ].
+
+iff-pro-subj-crdvp-gpr := x_-_prule_le &
+ [ ORTH < "iff-pro-subj-crdvp-gpr" >,
+   SYNSEM [ --SIND.PORD pr058s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr058 ] ].
+
+vp-ellip-if-pos-one-gpr := x_-_prule_le &
+ [ ORTH < "vp-ellip-if-pos-one-gpr" >,
+   SYNSEM [ --SIND.PORD pr059s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr059 ] ].
+
+vp-ellip-if-pos-two-comp-gpr := x_-_prule_le &
+ [ ORTH < "vp-ellip-if-pos-two-comp-gpr" >,
+   SYNSEM [ --SIND.PORD pr060s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr060 ] ].
+
+vp-ellip-if-neg-one-gpr := x_-_prule_le &
+ [ ORTH < "vp-ellip-if-neg-one-gpr" >,
+   SYNSEM [ --SIND.PORD pr061s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr061 ] ].
+
+vp-ellip-if-pos-two-gpr := x_-_prule_le &
+ [ ORTH < "vp-ellip-if-pos-two-gpr" >,
+   SYNSEM [ --SIND.PORD pr062s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr062 ] ].
+
+vp-ellip-if-neg-two-gpr := x_-_prule_le &
+ [ ORTH < "vp-ellip-if-neg-two-gpr" >,
+   SYNSEM [ --SIND.PORD pr063s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr063 ] ].
+
+vp-ellip-iff-pos-one-gpr := x_-_prule_le &
+ [ ORTH < "vp-ellip-iff-pos-one-gpr" >,
+   SYNSEM [ --SIND.PORD pr064s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr064 ] ].
+
+vp-ellip-iff-pos-two-comp-gpr := x_-_prule_le &
+ [ ORTH < "vp-ellip-iff-pos-two-comp-gpr" >,
+   SYNSEM [ --SIND.PORD pr065s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr065 ] ].
+
+vp-ellip-iff-neg-one-gpr := x_-_prule_le &
+ [ ORTH < "vp-ellip-iff-neg-one-gpr" >,
+   SYNSEM [ --SIND.PORD pr066s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr066 ] ].
+
+vp-ellip-iff-pos-two-gpr := x_-_prule_le &
+ [ ORTH < "vp-ellip-iff-pos-two-gpr" >,
+   SYNSEM [ --SIND.PORD pr067s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr067 ] ].
+
+vp-ellip-iff-neg-two-gpr := x_-_prule_le &
+ [ ORTH < "vp-ellip-iff-neg-two-gpr" >,
+   SYNSEM [ --SIND.PORD pr068s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr068 ] ].
+
+vp-ellip-coord-pos-one-gpr := x_-_prule_le &
+ [ ORTH < "vp-ellip-coord-pos-one-gpr" >,
+   SYNSEM [ --SIND.PORD pr069s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr069 ] ].
+
+vp-ellip-coord-pos-two-gpr := x_-_prule_le &
+ [ ORTH < "vp-ellip-coord-pos-two-gpr" >,
+   SYNSEM [ --SIND.PORD pr070s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr070 ] ].
+
+vp-ellip-coord-pos-twoconj-gpr := x_-_prule_le &
+ [ ORTH < "vp-ellip-coord-pos-twoconj-gpr" >,
+   SYNSEM [ --SIND.PORD pr071s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr071 ] ].
+
+iff-to-justincase-gpr := x_-_prule_le &
+ [ ORTH < "iff-to-justincase-gpr" >,
+   SYNSEM [ --SIND.PORD pr072s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr072 ] ].
+
+iff-to-justincasefact-gpr := x_-_prule_le &
+ [ ORTH < "iff-to-justincasefact-gpr" >,
+   SYNSEM [ --SIND.PORD pr073s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr073 ] ].
+
+and-but-small-large-op-gpr := x_-_prule_le &
+ [ ORTH < "and-but-small-large-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr074s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr074 ] ].
+
+and-but-small-large-2-op-gpr := x_-_prule_le &
+ [ ORTH < "and-but-small-large-2-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr075s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr075 ] ].
+
+and-but-large-small-op-gpr := x_-_prule_le &
+ [ ORTH < "and-but-large-small-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr076s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr076 ] ].
+
+and-but-large-small-2-op-gpr := x_-_prule_le &
+ [ ORTH < "and-but-large-small-2-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr077s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr077 ] ].
+
+and-but-loc-op-gpr := x_-_prule_le &
+ [ ORTH < "and-but-loc-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr078s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr078 ] ].
+
+either-to-neither-gpr := x_-_prule_le &
+ [ ORTH < "either-to-neither-gpr" >,
+   SYNSEM [ --SIND.PORD pr079s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr079 ] ].
+
+either-to-neither-the-case-gpr := x_-_prule_le &
+ [ ORTH < "either-to-neither-the-case-gpr" >,
+   SYNSEM [ --SIND.PORD pr080s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr080 ] ].
+
+neither-part-op-gpr := x_-_prule_le &
+ [ ORTH < "neither-part-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr081s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr081 ] ].
+
+none-of-op-gpr := x_-_prule_le &
+ [ ORTH < "none-of-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr082s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr082 ] ].
+
+and-but-pos-op-gpr := x_-_prule_le &
+ [ ORTH < "and-but-pos-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr083s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr083 ] ].
+
+semicol-and-op-gpr := x_-_prule_le &
+ [ ORTH < "semicol-and-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr084s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr084 ] ].
+
+semicol-but-op-gpr := x_-_prule_le &
+ [ ORTH < "semicol-but-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr085s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr085 ] ].
+
+ifthen-to-provided-gpr := x_-_prule_le &
+ [ ORTH < "ifthen-to-provided-gpr" >,
+   SYNSEM [ --SIND.PORD pr086s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr086 ] ].
+
+also-adv-cond-onearg-gpr := x_-_prule_le &
+ [ ORTH < "also-adv-cond-onearg-gpr" >,
+   SYNSEM [ --SIND.PORD pr087s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr087 ] ].
+
+also-adv-cond-twoarg-comp-gpr := x_-_prule_le &
+ [ ORTH < "also-adv-cond-twoarg-comp-gpr" >,
+   SYNSEM [ --SIND.PORD pr088s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr088 ] ].
+
+also-adv-cond-twoarg-gpr := x_-_prule_le &
+ [ ORTH < "also-adv-cond-twoarg-gpr" >,
+   SYNSEM [ --SIND.PORD pr089s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr089 ] ].
+
+drop-then-opt-gpr := x_-_prule_le &
+ [ ORTH < "drop-then-opt-gpr" >,
+   SYNSEM [ --SIND.PORD pr090s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr090 ] ].
+
+drop-then-oblig-gpr := x_-_prule_le &
+ [ ORTH < "drop-then-oblig-gpr" >,
+   SYNSEM [ --SIND.PORD pr091s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr091 ] ].
+
+cond-pro-subj-rev-gpr := x_-_prule_le &
+ [ ORTH < "cond-pro-subj-rev-gpr" >,
+   SYNSEM [ --SIND.PORD pr092s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr092 ] ].
+
+cond-pro-subj-ambig-rev-gpr := x_-_prule_le &
+ [ ORTH < "cond-pro-subj-ambig-rev-gpr" >,
+   SYNSEM [ --SIND.PORD pr093s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr093 ] ].
+
+cond-pro-subj-rev-prov-gpr := x_-_prule_le &
+ [ ORTH < "cond-pro-subj-rev-prov-gpr" >,
+   SYNSEM [ --SIND.PORD pr094s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr094 ] ].
+
+cond-pro-subj-ambig-rev-prov-gpr := x_-_prule_le &
+ [ ORTH < "cond-pro-subj-ambig-rev-prov-gpr" >,
+   SYNSEM [ --SIND.PORD pr095s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr095 ] ].
+
+vp-ellip-if-pos-ante-one-gpr := x_-_prule_le &
+ [ ORTH < "vp-ellip-if-pos-ante-one-gpr" >,
+   SYNSEM [ --SIND.PORD pr096s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr096 ] ].
+
+vp-ellip-if-pos-ante-two-comp-gpr := x_-_prule_le &
+ [ ORTH < "vp-ellip-if-pos-ante-two-comp-gpr" >,
+   SYNSEM [ --SIND.PORD pr097s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr097 ] ].
+
+vp-ellip-if-pos-ante-two-gpr := x_-_prule_le &
+ [ ORTH < "vp-ellip-if-pos-ante-two-gpr" >,
+   SYNSEM [ --SIND.PORD pr098s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr098 ] ].
+
+one-of-set-two-gpr := x_-_prule_le &
+ [ ORTH < "one-of-set-two-gpr" >,
+   SYNSEM [ --SIND.PORD pr099s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr099 ] ].
+
+one-of-set-one-gpr := x_-_prule_le &
+ [ ORTH < "one-of-set-one-gpr" >,
+   SYNSEM [ --SIND.PORD pr100s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr100 ] ].
+
+conj-pro-coord-subj-and-gpr := x_-_prule_le &
+ [ ORTH < "conj-pro-coord-subj-and-gpr" >,
+   SYNSEM [ --SIND.PORD pr101s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr101 ] ].
+
+conj-pro-coord-subj-or-gpr := x_-_prule_le &
+ [ ORTH < "conj-pro-coord-subj-or-gpr" >,
+   SYNSEM [ --SIND.PORD pr102s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr102 ] ].
+
+onlyif-pro-coord-subj-and-gpr := x_-_prule_le &
+ [ ORTH < "onlyif-pro-coord-subj-and-gpr" >,
+   SYNSEM [ --SIND.PORD pr103s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr103 ] ].
+
+onlyif-pro-coord-subj-or-gpr := x_-_prule_le &
+ [ ORTH < "onlyif-pro-coord-subj-or-gpr" >,
+   SYNSEM [ --SIND.PORD pr104s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr104 ] ].
+
+iff-pro-coord-subj-and-gpr := x_-_prule_le &
+ [ ORTH < "iff-pro-coord-subj-and-gpr" >,
+   SYNSEM [ --SIND.PORD pr105s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr105 ] ].
+
+iff-pro-coord-subj-or-gpr := x_-_prule_le &
+ [ ORTH < "iff-pro-coord-subj-or-gpr" >,
+   SYNSEM [ --SIND.PORD pr106s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr106 ] ].
+
+coord-vp-prosub-two-op-gpr := x_-_prule_le &
+ [ ORTH < "coord-vp-prosub-two-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr107s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr107 ] ].
+
+coord-vp-prosub-one-op-gpr := x_-_prule_le &
+ [ ORTH < "coord-vp-prosub-one-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr108s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr108 ] ].
+
+common-dobj-onepred-op-gpr := x_-_prule_le &
+ [ ORTH < "common-dobj-onepred-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr109s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr109 ] ].
+
+common-dobj-twopred-op-gpr := x_-_prule_le &
+ [ ORTH < "common-dobj-twopred-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr110s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr110 ] ].
+
+common-dobj-onetwopred-op-gpr := x_-_prule_le &
+ [ ORTH < "common-dobj-onetwopred-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr111s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr111 ] ].
+
+common-dobj-twoonepred-op-gpr := x_-_prule_le &
+ [ ORTH < "common-dobj-twoonepred-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr112s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr112 ] ].
+
+common-noun-obj-op-gpr := x_-_prule_le &
+ [ ORTH < "common-noun-obj-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr113s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr113 ] ].
+
+cond-pro-coord-subj-and-gpr := x_-_prule_le &
+ [ ORTH < "cond-pro-coord-subj-and-gpr" >,
+   SYNSEM [ --SIND.PORD pr114s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr114 ] ].
+
+cond-pro-coord-subj-or-gpr := x_-_prule_le &
+ [ ORTH < "cond-pro-coord-subj-or-gpr" >,
+   SYNSEM [ --SIND.PORD pr115s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr115 ] ].
+
+cond-pro-coord-subj-coord-cq-and-gpr := x_-_prule_le &
+ [ ORTH < "cond-pro-coord-subj-coord-cq-and-gpr" >,
+   SYNSEM [ --SIND.PORD pr116s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr116 ] ].
+
+cond-pro-coord-subj-coord-cq-or-gpr := x_-_prule_le &
+ [ ORTH < "cond-pro-coord-subj-coord-cq-or-gpr" >,
+   SYNSEM [ --SIND.PORD pr117s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr117 ] ].
+
+both-adv-op-gpr := x_-_prule_le &
+ [ ORTH < "both-adv-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr118s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr118 ] ].
+
+also-adv-pro-op-gpr := x_-_prule_le &
+ [ ORTH < "also-adv-pro-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr119s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr119 ] ].
+
+also-adv-part-op-gpr := x_-_prule_le &
+ [ ORTH < "also-adv-part-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr120s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr120 ] ].
+
+either-adv-op-gpr := x_-_prule_le &
+ [ ORTH < "either-adv-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr121s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr121 ] ].
+
+part-pron-one-op-gpr := x_-_prule_le &
+ [ ORTH < "part-pron-one-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr122s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr122 ] ].
+
+part-pron-both-op-gpr := x_-_prule_le &
+ [ ORTH < "part-pron-both-op-gpr" >,
+   SYNSEM [ --SIND.PORD pr123s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr123 ] ].
+
+at-least-one-gpr := x_-_prule_le &
+ [ ORTH < "at-least-one-gpr" >,
+   SYNSEM [ --SIND.PORD pr124s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr124 ] ].
+
+paired-either-nrev-gpr := x_-_prule_le &
+ [ ORTH < "paired-either-nrev-gpr" >,
+   SYNSEM [ --SIND.PORD pr125s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr125 ] ].
+
+paired-either-rev-gpr := x_-_prule_le &
+ [ ORTH < "paired-either-rev-gpr" >,
+   SYNSEM [ --SIND.PORD pr138s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr138 ] ].
+
+paired-either-x-nrev-gpr := x_-_prule_le &
+ [ ORTH < "paired-either-x-nrev-gpr" >,
+   SYNSEM [ --SIND.PORD pr126s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr126 ] ].
+
+paired-either-x-rev-gpr := x_-_prule_le &
+ [ ORTH < "paired-either-x-rev-gpr" >,
+   SYNSEM [ --SIND.PORD pr140s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr140 ] ].
+
+paired-both-nrev-gpr := x_-_prule_le &
+ [ ORTH < "paired-both-nrev-gpr" >,
+   SYNSEM [ --SIND.PORD pr127s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr127 ] ].
+
+paired-both-rev-gpr := x_-_prule_le &
+ [ ORTH < "paired-both-rev-gpr" >,
+   SYNSEM [ --SIND.PORD pr139s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr139 ] ].
+
+paired-both-x-nrev-gpr := x_-_prule_le &
+ [ ORTH < "paired-both-x-nrev-gpr" >,
+   SYNSEM [ --SIND.PORD pr128s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr128 ] ].
+
+paired-both-x-rev-gpr := x_-_prule_le &
+ [ ORTH < "paired-both-x-rev-gpr" >,
+   SYNSEM [ --SIND.PORD pr141s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr141 ] ].
+
+paired-both-xs-nrev-gpr := x_-_prule_le &
+ [ ORTH < "paired-both-xs-nrev-gpr" >,
+   SYNSEM [ --SIND.PORD pr129s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr129 ] ].
+
+paired-both-xs-rev-gpr := x_-_prule_le &
+ [ ORTH < "paired-both-xs-rev-gpr" >,
+   SYNSEM [ --SIND.PORD pr142s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr142 ] ].
+
+paired-both-xn-nrev-gpr := x_-_prule_le &
+ [ ORTH < "paired-both-xn-nrev-gpr" >,
+   SYNSEM [ --SIND.PORD pr130s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr130 ] ].
+
+paired-both-xn-rev-gpr := x_-_prule_le &
+ [ ORTH < "paired-both-xn-rev-gpr" >,
+   SYNSEM [ --SIND.PORD pr143s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr143 ] ].
+
+#|
+paired-both-xl-gpr := x_-_prule_le &
+ [ ORTH < "paired-both-xl-gpr" >,
+   SYNSEM [ --SIND.PORD pr131s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr131 ] ].
+
+paired-both-xr-gpr := x_-_prule_le &
+ [ ORTH < "paired-both-xr-gpr" >,
+   SYNSEM [ --SIND.PORD pr132s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr132 ] ].
+|#
+
+thecase-top-gpr := x_-_prule_le &
+ [ ORTH < "thecase-top-gpr" >,
+   SYNSEM [ --SIND.PORD pr133s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr133 ] ].
+
+thecase-cleft-gpr := x_-_prule_le &
+ [ ORTH < "thecase-cleft-gpr" >,
+   SYNSEM [ --SIND.PORD pr134s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr134 ] ].
+
+thecase-cright-gpr := x_-_prule_le &
+ [ ORTH < "thecase-cright-gpr" >,
+   SYNSEM [ --SIND.PORD pr135s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr135 ] ].
+
+conj-s-rev-gpr := x_-_prule_le &
+ [ ORTH < "conj-s-rev-gpr" >,
+   SYNSEM [ --SIND.PORD pr136s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr136 ] ].
+
+conj-s-rev-neg-gpr := x_-_prule_le &
+ [ ORTH < "conj-s-rev-neg-gpr" >,
+   SYNSEM [ --SIND.PORD pr137s,
+            LOCAL.CAT.HEAD.MOD.FIRST.LOCAL.CAT.PRORDER pr137 ] ].

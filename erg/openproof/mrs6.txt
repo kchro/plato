@@ -1,0 +1,10 @@
+[ LTOP: h0
+INDEX: e2 [ e SF: prop TENSE: pres PERF: - PORD: pr-order ]
+RELS: < [ proper_q_rel<0:1> LBL: h4 ARG0: x5 [ x PERS: 3 NUM: sg GEND: n ] RSTR: h6 BODY: h7 ]
+ [ named_rel<0:1> LBL: h8 CARG: "B" ARG0: x5 ]
+ [ "_large_a_1_rel"<5:10> LBL: h10 ARG0: e11 [ e SF: prop TENSE: pres PERF: - PORD: pr-order ] ARG1: x5 ]
+ [ _and_c_rel<11:14> LBL: h1 ARG0: e2 L-INDEX: e11 R-INDEX: e12 [ e SF: prop TENSE: pres PERF: - PORD: pr-order ] L-HNDL: h13 R-HNDL: h14 ]
+ [ proper_q_rel<15:16> LBL: h15 ARG0: x16 [ x PERS: 3 NUM: sg GEND: n ] RSTR: h17 BODY: h18 ]
+ [ named_rel<15:16> LBL: h19 CARG: "C" ARG0: x16 ]
+ [ "_large_a_1_rel"<20:26> LBL: h21 ARG0: e12 ARG1: x16 ] >
+HCONS: < h0 qeq h1 h13 qeq h10 h6 qeq h8 h14 qeq h21 h17 qeq h19 > ]

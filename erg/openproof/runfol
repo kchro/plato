@@ -1,0 +1,112 @@
+#!/bin/bash
+# Argument = -f fol -l rulelist -r rules -b blocklist -x blockrules -a addrules
+
+usage()
+{
+cat << EOF
+usage: $0 options
+
+This script produces paraphrases of an FOL expression
+
+OPTIONS:
+   -f      FOL string
+   -l      Rule list
+   -r      Rule file
+   -b      Blocked rule list
+   -x      Blocked rule file
+   -a      Added rule file
+   -h      Show this message
+
+EOF
+}
+
+FOL=
+RULELIST=
+RULES=
+BLOCKED=
+ADDED=
+while getopts “hf:l:r:b:x:a:” OPTION
+do
+     case $OPTION in
+         h)
+             usage
+             exit 1
+             ;;
+         f)
+             FOL=$OPTARG
+             ;;
+         l)
+             RULELIST=$OPTARG
+             ;;
+         r)
+             RULES=$OPTARG
+             ;;
+         b)
+             BLOCKLIST=$OPTARG
+             ;;
+         x)
+             BLOCKED=$OPTARG
+             ;;
+         a)
+             ADDED=$OPTARG
+	     ;;
+         ?)
+             usage
+             exit
+    esac
+done
+
+if [[ -z $FOL ]]
+then
+     usage
+     exit 1
+else
+if [[ -z $RULELIST && -z $RULES ]]
+ then
+  RULES=rules.all
+fi
+if [[ -z $BLOCKED ]]
+ then
+  BLOCKED=rules.none
+fi;
+allrules="~/Desktop/plato/tmp/allrules.$RANDOM"
+blockrules="~/Desktop/plato/tmp/blockrules.$RANDOM"
+newrules="~/Desktop/plato/tmp/newrules.$RANDOM"
+userules="~/Desktop/plato/tmp/rules.$RANDOM"
+if [[ -n $RULELIST ]]
+ then
+  echo $RULELIST | sed -e 's/\s\+/\n/g' | cat $RULES - | sort -u > $allrules
+ else
+  sort $RULES > $allrules
+fi;
+if [[ -n $BLOCKLIST ]]
+ then
+  echo $BLOCKLIST | sed -e 's/\s\+/\n/g' | cat $BLOCKED - | sort -u > $blockrules
+ else
+  sort $BLOCKED > $blockrules
+fi;
+comm -23 $allrules $blockrules > $newrules;
+if [[ -n $ADDED ]]
+   then
+   cat $ADDED $newrules > $userules
+   else
+   cp $newrules $userules
+fi;
+cd ~/Desktop/plato/erg/openproof; python scripts/e2e.py $FOL | ../bin/ace -g inflatemrs.dat -f | ../bin/ace -g paraphrase-op.dat --transfer-config $userules --timeout 10 | ../bin/ace -g ergopen.dat -e | scripts/xmlify
+fi;
+if [ -f $allrules ]; then
+rm $allrules
+fi;
+if [ -f $blockrules ]; then
+rm $blockrules
+fi;
+if [ -f $newrules ]; then
+rm $newrules
+fi;
+if [ -f $userules ]; then
+rm $userules
+fi;
+if [ -n ~/Desktop/plato/tmp/folserverlog ]; then
+touch ~/Desktop/plato/tmp/folserverlog
+fi;
+echo $FOL >> ~/Desktop/plato/tmp/folserverlog

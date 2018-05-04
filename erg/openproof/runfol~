@@ -1,0 +1,70 @@
+#!/bin/bash
+# Argument = -f fol -r ruleset -x blockrules -a addrules
+
+usage()
+{
+cat << EOF
+usage: $0 options
+
+This script produces paraphrases of an FOL expression
+
+OPTIONS:
+   -f      FOL string
+   -r      Rule set filename
+   -x      Blocked rule set filename
+   -a      Added rule set filename
+   -h      Show this message
+
+EOF
+}
+
+FOL=
+RULES=
+BLOCKED=
+ADDED=
+while getopts “hf:r:x:a:” OPTION
+do
+     case $OPTION in
+         h)
+             usage
+             exit 1
+             ;;
+         f)
+             FOL=$OPTARG
+             ;;
+         r)
+             RULES=$OPTARG
+             ;;
+         x)
+             BLOCKED=$OPTARG
+             ;;
+         a)
+             ADDED=$OPTARG
+	     ;;
+         ?)
+             usage
+             exit
+    esac
+done
+
+if [[ -z $FOL ]] || [[ -z $RULES ]]
+then
+     usage
+     exit 1
+else
+sort $RULES > /tmp/allrules;
+if [[ -n $BLOCKED ]]
+  then
+   sort $BLOCKED > /tmp/blockrules;
+   comm -23 /tmp/allrules /tmp/blockrules > /tmp/newrules
+  else
+   cp /tmp/allrules /tmp/newrules
+fi;
+if [[ -n $ADDED ]]
+   then
+   cat $ADDED /tmp/newrules > /tmp/rules
+   else
+   cp /tmp/newrules /tmp/rules
+fi;
+cd /home/danf/erg/openproof; python scripts/e2e.py $FOL | /home/danf/bin/ace -g inflatemrs.dat -f | /home/danf/bin/ace -g paraphrase-op.dat --transfer-config /tmp/rules | tee /tmp/paras | /home/danf/bin/ace -g ergopen.dat -e > /tmp/sents.txt; scripts/xmlify > /tmp/out.txt
+fi
