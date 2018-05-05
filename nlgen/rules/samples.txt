@@ -1,0 +1,372 @@
+;; Test run - call Aaron's FOL converter to MRS syntax, then inflate, add paraphrased MRSs, generate, sort uniquely, and write to a file.
+
+cd /home/danf/erg; for i in $(cat openproof/fols.txt); do \python openproof/scripts/e2e.py $i | /home/danf/bin/ace -g inflatemrs.dat -f | /home/danf/bin/ace -g paraphrase-op.dat -f | /home/danf/bin/ace -g ergopen.dat -e | sort -u; echo "---ITEM---"; done > /tmp/out.txt
+
+cd /home/danf/erg; for i in $(cat openproof/7-12.txt); do \python openproof/scripts/e2e.py $i | /home/danf/bin/ace -g inflatemrs.dat -f | /home/danf/bin/ace -g paraphrase-op.dat -f | /home/danf/bin/ace -g ergopen.dat -e | sort -u; echo "---ITEM---"; done > /tmp/out7-12.txt
+
+;; To evaluate using Aaron's script, do the following
+
+cd /home/danf/erg
+python openproof/scripts/corpus_test.py openproof/fols.txt openproof/scripts/goals.txt openproof/out.txt
+python openproof/scripts/corpus_test.py openproof/7-12.txt openproof/scripts/712goals.txt openproof/out7-12.txt
+
+
+;; To generate from MRS-ified FOL expressions using Aaron's script, do this:
+cd ~/erg
+ace -G inflatemrs.dat -g openproof/config-inflate.tdl
+ace -G paraphrase-op.dat -g openproof/config.tdl
+ace -G paraphrase-01.dat -g openproof/config-01.tdl
+ace -G paraphrase-02.dat -g openproof/config-02.tdl
+ace -G ergopen.dat -g ace/config-open.tdl
+
+----------------------
+A is a cube        ::        cube(a)
+
+ [ LTOP: h1
+   INDEX: e2
+   RELS: < [ named_rel LBL: h2 ARG0: x4 CARG: "A" ]
+           [ "cube" LBL: h3 ARG0: e2 ARG1: x4 ] > ]
+
+----------------------
+A is a tetrahedron        ::        tet(a)
+
+ [ LTOP: h1
+   INDEX: e2
+   RELS: < [ named_rel LBL: h2 ARG0: x4 CARG: "A" ]
+           [ "tet" LBL: h3 ARG0: e2 ARG1: x4 ] > ]
+
+----------------------
+B is smaller than A        ::         smaller(b,a)
+
+ [ LTOP: h1
+   INDEX: e3
+   RELS: < [ named_rel LBL: h8 ARG0: x6 CARG: "B" ]
+           [ named_rel LBL: h9 ARG0: x7 CARG: "A" ]
+           [ "smaller" LBL: h2 ARG0: e3 ARG1: x6 ARG2: x7 ] > ]
+
+B is larger than A
+
+ [ LTOP: h1
+   INDEX: e3
+   RELS: < [ named_rel LBL: h8 ARG0: x6 CARG: "B" ]
+           [ named_rel LBL: h9 ARG0: x7 CARG: "A" ]
+           [ "larger" LBL: h2 ARG0: e3 ARG1: x6 ARG2: x7 ] > ]
+
+----------------------
+C is between A and D        ::         between(c,a,d)
+
+ [ LTOP: h1
+   INDEX: e3
+   RELS: < [ named_rel LBL: h9 ARG0: x1 CARG: "A" ]
+	   [ named_rel LBL: h8 ARG0: x2 CARG: "C" ]           
+           [ named_rel LBL: h7 ARG0: x3 CARG: "D" ]
+	   [ "between" LBL: h2 ARG0: e3 ARG1: x2 ARG2: x1 ARG3: x3 ] > ]
+
+----------------------
+D is in back of A        ::         backof(d,a)
+
+ [ LTOP: h1
+   INDEX: e3
+   RELS: < [ named_rel LBL: h8 ARG0: x6 CARG: "B" ]
+           [ named_rel LBL: h9 ARG0: x7 CARG: "A" ]
+           [ "backof" LBL: h2 ARG0: e3 ARG1: x6 ARG2: x7 ] > ]
+
+----------------------
+D is large        ::         large(d)
+
+ [ LTOP: h1
+   INDEX: e3
+   RELS: < [ named_rel LBL: h8 ARG0: x6 CARG: "A" ]
+           [ "large" LBL: h2 ARG0: e3 ARG1: x6 ] > ]
+
+----------------------
+E is to the right of B        ::         rightof(e,b)  
+
+ [ LTOP: h1
+   INDEX: e3
+   RELS: < [ named_rel LBL: h8 ARG0: x6 CARG: "E" ]
+           [ named_rel LBL: h9 ARG0: x7 CARG: "B" ]
+           [ "rightof" LBL: h2 ARG0: e3 ARG1: x6 ARG2: x7 ] > ]
+
+E is to the left of B        ::         leftof(e,b)  
+
+ [ LTOP: h1
+   INDEX: e3
+   RELS: < [ named_rel LBL: h8 ARG0: x6 CARG: "E" ]
+           [ named_rel LBL: h9 ARG0: x7 CARG: "B" ]
+           [ "leftof" LBL: h2 ARG0: e3 ARG1: x6 ARG2: x7 ] > ]
+
+----------------------
+F is not in front of A    ::     -frontof(f,a)
+
+ [ LTOP: h1
+   INDEX: e3
+   RELS: < [ named_rel LBL: h8 ARG0: x6 CARG: "F" ]
+           [ named_rel LBL: h9 ARG0: x7 CARG: "A" ]
+	   [ "not" LBL: h10 ARG1: e3 ]
+           [ "frontof" LBL: h2 ARG0: e3 ARG1: x6 ARG2: x7 ] > ]
+
+----------------------
+B is in the same row as D        ::         samerow(b,d)
+
+ [ LTOP: h1
+   INDEX: e3
+   RELS: < [ named_rel LBL: h8 ARG0: x6 CARG: "B" ]
+           [ named_rel LBL: h9 ARG0: x7 CARG: "D" ]
+           [ "samerow" LBL: h2 ARG0: e3 ARG1: x6 ARG2: x7 ] > ]
+
+----------------------
+B is in the same column as D        ::         samecol(b,d)
+
+ [ LTOP: h1
+   INDEX: e3
+   RELS: < [ named_rel LBL: h8 ARG0: x6 CARG: "B" ]
+           [ named_rel LBL: h9 ARG0: x7 CARG: "D" ]
+           [ "samecol" LBL: h2 ARG0: e3 ARG1: x6 ARG2: x7 ] > ]
+
+----------------------
+B is the same size as C    ::     samesize(b,c)
+
+ [ LTOP: h1
+   INDEX: e3
+   RELS: < [ named_rel LBL: h8 ARG0: x6 CARG: "B" ]
+           [ named_rel LBL: h9 ARG0: x7 CARG: "C" ]
+           [ "samesize" LBL: h2 ARG0: e3 ARG1: x6 ARG2: x7 ] > ]
+
+----------------------
+A is large and B is small.           ::        largef(a) & small(b) 
+
+ [ LTOP: h1
+   INDEX: e3
+   RELS: < [ _and_c_rel LBL: h2 ARG0: e3 L-INDEX: e4 R-INDEX: e5 ]
+           [ named_rel LBL: h8 ARG0: x6 CARG: "A" ]
+           [ "large" LBL: h3 ARG0: e4 ARG1: x6 ]
+           [ named_rel LBL: h9 ARG0: x7 CARG: "B" ]
+           [ "small" LBL: h4 ARG0: e5 ARG1: x7 ] > ]
+
+----------------------
+A is large and A is a cube.          ::         largef(a) & cube(a)
+A is large and is a cube.
+
+;; NB - Seems to be some caching problem in ace:
+;; when start ace afresh and produce this input, get both outputs,
+;; but also get both (wrongly) for the A-B expression below.  Conversely,
+;; when start ace afresh and first give the A-B input, only get coord-S
+;; output, but then only get the coord-S for the A-A input as well.  FIX?
+
+ [ LTOP: h1
+   INDEX: e3
+   RELS: < [ _and_c_rel LBL: h2 ARG0: e3 L-INDEX: e4 R-INDEX: e5 ]
+           [ named_rel LBL: h8 ARG0: x6 CARG: "A" ]
+           [ "large" LBL: h3 ARG0: e4 ARG1: x6 ]
+	   [ named_rel LBL: h4 ARG0: x4 CARG: "A" ]
+           [ "cube" LBL: h5 ARG0: e5 ARG1: x4 ] > ]
+
+A is large and B is a cube.
+
+ [ LTOP: h1
+   INDEX: e3
+   RELS: < [ _and_c_rel LBL: h2 ARG0: e3 L-INDEX: e4 R-INDEX: e5 ]
+           [ named_rel LBL: h8 ARG0: x6 CARG: "A" ]
+           [ "large" LBL: h3 ARG0: e4 ARG1: x6 ]
+	   [ named_rel LBL: h4 ARG0: x4 CARG: "B" ]
+           [ "cube" LBL: h5 ARG0: e5 ARG1: x4 ] > ]
+
+----------------------
+F is to the right of A and F is to the left of B  :: rightof(f,a) & leftof(f,b) 
+F is to the right of A and is to the left of B
+F is to the right of A and to the left of B
+
+ [ LTOP: h1
+   INDEX: e3
+   RELS: < [ _and_c_rel LBL: h2 ARG0: e3 L-INDEX: e4 R-INDEX: e5 ]
+           [ named_rel LBL: h8 ARG0: x6 CARG: "F" ]
+           [ named_rel LBL: h9 ARG0: x7 CARG: "A" ]
+           [ "rightof" LBL: h3 ARG0: e4 ARG1: x6 ARG2: x7 ]
+	   [ named_rel LBL: h18 ARG0: x16 CARG: "F" ]
+           [ named_rel LBL: h19 ARG0: x17 CARG: "B" ]
+           [ "leftof" LBL: h12 ARG0: e5 ARG1: x16 ARG2: x17 ] > ]
+
+F is smaller than A and F is larger than B.
+F is smaller than A and is larger than B.
+F is smaller than A and larger than B.
+
+ [ LTOP: h1
+   INDEX: e3
+   RELS: < [ _and_c_rel LBL: h2 ARG0: e3 L-INDEX: e4 R-INDEX: e5 ]
+           [ named_rel LBL: h8 ARG0: x6 CARG: "F" ]
+           [ named_rel LBL: h9 ARG0: x7 CARG: "A" ]
+           [ "smaller" LBL: h3 ARG0: e4 ARG1: x6 ARG2: x7 ]
+	   [ named_rel LBL: h18 ARG0: x16 CARG: "F" ]
+           [ named_rel LBL: h19 ARG0: x17 CARG: "B" ]
+           [ "larger" LBL: h12 ARG0: e5 ARG1: x16 ARG2: x17 ] > ]
+
+----------------------
+F is in back of A or F is smaller than A    ::     backof(f,a) | smaller(f,a) 
+F is in back of A or is smaller than A
+F is either in back of A or smaller than A
+F is either in back of or smaller than A
+F either is in back of or is smaller than A
+F is in back of or is smaller than A
+F is in back of A or smaller than A
+
+ [ LTOP: h1
+   INDEX: e3
+   RELS: < [ _or_c_rel LBL: h2 ARG0: e3 L-INDEX: e4 R-INDEX: e5 ]
+           [ named_rel LBL: h8 ARG0: x6 CARG: "F" ]
+           [ named_rel LBL: h9 ARG0: x7 CARG: "A" ]
+           [ "backof" LBL: h3 ARG0: e4 ARG1: x6 ARG2: x7 ]
+	   [ named_rel LBL: h18 ARG0: x16 CARG: "F" ]
+           [ named_rel LBL: h19 ARG0: x17 CARG: "A" ]
+           [ "smaller" LBL: h12 ARG0: e5 ARG1: x16 ARG2: x17 ] > ]
+
+----------------------
+E and D are between C and A    ::     between(e,c,a) & between(d,c,a) 
+E is between C and A and D is between C and A
+
+ [ LTOP: h1
+   INDEX: e3
+   RELS: < [ _and_c_rel LBL: h2 ARG0: e3 L-INDEX: e4 R-INDEX: e5 ]
+           [ named_rel LBL: h9 ARG0: x1 CARG: "E" ]
+	   [ named_rel LBL: h8 ARG0: x2 CARG: "C" ]           
+           [ named_rel LBL: h7 ARG0: x3 CARG: "A" ]
+	   [ "between" LBL: h3 ARG0: e4 ARG1: x1 ARG2: x2 ARG3: x3 ]
+	   [ named_rel LBL: h19 ARG0: x11 CARG: "D" ]
+	   [ named_rel LBL: h18 ARG0: x12 CARG: "C" ]           
+           [ named_rel LBL: h17 ARG0: x13 CARG: "A" ]
+	   [ "between" LBL: h13 ARG0: e5 ARG1: x11 ARG2: x12 ARG3: x13 ] > ]
+
+----------------------
+B is smaller than C and D is smaller than C. ::   smaller(b,c) & smaller(d,c) 
+B and D are smaller than C.
+
+ [ LTOP: h1
+   INDEX: e3
+   RELS: < [ _and_c_rel LBL: h2 ARG0: e3 L-INDEX: e4 R-INDEX: e5 ]
+           [ named_rel LBL: h8 ARG0: x6 CARG: "B" ]
+           [ named_rel LBL: h9 ARG0: x7 CARG: "C" ]
+           [ "smaller" LBL: h3 ARG0: e4 ARG1: x6 ARG2: x7 ]
+	   [ named_rel LBL: h18 ARG0: x16 CARG: "D" ]
+           [ named_rel LBL: h19 ARG0: x17 CARG: "C" ]
+           [ "smaller" LBL: h12 ARG0: e5 ARG1: x16 ARG2: x17 ] > ]
+
+----------------------
+F is in back of A or D is in back of A  ::   backof(f,a) | backof(d,a) 
+Either F or D is in back of A
+F or D is in back of A
+
+ [ LTOP: h1
+   INDEX: e3
+   RELS: < [ _or_c_rel LBL: h2 ARG0: e3 L-INDEX: e4 R-INDEX: e5 ]
+           [ named_rel LBL: h8 ARG0: x6 CARG: "F" ]
+           [ named_rel LBL: h9 ARG0: x7 CARG: "A" ]
+           [ "backof" LBL: h3 ARG0: e4 ARG1: x6 ARG2: x7 ]
+	   [ named_rel LBL: h18 ARG0: x16 CARG: "D" ]
+           [ named_rel LBL: h19 ARG0: x17 CARG: "A" ]
+           [ "backof" LBL: h12 ARG0: e5 ARG1: x16 ARG2: x17 ] > ]
+
+----------------------
+B is in the same row as A but B is not in the same column as F
+   :: samerow(b,a) & -samecol(b,f)
+B is in the same row as A but is not in the same column as F
+B is in the same row as A but not in the same column as F
+
+ [ LTOP: h1
+   INDEX: e3
+   RELS: < [ _and_c_rel LBL: h2 ARG0: e3 L-INDEX: e4 R-INDEX: e5 ]
+	   [ named_rel LBL: h8 ARG0: x6 CARG: "B" ]
+           [ named_rel LBL: h9 ARG0: x7 CARG: "A" ]
+           [ "samerow" LBL: h3 ARG0: e4 ARG1: x6 ARG2: x7 ]
+	   [ named_rel LBL: h18 ARG0: x16 CARG: "B" ]
+           [ named_rel LBL: h19 ARG0: x17 CARG: "F" ]
+	   [ "not" LBL: h10 ARG1: e5 ]
+           [ "samecol" LBL: h12 ARG0: e5 ARG1: x16 ARG2: x17 ] > ]
+
+----------------------
+Neither E nor D is larger than C    ::     -(larger(e,c) | larger(d,c)) 
+
+ [ LTOP: h1
+   INDEX: e3
+   RELS: < [ "not" LBL: h10 ARG1: e3 ]
+	   [ _or_c_rel LBL: h2 ARG0: e3 L-INDEX: e4 R-INDEX: e5 ]
+	   [ named_rel LBL: h8 ARG0: x6 CARG: "E" ]
+           [ named_rel LBL: h9 ARG0: x7 CARG: "C" ]
+           [ "larger" LBL: h3 ARG0: e4 ARG1: x6 ARG2: x7 ]
+	   [ named_rel LBL: h18 ARG0: x16 CARG: "D" ]
+           [ named_rel LBL: h19 ARG0: x17 CARG: "C" ]
+           [ "larger" LBL: h12 ARG0: e5 ARG1: x16 ARG2: x17 ] > ]
+
+----------------------
+E is neither larger than nor smaller than D  ::   -(larger(e,d) | smaller(e,d)) 
+E is neither larger than D nor smaller than D
+
+ [ LTOP: h1
+   INDEX: e3
+   RELS: < [ "not" LBL: h10 ARG0: e1 ARG1: e3 ]
+	   [ _or_c_rel LBL: h2 ARG0: e3 L-INDEX: e4 R-INDEX: e5 ]
+	   [ named_rel LBL: h8 ARG0: x6 CARG: "E" ]
+           [ named_rel LBL: h9 ARG0: x7 CARG: "D" ]
+           [ "larger" LBL: h3 ARG0: e4 ARG1: x6 ARG2: x7 ]
+	   [ named_rel LBL: h18 ARG0: x16 CARG: "E" ]
+           [ named_rel LBL: h19 ARG0: x17 CARG: "D" ]
+           [ "smaller" LBL: h12 ARG0: e5 ARG1: x16 ARG2: x17 ] > ]
+
+------------------
+Not quite:
+E is not in the same column as either C or D    ::     -(samecol(e,c) | samecol(e,d))
+  NB: Can't (yet) get rid of second "in the same column as", but generate this:
+E neither is in the same column as C nor is in the same column as D.
+E is neither in the same column as C nor in the same column as D.
+
+ [ LTOP: h1
+   INDEX: e3
+   RELS: < [ "not" LBL: h10 ARG1: e3 ]
+	   [ _or_c_rel LBL: h2 ARG0: e3 L-INDEX: e4 R-INDEX: e5 ]
+	   [ named_rel LBL: h8 ARG0: x6 CARG: "E" ]
+           [ named_rel LBL: h9 ARG0: x7 CARG: "C" ]
+           [ "samecol" LBL: h3 ARG0: e4 ARG1: x6 ARG2: x7 ]
+	   [ named_rel LBL: h18 ARG0: x16 CARG: "E" ]
+           [ named_rel LBL: h19 ARG0: x17 CARG: "D" ]
+           [ "samecol" LBL: h12 ARG0: e5 ARG1: x16 ARG2: x17 ] > ]
+
+------------------
+Either A is small or both C and D are large  :: small(a) | (large(c) & large(d))
+Either A is small or C is large and D is large
+
+ [ LTOP: h1
+   INDEX: e1
+   RELS: < [ _or_c_rel LBL: h2 ARG0: e1 L-INDEX: e2 R-INDEX: e3 ]
+           [ named_rel LBL: h10 ARG0: x1 CARG: "A" ]
+           [ "small" LBL: h13 ARG0: e2 ARG1: x1 ]
+           [ _and_c_rel LBL: h22 ARG0: e3 L-INDEX: e4 R-INDEX: e5 ]
+           [ named_rel LBL: h8 ARG0: x6 CARG: "C" ]
+           [ "large" LBL: h3 ARG0: e4 ARG1: x6 ]
+	   [ named_rel LBL: h18 ARG0: x16 CARG: "D" ]
+           [ "large" LBL: h12 ARG0: e5 ARG1: x16 ] > ]
+
+------------------
+if C is a tetrahedron then A is not a tetrahedron    ::     tet(c) -> -tet(a)
+
+ [ LTOP: h1
+   INDEX: e5
+   RELS: < [ "if" LBL: h2 ARG0: e3 ARG1: e4 ARG2: e2 ]
+           [ named_rel LBL: h8 ARG0: x6 CARG: "C" ]
+           [ "tet" LBL: h3 ARG0: e4 ARG1: x6 ]
+	   [ named_rel LBL: h4 ARG0: x4 CARG: "A" ]
+	   [ "not" LBL: h5 ARG0: e2 ARG1: e5 ]
+           [ "tet" LBL: h6 ARG0: e5 ARG1: x4 ] > ]
+
+------------------
+B is a tetrahedron only if it is small    ::     tet(b) <-> small(b)
+  NB: Need to add pronoun substitution; so far, get only:
+B is a tetrahedron only if B is small
+
+ [ LTOP: h1
+   INDEX: e4
+   RELS: < [ "iff" LBL: h2 ARG0: e3 ARG1: e4 ARG2: e5 ]
+           [ named_rel LBL: h8 ARG0: x6 CARG: "B" ]
+           [ "tet" LBL: h3 ARG0: e4 ARG1: x6 ]
+	   [ named_rel LBL: h4 ARG0: x4 CARG: "B" ]
+           [ "small" LBL: h6 ARG0: e5 ARG1: x4 ] > ]
+
+------------------
