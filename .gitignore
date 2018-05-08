@@ -4,3 +4,4 @@ env/
 openproof/Server/venv/
 data/erg-1214-osx-0.9.26.dat
 nlgen/dat/
+platopy/nlgen_scripts/dat/

@@ -37,6 +37,57 @@ def get_rules(filename):
         rules = [line for line in f]
     return rules
 
+def runfol(fol, rule_file, add_file, rule_list,
+           block_file, block_list):
+    """
+    @params:
+        fol         string
+        rules       strings
+    @returns:
+        out         [strings]
+    """
+
+    rules = set()
+
+    # add rules to set:
+    add_rules = []
+    if rule_file:
+        add_rules += rule_file
+    if add_file:
+        add_rules += add_file
+    if rule_list:
+        add_rules += rule_list
+
+    for rule_file in add_rules:
+        rules.update(get_rules(rule_file))
+
+    # del rules from set
+    del_rules = []
+    if block_file:
+        del_rules += block_file
+    if block_list:
+        del_rules += block_list
+
+    for rule_file in del_rules:
+        rules.difference_update(get_rules(rule_file))
+
+    # write out the rules in temp file
+    with open('rules.tmp', 'w') as f:
+        for rule in sorted(rules):
+            f.write(rule)
+
+    command = 'python scripts/e2e.py "%s" | ' % fol + \
+              'ace -g dat/inflatemrs.dat -f | ' + \
+              'ace -g dat/paraphrase-op.dat --transfer-config rules.tmp | ' + \
+              'ace -g dat/ergopen.dat -e'
+
+    stdout = subprocess.check_output([command], shell=True)
+    sents = set(filter(lambda x: len(x), stdout.split('\n')))
+    out = []
+    for sent in sents:
+        out.append(sent.split('.')[0])
+    return out
+
 if __name__ == '__main__':
     parser = get_parser()
     args = parser.parse_args()
