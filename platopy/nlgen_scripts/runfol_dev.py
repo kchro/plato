@@ -5,10 +5,9 @@ import subprocess
 
 from scripts.e2e import e2e
 
-# dir = '~/Desktop/plato/platopy/nlgen_scripts'
-dir = '/home/danf/erg/openproof'
-dat_dir = dir
-rules_dir = dir
+dir = '~/Desktop/plato/platopy/nlgen_scripts'
+dat_dir = '%s/dat' % dir
+rules_dir = '%s/rules' % dir
 
 def get_parser():
     '''

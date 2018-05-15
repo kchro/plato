@@ -13,8 +13,8 @@ Front-End:
 Back-End:
 - [x] sort out the permissions issues in the server error logs
   - [x] download the server code locally
-  - [ ] run the server locally
-    - [ ] write your own script for ./erg/openproof/runfol. current one is broken as hell
+  - [x] run the server locally
+    - [x] write your own script for ./erg/openproof/runfol. current one is broken as hell
       - [x] what does e2e.py do?
         - takes an infix LPL string like 'dodec(d)|~(cube(a)&larger(f,a))' and returns an underspecified MRS (MRS appears to be a file format or syntax)
       - [x] figure out how ACE works:
@@ -23,17 +23,17 @@ Back-End:
         - compiling: ```ace -G grammar.dat -g path-to-config.tdl```
         - ```ace -g inflatemrs.dat -f ```
 
-      - [ ] given default rule settings, run ACE on sentences
+      - [x] given default rule settings, run ACE on sentences
       - [x] why are we making tmp rule files?
       - [x] what does inflatemrs.dat do?
       - [x] what does paraphrase-op.dat do?
       - [x] what does ergopen.dat do?
       - [x] what does xmlify do?
-- [ ] set up the AWS
-- [ ] get all the source code
+- [x] set up the AWS
+- [x] get all the source code
 - [ ] platopy
   - [ ] might be hopeless, but code refactoring from java to python
-    - [ ] why refactor? plato.jar is deprecated and it'll take longer to learn java and the openproof framework than to write up the python classes to do exactly what i need
+    - [ ] why refactor? plato.jar doesn't work, and it'll take longer to learn the openproof framework than to write up lightweight python classes
     - [ ] server that controls a lifecycle
       - [ ] user
         - [ ] request new learning goal
@@ -58,6 +58,10 @@ Back-End:
   - [x] configure the server.py
 
 Machine-Learning:
+- [ ] getting the data
+  - [x] getting atomic sentence data
+  - [ ] getting binary sentence data
+  - [ ] getting k=2 trees (probably unreasonably expensive)
 - [ ] decide on objective function
 - [ ] create baseline model
 - [ ] set up evaluation tools

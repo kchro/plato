@@ -1,0 +1,12 @@
+Z is large
+Z. is large
+Z is large and |a| is a cube
+Z. is large and |a| is a cube
+Z. is large, and |a| is a cube
+Z is large, and |a| is a cube
+|F| is a tetrahedron and |d| is a tetrahedron
+|F| is a tetrahedron, and |d| is a tetrahedron
+X. is a tetrahedron, and |d| is a tetrahedron
+X is a tetrahedron and |d| is a tetrahedron
+X is a tetrahedron, and |d| is a tetrahedron
+X. is a tetrahedron and |d| is a tetrahedron

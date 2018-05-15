@@ -12,7 +12,6 @@ frontof,2
 backof,2
 samecol,2
 samerow,2
-between,3
 adjoins,2
 smaller,2
 larger,2

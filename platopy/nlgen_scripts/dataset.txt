@@ -1,2 +1,4 @@
 |E| is to the right of y
 |E| is to the right of y
+|F| is smaller than |a|
+|F| is smaller than |a|

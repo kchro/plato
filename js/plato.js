@@ -144,6 +144,7 @@ function post(fol, params, callback) {
     }
   }
 
+  console.log(formData);
   request.send(formData);
 }
 
@@ -164,7 +165,13 @@ function renderTrans(root, state) {
 
   // promptText.innerHTML = data.problems[state.problem].prompt;
   post(data.problems[state.problem].answer, data.config, function(response) {
-    promptText.innerHTML = response.responseText;
+    // get the list of NL sentences and choose based on policy
+    const prompts = response.responseText.split('\n');
+
+    // random policy
+    const index = Math.floor(Math.random() * prompts.length);
+
+    promptText.innerHTML = prompts[index];
   });
 
   prompt.appendChild(promptLabel);

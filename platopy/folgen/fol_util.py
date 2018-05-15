@@ -34,10 +34,16 @@ def read_predicate_file(filename):
             predicates.append((pred, arity))
     return predicates
 
-def read_constant_file(filename):
+def read_file(filename):
     with open(filename, 'r') as f:
-        constants = []
-        for line in f:
-            constant = line.rstrip()
-            constants.append(constant)
-    return constants
+        arr = [line.rstrip() for line in f]
+    return arr
+
+def read_constant_file(filename):
+    return read_file(filename)
+
+def read_atom_file(filename='atoms.out'):
+    return read_file(filename)
+
+def read_operator_file(filename):
+    return read_file(filename)

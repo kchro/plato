@@ -1,0 +1,1380 @@
+smaller(f,a)	|F| is smaller than |a|
+leftof(a,x)	|A| is to the left of x
+larger(f,e)	|F| is larger than |e|
+likes(e,f)	|E| likes |f|
+leftof(d,x)	|D| is to the left of x
+adjoins(c,b)	|C| adjoins |b|
+samecol(d,x)	|D| is in the same column as x
+leftof(c,x)	|C| is to the left of x
+rightof(x,f)	X is to the right of |f|
+rightof(x,f)	X. is to the right of |f|
+backof(y,c)	Y. is in back of |c|
+backof(y,c)	Y is in back of |c|
+samesize(c,c)	|C| is the same size as |c|
+frontof(d,y)	|D| is in front of y
+likes(a,c)	|A| likes |c|
+sameshape(f,d)	|F| is the same shape as |d|
+medium(d)	|D| is medium
+samecol(c,x)	|C| is in the same column as x
+larger(x,d)	X. is larger than |d|
+larger(x,d)	X is larger than |d|
+samerow(c,e)	|C| is in the same row as |e|
+larger(y,x)	Y. is larger than x
+larger(y,x)	Y is larger than x
+samecol(z,d)	Z. is in the same column as |d|
+samecol(z,d)	Z is in the same column as |d|
+backof(f,z)	|F| is in back of z
+sameshape(a,b)	|A| is the same shape as |b|
+rightof(e,y)	|E| is to the right of y
+larger(z,d)	Z. is larger than |d|
+larger(z,d)	Z is larger than |d|
+leftof(x,y)	X. is to the left of y
+leftof(x,y)	X is to the left of y
+larger(d,f)	|D| is larger than |f|
+frontof(e,e)	|E| is in front of |e|
+larger(a,z)	|A| is larger than z
+backof(z,x)	Z. is in back of x
+backof(z,x)	Z is in back of x
+samecol(y,x)	Y. is in the same column as x
+samecol(y,x)	Y is in the same column as x
+frontof(y,e)	Y. is in front of |e|
+frontof(y,e)	Y is in front of |e|
+happy(x)	X. is happy
+happy(x)	X is happy
+backof(c,e)	|C| is in back of |e|
+smaller(e,f)	|E| is smaller than |f|
+frontof(f,y)	|F| is in front of y
+samerow(z,y)	Z. is in the same row as y
+samerow(z,y)	Z is in the same row as y
+frontof(z,f)	Z is in front of |f|
+frontof(z,f)	Z. is in front of |f|
+sameshape(c,d)	|C| is the same shape as |d|
+happy(c)	|C| is happy
+sameshape(d,z)	|D| is the same shape as z
+adjoins(e,a)	|E| adjoins |a|
+frontof(a,x)	|A| is in front of x
+leftof(y,y)	Y. is to the left of y
+leftof(y,y)	Y is to the left of y
+frontof(b,z)	|B| is in front of z
+backof(f,a)	|F| is in back of |a|
+adjoins(f,a)	|F| adjoins |a|
+sameshape(f,c)	|F| is the same shape as |c|
+rightof(c,a)	|C| is to the right of |a|
+leftof(c,a)	|C| is to the left of |a|
+smaller(c,f)	|C| is smaller than |f|
+backof(e,a)	|E| is in back of |a|
+rightof(f,b)	|F| is to the right of |b|
+leftof(b,e)	|B| is to the left of |e|
+adjoins(e,y)	|E| adjoins y
+frontof(x,y)	X is in front of y
+frontof(x,y)	X. is in front of y
+samerow(a,x)	|A| is in the same row as x
+likes(f,a)	|F| likes |a|
+smaller(y,y)	Y is smaller than y
+smaller(y,y)	Y. is smaller than y
+adjoins(e,e)	|E| adjoins |e|
+smaller(x,c)	X. is smaller than |c|
+smaller(x,c)	X is smaller than |c|
+likes(f,d)	|F| likes |d|
+larger(c,d)	|C| is larger than |d|
+frontof(e,b)	|E| is in front of |b|
+sameshape(y,x)	Y is the same shape as x
+sameshape(y,x)	Y. is the same shape as x
+rightof(c,x)	|C| is to the right of x
+large(z)	Z is large
+large(z)	Z. is large
+frontof(f,a)	|F| is in front of |a|
+backof(b,c)	|B| is in back of |c|
+smaller(a,x)	|A| is smaller than x
+backof(a,d)	|A| is in back of |d|
+large(b)	|B| is large
+adjoins(c,d)	|C| adjoins |d|
+likes(c,z)	|C| likes z
+adjoins(c,e)	|C| adjoins |e|
+samerow(f,a)	|F| is in the same row as |a|
+adjoins(z,z)	Z adjoins z
+adjoins(z,z)	Z. adjoins z
+frontof(b,e)	|B| is in front of |e|
+samesize(a,x)	|A| is the same size as x
+rightof(b,c)	|B| is to the right of |c|
+dodec(d)	|D| is a dodecahedron
+samerow(e,e)	|E| is in the same row as |e|
+backof(a,b)	|A| is in back of |b|
+samecol(c,e)	|C| is in the same column as |e|
+samesize(b,a)	|B| is the same size as |a|
+backof(b,a)	|B| is in back of |a|
+likes(a,z)	|A| likes z
+samesize(y,d)	Y is the same size as |d|
+samesize(y,d)	Y. is the same size as |d|
+large(e)	|E| is large
+backof(z,z)	Z. is in back of z
+backof(z,z)	Z is in back of z
+larger(b,b)	|B| is larger than |b|
+adjoins(y,x)	Y. adjoins x
+adjoins(y,x)	Y adjoins x
+samecol(x,c)	X. is in the same column as |c|
+samecol(x,c)	X is in the same column as |c|
+samecol(y,c)	Y. is in the same column as |c|
+samecol(y,c)	Y is in the same column as |c|
+leftof(x,b)	X. is to the left of |b|
+leftof(x,b)	X is to the left of |b|
+likes(x,a)	X. likes |a|
+likes(x,a)	X likes |a|
+smaller(e,y)	|E| is smaller than y
+adjoins(x,e)	X adjoins |e|
+adjoins(x,e)	X. adjoins |e|
+larger(a,c)	|A| is larger than |c|
+samesize(b,z)	|B| is the same size as z
+leftof(b,b)	|B| is to the left of |b|
+adjoins(d,d)	|D| adjoins |d|
+rightof(c,f)	|C| is to the right of |f|
+samerow(x,d)	X is in the same row as |d|
+samerow(x,d)	X. is in the same row as |d|
+larger(x,x)	X. is larger than x
+larger(x,x)	X is larger than x
+rightof(a,y)	|A| is to the right of y
+leftof(f,e)	|F| is to the left of |e|
+likes(c,e)	|C| likes |e|
+smaller(z,f)	Z. is smaller than |f|
+smaller(z,f)	Z is smaller than |f|
+sameshape(x,x)	X. is the same shape as x
+sameshape(x,x)	X is the same shape as x
+adjoins(f,z)	|F| adjoins z
+sameshape(f,z)	|F| is the same shape as z
+adjoins(d,c)	|D| adjoins |c|
+backof(x,y)	X is in back of y
+backof(x,y)	X. is in back of y
+samerow(z,b)	Z. is in the same row as |b|
+samerow(z,b)	Z is in the same row as |b|
+small(a)	|A| is small
+samerow(b,y)	|B| is in the same row as y
+frontof(x,d)	X. is in front of |d|
+frontof(x,d)	X is in front of |d|
+smaller(e,a)	|E| is smaller than |a|
+samerow(f,b)	|F| is in the same row as |b|
+adjoins(z,d)	Z adjoins |d|
+adjoins(z,d)	Z. adjoins |d|
+samesize(f,d)	|F| is the same size as |d|
+likes(x,c)	X likes |c|
+likes(x,c)	X. likes |c|
+adjoins(z,c)	Z. adjoins |c|
+adjoins(z,c)	Z adjoins |c|
+smaller(a,e)	|A| is smaller than |e|
+likes(c,d)	|C| likes |d|
+leftof(e,x)	|E| is to the left of x
+smaller(x,x)	X. is smaller than x
+smaller(x,x)	X is smaller than x
+samecol(e,x)	|E| is in the same column as x
+leftof(a,b)	|A| is to the left of |b|
+larger(a,a)	|A| is larger than |a|
+frontof(c,z)	|C| is in front of z
+samesize(x,b)	X is the same size as |b|
+samesize(x,b)	X. is the same size as |b|
+frontof(f,z)	|F| is in front of z
+tet(z)	Z. is a tetrahedron
+tet(z)	Z is a tetrahedron
+sameshape(y,c)	Y is the same shape as |c|
+sameshape(y,c)	Y. is the same shape as |c|
+rightof(y,f)	Y is to the right of |f|
+rightof(y,f)	Y. is to the right of |f|
+samerow(y,d)	Y. is in the same row as |d|
+samerow(y,d)	Y is in the same row as |d|
+rightof(x,c)	X. is to the right of |c|
+rightof(x,c)	X is to the right of |c|
+samesize(a,c)	|A| is the same size as |c|
+samecol(y,a)	Y is in the same column as |a|
+samecol(y,a)	Y. is in the same column as |a|
+rightof(b,x)	|B| is to the right of x
+backof(y,y)	Y is in back of y
+backof(y,y)	Y. is in back of y
+leftof(d,d)	|D| is to the left of |d|
+smaller(c,a)	|C| is smaller than |a|
+smaller(b,x)	|B| is smaller than x
+smaller(z,c)	Z. is smaller than |c|
+smaller(z,c)	Z is smaller than |c|
+frontof(c,e)	|C| is in front of |e|
+adjoins(a,b)	|A| adjoins |b|
+samerow(a,y)	|A| is in the same row as y
+samesize(f,y)	|F| is the same size as y
+leftof(d,c)	|D| is to the left of |c|
+larger(e,e)	|E| is larger than |e|
+samecol(a,d)	|A| is in the same column as |d|
+sameshape(b,c)	|B| is the same shape as |c|
+leftof(a,y)	|A| is to the left of y
+frontof(z,z)	Z. is in front of z
+frontof(z,z)	Z is in front of z
+smaller(z,z)	Z is smaller than z
+smaller(z,z)	Z. is smaller than z
+backof(c,a)	|C| is in back of |a|
+rightof(e,d)	|E| is to the right of |d|
+samerow(b,b)	|B| is in the same row as |b|
+backof(f,e)	|F| is in back of |e|
+adjoins(b,e)	|B| adjoins |e|
+backof(y,f)	Y is in back of |f|
+backof(y,f)	Y. is in back of |f|
+rightof(x,e)	X is to the right of |e|
+rightof(x,e)	X. is to the right of |e|
+frontof(b,d)	|B| is in front of |d|
+frontof(d,z)	|D| is in front of z
+adjoins(f,e)	|F| adjoins |e|
+larger(x,c)	X is larger than |c|
+larger(x,c)	X. is larger than |c|
+rightof(f,f)	|F| is to the right of |f|
+samecol(y,z)	Y. is in the same column as z
+samecol(y,z)	Y is in the same column as z
+rightof(d,b)	|D| is to the right of |b|
+likes(z,a)	Z. likes |a|
+likes(z,a)	Z likes |a|
+adjoins(z,x)	Z. adjoins x
+adjoins(z,x)	Z adjoins x
+backof(e,e)	|E| is in back of |e|
+leftof(b,y)	|B| is to the left of y
+sameshape(x,c)	X is the same shape as |c|
+sameshape(x,c)	X. is the same shape as |c|
+frontof(a,b)	|A| is in front of |b|
+samerow(x,x)	X. is in the same row as x
+samerow(x,x)	X is in the same row as x
+frontof(z,c)	Z. is in front of |c|
+frontof(z,c)	Z is in front of |c|
+smaller(e,e)	|E| is smaller than |e|
+rightof(z,c)	Z. is to the right of |c|
+rightof(z,c)	Z is to the right of |c|
+sameshape(c,y)	|C| is the same shape as y
+larger(d,c)	|D| is larger than |c|
+sameshape(d,y)	|D| is the same shape as y
+samesize(e,x)	|E| is the same size as x
+smaller(y,d)	Y. is smaller than |d|
+smaller(y,d)	Y is smaller than |d|
+adjoins(e,z)	|E| adjoins z
+sameshape(y,d)	Y. is the same shape as |d|
+sameshape(y,d)	Y is the same shape as |d|
+leftof(e,c)	|E| is to the left of |c|
+smaller(f,b)	|F| is smaller than |b|
+samerow(y,c)	Y is in the same row as |c|
+samerow(y,c)	Y. is in the same row as |c|
+rightof(c,b)	|C| is to the right of |b|
+leftof(z,y)	Z. is to the left of y
+leftof(z,y)	Z is to the left of y
+smaller(x,a)	X. is smaller than |a|
+smaller(x,a)	X is smaller than |a|
+leftof(b,f)	|B| is to the left of |f|
+backof(z,f)	Z. is in back of |f|
+backof(z,f)	Z is in back of |f|
+frontof(x,z)	X is in front of z
+frontof(x,z)	X. is in front of z
+smaller(d,e)	|D| is smaller than |e|
+adjoins(x,a)	X. adjoins |a|
+adjoins(x,a)	X adjoins |a|
+likes(f,b)	|F| likes |b|
+samesize(z,b)	Z is the same size as |b|
+samesize(z,b)	Z. is the same size as |b|
+samerow(b,f)	|B| is in the same row as |f|
+adjoins(z,f)	Z. adjoins |f|
+adjoins(z,f)	Z adjoins |f|
+tet(c)	|C| is a tetrahedron
+adjoins(c,x)	|C| adjoins x
+samesize(y,a)	Y. is the same size as |a|
+samesize(y,a)	Y is the same size as |a|
+likes(z,x)	Z likes x
+likes(z,x)	Z. likes x
+frontof(f,f)	|F| is in front of |f|
+samecol(b,y)	|B| is in the same column as y
+samecol(e,d)	|E| is in the same column as |d|
+larger(b,z)	|B| is larger than z
+samerow(d,c)	|D| is in the same row as |c|
+adjoins(y,a)	Y. adjoins |a|
+adjoins(y,a)	Y adjoins |a|
+sameshape(d,f)	|D| is the same shape as |f|
+larger(e,x)	|E| is larger than x
+sameshape(z,b)	Z. is the same shape as |b|
+sameshape(z,b)	Z is the same shape as |b|
+rightof(y,a)	Y. is to the right of |a|
+rightof(y,a)	Y is to the right of |a|
+samecol(f,d)	|F| is in the same column as |d|
+samesize(y,x)	Y. is the same size as x
+samesize(y,x)	Y is the same size as x
+frontof(x,f)	X. is in front of |f|
+frontof(x,f)	X is in front of |f|
+leftof(x,f)	X is to the left of |f|
+leftof(x,f)	X. is to the left of |f|
+samecol(y,b)	Y. is in the same column as |b|
+samecol(y,b)	Y is in the same column as |b|
+samecol(f,c)	|F| is in the same column as |c|
+larger(d,z)	|D| is larger than z
+adjoins(y,d)	Y adjoins |d|
+adjoins(y,d)	Y. adjoins |d|
+larger(z,c)	Z is larger than |c|
+larger(z,c)	Z. is larger than |c|
+samecol(x,y)	X. is in the same column as y
+samecol(x,y)	X is in the same column as y
+adjoins(b,z)	|B| adjoins z
+samesize(x,f)	X. is the same size as |f|
+samesize(x,f)	X is the same size as |f|
+frontof(b,b)	|B| is in front of |b|
+likes(c,a)	|C| likes |a|
+samerow(a,b)	|A| is in the same row as |b|
+samerow(e,x)	|E| is in the same row as x
+leftof(c,b)	|C| is to the left of |b|
+samecol(d,f)	|D| is in the same column as |f|
+backof(a,e)	|A| is in back of |e|
+larger(e,a)	|E| is larger than |a|
+rightof(b,f)	|B| is to the right of |f|
+leftof(f,a)	|F| is to the left of |a|
+frontof(d,c)	|D| is in front of |c|
+backof(b,f)	|B| is in back of |f|
+sameshape(a,z)	|A| is the same shape as z
+rightof(a,e)	|A| is to the right of |e|
+likes(a,y)	|A| likes y
+samesize(d,x)	|D| is the same size as x
+likes(b,c)	|B| likes |c|
+leftof(f,x)	|F| is to the left of x
+adjoins(b,x)	|B| adjoins x
+likes(f,e)	|F| likes |e|
+samerow(z,a)	Z. is in the same row as |a|
+samerow(z,a)	Z is in the same row as |a|
+samerow(e,a)	|E| is in the same row as |a|
+samesize(b,e)	|B| is the same size as |e|
+samecol(f,x)	|F| is in the same column as x
+samesize(e,c)	|E| is the same size as |c|
+backof(a,x)	|A| is in back of x
+samerow(b,a)	|B| is in the same row as |a|
+likes(d,d)	|D| likes |d|
+samesize(z,y)	Z. is the same size as y
+samesize(z,y)	Z is the same size as y
+samerow(f,f)	|F| is in the same row as |f|
+larger(f,b)	|F| is larger than |b|
+adjoins(y,f)	Y adjoins |f|
+adjoins(y,f)	Y. adjoins |f|
+backof(e,y)	|E| is in back of y
+likes(e,c)	|E| likes |c|
+rightof(f,z)	|F| is to the right of z
+samerow(a,e)	|A| is in the same row as |e|
+smaller(d,x)	|D| is smaller than x
+small(d)	|D| is small
+frontof(x,a)	X is in front of |a|
+frontof(x,a)	X. is in front of |a|
+samesize(d,c)	|D| is the same size as |c|
+large(a)	|A| is large
+cube(c)	|C| is a cube
+sameshape(e,d)	|E| is the same shape as |d|
+smaller(c,x)	|C| is smaller than x
+samerow(f,x)	|F| is in the same row as x
+adjoins(c,f)	|C| adjoins |f|
+tet(x)	X is a tetrahedron
+tet(x)	X. is a tetrahedron
+adjoins(a,e)	|A| adjoins |e|
+samerow(y,x)	Y. is in the same row as x
+samerow(y,x)	Y is in the same row as x
+samesize(x,x)	X is the same size as x
+samesize(x,x)	X. is the same size as x
+sameshape(b,z)	|B| is the same shape as z
+samesize(e,d)	|E| is the same size as |d|
+smaller(y,x)	Y is smaller than x
+smaller(y,x)	Y. is smaller than x
+likes(y,x)	Y. likes x
+likes(y,x)	Y likes x
+samesize(x,a)	X is the same size as |a|
+samesize(x,a)	X. is the same size as |a|
+frontof(c,y)	|C| is in front of y
+large(x)	X is large
+large(x)	X. is large
+adjoins(f,d)	|F| adjoins |d|
+leftof(f,f)	|F| is to the left of |f|
+sameshape(b,a)	|B| is the same shape as |a|
+leftof(y,c)	Y is to the left of |c|
+leftof(y,c)	Y. is to the left of |c|
+leftof(d,y)	|D| is to the left of y
+samecol(b,d)	|B| is in the same column as |d|
+backof(d,d)	|D| is in back of |d|
+cube(z)	Z is a cube
+cube(z)	Z. is a cube
+samecol(d,y)	|D| is in the same column as y
+backof(c,z)	|C| is in back of z
+backof(a,z)	|A| is in back of z
+backof(y,x)	Y is in back of x
+backof(y,x)	Y. is in back of x
+smaller(a,c)	|A| is smaller than |c|
+larger(z,a)	Z is larger than |a|
+larger(z,a)	Z. is larger than |a|
+frontof(y,c)	Y is in front of |c|
+frontof(y,c)	Y. is in front of |c|
+likes(a,b)	|A| likes |b|
+rightof(d,f)	|D| is to the right of |f|
+samecol(x,d)	X is in the same column as |d|
+samecol(x,d)	X. is in the same column as |d|
+sameshape(a,c)	|A| is the same shape as |c|
+rightof(e,z)	|E| is to the right of z
+happy(a)	|A| is happy
+frontof(y,d)	Y. is in front of |d|
+frontof(y,d)	Y is in front of |d|
+likes(x,e)	X. likes |e|
+likes(x,e)	X likes |e|
+samecol(a,c)	|A| is in the same column as |c|
+leftof(x,z)	X. is to the left of z
+leftof(x,z)	X is to the left of z
+rightof(y,x)	Y is to the right of x
+rightof(y,x)	Y. is to the right of x
+backof(z,d)	Z. is in back of |d|
+backof(z,d)	Z is in back of |d|
+samerow(z,z)	Z. is in the same row as z
+samerow(z,z)	Z is in the same row as z
+likes(y,f)	Y. likes |f|
+likes(y,f)	Y likes |f|
+backof(f,b)	|F| is in back of |b|
+rightof(e,a)	|E| is to the right of |a|
+samecol(e,a)	|E| is in the same column as |a|
+frontof(e,z)	|E| is in front of z
+larger(y,a)	Y. is larger than |a|
+larger(y,a)	Y is larger than |a|
+larger(c,c)	|C| is larger than |c|
+sameshape(c,e)	|C| is the same shape as |e|
+samerow(c,a)	|C| is in the same row as |a|
+adjoins(f,b)	|F| adjoins |b|
+sameshape(f,b)	|F| is the same shape as |b|
+larger(f,f)	|F| is larger than |f|
+larger(z,b)	Z. is larger than |b|
+larger(z,b)	Z is larger than |b|
+rightof(f,a)	|F| is to the right of |a|
+small(y)	Y. is small
+small(y)	Y is small
+sameshape(a,d)	|A| is the same shape as |d|
+leftof(b,z)	|B| is to the left of z
+sameshape(x,f)	X. is the same shape as |f|
+sameshape(x,f)	X is the same shape as |f|
+smaller(c,e)	|C| is smaller than |e|
+samerow(f,y)	|F| is in the same row as y
+samesize(z,f)	Z is the same size as |f|
+samesize(z,f)	Z. is the same size as |f|
+samecol(b,z)	|B| is in the same column as z
+adjoins(x,f)	X adjoins |f|
+adjoins(x,f)	X. adjoins |f|
+rightof(c,y)	|C| is to the right of y
+frontof(a,f)	|A| is in front of |f|
+sameshape(c,z)	|C| is the same shape as z
+frontof(f,x)	|F| is in front of x
+smaller(y,c)	Y is smaller than |c|
+smaller(y,c)	Y. is smaller than |c|
+frontof(e,a)	|E| is in front of |a|
+leftof(e,f)	|E| is to the left of |f|
+samecol(z,x)	Z is in the same column as x
+samecol(z,x)	Z. is in the same column as x
+samecol(z,c)	Z is in the same column as |c|
+samecol(z,c)	Z. is in the same column as |c|
+frontof(f,b)	|F| is in front of |b|
+frontof(y,z)	Y. is in front of z
+frontof(y,z)	Y is in front of z
+smaller(f,f)	|F| is smaller than |f|
+backof(b,b)	|B| is in back of |b|
+larger(c,y)	|C| is larger than y
+samecol(c,y)	|C| is in the same column as y
+tet(f)	|F| is a tetrahedron
+larger(a,f)	|A| is larger than |f|
+sameshape(e,x)	|E| is the same shape as x
+adjoins(x,b)	X. adjoins |b|
+adjoins(x,b)	X adjoins |b|
+smaller(c,y)	|C| is smaller than y
+samesize(a,y)	|A| is the same size as y
+samecol(c,d)	|C| is in the same column as |d|
+larger(e,b)	|E| is larger than |b|
+rightof(b,b)	|B| is to the right of |b|
+leftof(y,z)	Y. is to the left of z
+leftof(y,z)	Y is to the left of z
+leftof(c,f)	|C| is to the left of |f|
+larger(d,y)	|D| is larger than y
+frontof(b,f)	|B| is in front of |f|
+backof(a,a)	|A| is in back of |a|
+rightof(a,a)	|A| is to the right of |a|
+adjoins(c,c)	|C| adjoins |c|
+samerow(e,d)	|E| is in the same row as |d|
+samecol(d,b)	|D| is in the same column as |b|
+sameshape(a,a)	|A| is the same shape as |a|
+large(d)	|D| is large
+samesize(y,e)	Y is the same size as |e|
+samesize(y,e)	Y. is the same size as |e|
+larger(z,x)	Z. is larger than x
+larger(z,x)	Z is larger than x
+sameshape(z,e)	Z is the same shape as |e|
+sameshape(z,e)	Z. is the same shape as |e|
+samerow(z,e)	Z is in the same row as |e|
+samerow(z,e)	Z. is in the same row as |e|
+backof(x,a)	X is in back of |a|
+backof(x,a)	X. is in back of |a|
+backof(c,y)	|C| is in back of y
+samesize(b,y)	|B| is the same size as y
+leftof(x,c)	X. is to the left of |c|
+leftof(x,c)	X is to the left of |c|
+samecol(a,z)	|A| is in the same column as z
+larger(a,d)	|A| is larger than |d|
+samerow(x,e)	X is in the same row as |e|
+samerow(x,e)	X. is in the same row as |e|
+leftof(b,c)	|B| is to the left of |c|
+leftof(z,z)	Z is to the left of z
+leftof(z,z)	Z. is to the left of z
+adjoins(e,b)	|E| adjoins |b|
+samecol(c,c)	|C| is in the same column as |c|
+leftof(f,b)	|F| is to the left of |b|
+sameshape(f,y)	|F| is the same shape as y
+frontof(d,d)	|D| is in front of |d|
+rightof(d,z)	|D| is to the right of z
+likes(z,e)	Z likes |e|
+likes(z,e)	Z. likes |e|
+rightof(a,z)	|A| is to the right of z
+frontof(x,e)	X. is in front of |e|
+frontof(x,e)	X is in front of |e|
+larger(z,e)	Z is larger than |e|
+larger(z,e)	Z. is larger than |e|
+backof(x,f)	X. is in back of |f|
+backof(x,f)	X is in back of |f|
+samerow(b,z)	|B| is in the same row as z
+likes(b,d)	|B| likes |d|
+samerow(z,d)	Z is in the same row as |d|
+samerow(z,d)	Z. is in the same row as |d|
+adjoins(z,e)	Z adjoins |e|
+adjoins(z,e)	Z. adjoins |e|
+samesize(f,c)	|F| is the same size as |c|
+backof(x,e)	X is in back of |e|
+backof(x,e)	X. is in back of |e|
+sameshape(d,a)	|D| is the same shape as |a|
+likes(d,a)	|D| likes |a|
+smaller(a,d)	|A| is smaller than |d|
+frontof(e,y)	|E| is in front of y
+samerow(x,b)	X. is in the same row as |b|
+samerow(x,b)	X is in the same row as |b|
+samesize(x,e)	X. is the same size as |e|
+samesize(x,e)	X is the same size as |e|
+adjoins(a,z)	|A| adjoins z
+rightof(z,b)	Z is to the right of |b|
+rightof(z,b)	Z. is to the right of |b|
+adjoins(y,c)	Y. adjoins |c|
+adjoins(y,c)	Y adjoins |c|
+backof(f,f)	|F| is in back of |f|
+sameshape(c,a)	|C| is the same shape as |a|
+leftof(a,z)	|A| is to the left of z
+samerow(b,c)	|B| is in the same row as |c|
+samesize(d,f)	|D| is the same size as |f|
+samesize(a,d)	|A| is the same size as |d|
+leftof(a,c)	|A| is to the left of |c|
+sameshape(e,a)	|E| is the same shape as |a|
+frontof(z,e)	Z. is in front of |e|
+frontof(z,e)	Z is in front of |e|
+likes(z,z)	Z. likes z
+likes(z,z)	Z likes z
+leftof(d,e)	|D| is to the left of |e|
+backof(d,x)	|D| is in back of x
+larger(f,c)	|F| is larger than |c|
+larger(d,b)	|D| is larger than |b|
+samerow(x,y)	X is in the same row as y
+samerow(x,y)	X. is in the same row as y
+adjoins(c,y)	|C| adjoins y
+cube(f)	|F| is a cube
+samesize(c,d)	|C| is the same size as |d|
+samecol(a,a)	|A| is in the same column as |a|
+backof(y,a)	Y. is in back of |a|
+backof(y,a)	Y is in back of |a|
+frontof(c,d)	|C| is in front of |d|
+rightof(x,y)	X. is to the right of y
+rightof(x,y)	X is to the right of y
+sameshape(z,z)	Z is the same shape as z
+sameshape(z,z)	Z. is the same shape as z
+larger(e,f)	|E| is larger than |f|
+samecol(d,a)	|D| is in the same column as |a|
+adjoins(a,a)	|A| adjoins |a|
+likes(e,d)	|E| likes |d|
+adjoins(b,b)	|B| adjoins |b|
+rightof(e,e)	|E| is to the right of |e|
+happy(y)	Y. is happy
+happy(y)	Y is happy
+larger(y,d)	Y is larger than |d|
+larger(y,d)	Y. is larger than |d|
+backof(y,z)	Y. is in back of z
+backof(y,z)	Y is in back of z
+leftof(c,z)	|C| is to the left of z
+larger(d,e)	|D| is larger than |e|
+backof(d,a)	|D| is in back of |a|
+backof(y,e)	Y is in back of |e|
+backof(y,e)	Y. is in back of |e|
+rightof(x,d)	X is to the right of |d|
+rightof(x,d)	X. is to the right of |d|
+sameshape(f,f)	|F| is the same shape as |f|
+medium(z)	Z is medium
+medium(z)	Z. is medium
+samecol(c,z)	|C| is in the same column as z
+likes(a,a)	|A| likes |a|
+rightof(d,e)	|D| is to the right of |e|
+samerow(c,c)	|C| is in the same row as |c|
+sameshape(d,b)	|D| is the same shape as |b|
+samecol(x,a)	X. is in the same column as |a|
+samecol(x,a)	X is in the same column as |a|
+adjoins(f,f)	|F| adjoins |f|
+rightof(c,z)	|C| is to the right of z
+sameshape(x,b)	X is the same shape as |b|
+sameshape(x,b)	X. is the same shape as |b|
+leftof(z,a)	Z is to the left of |a|
+leftof(z,a)	Z. is to the left of |a|
+likes(c,b)	|C| likes |b|
+larger(c,f)	|C| is larger than |f|
+rightof(f,e)	|F| is to the right of |e|
+frontof(z,d)	Z is in front of |d|
+frontof(z,d)	Z. is in front of |d|
+medium(c)	|C| is medium
+smaller(b,y)	|B| is smaller than y
+smaller(e,d)	|E| is smaller than |d|
+happy(b)	|B| is happy
+likes(y,e)	Y. likes |e|
+likes(y,e)	Y likes |e|
+sameshape(d,x)	|D| is the same shape as x
+samesize(e,y)	|E| is the same size as y
+sameshape(y,e)	Y. is the same shape as |e|
+sameshape(y,e)	Y is the same shape as |e|
+samerow(a,z)	|A| is in the same row as z
+frontof(a,z)	|A| is in front of z
+sameshape(c,f)	|C| is the same shape as |f|
+samerow(x,a)	X is in the same row as |a|
+samerow(x,a)	X. is in the same row as |a|
+smaller(f,c)	|F| is smaller than |c|
+samecol(b,a)	|B| is in the same column as |a|
+samerow(y,b)	Y is in the same row as |b|
+samerow(y,b)	Y. is in the same row as |b|
+leftof(e,b)	|E| is to the left of |b|
+adjoins(d,f)	|D| adjoins |f|
+samesize(f,x)	|F| is the same size as x
+rightof(c,c)	|C| is to the right of |c|
+samerow(c,z)	|C| is in the same row as z
+likes(x,d)	X. likes |d|
+likes(x,d)	X likes |d|
+backof(e,c)	|E| is in back of |c|
+smaller(d,f)	|D| is smaller than |f|
+sameshape(x,e)	X. is the same shape as |e|
+sameshape(x,e)	X is the same shape as |e|
+likes(f,c)	|F| likes |c|
+samesize(z,a)	Z. is the same size as |a|
+samesize(z,a)	Z is the same size as |a|
+tet(b)	|B| is a tetrahedron
+samesize(y,b)	Y. is the same size as |b|
+samesize(y,b)	Y is the same size as |b|
+leftof(a,f)	|A| is to the left of |f|
+smaller(x,z)	X. is smaller than z
+smaller(x,z)	X is smaller than z
+frontof(e,d)	|E| is in front of |d|
+likes(z,y)	Z likes y
+likes(z,y)	Z. likes y
+adjoins(e,x)	|E| adjoins x
+leftof(e,e)	|E| is to the left of |e|
+larger(b,y)	|B| is larger than y
+larger(e,y)	|E| is larger than y
+likes(z,b)	Z. likes |b|
+likes(z,b)	Z likes |b|
+smaller(f,x)	|F| is smaller than x
+smaller(e,c)	|E| is smaller than |c|
+larger(c,b)	|C| is larger than |b|
+samesize(y,y)	Y. is the same size as y
+samesize(y,y)	Y is the same size as y
+samecol(y,f)	Y. is in the same column as |f|
+samecol(y,f)	Y is in the same column as |f|
+backof(z,c)	Z is in back of |c|
+backof(z,c)	Z. is in back of |c|
+samecol(x,z)	X. is in the same column as z
+samecol(x,z)	X is in the same column as z
+sameshape(z,a)	Z is the same shape as |a|
+sameshape(z,a)	Z. is the same shape as |a|
+samesize(c,x)	|C| is the same size as x
+samesize(z,x)	Z is the same size as x
+samesize(z,x)	Z. is the same size as x
+sameshape(z,f)	Z. is the same shape as |f|
+sameshape(z,f)	Z is the same shape as |f|
+leftof(a,a)	|A| is to the left of |a|
+rightof(b,e)	|B| is to the right of |e|
+dodec(z)	Z. is a dodecahedron
+dodec(z)	Z is a dodecahedron
+frontof(b,c)	|B| is in front of |c|
+rightof(z,x)	Z is to the right of x
+rightof(z,x)	Z. is to the right of x
+rightof(a,f)	|A| is to the right of |f|
+likes(a,x)	|A| likes x
+larger(c,z)	|C| is larger than z
+likes(x,y)	X. likes y
+likes(x,y)	X likes y
+smaller(z,d)	Z is smaller than |d|
+smaller(z,d)	Z. is smaller than |d|
+samesize(b,c)	|B| is the same size as |c|
+backof(x,b)	X. is in back of |b|
+backof(x,b)	X is in back of |b|
+samesize(f,f)	|F| is the same size as |f|
+adjoins(y,z)	Y. adjoins z
+adjoins(y,z)	Y adjoins z
+dodec(c)	|C| is a dodecahedron
+backof(x,z)	X is in back of z
+backof(x,z)	X. is in back of z
+leftof(f,y)	|F| is to the left of y
+samecol(f,y)	|F| is in the same column as y
+samesize(b,d)	|B| is the same size as |d|
+sameshape(d,e)	|D| is the same shape as |e|
+samecol(a,y)	|A| is in the same column as y
+rightof(z,d)	Z is to the right of |d|
+rightof(z,d)	Z. is to the right of |d|
+larger(f,d)	|F| is larger than |d|
+samerow(x,f)	X. is in the same row as |f|
+samerow(x,f)	X is in the same row as |f|
+likes(d,e)	|D| likes |e|
+frontof(x,b)	X is in front of |b|
+frontof(x,b)	X. is in front of |b|
+likes(b,x)	|B| likes x
+rightof(y,e)	Y is to the right of |e|
+rightof(y,e)	Y. is to the right of |e|
+likes(f,x)	|F| likes x
+samerow(a,c)	|A| is in the same row as |c|
+samerow(a,d)	|A| is in the same row as |d|
+larger(z,z)	Z is larger than z
+larger(z,z)	Z. is larger than z
+rightof(f,y)	|F| is to the right of y
+rightof(d,y)	|D| is to the right of y
+backof(b,x)	|B| is in back of x
+smaller(b,d)	|B| is smaller than |d|
+samesize(d,b)	|D| is the same size as |b|
+smaller(d,y)	|D| is smaller than y
+backof(e,x)	|E| is in back of x
+adjoins(f,x)	|F| adjoins x
+likes(b,y)	|B| likes y
+samerow(d,f)	|D| is in the same row as |f|
+sameshape(e,e)	|E| is the same shape as |e|
+cube(b)	|B| is a cube
+likes(e,x)	|E| likes x
+smaller(x,d)	X is smaller than |d|
+smaller(x,d)	X. is smaller than |d|
+frontof(c,c)	|C| is in front of |c|
+leftof(d,a)	|D| is to the left of |a|
+adjoins(d,a)	|D| adjoins |a|
+adjoins(z,a)	Z adjoins |a|
+adjoins(z,a)	Z. adjoins |a|
+backof(f,c)	|F| is in back of |c|
+samesize(e,e)	|E| is the same size as |e|
+larger(b,f)	|B| is larger than |f|
+sameshape(b,b)	|B| is the same shape as |b|
+larger(f,x)	|F| is larger than x
+frontof(c,x)	|C| is in front of x
+samerow(d,y)	|D| is in the same row as y
+samecol(b,e)	|B| is in the same column as |e|
+likes(c,f)	|C| likes |f|
+samerow(y,f)	Y. is in the same row as |f|
+samerow(y,f)	Y is in the same row as |f|
+cube(y)	Y. is a cube
+cube(y)	Y is a cube
+samesize(a,a)	|A| is the same size as |a|
+leftof(d,z)	|D| is to the left of z
+rightof(b,z)	|B| is to the right of z
+leftof(y,b)	Y is to the left of |b|
+leftof(y,b)	Y. is to the left of |b|
+larger(d,a)	|D| is larger than |a|
+backof(d,e)	|D| is in back of |e|
+backof(a,y)	|A| is in back of y
+samesize(c,a)	|C| is the same size as |a|
+frontof(y,b)	Y is in front of |b|
+frontof(y,b)	Y. is in front of |b|
+samecol(d,z)	|D| is in the same column as z
+medium(f)	|F| is medium
+samecol(x,e)	X is in the same column as |e|
+samecol(x,e)	X. is in the same column as |e|
+sameshape(y,y)	Y is the same shape as y
+sameshape(y,y)	Y. is the same shape as y
+larger(y,z)	Y is larger than z
+larger(y,z)	Y. is larger than z
+smaller(b,z)	|B| is smaller than z
+frontof(z,a)	Z. is in front of |a|
+frontof(z,a)	Z is in front of |a|
+larger(x,f)	X. is larger than |f|
+larger(x,f)	X is larger than |f|
+sameshape(b,e)	|B| is the same shape as |e|
+adjoins(a,d)	|A| adjoins |d|
+likes(y,b)	Y likes |b|
+likes(y,b)	Y. likes |b|
+smaller(x,y)	X. is smaller than y
+smaller(x,y)	X is smaller than y
+happy(z)	Z is happy
+happy(z)	Z. is happy
+backof(z,e)	Z. is in back of |e|
+backof(z,e)	Z is in back of |e|
+rightof(y,y)	Y. is to the right of y
+rightof(y,y)	Y is to the right of y
+samecol(a,b)	|A| is in the same column as |b|
+adjoins(b,y)	|B| adjoins y
+likes(e,y)	|E| likes y
+smaller(d,a)	|D| is smaller than |a|
+backof(b,z)	|B| is in back of z
+rightof(e,b)	|E| is to the right of |b|
+frontof(z,x)	Z. is in front of x
+frontof(z,x)	Z is in front of x
+likes(y,a)	Y likes |a|
+likes(y,a)	Y. likes |a|
+sameshape(y,a)	Y. is the same shape as |a|
+sameshape(y,a)	Y is the same shape as |a|
+sameshape(c,b)	|C| is the same shape as |b|
+samesize(d,e)	|D| is the same size as |e|
+likes(a,d)	|A| likes |d|
+sameshape(f,a)	|F| is the same shape as |a|
+adjoins(d,x)	|D| adjoins x
+medium(y)	Y. is medium
+medium(y)	Y is medium
+samecol(z,f)	Z. is in the same column as |f|
+samecol(z,f)	Z is in the same column as |f|
+adjoins(f,c)	|F| adjoins |c|
+larger(x,a)	X is larger than |a|
+larger(x,a)	X. is larger than |a|
+sameshape(a,e)	|A| is the same shape as |e|
+small(x)	X is small
+small(x)	X. is small
+smaller(c,d)	|C| is smaller than |d|
+smaller(e,z)	|E| is smaller than z
+leftof(z,b)	Z. is to the left of |b|
+leftof(z,b)	Z is to the left of |b|
+sameshape(x,a)	X is the same shape as |a|
+sameshape(x,a)	X. is the same shape as |a|
+samecol(z,b)	Z. is in the same column as |b|
+samecol(z,b)	Z is in the same column as |b|
+smaller(d,b)	|D| is smaller than |b|
+likes(d,y)	|D| likes y
+samerow(x,z)	X is in the same row as z
+samerow(x,z)	X. is in the same row as z
+leftof(z,e)	Z is to the left of |e|
+leftof(z,e)	Z. is to the left of |e|
+samecol(z,e)	Z is in the same column as |e|
+samecol(z,e)	Z. is in the same column as |e|
+sameshape(y,z)	Y is the same shape as z
+sameshape(y,z)	Y. is the same shape as z
+frontof(a,e)	|A| is in front of |e|
+frontof(f,c)	|F| is in front of |c|
+samerow(d,x)	|D| is in the same row as x
+smaller(f,d)	|F| is smaller than |d|
+smaller(a,z)	|A| is smaller than z
+samecol(b,b)	|B| is in the same column as |b|
+leftof(e,a)	|E| is to the left of |a|
+samecol(e,c)	|E| is in the same column as |c|
+backof(d,b)	|D| is in back of |b|
+frontof(y,y)	Y. is in front of y
+frontof(y,y)	Y is in front of y
+adjoins(d,b)	|D| adjoins |b|
+tet(e)	|E| is a tetrahedron
+sameshape(e,y)	|E| is the same shape as y
+smaller(c,c)	|C| is smaller than |c|
+samerow(f,c)	|F| is in the same row as |c|
+samesize(a,z)	|A| is the same size as z
+smaller(y,a)	Y is smaller than |a|
+smaller(y,a)	Y. is smaller than |a|
+larger(d,x)	|D| is larger than x
+leftof(a,e)	|A| is to the left of |e|
+leftof(c,e)	|C| is to the left of |e|
+samerow(e,c)	|E| is in the same row as |c|
+leftof(f,z)	|F| is to the left of z
+rightof(b,a)	|B| is to the right of |a|
+likes(e,b)	|E| likes |b|
+larger(e,z)	|E| is larger than z
+rightof(z,f)	Z is to the right of |f|
+rightof(z,f)	Z. is to the right of |f|
+samesize(z,e)	Z. is the same size as |e|
+samesize(z,e)	Z is the same size as |e|
+samerow(f,z)	|F| is in the same row as z
+samerow(d,e)	|D| is in the same row as |e|
+backof(c,x)	|C| is in back of x
+samesize(y,f)	Y is the same size as |f|
+samesize(y,f)	Y. is the same size as |f|
+adjoins(e,c)	|E| adjoins |c|
+samecol(y,e)	Y is in the same column as |e|
+samecol(y,e)	Y. is in the same column as |e|
+larger(b,x)	|B| is larger than x
+larger(a,e)	|A| is larger than |e|
+leftof(x,d)	X is to the left of |d|
+leftof(x,d)	X. is to the left of |d|
+samerow(z,f)	Z is in the same row as |f|
+samerow(z,f)	Z. is in the same row as |f|
+rightof(z,z)	Z is to the right of z
+rightof(z,z)	Z. is to the right of z
+rightof(c,d)	|C| is to the right of |d|
+samecol(f,e)	|F| is in the same column as |e|
+samesize(b,x)	|B| is the same size as x
+rightof(y,b)	Y. is to the right of |b|
+rightof(y,b)	Y is to the right of |b|
+backof(b,e)	|B| is in back of |e|
+samerow(e,z)	|E| is in the same row as z
+dodec(y)	Y is a dodecahedron
+dodec(y)	Y. is a dodecahedron
+samecol(c,b)	|C| is in the same column as |b|
+adjoins(a,y)	|A| adjoins y
+sameshape(a,x)	|A| is the same shape as x
+samecol(d,d)	|D| is in the same column as |d|
+frontof(b,x)	|B| is in front of x
+sameshape(x,z)	X. is the same shape as z
+sameshape(x,z)	X is the same shape as z
+frontof(d,e)	|D| is in front of |e|
+likes(x,f)	X likes |f|
+likes(x,f)	X. likes |f|
+sameshape(f,x)	|F| is the same shape as x
+likes(b,e)	|B| likes |e|
+small(c)	|C| is small
+adjoins(y,b)	Y. adjoins |b|
+adjoins(y,b)	Y adjoins |b|
+samecol(f,z)	|F| is in the same column as z
+samesize(f,b)	|F| is the same size as |b|
+rightof(a,b)	|A| is to the right of |b|
+samesize(e,a)	|E| is the same size as |a|
+likes(d,b)	|D| likes |b|
+samerow(x,c)	X. is in the same row as |c|
+samerow(x,c)	X is in the same row as |c|
+adjoins(e,d)	|E| adjoins |d|
+samerow(c,x)	|C| is in the same row as x
+leftof(e,z)	|E| is to the left of z
+samecol(e,z)	|E| is in the same column as z
+samesize(x,d)	X. is the same size as |d|
+samesize(x,d)	X is the same size as |d|
+samerow(f,d)	|F| is in the same row as |d|
+larger(z,f)	Z. is larger than |f|
+larger(z,f)	Z is larger than |f|
+samesize(d,a)	|D| is the same size as |a|
+samerow(b,d)	|B| is in the same row as |d|
+likes(e,a)	|E| likes |a|
+happy(e)	|E| is happy
+frontof(x,c)	X is in front of |c|
+frontof(x,c)	X. is in front of |c|
+rightof(e,f)	|E| is to the right of |f|
+sameshape(e,b)	|E| is the same shape as |b|
+samesize(a,e)	|A| is the same size as |e|
+smaller(c,z)	|C| is smaller than z
+leftof(d,f)	|D| is to the left of |f|
+samerow(y,z)	Y. is in the same row as z
+samerow(y,z)	Y is in the same row as z
+leftof(y,f)	Y. is to the left of |f|
+leftof(y,f)	Y is to the left of |f|
+cube(e)	|E| is a cube
+samesize(c,e)	|C| is the same size as |e|
+frontof(y,f)	Y. is in front of |f|
+frontof(y,f)	Y is in front of |f|
+backof(d,y)	|D| is in back of y
+backof(f,x)	|F| is in back of x
+adjoins(x,x)	X. adjoins x
+adjoins(x,x)	X adjoins x
+frontof(a,a)	|A| is in front of |a|
+larger(b,a)	|B| is larger than |a|
+samecol(a,f)	|A| is in the same column as |f|
+samerow(d,z)	|D| is in the same row as z
+smaller(z,x)	Z. is smaller than x
+smaller(z,x)	Z is smaller than x
+sameshape(z,y)	Z is the same shape as y
+sameshape(z,y)	Z. is the same shape as y
+likes(c,c)	|C| likes |c|
+rightof(x,a)	X. is to the right of |a|
+rightof(x,a)	X is to the right of |a|
+backof(c,c)	|C| is in back of |c|
+smaller(y,b)	Y is smaller than |b|
+smaller(y,b)	Y. is smaller than |b|
+larger(c,a)	|C| is larger than |a|
+backof(e,d)	|E| is in back of |d|
+smaller(b,a)	|B| is smaller than |a|
+larger(y,e)	Y is larger than |e|
+larger(y,e)	Y. is larger than |e|
+likes(z,f)	Z likes |f|
+likes(z,f)	Z. likes |f|
+larger(d,d)	|D| is larger than |d|
+leftof(y,a)	Y is to the left of |a|
+leftof(y,a)	Y. is to the left of |a|
+rightof(z,e)	Z. is to the right of |e|
+rightof(z,e)	Z is to the right of |e|
+leftof(c,y)	|C| is to the left of y
+backof(d,f)	|D| is in back of |f|
+backof(y,d)	Y is in back of |d|
+backof(y,d)	Y. is in back of |d|
+samesize(c,b)	|C| is the same size as |b|
+larger(a,x)	|A| is larger than x
+frontof(b,y)	|B| is in front of y
+backof(y,b)	Y. is in back of |b|
+backof(y,b)	Y is in back of |b|
+medium(e)	|E| is medium
+rightof(d,d)	|D| is to the right of |d|
+samecol(x,b)	X. is in the same column as |b|
+samecol(x,b)	X is in the same column as |b|
+sameshape(f,e)	|F| is the same shape as |e|
+larger(x,e)	X. is larger than |e|
+larger(x,e)	X is larger than |e|
+frontof(d,x)	|D| is in front of x
+rightof(f,d)	|F| is to the right of |d|
+backof(f,y)	|F| is in back of y
+samerow(c,b)	|C| is in the same row as |b|
+rightof(e,x)	|E| is to the right of x
+leftof(z,f)	Z. is to the left of |f|
+leftof(z,f)	Z is to the left of |f|
+larger(a,y)	|A| is larger than y
+leftof(x,x)	X is to the left of x
+leftof(x,x)	X. is to the left of x
+smaller(z,a)	Z is smaller than |a|
+smaller(z,a)	Z. is smaller than |a|
+medium(b)	|B| is medium
+likes(y,d)	Y. likes |d|
+likes(y,d)	Y likes |d|
+samerow(z,x)	Z is in the same row as x
+samerow(z,x)	Z. is in the same row as x
+sameshape(y,f)	Y is the same shape as |f|
+sameshape(y,f)	Y. is the same shape as |f|
+frontof(a,y)	|A| is in front of y
+smaller(y,f)	Y. is smaller than |f|
+smaller(y,f)	Y is smaller than |f|
+samecol(b,f)	|B| is in the same column as |f|
+samerow(y,a)	Y is in the same row as |a|
+samerow(y,a)	Y. is in the same row as |a|
+samecol(z,y)	Z is in the same column as y
+samecol(z,y)	Z. is in the same column as y
+samesize(e,z)	|E| is the same size as z
+samecol(f,a)	|F| is in the same column as |a|
+samerow(e,f)	|E| is in the same row as |f|
+leftof(b,d)	|B| is to the left of |d|
+backof(e,b)	|E| is in back of |b|
+frontof(x,x)	X is in front of x
+frontof(x,x)	X. is in front of x
+sameshape(x,d)	X. is the same shape as |d|
+sameshape(x,d)	X is the same shape as |d|
+rightof(f,c)	|F| is to the right of |c|
+likes(c,x)	|C| likes x
+larger(f,y)	|F| is larger than y
+adjoins(d,e)	|D| adjoins |e|
+tet(a)	|A| is a tetrahedron
+larger(y,y)	Y is larger than y
+larger(y,y)	Y. is larger than y
+likes(z,c)	Z. likes |c|
+likes(z,c)	Z likes |c|
+samerow(c,d)	|C| is in the same row as |d|
+frontof(e,c)	|E| is in front of |c|
+smaller(f,y)	|F| is smaller than y
+leftof(e,d)	|E| is to the left of |d|
+samecol(e,f)	|E| is in the same column as |f|
+smaller(a,y)	|A| is smaller than y
+rightof(z,a)	Z. is to the right of |a|
+rightof(z,a)	Z is to the right of |a|
+samerow(d,a)	|D| is in the same row as |a|
+samesize(y,z)	Y. is the same size as z
+samesize(y,z)	Y is the same size as z
+large(c)	|C| is large
+likes(e,z)	|E| likes z
+sameshape(b,x)	|B| is the same shape as x
+adjoins(x,c)	X. adjoins |c|
+adjoins(x,c)	X adjoins |c|
+adjoins(c,z)	|C| adjoins z
+likes(f,y)	|F| likes y
+adjoins(x,d)	X adjoins |d|
+adjoins(x,d)	X. adjoins |d|
+leftof(y,x)	Y. is to the left of x
+leftof(y,x)	Y is to the left of x
+samecol(c,f)	|C| is in the same column as |f|
+samesize(c,y)	|C| is the same size as y
+leftof(y,d)	Y. is to the left of |d|
+leftof(y,d)	Y is to the left of |d|
+dodec(e)	|E| is a dodecahedron
+adjoins(b,f)	|B| adjoins |f|
+rightof(b,d)	|B| is to the right of |d|
+backof(a,c)	|A| is in back of |c|
+frontof(d,a)	|D| is in front of |a|
+sameshape(b,f)	|B| is the same shape as |f|
+samesize(f,e)	|F| is the same size as |e|
+backof(x,c)	X. is in back of |c|
+backof(x,c)	X is in back of |c|
+samesize(b,b)	|B| is the same size as |b|
+rightof(x,b)	X. is to the right of |b|
+rightof(x,b)	X is to the right of |b|
+likes(f,z)	|F| likes z
+dodec(b)	|B| is a dodecahedron
+samesize(y,c)	Y. is the same size as |c|
+samesize(y,c)	Y is the same size as |c|
+adjoins(x,z)	X adjoins z
+adjoins(x,z)	X. adjoins z
+sameshape(d,d)	|D| is the same shape as |d|
+leftof(x,a)	X. is to the left of |a|
+leftof(x,a)	X is to the left of |a|
+samerow(z,c)	Z. is in the same row as |c|
+samerow(z,c)	Z is in the same row as |c|
+samecol(a,x)	|A| is in the same column as x
+adjoins(y,y)	Y adjoins y
+adjoins(y,y)	Y. adjoins y
+samecol(f,f)	|F| is in the same column as |f|
+backof(c,d)	|C| is in back of |d|
+likes(d,f)	|D| likes |f|
+adjoins(z,y)	Z. adjoins y
+adjoins(z,y)	Z adjoins y
+likes(z,d)	Z likes |d|
+likes(z,d)	Z. likes |d|
+larger(f,z)	|F| is larger than z
+smaller(b,e)	|B| is smaller than |e|
+rightof(a,x)	|A| is to the right of x
+larger(x,y)	X is larger than y
+larger(x,y)	X. is larger than y
+likes(y,z)	Y. likes z
+likes(y,z)	Y likes z
+larger(z,y)	Z is larger than y
+larger(z,y)	Z. is larger than y
+backof(b,y)	|B| is in back of y
+rightof(d,x)	|D| is to the right of x
+backof(e,z)	|E| is in back of z
+backof(x,x)	X. is in back of x
+backof(x,x)	X is in back of x
+larger(a,b)	|A| is larger than |b|
+sameshape(x,y)	X. is the same shape as y
+sameshape(x,y)	X is the same shape as y
+rightof(f,x)	|F| is to the right of x
+frontof(d,f)	|D| is in front of |f|
+adjoins(f,y)	|F| adjoins y
+likes(e,e)	|E| likes |e|
+small(f)	|F| is small
+dodec(f)	|F| is a dodecahedron
+likes(b,f)	|B| likes |f|
+samerow(b,x)	|B| is in the same row as x
+smaller(d,z)	|D| is smaller than z
+smaller(x,e)	X is smaller than |e|
+smaller(x,e)	X. is smaller than |e|
+likes(y,y)	Y. likes y
+likes(y,y)	Y likes y
+sameshape(e,f)	|E| is the same shape as |f|
+samesize(d,z)	|D| is the same size as z
+samesize(e,f)	|E| is the same size as |f|
+smaller(b,c)	|B| is smaller than |c|
+likes(b,a)	|B| likes |a|
+likes(x,x)	X likes x
+likes(x,x)	X. likes x
+smaller(a,b)	|A| is smaller than |b|
+leftof(e,y)	|E| is to the left of y
+adjoins(z,b)	Z. adjoins |b|
+adjoins(z,b)	Z adjoins |b|
+larger(b,e)	|B| is larger than |e|
+samecol(e,y)	|E| is in the same column as y
+samesize(x,c)	X is the same size as |c|
+samesize(x,c)	X. is the same size as |c|
+likes(d,x)	|D| likes x
+rightof(x,x)	X is to the right of x
+rightof(x,x)	X. is to the right of x
+rightof(z,y)	Z. is to the right of y
+rightof(z,y)	Z is to the right of y
+leftof(f,d)	|F| is to the left of |d|
+larger(b,d)	|B| is larger than |d|
+larger(e,c)	|E| is larger than |c|
+frontof(e,x)	|E| is in front of x
+samesize(a,b)	|A| is the same size as |b|
+cube(x)	X. is a cube
+cube(x)	X is a cube
+sameshape(y,b)	Y is the same shape as |b|
+sameshape(y,b)	Y. is the same shape as |b|
+larger(b,c)	|B| is larger than |c|
+leftof(y,e)	Y. is to the left of |e|
+leftof(y,e)	Y is to the left of |e|
+samerow(y,e)	Y. is in the same row as |e|
+samerow(y,e)	Y is in the same row as |e|
+samesize(c,f)	|C| is the same size as |f|
+backof(d,z)	|D| is in back of z
+frontof(y,a)	Y is in front of |a|
+frontof(y,a)	Y. is in front of |a|
+rightof(b,y)	|B| is to the right of y
+frontof(z,b)	Z is in front of |b|
+frontof(z,b)	Z. is in front of |b|
+medium(a)	|A| is medium
+smaller(z,b)	Z. is smaller than |b|
+smaller(z,b)	Z is smaller than |b|
+adjoins(d,z)	|D| adjoins z
+frontof(f,d)	|F| is in front of |d|
+leftof(d,b)	|D| is to the left of |b|
+adjoins(a,c)	|A| adjoins |c|
+frontof(c,b)	|C| is in front of |b|
+samesize(x,z)	X. is the same size as z
+samesize(x,z)	X is the same size as z
+smaller(z,e)	Z is smaller than |e|
+smaller(z,e)	Z. is smaller than |e|
+samecol(a,e)	|A| is in the same column as |e|
+larger(e,d)	|E| is larger than |d|
+smaller(x,f)	X is smaller than |f|
+smaller(x,f)	X. is smaller than |f|
+cube(a)	|A| is a cube
+sameshape(b,d)	|B| is the same shape as |d|
+backof(c,f)	|C| is in back of |f|
+larger(y,b)	Y. is larger than |b|
+larger(y,b)	Y is larger than |b|
+smaller(b,b)	|B| is smaller than |b|
+frontof(z,y)	Z. is in front of y
+frontof(z,y)	Z is in front of y
+rightof(y,z)	Y. is to the right of z
+rightof(y,z)	Y is to the right of z
+sameshape(c,c)	|C| is the same shape as |c|
+smaller(e,x)	|E| is smaller than x
+rightof(e,c)	|E| is to the right of |c|
+adjoins(b,a)	|B| adjoins |a|
+backof(f,d)	|F| is in back of |d|
+samesize(d,d)	|D| is the same size as |d|
+frontof(y,x)	Y is in front of x
+frontof(y,x)	Y. is in front of x
+sameshape(e,c)	|E| is the same shape as |c|
+medium(x)	X is medium
+medium(x)	X. is medium
+sameshape(a,f)	|A| is the same shape as |f|
+rightof(d,c)	|D| is to the right of |c|
+adjoins(d,y)	|D| adjoins y
+leftof(z,c)	Z. is to the left of |c|
+leftof(z,c)	Z is to the left of |c|
+likes(a,e)	|A| likes |e|
+leftof(b,x)	|B| is to the left of x
+backof(e,f)	|E| is in back of |f|
+smaller(d,c)	|D| is smaller than |c|
+samecol(b,x)	|B| is in the same column as x
+frontof(a,c)	|A| is in front of |c|
+frontof(e,f)	|E| is in front of |f|
+smaller(f,z)	|F| is smaller than z
+samerow(c,f)	|C| is in the same row as |f|
+smaller(e,b)	|E| is smaller than |b|
+likes(b,b)	|B| likes |b|
+likes(d,z)	|D| likes z
+samecol(x,f)	X is in the same column as |f|
+samecol(x,f)	X. is in the same column as |f|
+frontof(a,d)	|A| is in front of |d|
+happy(f)	|F| is happy
+sameshape(c,x)	|C| is the same shape as x
+frontof(c,a)	|C| is in front of |a|
+samecol(e,b)	|E| is in the same column as |b|
+smaller(y,e)	Y. is smaller than |e|
+smaller(y,e)	Y is smaller than |e|
+samerow(a,a)	|A| is in the same row as |a|
+samecol(z,z)	Z. is in the same column as z
+samecol(z,z)	Z is in the same column as z
+samecol(b,c)	|B| is in the same column as |c|
+samerow(d,d)	|D| is in the same row as |d|
+backof(d,c)	|D| is in back of |c|
+happy(d)	|D| is happy
+adjoins(y,e)	Y adjoins |e|
+adjoins(y,e)	Y. adjoins |e|
+smaller(f,e)	|F| is smaller than |e|
+sameshape(e,z)	|E| is the same shape as z
+leftof(b,a)	|B| is to the left of |a|
+rightof(c,e)	|C| is to the right of |e|
+sameshape(z,d)	Z. is the same shape as |d|
+sameshape(z,d)	Z is the same shape as |d|
+smaller(c,b)	|C| is smaller than |b|
+adjoins(b,d)	|B| adjoins |d|
+smaller(d,d)	|D| is smaller than |d|
+rightof(d,a)	|D| is to the right of |a|
+samesize(z,c)	Z is the same size as |c|
+samesize(z,c)	Z. is the same size as |c|
+leftof(a,d)	|A| is to the left of |d|
+likes(y,c)	Y likes |c|
+likes(y,c)	Y. likes |c|
+rightof(x,z)	X is to the right of z
+rightof(x,z)	X. is to the right of z
+samecol(z,a)	Z is in the same column as |a|
+samecol(z,a)	Z. is in the same column as |a|
+samerow(e,b)	|E| is in the same row as |b|
+larger(x,b)	X is larger than |b|
+larger(x,b)	X. is larger than |b|
+dodec(a)	|A| is a dodecahedron
+tet(d)	|D| is a tetrahedron
+leftof(c,d)	|C| is to the left of |d|
+samesize(z,d)	Z. is the same size as |d|
+samesize(z,d)	Z is the same size as |d|
+larger(y,c)	Y. is larger than |c|
+larger(y,c)	Y is larger than |c|
+samecol(e,e)	|E| is in the same column as |e|
+frontof(f,e)	|F| is in front of |e|
+large(f)	|F| is large
+samerow(d,b)	|D| is in the same row as |b|
+backof(z,y)	Z. is in back of y
+backof(z,y)	Z is in back of y
+smaller(x,b)	X. is smaller than |b|
+smaller(x,b)	X is smaller than |b|
+samerow(c,y)	|C| is in the same row as y
+samecol(y,d)	Y is in the same column as |d|
+samecol(y,d)	Y. is in the same column as |d|
+sameshape(z,c)	Z is the same shape as |c|
+sameshape(z,c)	Z. is the same shape as |c|
+leftof(x,e)	X is to the left of |e|
+leftof(x,e)	X. is to the left of |e|
+likes(x,z)	X. likes z
+likes(x,z)	X likes z
+larger(c,x)	|C| is larger than x
+rightof(y,c)	Y. is to the right of |c|
+rightof(y,c)	Y is to the right of |c|
+samecol(f,b)	|F| is in the same column as |b|
+samesize(f,z)	|F| is the same size as z
+leftof(z,x)	Z. is to the left of x
+leftof(z,x)	Z is to the left of x
+samecol(x,x)	X. is in the same column as x
+samecol(x,x)	X is in the same column as x
+samecol(d,c)	|D| is in the same column as |c|
+adjoins(a,x)	|A| adjoins x
+frontof(b,a)	|B| is in front of |a|
+samecol(c,a)	|C| is in the same column as |a|
+samesize(c,z)	|C| is the same size as z
+dodec(x)	X. is a dodecahedron
+dodec(x)	X is a dodecahedron
+adjoins(c,a)	|C| adjoins |a|
+sameshape(a,y)	|A| is the same shape as y
+backof(a,f)	|A| is in back of |f|
+leftof(c,c)	|C| is to the left of |c|
+samecol(d,e)	|D| is in the same column as |e|
+samerow(e,y)	|E| is in the same row as y
+frontof(d,b)	|D| is in front of |b|
+adjoins(b,c)	|B| adjoins |c|
+backof(x,d)	X is in back of |d|
+backof(x,d)	X. is in back of |d|
+rightof(a,d)	|A| is to the right of |d|
+samesize(d,y)	|D| is the same size as y
+small(b)	|B| is small
+leftof(f,c)	|F| is to the left of |c|
+rightof(a,c)	|A| is to the right of |c|
+sameshape(d,c)	|D| is the same shape as |c|
+samesize(b,f)	|B| is the same size as |f|
+adjoins(e,f)	|E| adjoins |f|
+backof(z,a)	Z is in back of |a|
+backof(z,a)	Z. is in back of |a|
+rightof(y,d)	Y is to the right of |d|
+rightof(y,d)	Y. is to the right of |d|
+samesize(f,a)	|F| is the same size as |a|
+smaller(a,f)	|A| is smaller than |f|
+likes(d,c)	|D| likes |c|
+smaller(b,f)	|B| is smaller than |f|
+samesize(e,b)	|E| is the same size as |b|
+likes(f,f)	|F| likes |f|
+likes(a,f)	|A| likes |f|
+samerow(f,e)	|F| is in the same row as |e|
+samesize(z,z)	Z. is the same size as z
+samesize(z,z)	Z is the same size as z
+larger(y,f)	Y is larger than |f|
+larger(y,f)	Y. is larger than |f|
+leftof(z,d)	Z is to the left of |d|
+leftof(z,d)	Z. is to the left of |d|
+samerow(b,e)	|B| is in the same row as |e|
+larger(x,z)	X. is larger than z
+larger(x,z)	X is larger than z
+likes(b,z)	|B| likes z
+likes(x,b)	X likes |b|
+likes(x,b)	X. likes |b|
+small(e)	|E| is small
+samecol(y,y)	Y is in the same column as y
+samecol(y,y)	Y. is in the same column as y
+samerow(y,y)	Y is in the same row as y
+samerow(y,y)	Y. is in the same row as y
+samesize(a,f)	|A| is the same size as |f|
+cube(d)	|D| is a cube
+adjoins(x,y)	X. adjoins y
+adjoins(x,y)	X adjoins y
+samesize(x,y)	X is the same size as y
+samesize(x,y)	X. is the same size as y
+tet(y)	Y. is a tetrahedron
+tet(y)	Y is a tetrahedron
+adjoins(a,f)	|A| adjoins |f|
+smaller(a,a)	|A| is smaller than |a|
+likes(c,y)	|C| likes y
+frontof(c,f)	|C| is in front of |f|
+larger(c,e)	|C| is larger than |e|
+backof(b,d)	|B| is in back of |d|
+larger(f,a)	|F| is larger than |a|
+sameshape(b,y)	|B| is the same shape as y
+sameshape(z,x)	Z. is the same shape as x
+sameshape(z,x)	Z is the same shape as x
+large(y)	Y. is large
+large(y)	Y is large
+backof(z,b)	Z is in back of |b|
+backof(z,b)	Z. is in back of |b|
+small(z)	Z is small
+small(z)	Z. is small
+samerow(a,f)	|A| is in the same row as |f|
+smaller(z,y)	Z is smaller than y
+smaller(z,y)	Z. is smaller than y
+smaller(y,z)	Y. is smaller than z
+smaller(y,z)	Y is smaller than z
+backof(c,b)	|C| is in back of |b|
