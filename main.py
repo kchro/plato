@@ -51,4 +51,4 @@ def baseline():
 
 if __name__ == '__main__':
     if BASELINE:
-        baseline2()
+        baseline()

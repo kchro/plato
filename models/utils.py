@@ -7,6 +7,9 @@ class NLVocab:
         wc = Counter([w for sent in text for w in sent.split()])
         wc = wc.most_common(n_words) if n_words else wc.items()
         vocab = {w for w, c in wc}
+        vocab.add('(')
+        vocab.add(')')
+        vocab.add(',')
         vocab.add('<UNK>')
         vocab.add('<S>')
         vocab.add('</S>')
