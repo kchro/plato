@@ -60,11 +60,19 @@ if __name__ == '__main__':
     print 'running on the %s' % device
 
     # get the data
-    src_inputs, tar_inputs = get_atomic_sents(device)
+    inputs, vocabs = get_atomic_sents(device, get_vocabs=True)
+    src_inputs, tar_inputs = inputs
+    src_vocab, tar_vocab = vocabs
     X_train, X_test, y_train, y_test = train_test_split(src_inputs, tar_inputs, test_size=0.1)
 
     # load the model
-    mod = Seq2Seq()
+    mod = Seq2Seq(input_size=len(src_vocab),
+                  hidden_size=200,
+                  output_size=len(tar_vocab),
+                  max_length=len(tar_inputs[0]),
+                  device=device)
+
+    mod.train(X_train, y_train)
 
     # train the model
 

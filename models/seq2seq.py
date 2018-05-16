@@ -10,6 +10,7 @@ import torch.nn as nn
 from torch import optim
 import torch.nn.functional as F
 from utils import NLVocab, FOLVocab
+from tqdm import tqdm
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -67,15 +68,25 @@ class AttnDecoderRNN(nn.Module):
         return torch.zeros(1, 1, self.hidden_size, device=device)
 
 class Seq2Seq:
-    def __init__(self, input_size, hidden_size, output_size):
+    def __init__(self, input_size=0, hidden_size=100, output_size=0, max_length=0, device='cpu'):
         self.encoder = EncoderRNN(input_size=input_size,
-                                  hidden_size=hidden_size)
+                                  hidden_size=hidden_size).to(device)
         self.decoder = AttnDecoderRNN(hidden_size=hidden_size,
                                       output_size=output_size,
-                                      max_length=max_length)
+                                      max_length=max_length).to(device)
+        self.device = device
 
-    def train(X_train, y_train, n_iters=10, lr=0.01):
-        encoder_opt = optim.SGD(encoder.parameters(), lr=lr)
-        decoder_opt = optim.SGD(decoder.parameters(), lr=lr)
+    def train(self, X_train, y_train,
+              n_iters=10,
+              lr=0.01,
+              batch_size=10):
+        encoder_opt = optim.SGD(self.encoder.parameters(), lr=lr)
+        decoder_opt = optim.SGD(self.decoder.parameters(), lr=lr)
 
-        for iter in range(n_iters):
+        n = 0
+        for iter in tqdm(range(n_iters)):
+            while n < len(X_train):
+                X_batch = torch.stack(X_train[n:n+batch_size])
+                y_batch = torch.stack(y_train[n:n+batch_size])
+                n += batch_size
+            raise

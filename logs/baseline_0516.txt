@@ -1,0 +1,3325 @@
+Epoch 100/100
+3321/3321 [==============================] - 30s 9ms/step - loss: 0.0074 - acc: 0.2314
+both f and z are the same size </S>
+<S>samesize(f,z)</S>
+<S>samesize(z,z)</S>
+
+y and f both are the same size </S>
+<S>samesize(y,f)</S>
+<S>samesize(z,z)</S>
+
+x likes e </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>likes(x,e)</S>
+<S>samerow(c,</S>)</S>
+
+e and d both are in the same column
+<S>samecol(e,d)</S>
+<S>samecol(z,z)</S>
+
+e likes f </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>likes(e,f)</S>
+<S>cube(b,</S>)</S>
+
+y is to the left of d </S> <PAD>
+<S>leftof(y,d)</S>
+<S>likes(y,a)</S>
+
+e and x both are in the same row
+<S>samerow(e,x)</S>
+<S>samerow(z,z)</S>
+
+d and b are both in the same row
+<S>samerow(d,b)</S>
+<S>samerow(z,z)</S>
+
+b and d are both in the same row
+<S>samerow(b,d)</S>
+<S>samerow(z,z)</S>
+
+both c and e are in the same column
+<S>samecol(c,e)</S>
+<S>samecol(z,z)</S>
+
+d is smaller than c </S> <PAD> <PAD> <PAD>
+<S>smaller(d,c)</S>
+<S>likes(z,a)</S>
+
+z adjoins x </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>adjoins(z,x)</S>
+<S>adjoins(c,c)</S>
+
+z is the same shape as y </S> <PAD>
+<S>sameshape(z,y)</S>
+<S>samecol(x,x)</S>
+
+a and z are both the same shape </S>
+<S>sameshape(a,z)</S>
+<S>sameshape(z,z)</S>
+
+f and z both are the same shape </S>
+<S>sameshape(f,z)</S>
+<S>sameshape(z,z)</S>
+
+z and a are both in the same row
+<S>samerow(z,a)</S>
+<S>samerow(z,z)</S>
+
+a and f are both the same shape </S>
+<S>sameshape(a,f)</S>
+<S>sameshape(z,z)</S>
+
+y is in the same column as a </S>
+<S>samecol(y,a)</S>
+<S>likes(z,a)</S>
+
+x is smaller than y </S> <PAD> <PAD> <PAD>
+<S>smaller(x,y)</S>
+<S>small(z,y)</S>
+
+both z and z are in the same column
+<S>samecol(z,z)</S>
+<S>samecol(z,z)</S>
+
+both e and y are in the same column
+<S>samecol(e,y)</S>
+<S>samecol(z,z)</S>
+
+x and x are in the same column </S>
+<S>samecol(x,x)</S>
+<S>samecol(z,z)</S>
+
+z is to the right of a </S> <PAD>
+<S>rightof(z,a)</S>
+<S>rightof(z,z)</S>
+
+x and y both are in the same row
+<S>samerow(x,y)</S>
+<S>samerow(z,z)</S>
+
+y and z are both in the same column
+<S>samecol(y,z)</S>
+<S>samecol(z,z)</S>
+
+both z and d are the same shape </S>
+<S>sameshape(z,d)</S>
+<S>sameshape(z,z)</S>
+
+y and y are both the same shape </S>
+<S>sameshape(y,y)</S>
+<S>sameshape(z,z)</S>
+
+a and c are in the same column </S>
+<S>samecol(a,c)</S>
+<S>samecol(z,z)</S>
+
+b and x are both the same size </S>
+<S>samesize(b,x)</S>
+<S>samesize(z,z)</S>
+
+b and c are in the same row </S>
+<S>samerow(b,c)</S>
+<S>samerow(z,z)</S>
+
+b is smaller than x </S> <PAD> <PAD> <PAD>
+<S>smaller(b,x)</S>
+<S>small(z,z)</S>
+
+both y and a are in the same column
+<S>samecol(y,a)</S>
+<S>samecol(z,z)</S>
+
+f and b are in the same column </S>
+<S>samecol(f,b)</S>
+<S>samecol(z,z)</S>
+
+both z and y are in the same row
+<S>samerow(z,y)</S>
+<S>samerow(z,z)</S>
+
+f is smaller than b </S> <PAD> <PAD> <PAD>
+<S>smaller(f,b)</S>
+<S>likes(z,a)</S>
+
+y and f are both the same shape </S>
+<S>sameshape(y,f)</S>
+<S>sameshape(z,z)</S>
+
+z and e are in the same column </S>
+<S>samecol(z,e)</S>
+<S>samecol(z,z)</S>
+
+both z and f are in the same column
+<S>samecol(z,f)</S>
+<S>samecol(z,z)</S>
+
+c and z are in the same row </S>
+<S>samerow(c,z)</S>
+<S>samerow(z,z)</S>
+
+e and e are both the same size </S>
+<S>samesize(e,e)</S>
+<S>samesize(z,z)</S>
+
+f and f both are the same shape </S>
+<S>sameshape(f,f)</S>
+<S>sameshape(z,z)</S>
+
+both d and y are in the same column
+<S>samecol(d,y)</S>
+<S>samecol(z,z)</S>
+
+x and f are both in the same row
+<S>samerow(x,f)</S>
+<S>samerow(z,z)</S>
+
+both f and b are in the same column
+<S>samecol(f,b)</S>
+<S>samecol(z,z)</S>
+
+both y and z are in the same row
+<S>samerow(y,z)</S>
+<S>samerow(z,z)</S>
+
+z and x are both the same size </S>
+<S>samesize(z,x)</S>
+<S>samesize(z,z)</S>
+
+f is larger than c </S> <PAD> <PAD> <PAD>
+<S>larger(f,c)</S>
+<S>likes(z,a)</S>
+
+x is in front of c </S> <PAD> <PAD>
+<S>frontof(x,c)</S>
+<S>likes(z,a)</S>
+
+c is to the left of e </S> <PAD>
+<S>leftof(c,e)</S>
+<S>likes(z,a)</S>
+
+a and e are both in the same row
+<S>samerow(a,e)</S>
+<S>samerow(z,z)</S>
+
+f is the same shape as c </S> <PAD>
+<S>sameshape(f,c)</S>
+<S>samerow(y,y)</S>
+
+z and c are in the same row </S>
+<S>samerow(z,c)</S>
+<S>samerow(z,z)</S>
+
+both e and a are the same size </S>
+<S>samesize(e,a)</S>
+<S>samesize(z,z)</S>
+
+x and x are both in the same row
+<S>samerow(x,x)</S>
+<S>samerow(z,z)</S>
+
+both z and y are the same shape </S>
+<S>sameshape(z,y)</S>
+<S>sameshape(z,y)</S>
+
+y and x both are in the same row
+<S>samerow(y,x)</S>
+<S>samerow(z,z)</S>
+
+both y and c are in the same column
+<S>samecol(y,c)</S>
+<S>samecol(z,z)</S>
+
+e adjoins a </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>adjoins(e,a)</S>
+<S>adjoins(c,c)</S>
+
+f is a tetrahedron </S> <PAD> <PAD> <PAD> <PAD>
+<S>tet(f)</S><PAD><PAD>
+<S>c(a)</S><PAD><PAD>
+
+both x and y are the same size </S>
+<S>samesize(x,y)</S>
+<S>samesize(z,z)</S>
+
+f adjoins a </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>adjoins(f,a)</S>
+<S>adjoins(c,c)</S>
+
+a is the same shape as c </S> <PAD>
+<S>sameshape(a,c)</S>
+<S>samerow(y,y)</S>
+
+z and c are in the same column </S>
+<S>samecol(z,c)</S>
+<S>samecol(z,z)</S>
+
+both f and f are in the same row
+<S>samerow(f,f)</S>
+<S>samerow(z,z)</S>
+
+x is in back of e </S> <PAD> <PAD>
+<S>backof(x,e)</S>
+<S>likes(z,a)</S>
+
+x and f both are in the same column
+<S>samecol(x,f)</S>
+<S>samecol(z,z)</S>
+
+f is the same size as a </S> <PAD>
+<S>samesize(f,a)</S>
+<S>small(z,z)</S>
+
+y is larger than a </S> <PAD> <PAD> <PAD>
+<S>larger(y,a)</S>
+<S>likes(z,a)</S>
+
+f likes x </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>likes(f,x)</S>
+<S><PAD>(c)</S><PAD><PAD>
+
+a is a cube </S> <PAD> <PAD> <PAD> <PAD>
+<S>cube(a)</S><PAD><PAD>
+<S>likes(b,</S>)</S>
+
+b and y both are in the same row
+<S>samerow(b,y)</S>
+<S>samerow(z,z)</S>
+
+z </S> <PAD> <PAD> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>smaller(z,y)</S>
+<S>samesize(z,</S>)</S>
+
+both x and f are in the same row
+<S>samerow(x,f)</S>
+<S>samerow(z,z)</S>
+
+y is a tetrahedron </S> <PAD> <PAD> <PAD> <PAD>
+<S>tet(y)</S><PAD><PAD>
+<S>c(adjoins)</S><PAD><PAD>
+
+c and c are both the same size </S>
+<S>samesize(c,c)</S>
+<S>samesize(z,z)</S>
+
+d and b are in the same row </S>
+<S>samerow(d,b)</S>
+<S>samerow(z,z)</S>
+
+both y and y are the same shape </S>
+<S>sameshape(y,y)</S>
+<S>sameshape(z,z)</S>
+
+a and x both are in the same row
+<S>samerow(a,x)</S>
+<S>samerow(z,z)</S>
+
+both e and x are the same size </S>
+<S>samesize(e,x)</S>
+<S>samesize(z,z)</S>
+
+both z and x are in the same row
+<S>samerow(z,x)</S>
+<S>samerow(z,z)</S>
+
+f and d are both in the same row
+<S>samerow(f,d)</S>
+<S>samerow(z,z)</S>
+
+both y and c are in the same row
+<S>samerow(y,c)</S>
+<S>samerow(z,z)</S>
+
+x and x are in the same column </S>
+<S>samecol(x,x)</S>
+<S>samecol(z,z)</S>
+
+y is in back of f </S> <PAD> <PAD>
+<S>backof(y,f)</S>
+<S>likes(z,a)</S>
+
+z and y are the same shape </S> <PAD>
+<S>sameshape(z,y)</S>
+<S>sameshape(z,z)</S>
+
+c and z are both the same size </S>
+<S>samesize(c,z)</S>
+<S>samesize(z,z)</S>
+
+y and b are the same shape </S> <PAD>
+<S>sameshape(y,b)</S>
+<S>sameshape(z,z)</S>
+
+x is larger than c </S> <PAD> <PAD> <PAD>
+<S>larger(x,c)</S>
+<S>likes(z,a)</S>
+
+f and f are in the same column </S>
+<S>samecol(f,f)</S>
+<S>samecol(z,z)</S>
+
+x and d both are in the same row
+<S>samerow(x,d)</S>
+<S>samerow(z,z)</S>
+
+both x and y are in the same column
+<S>samecol(x,y)</S>
+<S>samecol(z,z)</S>
+
+both f and b are in the same column
+<S>samecol(f,b)</S>
+<S>samecol(z,z)</S>
+
+d is the same shape as a </S> <PAD>
+<S>sameshape(d,a)</S>
+<S>samerow(y,y)</S>
+
+both z and f are in the same column
+<S>samecol(z,f)</S>
+<S>samecol(z,z)</S>
+
+b and f are both in the same column
+<S>samecol(b,f)</S>
+<S>samecol(z,z)</S>
+
+x and x are in the same row </S>
+<S>samerow(x,x)</S>
+<S>samerow(z,z)</S>
+
+y and d are both in the same column
+<S>samecol(y,d)</S>
+<S>samecol(z,z)</S>
+
+both b and x are in the same column
+<S>samecol(b,x)</S>
+<S>samecol(z,z)</S>
+
+z is the same size as f </S> <PAD>
+<S>samesize(z,f)</S>
+<S>small(z,z)</S>
+
+y and x both are the same size </S>
+<S>samesize(y,x)</S>
+<S>samesize(z,z)</S>
+
+z and c are in the same column </S>
+<S>samecol(z,c)</S>
+<S>samecol(z,z)</S>
+
+d and z both are in the same row
+<S>samerow(d,z)</S>
+<S>samerow(z,z)</S>
+
+x and f are the same shape </S> <PAD>
+<S>sameshape(x,f)</S>
+<S>sameshape(z,z)</S>
+
+c likes a </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>likes(c,a)</S>
+<S>samecol(b,</S>)</S>
+
+c adjoins f </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>adjoins(c,f)</S>
+<S>adjoins(c,c)</S>
+
+both c and z are in the same row
+<S>samerow(c,z)</S>
+<S>samerow(z,z)</S>
+
+a and x both are in the same column
+<S>samecol(a,x)</S>
+<S>samecol(z,z)</S>
+
+y and f are both in the same row
+<S>samerow(y,f)</S>
+<S>samerow(z,z)</S>
+
+both b and b are the same size </S>
+<S>samesize(b,b)</S>
+<S>samesize(z,z)</S>
+
+z is in back of a </S> <PAD> <PAD>
+<S>backof(z,a)</S>
+<S>likes(z,a)</S>
+
+z and a are in the same column </S>
+<S>samecol(z,a)</S>
+<S>samecol(z,z)</S>
+
+f and z are both in the same column
+<S>samecol(f,z)</S>
+<S>samecol(z,z)</S>
+
+both y and y are the same shape </S>
+<S>sameshape(y,y)</S>
+<S>sameshape(z,z)</S>
+
+y </S> <PAD> <PAD> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>samesize(y,x)</S>
+<S>samesize(z,</S>)</S>
+
+c and x are in the same row </S>
+<S>samerow(c,x)</S>
+<S>samerow(z,z)</S>
+
+f and z are the same shape </S> <PAD>
+<S>sameshape(f,z)</S>
+<S>sameshape(z,z)</S>
+
+both b and a are the same size </S>
+<S>samesize(b,a)</S>
+<S>samesize(z,z)</S>
+
+f and f are in the same row </S>
+<S>samerow(f,f)</S>
+<S>samerow(z,z)</S>
+
+e and x are in the same row </S>
+<S>samerow(e,x)</S>
+<S>samerow(z,z)</S>
+
+b is in back of e </S> <PAD> <PAD>
+<S>backof(b,e)</S>
+<S>likes(z,a)</S>
+
+x and y both are in the same column
+<S>samecol(x,y)</S>
+<S>samecol(z,z)</S>
+
+x is to the left of c </S> <PAD>
+<S>leftof(x,c)</S>
+<S>likes(y,a)</S>
+
+c is in front of e </S> <PAD> <PAD>
+<S>frontof(c,e)</S>
+<S>likes(z,a)</S>
+
+y and d are the same shape </S> <PAD>
+<S>sameshape(y,d)</S>
+<S>sameshape(z,z)</S>
+
+both x and a are in the same row
+<S>samerow(x,a)</S>
+<S>samerow(z,z)</S>
+
+z is large </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>large(z)</S><PAD><PAD>
+<S><UNK>(c)</S><PAD><PAD>
+
+both c and y are in the same row
+<S>samerow(c,y)</S>
+<S>samerow(z,z)</S>
+
+both x and z are in the same column
+<S>samecol(x,z)</S>
+<S>samecol(z,z)</S>
+
+both y and x are the same shape </S>
+<S>sameshape(y,x)</S>
+<S>sameshape(z,z)</S>
+
+y is the same size as d </S> <PAD>
+<S>samesize(y,d)</S>
+<S>small(z,z)</S>
+
+both z and z are the same size </S>
+<S>samesize(z,z)</S>
+<S>samesize(z,z)</S>
+
+d is the same shape as b </S> <PAD>
+<S>sameshape(d,b)</S>
+<S>samerow(y,y)</S>
+
+both z and b are the same shape </S>
+<S>sameshape(z,b)</S>
+<S>sameshape(z,z)</S>
+
+both a and e are the same size </S>
+<S>samesize(a,e)</S>
+<S>samesize(z,z)</S>
+
+x and c are in the same row </S>
+<S>samerow(x,c)</S>
+<S>samerow(z,z)</S>
+
+both f and x are the same size </S>
+<S>samesize(f,x)</S>
+<S>samesize(z,z)</S>
+
+a and z both are in the same row
+<S>samerow(a,z)</S>
+<S>samerow(z,z)</S>
+
+z is larger than b </S> <PAD> <PAD> <PAD>
+<S>larger(z,b)</S>
+<S>likes(z,a)</S>
+
+z and x both are the same shape </S>
+<S>sameshape(z,x)</S>
+<S>sameshape(z,z)</S>
+
+z is the same shape as e </S> <PAD>
+<S>sameshape(z,e)</S>
+<S>samerow(y,y)</S>
+
+x and y are in the same column </S>
+<S>samecol(x,y)</S>
+<S>samecol(z,z)</S>
+
+both d and d are in the same column
+<S>samecol(d,d)</S>
+<S>samecol(z,z)</S>
+
+d and e both are the same size </S>
+<S>samesize(d,e)</S>
+<S>samesize(z,z)</S>
+
+a is to the left of b </S> <PAD>
+<S>leftof(a,b)</S>
+<S>likes(y,a)</S>
+
+a and e both are in the same row
+<S>samerow(a,e)</S>
+<S>samerow(z,z)</S>
+
+y and x are both the same shape </S>
+<S>sameshape(y,x)</S>
+<S>sameshape(z,z)</S>
+
+x and e are both in the same column
+<S>samecol(x,e)</S>
+<S>samecol(z,z)</S>
+
+f and e both are the same shape </S>
+<S>sameshape(f,e)</S>
+<S>sameshape(z,z)</S>
+
+both c and y are in the same column
+<S>samecol(c,y)</S>
+<S>samecol(z,z)</S>
+
+y is the same size as x </S> <PAD>
+<S>samesize(y,x)</S>
+<S>samesize(y,y)</S>
+
+a and b both are in the same row
+<S>samerow(a,b)</S>
+<S>samerow(z,z)</S>
+
+c and a are both the same size </S>
+<S>samesize(c,a)</S>
+<S>samesize(z,z)</S>
+
+z and c are both in the same row
+<S>samerow(z,c)</S>
+<S>samerow(z,z)</S>
+
+x and x both are the same size </S>
+<S>samesize(x,x)</S>
+<S>samesize(z,z)</S>
+
+c is smaller than x </S> <PAD> <PAD> <PAD>
+<S>smaller(c,x)</S>
+<S>small(z,z)</S>
+
+e and z are both the same size </S>
+<S>samesize(e,z)</S>
+<S>samesize(z,z)</S>
+
+y and f both are in the same row
+<S>samerow(y,f)</S>
+<S>samerow(z,z)</S>
+
+c and z are both the same shape </S>
+<S>sameshape(c,z)</S>
+<S>sameshape(z,z)</S>
+
+b and f are both the same shape </S>
+<S>sameshape(b,f)</S>
+<S>sameshape(z,z)</S>
+
+x and c are both the same shape </S>
+<S>sameshape(x,c)</S>
+<S>sameshape(z,z)</S>
+
+both y and f are the same size </S>
+<S>samesize(y,f)</S>
+<S>samesize(z,z)</S>
+
+x and c both are the same shape </S>
+<S>sameshape(x,c)</S>
+<S>sameshape(z,z)</S>
+
+a and e both are the same size </S>
+<S>samesize(a,e)</S>
+<S>samesize(z,z)</S>
+
+both x and z are in the same column
+<S>samecol(x,z)</S>
+<S>samecol(z,z)</S>
+
+z and a are the same size </S> <PAD>
+<S>samesize(z,a)</S>
+<S>samesize(z,z)</S>
+
+e is in back of c </S> <PAD> <PAD>
+<S>backof(e,c)</S>
+<S>likes(z,a)</S>
+
+both z and z are in the same row
+<S>samerow(z,z)</S>
+<S>samerow(z,z)</S>
+
+a is large </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>large(a)</S><PAD><PAD>
+<S><UNK>(c)</S><PAD><PAD>
+
+z and z are both in the same column
+<S>samecol(z,z)</S>
+<S>samecol(z,z)</S>
+
+z and z both are in the same row
+<S>samerow(z,z)</S>
+<S>samerow(z,z)</S>
+
+x and y are both the same size </S>
+<S>samesize(x,y)</S>
+<S>samesize(z,z)</S>
+
+x and x are in the same row </S>
+<S>samerow(x,x)</S>
+<S>samerow(z,z)</S>
+
+x and z both are the same size </S>
+<S>samesize(x,z)</S>
+<S>samesize(z,z)</S>
+
+f and d are both the same shape </S>
+<S>sameshape(f,d)</S>
+<S>sameshape(z,z)</S>
+
+both b and b are the same shape </S>
+<S>sameshape(b,b)</S>
+<S>sameshape(z,z)</S>
+
+z and e both are the same size </S>
+<S>samesize(z,e)</S>
+<S>samesize(z,z)</S>
+
+y is the same shape as e </S> <PAD>
+<S>sameshape(y,e)</S>
+<S>samerow(y,y)</S>
+
+b and z both are in the same column
+<S>samecol(b,z)</S>
+<S>samecol(z,z)</S>
+
+a and f both are the same shape </S>
+<S>sameshape(a,f)</S>
+<S>sameshape(z,z)</S>
+
+y and f are the same shape </S> <PAD>
+<S>sameshape(y,f)</S>
+<S>sameshape(z,z)</S>
+
+both a and f are the same shape </S>
+<S>sameshape(a,f)</S>
+<S>sameshape(z,z)</S>
+
+z and d both are in the same column
+<S>samecol(z,d)</S>
+<S>samecol(z,z)</S>
+
+e and c both are in the same row
+<S>samerow(e,c)</S>
+<S>samerow(z,z)</S>
+
+x and d both are the same size </S>
+<S>samesize(x,d)</S>
+<S>samesize(z,z)</S>
+
+f and z are in the same row </S>
+<S>samerow(f,z)</S>
+<S>samerow(z,z)</S>
+
+z is to the left of d </S> <PAD>
+<S>leftof(z,d)</S>
+<S>likes(y,a)</S>
+
+both x and y are the same shape </S>
+<S>sameshape(x,y)</S>
+<S>sameshape(z,z)</S>
+
+e is the same shape as d </S> <PAD>
+<S>sameshape(e,d)</S>
+<S>samerow(y,y)</S>
+
+y is in the same row as y </S>
+<S>samerow(y,y)</S>
+<S>samerow(y,y)</S>
+
+z and d both are the same shape </S>
+<S>sameshape(z,d)</S>
+<S>sameshape(z,z)</S>
+
+b is larger than c </S> <PAD> <PAD> <PAD>
+<S>larger(b,c)</S>
+<S>likes(z,a)</S>
+
+y and x are both in the same column
+<S>samecol(y,x)</S>
+<S>samecol(z,z)</S>
+
+z and e are both the same size </S>
+<S>samesize(z,e)</S>
+<S>samesize(z,z)</S>
+
+c and x are both in the same row
+<S>samerow(c,x)</S>
+<S>samerow(z,z)</S>
+
+z and x are in the same row </S>
+<S>samerow(z,x)</S>
+<S>samerow(z,z)</S>
+
+both f and y are the same size </S>
+<S>samesize(f,y)</S>
+<S>samesize(z,z)</S>
+
+d and z both are in the same column
+<S>samecol(d,z)</S>
+<S>samecol(z,z)</S>
+
+b and y are both in the same column
+<S>samecol(b,y)</S>
+<S>samecol(z,z)</S>
+
+a and e are in the same row </S>
+<S>samerow(a,e)</S>
+<S>samerow(z,z)</S>
+
+both f and z are the same size </S>
+<S>samesize(f,z)</S>
+<S>samesize(z,z)</S>
+
+y and c both are in the same row
+<S>samerow(y,c)</S>
+<S>samerow(z,z)</S>
+
+b and y are the same size </S> <PAD>
+<S>samesize(b,y)</S>
+<S>samesize(z,z)</S>
+
+b and b both are the same shape </S>
+<S>sameshape(b,b)</S>
+<S>sameshape(z,z)</S>
+
+both y and x are in the same row
+<S>samerow(y,x)</S>
+<S>samerow(z,z)</S>
+
+a and a are in the same column </S>
+<S>samecol(a,a)</S>
+<S>samecol(z,z)</S>
+
+y and y both are in the same column
+<S>samecol(y,y)</S>
+<S>samecol(z,z)</S>
+
+both x and z are the same shape </S>
+<S>sameshape(x,z)</S>
+<S>sameshape(z,z)</S>
+
+both f and e are the same size </S>
+<S>samesize(f,e)</S>
+<S>samesize(z,z)</S>
+
+e and x are the same shape </S> <PAD>
+<S>sameshape(e,x)</S>
+<S>sameshape(z,z)</S>
+
+z and x both are the same size </S>
+<S>samesize(z,x)</S>
+<S>samesize(z,z)</S>
+
+d adjoins y </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>adjoins(d,y)</S>
+<S>adjoins(c,c)</S>
+
+both x and x are in the same row
+<S>samerow(x,x)</S>
+<S>samerow(z,z)</S>
+
+a is the same size as b </S> <PAD>
+<S>samesize(a,b)</S>
+<S>small(z,z)</S>
+
+both a and x are the same size </S>
+<S>samesize(a,x)</S>
+<S>samesize(z,z)</S>
+
+x and x are in the same row </S>
+<S>samerow(x,x)</S>
+<S>samerow(z,z)</S>
+
+z is in front of e </S> <PAD> <PAD>
+<S>frontof(z,e)</S>
+<S>likes(z,a)</S>
+
+d adjoins e </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>adjoins(d,e)</S>
+<S>adjoins(c,c)</S>
+
+f and e are both in the same row
+<S>samerow(f,e)</S>
+<S>samerow(z,z)</S>
+
+d and x are the same size </S> <PAD>
+<S>samesize(d,x)</S>
+<S>samesize(z,z)</S>
+
+d and z are both in the same row
+<S>samerow(d,z)</S>
+<S>samerow(z,z)</S>
+
+f and c both are in the same row
+<S>samerow(f,c)</S>
+<S>samerow(z,z)</S>
+
+both y and z are the same size </S>
+<S>samesize(y,z)</S>
+<S>samesize(z,z)</S>
+
+b is smaller than e </S> <PAD> <PAD> <PAD>
+<S>smaller(b,e)</S>
+<S>likes(z,a)</S>
+
+y is the same shape as d </S> <PAD>
+<S>sameshape(y,d)</S>
+<S>samerow(y,y)</S>
+
+e is in back of d </S> <PAD> <PAD>
+<S>backof(e,d)</S>
+<S>likes(z,z)</S>
+
+x and c are in the same column </S>
+<S>samecol(x,c)</S>
+<S>samecol(z,z)</S>
+
+x and y are both in the same row
+<S>samerow(x,y)</S>
+<S>samerow(z,z)</S>
+
+y and y are both the same shape </S>
+<S>sameshape(y,y)</S>
+<S>sameshape(z,z)</S>
+
+a and y both are the same size </S>
+<S>samesize(a,y)</S>
+<S>samesize(z,z)</S>
+
+both d and c are in the same column
+<S>samecol(d,c)</S>
+<S>samecol(z,z)</S>
+
+c and a both are in the same column
+<S>samecol(c,a)</S>
+<S>samecol(z,z)</S>
+
+both e and e are in the same row
+<S>samerow(e,e)</S>
+<S>samerow(z,z)</S>
+
+a is in back of c </S> <PAD> <PAD>
+<S>backof(a,c)</S>
+<S>likes(z,a)</S>
+
+a is in the same column as y </S>
+<S>samecol(a,y)</S>
+<S>samecol(z,z)</S>
+
+d is in front of e </S> <PAD> <PAD>
+<S>frontof(d,e)</S>
+<S>likes(z,a)</S>
+
+z and z are both in the same row
+<S>samerow(z,z)</S>
+<S>samerow(z,z)</S>
+
+b and x both are the same shape </S>
+<S>sameshape(b,x)</S>
+<S>sameshape(z,z)</S>
+
+both y and a are the same shape </S>
+<S>sameshape(y,a)</S>
+<S>sameshape(z,z)</S>
+
+a is smaller than y </S> <PAD> <PAD> <PAD>
+<S>smaller(a,y)</S>
+<S>small(z,z)</S>
+
+x and d both are the same size </S>
+<S>samesize(x,d)</S>
+<S>samesize(z,z)</S>
+
+d is in the same row as b </S>
+<S>samerow(d,b)</S>
+<S>samerow(z,z)</S>
+
+y and f are both the same size </S>
+<S>samesize(y,f)</S>
+<S>samesize(z,z)</S>
+
+both y and x are in the same column
+<S>samecol(y,x)</S>
+<S>samecol(z,z)</S>
+
+d and e are both the same shape </S>
+<S>sameshape(d,e)</S>
+<S>sameshape(z,z)</S>
+
+c is to the right of f </S> <PAD>
+<S>rightof(c,f)</S>
+<S>rightof(z,z)</S>
+
+d and z are both in the same row
+<S>samerow(d,z)</S>
+<S>samerow(z,z)</S>
+
+a and x are the same size </S> <PAD>
+<S>samesize(a,x)</S>
+<S>samesize(z,z)</S>
+
+z is larger than e </S> <PAD> <PAD> <PAD>
+<S>larger(z,e)</S>
+<S>likes(z,a)</S>
+
+b and y are both in the same row
+<S>samerow(b,y)</S>
+<S>samerow(z,z)</S>
+
+both f and f are in the same column
+<S>samecol(f,f)</S>
+<S>samecol(z,z)</S>
+
+d is smaller than f </S> <PAD> <PAD> <PAD>
+<S>smaller(d,f)</S>
+<S>likes(z,a)</S>
+
+both y and y are the same shape </S>
+<S>sameshape(y,y)</S>
+<S>sameshape(z,z)</S>
+
+c and x are in the same row </S>
+<S>samerow(c,x)</S>
+<S>samerow(z,z)</S>
+
+both f and d are the same size </S>
+<S>samesize(f,d)</S>
+<S>samesize(z,z)</S>
+
+y and y are in the same column </S>
+<S>samecol(y,y)</S>
+<S>samecol(z,z)</S>
+
+both f and d are the same size </S>
+<S>samesize(f,d)</S>
+<S>samesize(z,z)</S>
+
+x and a are in the same column </S>
+<S>samecol(x,a)</S>
+<S>samecol(z,z)</S>
+
+x and x are both the same size </S>
+<S>samesize(x,x)</S>
+<S>samesize(z,z)</S>
+
+c is in the same column as f </S>
+<S>samecol(c,f)</S>
+<S>likes(z,a)</S>
+
+both a and y are the same size </S>
+<S>samesize(a,y)</S>
+<S>samesize(z,z)</S>
+
+f and y are both the same size </S>
+<S>samesize(f,y)</S>
+<S>samesize(z,z)</S>
+
+b and c both are in the same column
+<S>samecol(b,c)</S>
+<S>samecol(z,z)</S>
+
+d and z both are the same shape </S>
+<S>sameshape(d,z)</S>
+<S>sameshape(z,z)</S>
+
+both f and f are in the same row
+<S>samerow(f,f)</S>
+<S>samerow(z,z)</S>
+
+c and a are both the same shape </S>
+<S>sameshape(c,a)</S>
+<S>sameshape(z,z)</S>
+
+d is the same shape as e </S> <PAD>
+<S>sameshape(d,e)</S>
+<S>samerow(y,y)</S>
+
+x likes d </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>likes(x,d)</S>
+<S>likes(b,</S>)</S>
+
+c and a both are the same size </S>
+<S>samesize(c,a)</S>
+<S>samesize(z,z)</S>
+
+x </S> <PAD> <PAD> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>smaller(x,y)</S>
+<S>samesize(z,</S>)</S>
+
+both z and x are in the same column
+<S>samecol(z,x)</S>
+<S>samecol(z,z)</S>
+
+z and c are the same size </S> <PAD>
+<S>samesize(z,c)</S>
+<S>samesize(z,z)</S>
+
+a is in the same column as f </S>
+<S>samecol(a,f)</S>
+<S>likes(z,a)</S>
+
+x and z are both the same size </S>
+<S>samesize(x,z)</S>
+<S>samesize(z,z)</S>
+
+z is in back of x </S> <PAD> <PAD>
+<S>backof(z,x)</S>
+<S>likes(z,z)</S>
+
+d and z both are in the same row
+<S>samerow(d,z)</S>
+<S>samerow(z,z)</S>
+
+y is in front of b </S> <PAD> <PAD>
+<S>frontof(y,b)</S>
+<S>likes(z,a)</S>
+
+f and y both are the same size </S>
+<S>samesize(f,y)</S>
+<S>samesize(z,z)</S>
+
+both d and e are the same shape </S>
+<S>sameshape(d,e)</S>
+<S>sameshape(z,z)</S>
+
+b and a are both the same size </S>
+<S>samesize(b,a)</S>
+<S>samesize(z,z)</S>
+
+both d and y are the same size </S>
+<S>samesize(d,y)</S>
+<S>samesize(z,z)</S>
+
+e is to the left of a </S> <PAD>
+<S>leftof(e,a)</S>
+<S>likes(y,a)</S>
+
+both a and y are in the same row
+<S>samerow(a,y)</S>
+<S>samerow(z,z)</S>
+
+b and y are the same shape </S> <PAD>
+<S>sameshape(b,y)</S>
+<S>sameshape(z,z)</S>
+
+z and y both are the same shape </S>
+<S>sameshape(z,y)</S>
+<S>sameshape(z,z)</S>
+
+z is larger than y </S> <PAD> <PAD> <PAD>
+<S>larger(z,y)</S>
+<S>leftof(z,z)</S>
+
+z and f are the same shape </S> <PAD>
+<S>sameshape(z,f)</S>
+<S>sameshape(z,z)</S>
+
+z is in front of x </S> <PAD> <PAD>
+<S>frontof(z,x)</S>
+<S>likes(z,z)</S>
+
+x is to the left of b </S> <PAD>
+<S>leftof(x,b)</S>
+<S>likes(y,a)</S>
+
+x is to the right of x </S> <PAD>
+<S>rightof(x,x)</S>
+<S>likes(z,z)</S>
+
+c and z both are in the same column
+<S>samecol(c,z)</S>
+<S>samecol(z,z)</S>
+
+a and a both are the same shape </S>
+<S>sameshape(a,a)</S>
+<S>sameshape(z,z)</S>
+
+both x and b are in the same column
+<S>samecol(x,b)</S>
+<S>samecol(z,z)</S>
+
+z and y are the same size </S> <PAD>
+<S>samesize(z,y)</S>
+<S>samesize(z,z)</S>
+
+e and a are in the same column </S>
+<S>samecol(e,a)</S>
+<S>samecol(z,z)</S>
+
+a and x are both in the same column
+<S>samecol(a,x)</S>
+<S>samecol(z,z)</S>
+
+e and b both are in the same row
+<S>samerow(e,b)</S>
+<S>samerow(z,z)</S>
+
+e and d are both in the same column
+<S>samecol(e,d)</S>
+<S>samecol(z,z)</S>
+
+d is small </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>small(d)</S><PAD><PAD>
+<S><UNK>(c)</S><PAD><PAD>
+
+f is in the same row as d </S>
+<S>samerow(f,d)</S>
+<S>samerow(z,z)</S>
+
+d is in back of x </S> <PAD> <PAD>
+<S>backof(d,x)</S>
+<S>leftof(z,z)</S>
+
+d is in the same column as a </S>
+<S>samecol(d,a)</S>
+<S>likes(z,a)</S>
+
+both y and y are the same size </S>
+<S>samesize(y,y)</S>
+<S>samesize(z,z)</S>
+
+d and b both are in the same column
+<S>samecol(d,b)</S>
+<S>samecol(z,z)</S>
+
+x and x are both the same shape </S>
+<S>sameshape(x,x)</S>
+<S>sameshape(z,z)</S>
+
+z and b are the same size </S> <PAD>
+<S>samesize(z,b)</S>
+<S>samesize(z,z)</S>
+
+x and y are in the same row </S>
+<S>samerow(x,y)</S>
+<S>samerow(z,z)</S>
+
+e and z both are in the same row
+<S>samerow(e,z)</S>
+<S>samerow(z,z)</S>
+
+y and a are the same shape </S> <PAD>
+<S>sameshape(y,a)</S>
+<S>sameshape(z,z)</S>
+
+y and a both are the same shape </S>
+<S>sameshape(y,a)</S>
+<S>sameshape(z,z)</S>
+
+both f and b are in the same row
+<S>samerow(f,b)</S>
+<S>samerow(z,z)</S>
+
+both y and x are in the same row
+<S>samerow(y,x)</S>
+<S>samerow(z,z)</S>
+
+c and z are the same shape </S> <PAD>
+<S>sameshape(c,z)</S>
+<S>sameshape(z,z)</S>
+
+f and x are both the same size </S>
+<S>samesize(f,x)</S>
+<S>samesize(z,z)</S>
+
+both d and c are in the same row
+<S>samerow(d,c)</S>
+<S>samerow(z,z)</S>
+
+both x and a are the same shape </S>
+<S>sameshape(x,a)</S>
+<S>sameshape(z,z)</S>
+
+f is to the right of y </S> <PAD>
+<S>rightof(f,y)</S>
+<S>likes(z,z)</S>
+
+d and d both are the same shape </S>
+<S>sameshape(d,d)</S>
+<S>sameshape(z,z)</S>
+
+both x and c are in the same row
+<S>samerow(x,c)</S>
+<S>samerow(z,z)</S>
+
+both x and c are in the same column
+<S>samecol(x,c)</S>
+<S>samecol(z,z)</S>
+
+c is to the left of c </S> <PAD>
+<S>leftof(c,c)</S>
+<S>likes(y,a)</S>
+
+both x and a are in the same row
+<S>samerow(x,a)</S>
+<S>samerow(z,z)</S>
+
+c and a are both in the same column
+<S>samecol(c,a)</S>
+<S>samecol(z,z)</S>
+
+x is the same size as a </S> <PAD>
+<S>samesize(x,a)</S>
+<S>small(z,z)</S>
+
+c likes x </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>likes(c,x)</S>
+<S><PAD>(b)</S><PAD><PAD>
+
+both y and a are in the same row
+<S>samerow(y,a)</S>
+<S>samerow(z,z)</S>
+
+both y and d are in the same column
+<S>samecol(y,d)</S>
+<S>samecol(z,z)</S>
+
+c and y both are the same size </S>
+<S>samesize(c,y)</S>
+<S>samesize(z,z)</S>
+
+z is the same shape as d </S> <PAD>
+<S>sameshape(z,d)</S>
+<S>samerow(y,y)</S>
+
+y and y are the same size </S> <PAD>
+<S>samesize(y,y)</S>
+<S>samesize(z,z)</S>
+
+x is small </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>small(x)</S><PAD><PAD>
+<S><UNK>(c)</S><PAD><PAD>
+
+b and x both are in the same column
+<S>samecol(b,x)</S>
+<S>samecol(z,z)</S>
+
+both x and x are in the same column
+<S>samecol(x,x)</S>
+<S>samecol(z,z)</S>
+
+both z and e are in the same row
+<S>samerow(z,e)</S>
+<S>samerow(z,z)</S>
+
+z likes f </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>likes(z,f)</S>
+<S>dodec(b,</S>)</S>
+
+y and a both are in the same column
+<S>samecol(y,a)</S>
+<S>samecol(z,z)</S>
+
+x and f both are in the same row
+<S>samerow(x,f)</S>
+<S>samerow(z,z)</S>
+
+both z and a are the same shape </S>
+<S>sameshape(z,a)</S>
+<S>sameshape(z,z)</S>
+
+y is in the same column as d </S>
+<S>samecol(y,d)</S>
+<S>likes(z,a)</S>
+
+a adjoins c </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>adjoins(a,c)</S>
+<S>adjoins(c,c)</S>
+
+e is the same shape as e </S> <PAD>
+<S>sameshape(e,e)</S>
+<S>samerow(y,y)</S>
+
+a and z are in the same column </S>
+<S>samecol(a,z)</S>
+<S>samecol(z,z)</S>
+
+d is the same size as a </S> <PAD>
+<S>samesize(d,a)</S>
+<S>small(z,z)</S>
+
+d and z are both the same size </S>
+<S>samesize(d,z)</S>
+<S>samesize(z,z)</S>
+
+both z and y are in the same column
+<S>samecol(z,y)</S>
+<S>samecol(z,z)</S>
+
+z is in back of c </S> <PAD> <PAD>
+<S>backof(z,c)</S>
+<S>likes(z,a)</S>
+
+both z and x are the same shape </S>
+<S>sameshape(z,x)</S>
+<S>sameshape(z,z)</S>
+
+z is in back of y </S> <PAD> <PAD>
+<S>backof(z,y)</S>
+<S>likes(z,z)</S>
+
+both z and c are in the same column
+<S>samecol(z,c)</S>
+<S>samecol(z,z)</S>
+
+both z and f are the same shape </S>
+<S>sameshape(z,f)</S>
+<S>sameshape(z,z)</S>
+
+a is the same size as c </S> <PAD>
+<S>samesize(a,c)</S>
+<S>small(z,z)</S>
+
+b is to the left of f </S> <PAD>
+<S>leftof(b,f)</S>
+<S>likes(z,a)</S>
+
+e and y both are in the same column
+<S>samecol(e,y)</S>
+<S>samecol(z,z)</S>
+
+z adjoins d </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>adjoins(z,d)</S>
+<S>adjoins(c,c)</S>
+
+z is large </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>large(z)</S><PAD><PAD>
+<S><UNK>(c)</S><PAD><PAD>
+
+z and a are the same shape </S> <PAD>
+<S>sameshape(z,a)</S>
+<S>sameshape(z,z)</S>
+
+b adjoins d </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>adjoins(b,d)</S>
+<S>adjoins(c,c)</S>
+
+f and y both are the same size </S>
+<S>samesize(f,y)</S>
+<S>samesize(z,z)</S>
+
+both b and y are the same shape </S>
+<S>sameshape(b,y)</S>
+<S>sameshape(z,z)</S>
+
+x and f are in the same row </S>
+<S>samerow(x,f)</S>
+<S>samerow(z,z)</S>
+
+d and x both are in the same column
+<S>samecol(d,x)</S>
+<S>samecol(z,z)</S>
+
+e and y are both the same shape </S>
+<S>sameshape(e,y)</S>
+<S>sameshape(z,z)</S>
+
+both e and a are in the same column
+<S>samecol(e,a)</S>
+<S>samecol(z,z)</S>
+
+y and f both are the same shape </S>
+<S>sameshape(y,f)</S>
+<S>sameshape(z,z)</S>
+
+both b and y are the same shape </S>
+<S>sameshape(b,y)</S>
+<S>sameshape(z,z)</S>
+
+both y and b are in the same row
+<S>samerow(y,b)</S>
+<S>samerow(z,z)</S>
+
+c and x are the same size </S> <PAD>
+<S>samesize(c,x)</S>
+<S>samesize(z,z)</S>
+
+y is in front of c </S> <PAD> <PAD>
+<S>frontof(y,c)</S>
+<S>likes(z,a)</S>
+
+e and x are in the same column </S>
+<S>samecol(e,x)</S>
+<S>samecol(z,z)</S>
+
+y likes y </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>likes(y,y)</S>
+<S><PAD>(c)</S><PAD><PAD>
+
+x and z both are in the same row
+<S>samerow(x,z)</S>
+<S>samerow(z,z)</S>
+
+both d and x are the same size </S>
+<S>samesize(d,x)</S>
+<S>samesize(z,z)</S>
+
+z is the same size as y </S> <PAD>
+<S>samesize(z,y)</S>
+<S>samesize(z,y)</S>
+
+y and y are both in the same column
+<S>samecol(y,y)</S>
+<S>samecol(z,z)</S>
+
+c and d both are in the same row
+<S>samerow(c,d)</S>
+<S>samerow(z,z)</S>
+
+both z and x are the same size </S>
+<S>samesize(z,x)</S>
+<S>samesize(z,z)</S>
+
+both c and b are the same size </S>
+<S>samesize(c,b)</S>
+<S>samesize(z,z)</S>
+
+x and x are both in the same column
+<S>samecol(x,x)</S>
+<S>samecol(z,z)</S>
+
+e and d are the same size </S> <PAD>
+<S>samesize(e,d)</S>
+<S>samesize(z,z)</S>
+
+z and d are both the same shape </S>
+<S>sameshape(z,d)</S>
+<S>sameshape(z,z)</S>
+
+a and y both are the same shape </S>
+<S>sameshape(a,y)</S>
+<S>sameshape(z,z)</S>
+
+a and c are both in the same column
+<S>samecol(a,c)</S>
+<S>samecol(z,z)</S>
+
+b and c both are the same size </S>
+<S>samesize(b,c)</S>
+<S>samesize(z,z)</S>
+
+y and d both are in the same row
+<S>samerow(y,d)</S>
+<S>samerow(z,z)</S>
+
+z and a both are the same shape </S>
+<S>sameshape(z,a)</S>
+<S>sameshape(z,z)</S>
+
+c and y are both the same shape </S>
+<S>sameshape(c,y)</S>
+<S>sameshape(z,z)</S>
+
+a is smaller than a </S> <PAD> <PAD> <PAD>
+<S>smaller(a,a)</S>
+<S>likes(z,a)</S>
+
+b is the same size as e </S> <PAD>
+<S>samesize(b,e)</S>
+<S>small(z,z)</S>
+
+x and y are in the same row </S>
+<S>samerow(x,y)</S>
+<S>samerow(z,z)</S>
+
+both z and e are in the same row
+<S>samerow(z,e)</S>
+<S>samerow(z,z)</S>
+
+z adjoins y </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>adjoins(z,y)</S>
+<S>adjoins(c,c)</S>
+
+y is larger than c </S> <PAD> <PAD> <PAD>
+<S>larger(y,c)</S>
+<S>likes(z,a)</S>
+
+both x and z are in the same row
+<S>samerow(x,z)</S>
+<S>samerow(z,z)</S>
+
+y and e both are in the same row
+<S>samerow(y,e)</S>
+<S>samerow(z,z)</S>
+
+e and e both are the same shape </S>
+<S>sameshape(e,e)</S>
+<S>sameshape(z,z)</S>
+
+e and c are the same size </S> <PAD>
+<S>samesize(e,c)</S>
+<S>samesize(z,z)</S>
+
+both e and y are in the same row
+<S>samerow(e,y)</S>
+<S>samerow(z,z)</S>
+
+both y and f are the same size </S>
+<S>samesize(y,f)</S>
+<S>samesize(z,z)</S>
+
+both x and c are in the same row
+<S>samerow(x,c)</S>
+<S>samerow(z,z)</S>
+
+b is smaller than f </S> <PAD> <PAD> <PAD>
+<S>smaller(b,f)</S>
+<S>likes(z,a)</S>
+
+y is in the same row as a </S>
+<S>samerow(y,a)</S>
+<S>samerow(z,z)</S>
+
+z and a are both the same shape </S>
+<S>sameshape(z,a)</S>
+<S>sameshape(z,z)</S>
+
+a is in front of c </S> <PAD> <PAD>
+<S>frontof(a,c)</S>
+<S>likes(z,a)</S>
+
+both c and d are the same size </S>
+<S>samesize(c,d)</S>
+<S>samesize(z,z)</S>
+
+d and y are both the same size </S>
+<S>samesize(d,y)</S>
+<S>samesize(z,z)</S>
+
+z is in the same column as b </S>
+<S>samecol(z,b)</S>
+<S>likes(z,a)</S>
+
+y adjoins y </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>adjoins(y,y)</S>
+<S>adjoins(c,c)</S>
+
+z and y both are the same size </S>
+<S>samesize(z,y)</S>
+<S>samesize(z,z)</S>
+
+x is larger than b </S> <PAD> <PAD> <PAD>
+<S>larger(x,b)</S>
+<S>likes(z,a)</S>
+
+z is larger than b </S> <PAD> <PAD> <PAD>
+<S>larger(z,b)</S>
+<S>likes(z,a)</S>
+
+f and f are both in the same row
+<S>samerow(f,f)</S>
+<S>samerow(z,z)</S>
+
+both c and z are in the same row
+<S>samerow(c,z)</S>
+<S>samerow(z,z)</S>
+
+c and x are both the same shape </S>
+<S>sameshape(c,x)</S>
+<S>sameshape(z,z)</S>
+
+z and b are in the same row </S>
+<S>samerow(z,b)</S>
+<S>samerow(z,z)</S>
+
+both c and x are the same size </S>
+<S>samesize(c,x)</S>
+<S>samesize(z,z)</S>
+
+both z and z are the same size </S>
+<S>samesize(z,z)</S>
+<S>samesize(z,z)</S>
+
+a is the same shape as y </S> <PAD>
+<S>sameshape(a,y)</S>
+<S>samecol(x,x)</S>
+
+both e and b are the same shape </S>
+<S>sameshape(e,b)</S>
+<S>sameshape(z,z)</S>
+
+c adjoins a </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>adjoins(c,a)</S>
+<S>adjoins(c,c)</S>
+
+both e and e are the same size </S>
+<S>samesize(e,e)</S>
+<S>samesize(z,z)</S>
+
+y and x are both in the same row
+<S>samerow(y,x)</S>
+<S>samerow(z,z)</S>
+
+y and e are both the same size </S>
+<S>samesize(y,e)</S>
+<S>samesize(z,z)</S>
+
+e and e are both in the same column
+<S>samecol(e,e)</S>
+<S>samecol(z,z)</S>
+
+d and z are in the same row </S>
+<S>samerow(d,z)</S>
+<S>samerow(z,z)</S>
+
+z </S> <PAD> <PAD> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>samecol(z,x)</S>
+<S>samesize(z,</S>)</S>
+
+b and y are in the same column </S>
+<S>samecol(b,y)</S>
+<S>samecol(z,z)</S>
+
+f and x are in the same column </S>
+<S>samecol(f,x)</S>
+<S>samecol(z,z)</S>
+
+c is in the same row as f </S>
+<S>samerow(c,f)</S>
+<S>samerow(z,z)</S>
+
+b and b are both in the same row
+<S>samerow(b,b)</S>
+<S>samerow(z,z)</S>
+
+f is in the same column as x </S>
+<S>samecol(f,x)</S>
+<S>samecol(z,z)</S>
+
+z and f are in the same column </S>
+<S>samecol(z,f)</S>
+<S>samecol(z,z)</S>
+
+y and z are both the same size </S>
+<S>samesize(y,z)</S>
+<S>samesize(z,z)</S>
+
+both x and x are in the same column
+<S>samecol(x,x)</S>
+<S>samecol(z,z)</S>
+
+both c and b are the same size </S>
+<S>samesize(c,b)</S>
+<S>samesize(z,z)</S>
+
+d and x both are the same shape </S>
+<S>sameshape(d,x)</S>
+<S>sameshape(z,z)</S>
+
+a and d both are the same size </S>
+<S>samesize(a,d)</S>
+<S>samesize(z,z)</S>
+
+d adjoins b </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>adjoins(d,b)</S>
+<S>adjoins(c,c)</S>
+
+x and x are both the same shape </S>
+<S>sameshape(x,x)</S>
+<S>sameshape(z,z)</S>
+
+x is to the right of e </S> <PAD>
+<S>rightof(x,e)</S>
+<S>rightof(z,z)</S>
+
+both z and c are in the same row
+<S>samerow(z,c)</S>
+<S>samerow(z,z)</S>
+
+x adjoins x </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>adjoins(x,x)</S>
+<S>adjoins(c,c)</S>
+
+both f and x are the same size </S>
+<S>samesize(f,x)</S>
+<S>samesize(z,z)</S>
+
+x is in the same row as f </S>
+<S>samerow(x,f)</S>
+<S>samerow(z,z)</S>
+
+a adjoins y </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>adjoins(a,y)</S>
+<S>adjoins(c,c)</S>
+
+both f and c are in the same column
+<S>samecol(f,c)</S>
+<S>samecol(z,z)</S>
+
+x and e are the same shape </S> <PAD>
+<S>sameshape(x,e)</S>
+<S>sameshape(z,z)</S>
+
+y and c are both the same shape </S>
+<S>sameshape(y,c)</S>
+<S>sameshape(z,z)</S>
+
+d and z both are in the same column
+<S>samecol(d,z)</S>
+<S>samecol(z,z)</S>
+
+y is a tetrahedron </S> <PAD> <PAD> <PAD> <PAD>
+<S>tet(y)</S><PAD><PAD>
+<S>c(adjoins)</S><PAD><PAD>
+
+d and d are in the same row </S>
+<S>samerow(d,d)</S>
+<S>samerow(z,z)</S>
+
+b and x are both the same shape </S>
+<S>sameshape(b,x)</S>
+<S>sameshape(z,z)</S>
+
+both x and z are the same shape </S>
+<S>sameshape(x,z)</S>
+<S>sameshape(z,z)</S>
+
+both f and e are in the same column
+<S>samecol(f,e)</S>
+<S>samecol(z,z)</S>
+
+z and d both are in the same column
+<S>samecol(z,d)</S>
+<S>samecol(z,z)</S>
+
+x and e both are in the same column
+<S>samecol(x,e)</S>
+<S>samecol(z,z)</S>
+
+x is in back of y </S> <PAD> <PAD>
+<S>backof(x,y)</S>
+<S>leftof(z,z)</S>
+
+x and x are both the same shape </S>
+<S>sameshape(x,x)</S>
+<S>sameshape(z,z)</S>
+
+z is small </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>small(z)</S><PAD><PAD>
+<S><UNK>(c)</S><PAD><PAD>
+
+both z and b are the same size </S>
+<S>samesize(z,b)</S>
+<S>samesize(z,z)</S>
+
+both d and y are in the same column
+<S>samecol(d,y)</S>
+<S>samecol(z,z)</S>
+
+both z and y are the same size </S>
+<S>samesize(z,y)</S>
+<S>samesize(z,z)</S>
+
+e and y both are in the same column
+<S>samecol(e,y)</S>
+<S>samecol(z,z)</S>
+
+both c and x are the same size </S>
+<S>samesize(c,x)</S>
+<S>samesize(z,z)</S>
+
+both a and y are the same shape </S>
+<S>sameshape(a,y)</S>
+<S>sameshape(z,z)</S>
+
+both x and z are the same size </S>
+<S>samesize(x,z)</S>
+<S>samesize(z,z)</S>
+
+both b and x are in the same row
+<S>samerow(b,x)</S>
+<S>samerow(z,z)</S>
+
+f is large </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>large(f)</S><PAD><PAD>
+<S><UNK>(c)</S><PAD><PAD>
+
+both x and z are the same shape </S>
+<S>sameshape(x,z)</S>
+<S>sameshape(z,z)</S>
+
+d is to the left of e </S> <PAD>
+<S>leftof(d,e)</S>
+<S>likes(y,a)</S>
+
+f and y are both the same shape </S>
+<S>sameshape(f,y)</S>
+<S>sameshape(z,z)</S>
+
+both f and y are the same size </S>
+<S>samesize(f,y)</S>
+<S>samesize(z,z)</S>
+
+z and z are the same size </S> <PAD>
+<S>samesize(z,z)</S>
+<S>samesize(z,z)</S>
+
+z is to the right of e </S> <PAD>
+<S>rightof(z,e)</S>
+<S>rightof(z,z)</S>
+
+b and y are in the same column </S>
+<S>samecol(b,y)</S>
+<S>samecol(z,z)</S>
+
+both b and a are the same shape </S>
+<S>sameshape(b,a)</S>
+<S>sameshape(z,z)</S>
+
+e is smaller than f </S> <PAD> <PAD> <PAD>
+<S>smaller(e,f)</S>
+<S>likes(z,a)</S>
+
+b and f are the same size </S> <PAD>
+<S>samesize(b,f)</S>
+<S>samesize(z,z)</S>
+
+x and y both are in the same column
+<S>samecol(x,y)</S>
+<S>samecol(z,z)</S>
+
+x and x both are the same shape </S>
+<S>sameshape(x,x)</S>
+<S>sameshape(z,z)</S>
+
+f is smaller than e </S> <PAD> <PAD> <PAD>
+<S>smaller(f,e)</S>
+<S>likes(z,a)</S>
+
+x and e are in the same row </S>
+<S>samerow(x,e)</S>
+<S>samerow(z,z)</S>
+
+y and d are both the same shape </S>
+<S>sameshape(y,d)</S>
+<S>sameshape(z,z)</S>
+
+y and z both are the same size </S>
+<S>samesize(y,z)</S>
+<S>samesize(z,z)</S>
+
+z is in the same column as x </S>
+<S>samecol(z,x)</S>
+<S>samecol(z,z)</S>
+
+z is in the same column as e </S>
+<S>samecol(z,e)</S>
+<S>likes(z,a)</S>
+
+x is the same size as c </S> <PAD>
+<S>samesize(x,c)</S>
+<S>small(z,z)</S>
+
+e is in the same column as c </S>
+<S>samecol(e,c)</S>
+<S>likes(z,a)</S>
+
+both a and z are the same size </S>
+<S>samesize(a,z)</S>
+<S>samesize(z,z)</S>
+
+both d and z are the same shape </S>
+<S>sameshape(d,z)</S>
+<S>sameshape(z,z)</S>
+
+f is the same size as d </S> <PAD>
+<S>samesize(f,d)</S>
+<S>small(z,z)</S>
+
+x and c are both in the same column
+<S>samecol(x,c)</S>
+<S>samecol(z,z)</S>
+
+both a and e are the same size </S>
+<S>samesize(a,e)</S>
+<S>samesize(z,z)</S>
+
+both e and x are the same size </S>
+<S>samesize(e,x)</S>
+<S>samesize(z,z)</S>
+
+d adjoins d </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>adjoins(d,d)</S>
+<S>adjoins(c,c)</S>
+
+x and a are the same size </S> <PAD>
+<S>samesize(x,a)</S>
+<S>samesize(z,z)</S>
+
+x and b are both in the same column
+<S>samecol(x,b)</S>
+<S>samecol(z,z)</S>
+
+b and e are both the same shape </S>
+<S>sameshape(b,e)</S>
+<S>sameshape(z,z)</S>
+
+y and b are the same size </S> <PAD>
+<S>samesize(y,b)</S>
+<S>samesize(z,z)</S>
+
+z and b are the same shape </S> <PAD>
+<S>sameshape(z,b)</S>
+<S>sameshape(z,z)</S>
+
+x and f both are the same size </S>
+<S>samesize(x,f)</S>
+<S>samesize(z,z)</S>
+
+both c and f are in the same column
+<S>samecol(c,f)</S>
+<S>samecol(z,z)</S>
+
+y and y both are the same shape </S>
+<S>sameshape(y,y)</S>
+<S>sameshape(z,z)</S>
+
+a and x both are in the same column
+<S>samecol(a,x)</S>
+<S>samecol(z,z)</S>
+
+e and b are the same size </S> <PAD>
+<S>samesize(e,b)</S>
+<S>samesize(z,z)</S>
+
+c is the same shape as y </S> <PAD>
+<S>sameshape(c,y)</S>
+<S>samecol(x,x)</S>
+
+x adjoins d </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>adjoins(x,d)</S>
+<S>adjoins(c,c)</S>
+
+y is in the same column as c </S>
+<S>samecol(y,c)</S>
+<S>likes(z,a)</S>
+
+both z and z are the same shape </S>
+<S>sameshape(z,z)</S>
+<S>sameshape(z,z)</S>
+
+x and f are the same shape </S> <PAD>
+<S>sameshape(x,f)</S>
+<S>sameshape(z,z)</S>
+
+y is small </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>small(y)</S><PAD><PAD>
+<S><UNK>(c)</S><PAD><PAD>
+
+both x and y are the same size </S>
+<S>samesize(x,y)</S>
+<S>samesize(z,z)</S>
+
+a and z both are the same shape </S>
+<S>sameshape(a,z)</S>
+<S>sameshape(z,z)</S>
+
+b is the same shape as e </S> <PAD>
+<S>sameshape(b,e)</S>
+<S>samerow(y,y)</S>
+
+both y and e are the same size </S>
+<S>samesize(y,e)</S>
+<S>samesize(z,z)</S>
+
+x and z are the same shape </S> <PAD>
+<S>sameshape(x,z)</S>
+<S>sameshape(z,z)</S>
+
+a and y are both the same size </S>
+<S>samesize(a,y)</S>
+<S>samesize(z,z)</S>
+
+y and z both are the same size </S>
+<S>samesize(y,z)</S>
+<S>samesize(z,z)</S>
+
+x and c are the same shape </S> <PAD>
+<S>sameshape(x,c)</S>
+<S>sameshape(z,z)</S>
+
+f is medium </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>medium(f)</S><PAD><PAD>
+<S>,(</S>)</S><PAD><PAD>
+
+y and f are both in the same row
+<S>samerow(y,f)</S>
+<S>samerow(z,z)</S>
+
+d is a dodecahedron </S> <PAD> <PAD> <PAD> <PAD>
+<S>dodec(d)</S><PAD><PAD>
+<S></S>(</S>)</S><PAD><PAD>
+
+y and b are both the same size </S>
+<S>samesize(y,b)</S>
+<S>samesize(z,z)</S>
+
+y and x both are in the same row
+<S>samerow(y,x)</S>
+<S>samerow(z,z)</S>
+
+both d and a are the same size </S>
+<S>samesize(d,a)</S>
+<S>samesize(z,z)</S>
+
+both f and a are the same size </S>
+<S>samesize(f,a)</S>
+<S>samesize(z,z)</S>
+
+f is a cube </S> <PAD> <PAD> <PAD> <PAD>
+<S>cube(f)</S><PAD><PAD>
+<S></S>(</S>)</S><PAD><PAD>
+
+both z and a are in the same column
+<S>samecol(z,a)</S>
+<S>samecol(z,z)</S>
+
+d and z are the same size </S> <PAD>
+<S>samesize(d,z)</S>
+<S>samesize(z,z)</S>
+
+a is the same size as y </S> <PAD>
+<S>samesize(a,y)</S>
+<S>samesize(z,y)</S>
+
+a is in front of y </S> <PAD> <PAD>
+<S>frontof(a,y)</S>
+<S>likes(z,z)</S>
+
+z is the same shape as b </S> <PAD>
+<S>sameshape(z,b)</S>
+<S>samerow(y,y)</S>
+
+both a and e are in the same column
+<S>samecol(a,e)</S>
+<S>samecol(z,z)</S>
+
+both d and y are the same shape </S>
+<S>sameshape(d,y)</S>
+<S>sameshape(z,z)</S>
+
+both x and e are the same size </S>
+<S>samesize(x,e)</S>
+<S>samesize(z,z)</S>
+
+z is to the left of c </S> <PAD>
+<S>leftof(z,c)</S>
+<S>likes(y,a)</S>
+
+z and c both are in the same row
+<S>samerow(z,c)</S>
+<S>samerow(z,z)</S>
+
+z and d are both in the same row
+<S>samerow(z,d)</S>
+<S>samerow(z,z)</S>
+
+z and e are both the same shape </S>
+<S>sameshape(z,e)</S>
+<S>sameshape(z,z)</S>
+
+b is in front of b </S> <PAD> <PAD>
+<S>frontof(b,b)</S>
+<S>likes(z,a)</S>
+
+both y and a are the same shape </S>
+<S>sameshape(y,a)</S>
+<S>sameshape(z,z)</S>
+
+x likes c </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>likes(x,c)</S>
+<S>happy(b,a)</S>
+
+a and y both are in the same column
+<S>samecol(a,y)</S>
+<S>samecol(z,z)</S>
+
+both d and z are in the same column
+<S>samecol(d,z)</S>
+<S>samecol(z,z)</S>
+
+both x and x are in the same column
+<S>samecol(x,x)</S>
+<S>samecol(z,z)</S>
+
+both y and x are in the same row
+<S>samerow(y,x)</S>
+<S>samerow(z,z)</S>
+
+x and f are both the same size </S>
+<S>samesize(x,f)</S>
+<S>samesize(z,z)</S>
+
+z is in the same row as d </S>
+<S>samerow(z,d)</S>
+<S>samerow(z,z)</S>
+
+both f and e are in the same row
+<S>samerow(f,e)</S>
+<S>samerow(z,z)</S>
+
+both x and x are the same size </S>
+<S>samesize(x,x)</S>
+<S>samesize(z,z)</S>
+
+both x and f are the same size </S>
+<S>samesize(x,f)</S>
+<S>samesize(z,z)</S>
+
+y is in front of a </S> <PAD> <PAD>
+<S>frontof(y,a)</S>
+<S>likes(z,a)</S>
+
+y and y both are in the same row
+<S>samerow(y,y)</S>
+<S>samerow(z,z)</S>
+
+c and c are both the same shape </S>
+<S>sameshape(c,c)</S>
+<S>sameshape(z,z)</S>
+
+both c and z are in the same column
+<S>samecol(c,z)</S>
+<S>samecol(z,z)</S>
+
+y is the same shape as y </S> <PAD>
+<S>sameshape(y,y)</S>
+<S>samerow(x,x)</S>
+
+d likes d </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>likes(d,d)</S>
+<S>rightof(b,</S>)</S>
+
+z is the same shape as y </S> <PAD>
+<S>sameshape(z,y)</S>
+<S>samecol(x,x)</S>
+
+c is in front of y </S> <PAD> <PAD>
+<S>frontof(c,y)</S>
+<S>likes(z,z)</S>
+
+z and y both are in the same row
+<S>samerow(z,y)</S>
+<S>samerow(z,z)</S>
+
+both c and e are in the same row
+<S>samerow(c,e)</S>
+<S>samerow(z,z)</S>
+
+f and x both are the same shape </S>
+<S>sameshape(f,x)</S>
+<S>sameshape(z,z)</S>
+
+c and x are both in the same column
+<S>samecol(c,x)</S>
+<S>samecol(z,z)</S>
+
+both y and z are in the same row
+<S>samerow(y,z)</S>
+<S>samerow(z,z)</S>
+
+both x and e are the same shape </S>
+<S>sameshape(x,e)</S>
+<S>sameshape(z,z)</S>
+
+x is larger than d </S> <PAD> <PAD> <PAD>
+<S>larger(x,d)</S>
+<S>likes(z,a)</S>
+
+f is in front of y </S> <PAD> <PAD>
+<S>frontof(f,y)</S>
+<S>likes(z,z)</S>
+
+both z and b are in the same column
+<S>samecol(z,b)</S>
+<S>samecol(z,z)</S>
+
+z is in the same column as e </S>
+<S>samecol(z,e)</S>
+<S>likes(z,a)</S>
+
+y and y both are in the same column
+<S>samecol(y,y)</S>
+<S>samecol(z,z)</S>
+
+z and y are both the same shape </S>
+<S>sameshape(z,y)</S>
+<S>sameshape(z,z)</S>
+
+c and b are both in the same row
+<S>samerow(c,b)</S>
+<S>samerow(z,z)</S>
+
+z is in front of d </S> <PAD> <PAD>
+<S>frontof(z,d)</S>
+<S>likes(z,a)</S>
+
+y and d are both in the same column
+<S>samecol(y,d)</S>
+<S>samecol(z,z)</S>
+
+both z and y are in the same row
+<S>samerow(z,y)</S>
+<S>samerow(z,z)</S>
+
+e and d are both in the same row
+<S>samerow(e,d)</S>
+<S>samerow(z,z)</S>
+
+a and b are the same shape </S> <PAD>
+<S>sameshape(a,b)</S>
+<S>sameshape(z,z)</S>
+
+y and y are both the same size </S>
+<S>samesize(y,y)</S>
+<S>samesize(z,z)</S>
+
+both y and z are the same size </S>
+<S>samesize(y,z)</S>
+<S>samesize(z,z)</S>
+
+x and x both are in the same column
+<S>samecol(x,x)</S>
+<S>samecol(z,z)</S>
+
+both c and x are in the same row
+<S>samerow(c,x)</S>
+<S>samerow(z,z)</S>
+
+y and b both are in the same column
+<S>samecol(y,b)</S>
+<S>samecol(z,z)</S>
+
+f and x are the same size </S> <PAD>
+<S>samesize(f,x)</S>
+<S>samesize(z,z)</S>
+
+both x and z are in the same column
+<S>samecol(x,z)</S>
+<S>samecol(z,z)</S>
+
+both a and z are the same shape </S>
+<S>sameshape(a,z)</S>
+<S>sameshape(z,z)</S>
+
+c and e are both in the same column
+<S>samecol(c,e)</S>
+<S>samecol(z,z)</S>
+
+a and z are both the same shape </S>
+<S>sameshape(a,z)</S>
+<S>sameshape(z,z)</S>
+
+z and x both are in the same row
+<S>samerow(z,x)</S>
+<S>samerow(z,z)</S>
+
+d is smaller than a </S> <PAD> <PAD> <PAD>
+<S>smaller(d,a)</S>
+<S>likes(z,a)</S>
+
+x and y are the same size </S> <PAD>
+<S>samesize(x,y)</S>
+<S>samesize(z,z)</S>
+
+c is to the right of d </S> <PAD>
+<S>rightof(c,d)</S>
+<S>rightof(z,z)</S>
+
+z and z are both in the same column
+<S>samecol(z,z)</S>
+<S>samecol(z,z)</S>
+
+y is in the same row as b </S>
+<S>samerow(y,b)</S>
+<S>samerow(z,z)</S>
+
+b is to the left of a </S> <PAD>
+<S>leftof(b,a)</S>
+<S>likes(y,a)</S>
+
+a likes b </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>likes(a,b)</S>
+<S>adjoins(b,a)</S>
+
+both e and c are the same size </S>
+<S>samesize(e,c)</S>
+<S>samesize(z,z)</S>
+
+x and x are both in the same column
+<S>samecol(x,x)</S>
+<S>samecol(z,z)</S>
+
+z is to the right of d </S> <PAD>
+<S>rightof(z,d)</S>
+<S>rightof(z,z)</S>
+
+a is in back of x </S> <PAD> <PAD>
+<S>backof(a,x)</S>
+<S>leftof(z,z)</S>
+
+y and c both are the same size </S>
+<S>samesize(y,c)</S>
+<S>samesize(z,z)</S>
+
+c and y are the same shape </S> <PAD>
+<S>sameshape(c,y)</S>
+<S>sameshape(z,z)</S>
+
+x and x are both the same size </S>
+<S>samesize(x,x)</S>
+<S>samesize(z,z)</S>
+
+c is in the same column as x </S>
+<S>samecol(c,x)</S>
+<S>samecol(z,z)</S>
+
+a is to the left of x </S> <PAD>
+<S>leftof(a,x)</S>
+<S>leftof(z,z)</S>
+
+a and y are the same size </S> <PAD>
+<S>samesize(a,y)</S>
+<S>samesize(z,z)</S>
+
+d and z are both the same size </S>
+<S>samesize(d,z)</S>
+<S>samesize(z,z)</S>
+
+y is smaller than b </S> <PAD> <PAD> <PAD>
+<S>smaller(y,b)</S>
+<S>likes(z,a)</S>
+
+both d and y are in the same column
+<S>samecol(d,y)</S>
+<S>samecol(z,z)</S>
+
+both a and x are in the same column
+<S>samecol(a,x)</S>
+<S>samecol(z,z)</S>
+
+z is the same size as c </S> <PAD>
+<S>samesize(z,c)</S>
+<S>small(z,z)</S>
+
+y and c are in the same row </S>
+<S>samerow(y,c)</S>
+<S>samerow(z,z)</S>
+
+b and y are both the same shape </S>
+<S>sameshape(b,y)</S>
+<S>sameshape(z,z)</S>
+
+x and f are the same size </S> <PAD>
+<S>samesize(x,f)</S>
+<S>samesize(z,z)</S>
+
+b and a are the same size </S> <PAD>
+<S>samesize(b,a)</S>
+<S>samesize(z,z)</S>
+
+y and e are in the same row </S>
+<S>samerow(y,e)</S>
+<S>samerow(z,z)</S>
+
+both y and c are the same shape </S>
+<S>sameshape(y,c)</S>
+<S>sameshape(z,z)</S>
+
+both c and a are the same size </S>
+<S>samesize(c,a)</S>
+<S>samesize(z,z)</S>
+
+x is to the right of b </S> <PAD>
+<S>rightof(x,b)</S>
+<S>rightof(z,z)</S>
+
+both x and z are in the same column
+<S>samecol(x,z)</S>
+<S>samecol(z,z)</S>
+
+f and x are the same shape </S> <PAD>
+<S>sameshape(f,x)</S>
+<S>sameshape(z,z)</S>
+
+c and d are both the same size </S>
+<S>samesize(c,d)</S>
+<S>samesize(z,z)</S>
+
+x </S> <PAD> <PAD> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>sameshape(x,y)</S>
+<S>samesize(z,</S>)</S>
+
+d and y both are the same shape </S>
+<S>sameshape(d,y)</S>
+<S>sameshape(z,z)</S>
+
+x adjoins e </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>adjoins(x,e)</S>
+<S>adjoins(c,c)</S>
+
+both z and z are the same size </S>
+<S>samesize(z,z)</S>
+<S>samesize(z,z)</S>
+
+both x and e are the same shape </S>
+<S>sameshape(x,e)</S>
+<S>sameshape(z,z)</S>
+
+z and e are both the same shape </S>
+<S>sameshape(z,e)</S>
+<S>sameshape(z,z)</S>
+
+e likes e </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>likes(e,e)</S>
+<S>sameshape(z,</S>)</S>
+
+x is in back of d </S> <PAD> <PAD>
+<S>backof(x,d)</S>
+<S>likes(z,z)</S>
+
+x and y are the same shape </S> <PAD>
+<S>sameshape(x,y)</S>
+<S>sameshape(z,z)</S>
+
+z is the same shape as a </S> <PAD>
+<S>sameshape(z,a)</S>
+<S>samerow(y,y)</S>
+
+both e and z are in the same column
+<S>samecol(e,z)</S>
+<S>samecol(z,z)</S>
+
+x and y are both the same shape </S>
+<S>sameshape(x,y)</S>
+<S>sameshape(z,z)</S>
+
+f is to the left of b </S> <PAD>
+<S>leftof(f,b)</S>
+<S>likes(y,a)</S>
+
+c and y are both the same size </S>
+<S>samesize(c,y)</S>
+<S>samesize(z,z)</S>
+
+both d and e are the same size </S>
+<S>samesize(d,e)</S>
+<S>samesize(z,z)</S>
+
+b is larger than d </S> <PAD> <PAD> <PAD>
+<S>larger(b,d)</S>
+<S>likes(z,a)</S>
+
+both c and y are the same shape </S>
+<S>sameshape(c,y)</S>
+<S>sameshape(z,z)</S>
+
+a is to the right of e </S> <PAD>
+<S>rightof(a,e)</S>
+<S>rightof(z,z)</S>
+
+b and a both are the same shape </S>
+<S>sameshape(b,a)</S>
+<S>sameshape(z,z)</S>
+
+both b and d are the same size </S>
+<S>samesize(b,d)</S>
+<S>samesize(z,z)</S>
+
+both z and a are in the same column
+<S>samecol(z,a)</S>
+<S>samecol(z,z)</S>
+
+both y and c are the same shape </S>
+<S>sameshape(y,c)</S>
+<S>sameshape(z,z)</S>
+
+c is larger than c </S> <PAD> <PAD> <PAD>
+<S>larger(c,c)</S>
+<S>likes(z,a)</S>
+
+d is smaller than x </S> <PAD> <PAD> <PAD>
+<S>smaller(d,x)</S>
+<S>small(z,z)</S>
+
+d and x are both in the same row
+<S>samerow(d,x)</S>
+<S>samerow(z,z)</S>
+
+both a and x are the same size </S>
+<S>samesize(a,x)</S>
+<S>samesize(z,z)</S>
+
+d is in the same row as d </S>
+<S>samerow(d,d)</S>
+<S>samerow(z,z)</S>
+
+b is in the same row as d </S>
+<S>samerow(b,d)</S>
+<S>samerow(z,z)</S>
+
+z is in the same column as a </S>
+<S>samecol(z,a)</S>
+<S>likes(z,a)</S>
+
+f is in front of d </S> <PAD> <PAD>
+<S>frontof(f,d)</S>
+<S>likes(z,a)</S>
+
+y is in back of b </S> <PAD> <PAD>
+<S>backof(y,b)</S>
+<S>likes(z,a)</S>
+
+a and y are in the same column </S>
+<S>samecol(a,y)</S>
+<S>samecol(z,z)</S>
+
+both z and b are the same shape </S>
+<S>sameshape(z,b)</S>
+<S>sameshape(z,z)</S>
+
+both c and a are the same size </S>
+<S>samesize(c,a)</S>
+<S>samesize(z,z)</S>
+
+b is in front of a </S> <PAD> <PAD>
+<S>frontof(b,a)</S>
+<S>likes(z,a)</S>
+
+b and x both are in the same column
+<S>samecol(b,x)</S>
+<S>samecol(z,z)</S>
+
+c and d are both the same shape </S>
+<S>sameshape(c,d)</S>
+<S>sameshape(z,z)</S>
+
+z is the same shape as d </S> <PAD>
+<S>sameshape(z,d)</S>
+<S>samerow(y,y)</S>
+
+x and d both are in the same column
+<S>samecol(x,d)</S>
+<S>samecol(z,z)</S>
+
+y is in front of f </S> <PAD> <PAD>
+<S>frontof(y,f)</S>
+<S>likes(z,z)</S>
+
+e and y are the same size </S> <PAD>
+<S>samesize(e,y)</S>
+<S>samesize(z,z)</S>
+
+both y and d are in the same row
+<S>samerow(y,d)</S>
+<S>samerow(z,z)</S>
+
+b and x are the same shape </S> <PAD>
+<S>sameshape(b,x)</S>
+<S>sameshape(z,z)</S>
+
+both z and c are the same shape </S>
+<S>sameshape(z,c)</S>
+<S>sameshape(z,z)</S>
+
+both z and x are in the same column
+<S>samecol(z,x)</S>
+<S>samecol(z,z)</S>
+
+x and x both are the same size </S>
+<S>samesize(x,x)</S>
+<S>samesize(z,z)</S>
+
+z and z both are the same shape </S>
+<S>sameshape(z,z)</S>
+<S>sameshape(z,z)</S>
+
+z and a both are in the same column
+<S>samecol(z,a)</S>
+<S>samecol(z,z)</S>
+
+both x and f are in the same column
+<S>samecol(x,f)</S>
+<S>samecol(z,z)</S>
+
+z adjoins d </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>adjoins(z,d)</S>
+<S>adjoins(c,c)</S>
+
+b is in the same column as a </S>
+<S>samecol(b,a)</S>
+<S>likes(z,a)</S>
+
+d and d are the same size </S> <PAD>
+<S>samesize(d,d)</S>
+<S>samesize(z,z)</S>
+
+both e and e are the same size </S>
+<S>samesize(e,e)</S>
+<S>samesize(z,z)</S>
+
+both x and b are the same size </S>
+<S>samesize(x,b)</S>
+<S>samesize(z,z)</S>
+
+both e and z are in the same row
+<S>samerow(e,z)</S>
+<S>samerow(z,z)</S>
+
+both x and c are the same shape </S>
+<S>sameshape(x,c)</S>
+<S>sameshape(z,z)</S>
+
+y and d are both the same size </S>
+<S>samesize(y,d)</S>
+<S>samesize(z,z)</S>
+
+e and a are the same shape </S> <PAD>
+<S>sameshape(e,a)</S>
+<S>sameshape(z,z)</S>
+
+a is larger than x </S> <PAD> <PAD> <PAD>
+<S>larger(a,x)</S>
+<S>small(z,z)</S>
+
+e is larger than d </S> <PAD> <PAD> <PAD>
+<S>larger(e,d)</S>
+<S>likes(z,a)</S>
+
+d is a tetrahedron </S> <PAD> <PAD> <PAD> <PAD>
+<S>tet(d)</S><PAD><PAD>
+<S>c(a)</S><PAD><PAD>
+
+f and z are in the same column </S>
+<S>samecol(f,z)</S>
+<S>samecol(z,z)</S>
+
+b and d both are in the same row
+<S>samerow(b,d)</S>
+<S>samerow(z,z)</S>
+
+f and z both are in the same column
+<S>samecol(f,z)</S>
+<S>samecol(z,z)</S>
+
+a is in the same column as b </S>
+<S>samecol(a,b)</S>
+<S>likes(z,a)</S>
+
+y and z both are in the same column
+<S>samecol(y,z)</S>
+<S>samecol(z,z)</S>
+
+both c and c are the same size </S>
+<S>samesize(c,c)</S>
+<S>samesize(z,z)</S>
+
+d is in back of a </S> <PAD> <PAD>
+<S>backof(d,a)</S>
+<S>likes(z,a)</S>
+
+both y and b are the same size </S>
+<S>samesize(y,b)</S>
+<S>samesize(z,z)</S>
+
+a and c both are in the same column
+<S>samecol(a,c)</S>
+<S>samecol(z,z)</S>
+
+a adjoins b </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>adjoins(a,b)</S>
+<S>adjoins(c,c)</S>
+
+both e and y are the same shape </S>
+<S>sameshape(e,y)</S>
+<S>sameshape(z,z)</S>
+
+f and x are both the same shape </S>
+<S>sameshape(f,x)</S>
+<S>sameshape(z,z)</S>
+
+both c and f are the same shape </S>
+<S>sameshape(c,f)</S>
+<S>sameshape(z,z)</S>
+
+y and y both are the same shape </S>
+<S>sameshape(y,y)</S>
+<S>sameshape(z,z)</S>
+
+b and x are the same shape </S> <PAD>
+<S>sameshape(b,x)</S>
+<S>sameshape(z,z)</S>
+
+both z and z are in the same column
+<S>samecol(z,z)</S>
+<S>samecol(z,z)</S>
+
+z and z are in the same row </S>
+<S>samerow(z,z)</S>
+<S>samerow(z,z)</S>
+
+y is the same size as a </S> <PAD>
+<S>samesize(y,a)</S>
+<S>small(z,z)</S>
+
+both a and d are in the same row
+<S>samerow(a,d)</S>
+<S>samerow(z,z)</S>
+
+e is the same shape as x </S> <PAD>
+<S>sameshape(e,x)</S>
+<S>samecol(y,y)</S>
+
+f is in front of f </S> <PAD> <PAD>
+<S>frontof(f,f)</S>
+<S>likes(y,a)</S>
+
+y likes f </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>likes(y,f)</S>
+<S>dodec(b,</S>)</S>
+
+b and z are both the same shape </S>
+<S>sameshape(b,z)</S>
+<S>sameshape(z,z)</S>
+
+c and c are in the same row </S>
+<S>samerow(c,c)</S>
+<S>samerow(z,z)</S>
+
+y is the same shape as f </S> <PAD>
+<S>sameshape(y,f)</S>
+<S>samerow(y,y)</S>
+
+z likes b </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>likes(z,b)</S>
+<S>happy(b,a)</S>
+
+both x and x are in the same row
+<S>samerow(x,x)</S>
+<S>samerow(z,z)</S>
+
+both x and x are the same size </S>
+<S>samesize(x,x)</S>
+<S>samesize(z,z)</S>
+
+z and z both are in the same column
+<S>samecol(z,z)</S>
+<S>samecol(z,z)</S>
+
+x and b both are the same shape </S>
+<S>sameshape(x,b)</S>
+<S>sameshape(z,z)</S>
+
+b and y are both the same size </S>
+<S>samesize(b,y)</S>
+<S>samesize(z,z)</S>
+
+e and x are both in the same row
+<S>samerow(e,x)</S>
+<S>samerow(z,z)</S>
+
+b is the same shape as x </S> <PAD>
+<S>sameshape(b,x)</S>
+<S>samecol(y,y)</S>
+
+x likes b </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>likes(x,b)</S>
+<S>happy(b,a)</S>
+
+z and z are both the same size </S>
+<S>samesize(z,z)</S>
+<S>samesize(z,z)</S>
+
+f and z are the same shape </S> <PAD>
+<S>sameshape(f,z)</S>
+<S>sameshape(z,z)</S>
+
+y is to the right of c </S> <PAD>
+<S>rightof(y,c)</S>
+<S>rightof(z,z)</S>
+
+x </S> <PAD> <PAD> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>samerow(x,y)</S>
+<S>samesize(z,</S>)</S>
+
+both x and x are the same size </S>
+<S>samesize(x,x)</S>
+<S>samesize(z,z)</S>
+
+y and y both are the same size </S>
+<S>samesize(y,y)</S>
+<S>samesize(z,z)</S>
+
+b is in front of e </S> <PAD> <PAD>
+<S>frontof(b,e)</S>
+<S>likes(z,a)</S>
+
+both x and y are the same size </S>
+<S>samesize(x,y)</S>
+<S>samesize(z,z)</S>
+
+both f and a are the same shape </S>
+<S>sameshape(f,a)</S>
+<S>sameshape(z,z)</S>
+
+both z and b are in the same row
+<S>samerow(z,b)</S>
+<S>samerow(z,z)</S>
+
+y and y both are in the same column
+<S>samecol(y,y)</S>
+<S>samecol(z,z)</S>
+
+both x and d are in the same column
+<S>samecol(x,d)</S>
+<S>samecol(z,z)</S>
+
+y and z are both in the same row
+<S>samerow(y,z)</S>
+<S>samerow(z,z)</S>
+
+a is larger than e </S> <PAD> <PAD> <PAD>
+<S>larger(a,e)</S>
+<S>likes(z,a)</S>
+
+d and a are the same size </S> <PAD>
+<S>samesize(d,a)</S>
+<S>samesize(z,z)</S>
+
+z is larger than d </S> <PAD> <PAD> <PAD>
+<S>larger(z,d)</S>
+<S>likes(z,a)</S>
+
+b and z are both in the same row
+<S>samerow(b,z)</S>
+<S>samerow(z,z)</S>
+
+z and f both are in the same column
+<S>samecol(z,f)</S>
+<S>samecol(z,z)</S>
+
+e and x both are the same size </S>
+<S>samesize(e,x)</S>
+<S>samesize(z,z)</S>
+
+x likes y </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>likes(x,y)</S>
+<S><PAD>(c)</S><PAD><PAD>
+
+both y and d are the same size </S>
+<S>samesize(y,d)</S>
+<S>samesize(z,z)</S>
+
+both a and z are the same shape </S>
+<S>sameshape(a,z)</S>
+<S>sameshape(z,z)</S>
+
+y and c both are in the same column
+<S>samecol(y,c)</S>
+<S>samecol(z,z)</S>
+
+both z and d are in the same row
+<S>samerow(z,d)</S>
+<S>samerow(z,z)</S>
+
+d and c are both in the same row
+<S>samerow(d,c)</S>
+<S>samerow(z,z)</S>
+
+both d and z are the same shape </S>
+<S>sameshape(d,z)</S>
+<S>sameshape(z,z)</S>
+
+z and x are both the same size </S>
+<S>samesize(z,x)</S>
+<S>samesize(z,z)</S>
+
+c is in front of b </S> <PAD> <PAD>
+<S>frontof(c,b)</S>
+<S>likes(z,a)</S>
+
+both c and x are the same size </S>
+<S>samesize(c,x)</S>
+<S>samesize(z,z)</S>
+
+y and c both are in the same row
+<S>samerow(y,c)</S>
+<S>samerow(z,z)</S>
+
+e and z are the same size </S> <PAD>
+<S>samesize(e,z)</S>
+<S>samesize(z,z)</S>
+
+b is the same size as b </S> <PAD>
+<S>samesize(b,b)</S>
+<S>small(z,z)</S>
+
+both y and z are in the same column
+<S>samecol(y,z)</S>
+<S>samecol(z,z)</S>
+
+e is to the left of d </S> <PAD>
+<S>leftof(e,d)</S>
+<S>likes(y,a)</S>
+
+x and c are both the same size </S>
+<S>samesize(x,c)</S>
+<S>samesize(z,z)</S>
+
+both x and y are the same size </S>
+<S>samesize(x,y)</S>
+<S>samesize(z,z)</S>
+
+x </S> <PAD> <PAD> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>samecol(x,x)</S>
+<S>samesize(z,</S>)</S>
+
+z and f are in the same row </S>
+<S>samerow(z,f)</S>
+<S>samerow(z,z)</S>
+
+x and d are the same size </S> <PAD>
+<S>samesize(x,d)</S>
+<S>samesize(z,z)</S>
+
+both c and x are the same size </S>
+<S>samesize(c,x)</S>
+<S>samesize(z,z)</S>
+
+c and b are the same shape </S> <PAD>
+<S>sameshape(c,b)</S>
+<S>sameshape(z,z)</S>
+
+z and x are the same size </S> <PAD>
+<S>samesize(z,x)</S>
+<S>samesize(z,z)</S>
+
+a and f are the same shape </S> <PAD>
+<S>sameshape(a,f)</S>
+<S>sameshape(z,z)</S>
+
+y is the same shape as b </S> <PAD>
+<S>sameshape(y,b)</S>
+<S>samerow(y,y)</S>
+
+d and b are both the same size </S>
+<S>samesize(d,b)</S>
+<S>samesize(z,z)</S>
+
+z and y both are in the same column
+<S>samecol(z,y)</S>
+<S>samecol(z,z)</S>
+
+x is in front of x </S> <PAD> <PAD>
+<S>frontof(x,x)</S>
+<S>leftof(z,z)</S>
+
+f and e both are the same size </S>
+<S>samesize(f,e)</S>
+<S>samesize(z,z)</S>
+
+c and z both are the same size </S>
+<S>samesize(c,z)</S>
+<S>samesize(z,z)</S>
+
+y and x are both the same size </S>
+<S>samesize(y,x)</S>
+<S>samesize(z,z)</S>
+
+z is larger than a </S> <PAD> <PAD> <PAD>
+<S>larger(z,a)</S>
+<S>likes(z,a)</S>
+
+y </S> <PAD> <PAD> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>sameshape(y,y)</S>
+<S>samesize(z,</S>)</S>
+
+y adjoins f </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>adjoins(y,f)</S>
+<S>adjoins(c,c)</S>
+
+both b and c are the same size </S>
+<S>samesize(b,c)</S>
+<S>samesize(z,z)</S>
+
+z and y both are the same size </S>
+<S>samesize(z,y)</S>
+<S>samesize(z,z)</S>
+
+d is in back of c </S> <PAD> <PAD>
+<S>backof(d,c)</S>
+<S>likes(z,a)</S>
+
+x and c are in the same row </S>
+<S>samerow(x,c)</S>
+<S>samerow(z,z)</S>
+
+d and e both are in the same column
+<S>samecol(d,e)</S>
+<S>samecol(z,z)</S>
+
+e and e are the same size </S> <PAD>
+<S>samesize(e,e)</S>
+<S>samesize(z,z)</S>
+
+d and f both are in the same row
+<S>samerow(d,f)</S>
+<S>samerow(z,z)</S>
+
+y and x are in the same column </S>
+<S>samecol(y,x)</S>
+<S>samecol(z,z)</S>
+
+both b and y are the same size </S>
+<S>samesize(b,y)</S>
+<S>samesize(z,z)</S>
+
+both z and x are the same shape </S>
+<S>sameshape(z,x)</S>
+<S>sameshape(z,z)</S>
+
+z and x are both the same size </S>
+<S>samesize(z,x)</S>
+<S>samesize(z,z)</S>
+
+both a and y are the same size </S>
+<S>samesize(a,y)</S>
+<S>samesize(z,z)</S>
+
+x and c both are in the same column
+<S>samecol(x,c)</S>
+<S>samecol(z,z)</S>
+
+z and b are both in the same row
+<S>samerow(z,b)</S>
+<S>samerow(z,z)</S>
+
+y is the same size as f </S> <PAD>
+<S>samesize(y,f)</S>
+<S>small(z,z)</S>
+
+b is larger than f </S> <PAD> <PAD> <PAD>
+<S>larger(b,f)</S>
+<S>likes(z,a)</S>
+
+both y and a are in the same column
+<S>samecol(y,a)</S>
+<S>samecol(z,z)</S>
+
+x and a are in the same row </S>
+<S>samerow(x,a)</S>
+<S>samerow(z,z)</S>
+
+d and f both are the same shape </S>
+<S>sameshape(d,f)</S>
+<S>sameshape(z,z)</S>
+
+b is to the right of c </S> <PAD>
+<S>rightof(b,c)</S>
+<S>rightof(z,z)</S>
+
+a is smaller than x </S> <PAD> <PAD> <PAD>
+<S>smaller(a,x)</S>
+<S>small(z,z)</S>
+
+both y and b are the same shape </S>
+<S>sameshape(y,b)</S>
+<S>sameshape(z,z)</S>
+
+d is the same shape as y </S> <PAD>
+<S>sameshape(d,y)</S>
+<S>samecol(x,x)</S>
+
+both a and f are in the same column
+<S>samecol(a,f)</S>
+<S>samecol(z,z)</S>
+
+x and x are the same size </S> <PAD>
+<S>samesize(x,x)</S>
+<S>samesize(z,z)</S>
+
+both x and d are in the same row
+<S>samerow(x,d)</S>
+<S>samerow(z,z)</S>
+
+y is in the same row as f </S>
+<S>samerow(y,f)</S>
+<S>samerow(z,z)</S>
+
+x is the same shape as x </S> <PAD>
+<S>sameshape(x,x)</S>
+<S>samecol(y,y)</S>
+
+x is the same shape as d </S> <PAD>
+<S>sameshape(x,d)</S>
+<S>samerow(y,y)</S>
+
+y is in back of x </S> <PAD> <PAD>
+<S>backof(y,x)</S>
+<S>likes(z,z)</S>
+
+d and b both are the same size </S>
+<S>samesize(d,b)</S>
+<S>samesize(z,z)</S>
+
+y and b are both in the same column
+<S>samecol(y,b)</S>
+<S>samecol(z,z)</S>
+
+y and c both are the same shape </S>
+<S>sameshape(y,c)</S>
+<S>sameshape(z,z)</S>
+
+both e and x are in the same row
+<S>samerow(e,x)</S>
+<S>samerow(z,z)</S>
+
+both y and c are in the same column
+<S>samecol(y,c)</S>
+<S>samecol(z,z)</S>
+
+y is in back of b </S> <PAD> <PAD>
+<S>backof(y,b)</S>
+<S>likes(z,a)</S>
+
+both f and x are in the same row
+<S>samerow(f,x)</S>
+<S>samerow(z,z)</S>
+
+both y and z are the same size </S>
+<S>samesize(y,z)</S>
+<S>samesize(z,z)</S>
+
+both y and d are in the same column
+<S>samecol(y,d)</S>
+<S>samecol(z,z)</S>
+
+y is medium </S> <PAD> <PAD> <PAD> <PAD> <PAD>
+<S>medium(y)</S><PAD><PAD>
+<S>,(b)</S><PAD><PAD>
+
+f and z both are the same shape </S>
+<S>sameshape(f,z)</S>
+<S>sameshape(z,z)</S>
+
+both x and a are the same size </S>
+<S>samesize(x,a)</S>
+<S>samesize(z,z)</S>
+
+f and x are both in the same row
+<S>samerow(f,x)</S>
+<S>samerow(z,z)</S>
+
+both d and a are the same shape </S>
+<S>sameshape(d,a)</S>
+<S>sameshape(z,z)</S>
+
+both c and z are the same shape </S>
+<S>sameshape(c,z)</S>
+<S>sameshape(z,z)</S>
+
+both a and e are in the same row
+<S>samerow(a,e)</S>
+<S>samerow(z,z)</S>
+
+c is in front of x </S> <PAD> <PAD>
+<S>frontof(c,x)</S>
+<S>leftof(z,z)</S>
+
+z is the same size as b </S> <PAD>
+<S>samesize(z,b)</S>
+<S>small(z,z)</S>
+
+b is the same shape as c </S> <PAD>
+<S>sameshape(b,c)</S>
+<S>samerow(y,y)</S>
+
+x and a are both in the same column
+<S>samecol(x,a)</S>
+<S>samecol(z,z)</S>
+
+both y and x are the same size </S>
+<S>samesize(y,x)</S>
+<S>samesize(z,z)</S>
+
+c is in back of e </S> <PAD> <PAD>
+<S>backof(c,e)</S>
+<S>likes(z,a)</S>
+
+d and e are the same shape </S> <PAD>
+<S>sameshape(d,e)</S>
+<S>sameshape(z,z)</S>
+
+a and y are both in the same row
+<S>samerow(a,y)</S>
+<S>samerow(z,z)</S>
+
+both a and z are in the same column
+<S>samecol(a,z)</S>
+<S>samecol(z,z)</S>
+
+x and y both are the same size </S>
+<S>samesize(x,y)</S>
+<S>samesize(z,z)</S>
+
+x and b both are in the same column
+<S>samecol(x,b)</S>
+<S>samecol(z,z)</S>
+
+z is smaller than b </S> <PAD> <PAD> <PAD>
+<S>smaller(z,b)</S>
+<S>likes(z,a)</S>
+
+x and z are both in the same row
+<S>samerow(x,z)</S>
+<S>samerow(z,z)</S>
+
+both c and a are in the same column
+<S>samecol(c,a)</S>
+<S>samecol(z,z)</S>
+
+both y and f are in the same row
+<S>samerow(y,f)</S>
+<S>samerow(z,z)</S>
+
+z is the same size as a </S> <PAD>
+<S>samesize(z,a)</S>
+<S>small(z,z)</S>
+
+both x and x are in the same row
+<S>samerow(x,x)</S>
+<S>samerow(z,z)</S>
+
+f and x are in the same row </S>
+<S>samerow(f,x)</S>
+<S>samerow(z,z)</S>

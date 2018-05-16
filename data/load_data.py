@@ -6,7 +6,7 @@ import torch
 # load atomic sents
 DATADIR = 'data/raw/'
 
-def get_atomic_sents(device):
+def get_atomic_sents(device, get_vocabs=True):
     filename = os.path.join(DATADIR, 'atomic_sents.out')
 
     def normalize_src(s):
@@ -45,4 +45,7 @@ def get_atomic_sents(device):
     ]
     print 'done.'
 
-    return src_inputs, tar_inputs
+    if get_vocabs:
+        return (src_inputs, tar_inputs), (src_vocab, tar_vocab)
+    else:
+        return src_inputs, tar_inputs

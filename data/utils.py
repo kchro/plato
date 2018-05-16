@@ -4,9 +4,11 @@ import re
 
 class NLVocab:
     def __init__(self, text, n_words=None):
-        wc = Counter([w for sent in text for w in sent.split()])
+        wc = Counter([w for sent in text for w in re.findall(r"[\w']+", sent)])
         wc = wc.most_common(n_words) if n_words else wc.items()
         vocab = {w for w, c in wc}
+        vocab.add(',')
+        vocab.add(';')
         vocab.add('<UNK>')
         vocab.add('<S>')
         vocab.add('</S>')
@@ -20,8 +22,15 @@ class NLVocab:
         aug = []
         max_len = 0
 
+        def replace(s, chars):
+            for ch in chars:
+                s = s.replace(ch, ' %s ' % ch)
+            return s
+
         # add the start, end, and unk tokens
         for sent in text:
+            sent = replace(sent, ',;')
+
             aug_sent = []
             aug_sent.append('<S>')
             for word in sent.split():
@@ -51,7 +60,7 @@ class NLVocab:
         for idx in indexes:
             sent.append(self.index_to_word[idx])
         return ' '.join(sent)
-        
+
     def text_to_sequence(self, sent):
         seq = []
         for word in sent:
@@ -74,6 +83,9 @@ class NLVocab:
         pro_text = [self.text_to_sequence(sent) for sent in aug_text]
         pro_text = np.array(pro_text)
         return pro_text
+
+    def __len__(self):
+        return len(self.vocab)
 
 class FOLVocab:
     def __init__(self, text, n_words=None):
@@ -153,3 +165,6 @@ class FOLVocab:
         pro_text = [self.text_to_sequence(sent) for sent in aug_text]
         pro_text = np.array(pro_text)
         return pro_text
+
+    def __len__(self):
+        return len(self.vocab)
