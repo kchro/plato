@@ -79,5 +79,3 @@ class Seq2Seq:
         decoder_opt = optim.SGD(decoder.parameters(), lr=lr)
 
         for iter in range(n_iters):
-            input_tensor = X_train[0]
-            output_tensor = y_train[0]
