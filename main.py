@@ -1,9 +1,10 @@
 from collections import Counter
 import numpy as np
 import seq2seq
-from seq2seq import *
+from seq2seq.models import *
 import re
 from keras.optimizers import *
+from keras.initializers import *
 
 BASELINE = True
 
@@ -52,16 +53,24 @@ def baseline():
         return aug_src
 
     def src_to_sequence(sent, vocab):
-        seq = [vocab[word] for word in sent]
-        return seq
+        """
+        the column vectors are the one-hot vectors
+        """
+        #seq = [vocab[word] for word in sent]
+        seq = []
+        for word in sent:
+            one_hot = np.zeros(len(vocab), dtype=np.float32)
+            one_hot[vocab[word]] = 1.0
+            seq.append(one_hot)
+        seq = np.array(seq)
+        return seq.T
 
     def preprocess_src(src):
         vocab = get_src_vocab(src)
         aug_src = aug_source(src, vocab)
         ret = [src_to_sequence(sent, vocab) for sent in aug_src]
         ret = np.array(ret)
-        m, n = ret.shape
-        return ret.reshape((m, n, 1))
+        return ret
 
     def get_tar_vocab(tar, n_words=None):
         wc = Counter([w for sent in tar for w in re.findall(r"[\w']+", sent)])
@@ -110,36 +119,55 @@ def baseline():
         return aug_tar
 
     def tar_to_sequence(sent, vocab):
-        seq = [vocab[word] for word in sent]
-        return seq
+        #seq = [vocab[word] for word in sent]
+        seq = []
+        for word in sent:
+            one_hot = np.zeros(len(vocab), dtype=np.float32)
+            one_hot[vocab[word]] = 1.0
+            seq.append(one_hot)
+        seq = np.array(seq)
+        return seq.T
 
     def sequence_to_tar(seq, vocab):
-        sent = [vocab[ind] for ind in seq]
+        #sent = [vocab[ind] for ind in seq]
+        indexes = np.argmax(seq, axis=0)
+        sent = [vocab[ind] for ind in indexes]
         return sent
 
     def preprocess_tar(tar, vocab):
         aug_tar = aug_target(tar, vocab)
         ret = [tar_to_sequence(sent, vocab) for sent in aug_tar]
         ret = np.array(ret)
-        m, n = ret.shape
-        return ret.reshape((m, n, 1))
+        return ret
 
-    src_inputs = preprocess_src(source)
-    tar_vocab = get_tar_vocab(target)
-    tar_inputs = preprocess_tar(target, tar_vocab)
+    src_inputs = preprocess_src(source[:10])
+    tar_vocab = get_tar_vocab(target[:10])
+    tar_inputs = preprocess_tar(target[:10], tar_vocab)
 
     _, input_length, input_dim = src_inputs.shape
     _, output_length, output_dim = tar_inputs.shape
 
-    mod = Seq2Seq(output_dim=output_dim,
-                  hidden_dim=200,
-                  output_length=output_length,
-                  input_shape=(input_length, input_dim))
+    print input_length, input_dim
+    print output_length, output_dim
+    
+    models = []
 
-    opt = SGD(lr=0.1, momentum=0.0)
+    models.append(Seq2Seq(output_dim=output_dim,
+                          hidden_dim=100,
+                          depth=2,
+                          output_length=output_length,
+                          input_shape=(input_length, input_dim)))
 
-    mod.compile(loss='mse', optimizer=opt, metrics=['accuracy'])
-    history = mod.fit(src_inputs, tar_inputs, nb_epoch=100)
+
+    opt = SGD(lr=0.1)
+
+    for mod in models:
+        mod.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['accuracy'])
+        history = mod.fit(src_inputs, tar_inputs, nb_epoch=100)
+        sample = src_inputs[:5]
+        predictions = mod.predict(sample)
+        print source[:5]
+        print [sequence_to_tar(seq, tar_vocab) for seq in predictions]
 
 if __name__ == '__main__':
     if BASELINE:
