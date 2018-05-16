@@ -7,9 +7,6 @@ class NLVocab:
         wc = Counter([w for sent in text for w in sent.split()])
         wc = wc.most_common(n_words) if n_words else wc.items()
         vocab = {w for w, c in wc}
-        vocab.add('(')
-        vocab.add(')')
-        vocab.add(',')
         vocab.add('<UNK>')
         vocab.add('<S>')
         vocab.add('</S>')
@@ -43,6 +40,18 @@ class NLVocab:
 
         return aug
 
+    def text_to_index(self, sent):
+        indexes = []
+        for word in sent:
+            indexes.append(self.word_to_index[word])
+        return indexes
+
+    def index_to_text(self, indexes):
+        sent = []
+        for idx in indexes:
+            sent.append(self.index_to_word[idx])
+        return ' '.join(sent)
+        
     def text_to_sequence(self, sent):
         seq = []
         for word in sent:
@@ -109,6 +118,18 @@ class FOLVocab:
             while len(aug[i]) < max_len:
                 aug[i].append('<PAD>')
         return aug
+
+    def text_to_index(self, sent):
+        indexes = []
+        for word in sent:
+            indexes.append(self.word_to_index[word])
+        return indexes
+
+    def index_to_text(self, indexes):
+        sent = []
+        for idx in indexes:
+            sent.append(self.index_to_word[idx])
+        return ' '.join(sent)
 
     def text_to_sequence(self, sent):
         seq = []

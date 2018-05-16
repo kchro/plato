@@ -3,6 +3,9 @@ tmp/
 env/
 openproof/Server/venv/
 data/erg-1214-osx-0.9.26.dat
+data/raw/
 platopy/nlgen_scripts/dat/
 
 platopy/folgen/k1_sents.out
+data.zip
+data 2/

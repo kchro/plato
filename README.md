@@ -60,10 +60,10 @@ Back-End:
 Machine-Learning:
 - [ ] getting the data
   - [x] getting atomic sentence data
-  - [ ] getting binary sentence data
+  - [x] getting binary sentence data
   - [ ] getting k=2 trees (probably unreasonably expensive)
 - [ ] decide on objective function
-- [ ] create baseline model
+- [x] create baseline model
 - [ ] set up evaluation tools
 - [ ] choose comparison points
 - [ ] try out the dependency parsing API

@@ -1,11 +1,14 @@
-from collections import Counter
 import numpy as np
-import seq2seq
-from seq2seq.models import *
 import re
+import torch
+# deprecate soon...
 from keras.optimizers import *
 from keras.initializers import *
 from models.utils import NLVocab, FOLVocab
+###################
+from sklearn.model_selection import train_test_split
+from models.seq2seq import Seq2Seq
+from data.load_data import get_atomic_sents
 
 BASELINE = True
 
@@ -50,5 +53,16 @@ def baseline():
         print
 
 if __name__ == '__main__':
-    if BASELINE:
-        baseline()
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print 'running on the %s' % device
+
+    # get the data
+    src_inputs, tar_inputs = get_atomic_sents(device)
+    X_train, X_test, y_train, y_test = train_test_split(src_inputs, tar_inputs, test_size=0.1)
+
+    # load the model
+    mod = Seq2Seq()
+
+    # train the model
+
+    # evaluate the model
