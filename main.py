@@ -1,14 +1,21 @@
 import numpy as np
 import re
 import torch
+import torch.nn as nn
+import json
 # deprecate soon...
 from keras.optimizers import *
 from keras.initializers import *
 from models.utils import NLVocab, FOLVocab
 ###################
 from sklearn.model_selection import train_test_split
-from models.seq2seq import Seq2Seq
+# from models.seq2seq import Seq2Seq
 from data.load_data import get_atomic_sents
+# from models.seq2seq import EncoderRNN
+from models.model import Seq2Seq
+import matplotlib
+matplotlib.use('TkAgg')
+import matplotlib.pyplot as plt
 
 BASELINE = True
 
@@ -59,6 +66,8 @@ if __name__ == '__main__':
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print 'running on the %s' % device
 
+    sess = raw_input('session name: ')
+
     # get the data
     inputs, vocabs = get_atomic_sents(device, get_vocabs=True)
     src_inputs, tar_inputs = inputs
@@ -66,14 +75,26 @@ if __name__ == '__main__':
     X_train, X_test, y_train, y_test = train_test_split(src_inputs, tar_inputs, test_size=0.1)
 
     # load the model
-    mod = Seq2Seq(input_size=len(src_vocab),
-                  hidden_size=200,
-                  output_size=len(tar_vocab),
-                  max_length=len(tar_inputs[0]),
-                  device=device)
+    embedding_size = 100
+    hidden_size = 200
 
-    mod.train(X_train, y_train)
+    print 'loading the model...',
+    model = Seq2Seq(input_size=len(src_vocab),
+                    hidden_size=hidden_size,
+                    output_size=len(tar_vocab),
+                    sess=sess, device=device)
 
-    # train the model
+    # model = Seq2Tree(input_size=len(src_vocab),
+    #                  hidden_size=hidden_size,
+    #                  output_size=len(tar_vocab),
+    #                  sess=sess, device=device)
 
-    # evaluate the model
+    model.set_vocab(src_vocab, tar_vocab)
+    print 'done.'
+
+    print 'training the model...'
+    history = model.train(X_train, y_train)
+    print 'done.'
+
+    with open('logs/sessions/%s.json' % sess.replace(' ', '_'), 'w') as w:
+        w.write(json.dumps(history))

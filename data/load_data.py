@@ -29,23 +29,18 @@ def get_atomic_sents(device, get_vocabs=True):
 
     print 'converting source and target to index tensors...',
     src_vocab = NLVocab(src)
-    src_aug = src_vocab.aug_text(src)
-    src_idx = [src_vocab.text_to_index(sent) for sent in src_aug]
-    src_inputs = [
-        torch.tensor(src_i, dtype=torch.long, device=device).view(-1, 1)
-        for src_i in src_idx
-    ]
+    src_inputs = src_vocab.get_idx_tensor(src)
 
     tar_vocab = FOLVocab(tar)
-    tar_aug = tar_vocab.aug_text(tar)
-    tar_idx = [tar_vocab.text_to_index(sent) for sent in tar_aug]
-    tar_inputs = [
-        torch.tensor(tar_i, dtype=torch.long, device=device).view(-1, 1)
-        for tar_i in tar_idx
-    ]
+    tar_inputs = tar_vocab.get_idx_tensor(tar)
     print 'done.'
 
     if get_vocabs:
         return (src_inputs, tar_inputs), (src_vocab, tar_vocab)
     else:
         return src_inputs, tar_inputs
+
+if __name__ == '__main__':
+    inputs, vocabs = get_atomic_sents('cpu')
+    src_inputs, tar_inputs = inputs
+    src_vocab, tar_vocab = vocabs

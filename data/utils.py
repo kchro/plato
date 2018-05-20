@@ -1,170 +1,92 @@
 from collections import Counter
 import numpy as np
 import re
+import torch
+from torchtext import data
 
-class NLVocab:
-    def __init__(self, text, n_words=None):
-        wc = Counter([w for sent in text for w in re.findall(r"[\w']+", sent)])
-        wc = wc.most_common(n_words) if n_words else wc.items()
-        vocab = {w for w, c in wc}
-        vocab.add(',')
-        vocab.add(';')
-        vocab.add('<UNK>')
+class Vocab(object):
+    def __init__(self, text, n_words, charset, join, device):
+        def split(sent):
+            return re.findall(r"[\w']+", sent)
+        self.split = split
+        freq = Counter([w for sent in text for w in split(sent)])
+        freq = freq.most_common(n_words) if n_words else freq.items()
+        vocab = {w for w, c in freq}
         vocab.add('<S>')
         vocab.add('</S>')
         vocab.add('<PAD>')
-        vocab = sorted(vocab)
-        self.vocab = vocab
-        self.word_to_index = { vocab[i]: i for i in range(len(vocab)) }
-        self.index_to_word = { i: vocab[i] for i in range(len(vocab)) }
+        vocab.add('<UNK>')
+        for ch in charset:
+            vocab.add(ch)
+        self.vocab = sorted(vocab)
+        self.word_to_index = { self.vocab[i]: i for i in range(len(self.vocab)) }
+        self.index_to_word = { i: self.vocab[i] for i in range(len(self.vocab)) }
+        self.join = join
+        self.device = device
 
-    def aug_text(self, text):
+    def replace(self, s, chars):
+        for ch in chars:
+            s = s.replace(ch, ' %s ' % ch)
+        return s
+
+    def augment_sent(self, sent):
         aug = []
-        max_len = 0
-
-        def replace(s, chars):
-            for ch in chars:
-                s = s.replace(ch, ' %s ' % ch)
-            return s
-
-        # add the start, end, and unk tokens
-        for sent in text:
-            sent = replace(sent, ',;')
-
-            aug_sent = []
-            aug_sent.append('<S>')
-            for word in sent.split():
-                if word not in self.vocab:
-                    aug_sent.append('<UNK>')
-                else:
-                    aug_sent.append(word)
-            aug_sent.append('</S>')
-            aug.append(aug_sent)
-            max_len = max(max_len, len(aug_sent))
-
-        # pad the sentences
-        for i in range(len(aug)):
-            while len(aug[i]) < max_len:
-                aug[i].append('<PAD>')
-
+        aug.append('<S>')
+        for word in self.split(sent):
+            if word not in self.vocab:
+                aug.append('<UNK>')
+            else:
+                aug.append(word)
+        aug.append('</S>')
         return aug
 
-    def text_to_index(self, sent):
-        indexes = []
-        for word in sent:
-            indexes.append(self.word_to_index[word])
-        return indexes
+    def augment_text(self, text):
+        aug_text = []
+        for sent in text:
+            aug = self.augment_sent(sent)
+            aug_text.append(aug)
 
-    def index_to_text(self, indexes):
-        sent = []
-        for idx in indexes:
-            sent.append(self.index_to_word[idx])
-        return ' '.join(sent)
+        self.max_len = max(len(aug) for aug in aug_text)
+        for i in range(len(aug_text)):
+            while len(aug_text[i]) < self.max_len:
+                aug_text[i].append('<PAD>')
 
-    def text_to_sequence(self, sent):
-        seq = []
-        for word in sent:
-            one_hot = np.zeros(len(self.vocab), dtype=np.float32)
-            one_hot[self.word_to_index[word]] = 1.0
-            seq.append(one_hot)
-        seq = np.array(seq).T
-        return seq
+        return aug_text
 
-    def sequence_to_text(self, seq):
+    def sent_to_idx(self, sent):
+        aug = self.augment_sent(sent)
+        idx = [self.word_to_index[word] for word in aug]
+        return idx
+
+    def get_idx_tensor(self, text):
+        tensors = []
+        for aug in self.augment_text(text):
+            idx = [self.word_to_index[word] for word in aug]
+            idx = torch.tensor(idx, dtype=torch.long, device=self.device)
+            tensors.append(idx)
+        # tensors = torch.Tensor(tensors, device=self.device)
+        return tensors
+
+    def reverse_text(self, sequences):
         text = []
-        for i in range(1, len(seq.T)-1):
-            ind = np.flatnonzero(seq.T[i])[0]
-            word = self.index_to_word[ind]
-            text.append(word)
-        return ' '.join(text)
-
-    def preprocess(self, text):
-        aug_text = self.aug_text(text)
-        pro_text = [self.text_to_sequence(sent) for sent in aug_text]
-        pro_text = np.array(pro_text)
-        return pro_text
+        for seq in sequences:
+            idxs = [num.item() for num in seq]
+            sent = [self.index_to_word[idx] for idx in idxs]
+            sent = self.join.join(sent)
+            text.append(sent)
+        return text
 
     def __len__(self):
         return len(self.vocab)
 
-class FOLVocab:
-    def __init__(self, text, n_words=None):
-        wc = Counter([w for sent in text for w in re.findall(r"[\w']+", sent)])
-        wc = wc.most_common(n_words) if n_words else wc.items()
-        vocab = {w for w, c in wc}
-        vocab.add('(')
-        vocab.add(')')
-        vocab.add(',')
-        vocab.add('<UNK>')
-        vocab.add('<S>')
-        vocab.add('</S>')
-        vocab.add('<PAD>')
-        vocab = sorted(vocab)
-        self.vocab = vocab
-        self.word_to_index = { vocab[i]: i for i in range(len(vocab)) }
-        self.index_to_word = { i: vocab[i] for i in range(len(vocab)) }
+class NLVocab(Vocab):
+    def __init__(self, text, n_words=2000, device='cpu'):
+        super(NLVocab, self).__init__(text, n_words,
+                                      charset=',;', join=' ',
+                                      device=device)
 
-    def aug_text(self, text, operators='&'):
-        aug = []
-        max_len = 0
-
-        def replace(s, chars):
-            for ch in chars:
-                s = s.replace(ch, ' %s ' % ch)
-            return s
-
-        for sent in text:
-            sent = replace(sent, '(),'+operators).split()
-            aug_sent = []
-            aug_sent.append('<S>')
-            for word in sent:
-                if word not in self.vocab:
-                    aug_sent.append('<UNK>')
-                else:
-                    aug_sent.append(word)
-            aug_sent.append('</S>')
-            max_len = max(max_len, len(aug_sent))
-            aug.append(aug_sent)
-
-        for i in range(len(aug)):
-            while len(aug[i]) < max_len:
-                aug[i].append('<PAD>')
-        return aug
-
-    def text_to_index(self, sent):
-        indexes = []
-        for word in sent:
-            indexes.append(self.word_to_index[word])
-        return indexes
-
-    def index_to_text(self, indexes):
-        sent = []
-        for idx in indexes:
-            sent.append(self.index_to_word[idx])
-        return ' '.join(sent)
-
-    def text_to_sequence(self, sent):
-        seq = []
-        for word in sent:
-            one_hot = np.zeros(len(self.vocab), dtype=np.float32)
-            one_hot[self.word_to_index[word]] = 1.0
-            seq.append(one_hot)
-        seq = np.array(seq).T
-        return seq
-
-    def sequence_to_text(self, seq):
-        text = []
-        for i in range(len(seq.T)):
-            ind = np.argmax(seq.T[i])
-            word = self.index_to_word[ind]
-            text.append(word)
-        return ''.join(text)
-
-    def preprocess(self, text):
-        aug_text = self.aug_text(text)
-        pro_text = [self.text_to_sequence(sent) for sent in aug_text]
-        pro_text = np.array(pro_text)
-        return pro_text
-
-    def __len__(self):
-        return len(self.vocab)
+class FOLVocab(Vocab):
+    def __init__(self, text, n_words=2000, device='cpu'):
+        super(FOLVocab, self).__init__(text, n_words,
+                                       charset=',()', join='',
+                                       device=device)

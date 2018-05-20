@@ -64,6 +64,10 @@ Machine-Learning:
   - [ ] getting k=2 trees (probably unreasonably expensive)
 - [ ] decide on objective function
 - [x] create baseline model
+  - [ ] make pytorch seq2seq
+  - [ ] make pytorch seq2seq character level embeddings
+  - [ ] extend to pytorch seq2tree
+  - [ ] extend to pytorch deptree2logtree
 - [ ] set up evaluation tools
 - [ ] choose comparison points
 - [ ] try out the dependency parsing API
