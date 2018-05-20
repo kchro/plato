@@ -13,9 +13,9 @@ from sklearn.model_selection import train_test_split
 from data.load_data import get_atomic_sents
 # from models.seq2seq import EncoderRNN
 from models.model import Seq2Seq
-import matplotlib
-matplotlib.use('TkAgg')
-import matplotlib.pyplot as plt
+# import matplotlib
+# matplotlib.use('TkAgg')
+# import matplotlib.pyplot as plt
 
 BASELINE = True
 

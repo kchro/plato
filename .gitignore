@@ -10,3 +10,5 @@ platopy/folgen/k1_sents.out
 data.zip
 data 2/
 logs/sessions/
+
+*.pyc
