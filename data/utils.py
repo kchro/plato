@@ -7,7 +7,10 @@ from torchtext import data
 class Vocab(object):
     def __init__(self, text, n_words, charset, join, device):
         def split(sent):
-            return re.findall(r"[\w']+", sent)
+            for ch in charset:
+                sent = sent.replace(ch, ' %s ' % ch)
+            return sent.split()
+
         self.split = split
         freq = Counter([w for sent in text for w in split(sent)])
         freq = freq.most_common(n_words) if n_words else freq.items()
@@ -16,8 +19,7 @@ class Vocab(object):
         vocab.add('</S>')
         vocab.add('<PAD>')
         vocab.add('<UNK>')
-        for ch in charset:
-            vocab.add(ch)
+
         self.vocab = sorted(vocab)
         self.word_to_index = { self.vocab[i]: i for i in range(len(self.vocab)) }
         self.index_to_word = { i: self.vocab[i] for i in range(len(self.vocab)) }
@@ -47,6 +49,7 @@ class Vocab(object):
             aug_text.append(aug)
 
         self.max_len = max(len(aug) for aug in aug_text)
+
         for i in range(len(aug_text)):
             while len(aug_text[i]) < self.max_len:
                 aug_text[i].append('<PAD>')
@@ -67,12 +70,16 @@ class Vocab(object):
         # tensors = torch.Tensor(tensors, device=self.device)
         return tensors
 
+    def reverse(self, seq):
+        idxs = [num.item() for num in seq]
+        sent = [self.index_to_word[idx] for idx in idxs]
+        sent = self.join.join(sent)
+        return sent
+
     def reverse_text(self, sequences):
         text = []
         for seq in sequences:
-            idxs = [num.item() for num in seq]
-            sent = [self.index_to_word[idx] for idx in idxs]
-            sent = self.join.join(sent)
+            sent = self.reverse(seq)
             text.append(sent)
         return text
 

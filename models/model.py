@@ -121,7 +121,7 @@ class Seq2Seq:
                 epoch_loss += loss
 
                 progress = get_progress(i, len(X_train), length=20)
-                out = '%d/%d [%s] loss: %f' % (i, len(X_train), progress, epoch_loss)
+                out = '%d/%d [%s] loss: %f' % (i, len(X_train), progress, epoch_loss/(i+1))
                 sys.stdout.write('{0}\r'.format(out))
                 sys.stdout.flush()
             print
@@ -131,3 +131,30 @@ class Seq2Seq:
                 self.save('%s_epoch_%d.json' % (self.sess, epoch))
         history['losses'] = losses
         return history
+
+    def predict(self, X_test):
+        with torch.no_grad():
+            decoded_text = []
+            for i in range(len(X_test)):
+                # encode the source input
+                encoder_output, encoder_hidden = self.encoder(X_test[i])
+
+                SOS_token = self.tar_vocab.word_to_index['<S>']
+                EOS_token = self.tar_vocab.word_to_index['</S>']
+                decoder_input = torch.LongTensor([[SOS_token]], device=self.device)
+                decoder_hidden = encoder_hidden
+
+                decoded_seq = []
+                tar_len = self.tar_vocab.max_len
+                for di in range(tar_len):
+                    decoder_output, decoder_hidden = self.decoder(decoder_input,
+                                                                  decoder_hidden)
+                    topv, topi = decoder_output.data.topk(1)
+                    idx = topi.item()
+                    decoded_seq.append(idx)
+                    decoder_input = topi.squeeze().detach()
+                decoded_seq = torch.tensor(decoded_seq,
+                                           dtype=torch.long,
+                                           device=self.device)
+                decoded_text.append(decoded_seq)
+        return decoded_text

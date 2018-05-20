@@ -10,7 +10,7 @@ from models.utils import NLVocab, FOLVocab
 ###################
 from sklearn.model_selection import train_test_split
 # from models.seq2seq import Seq2Seq
-from data.load_data import get_atomic_sents
+from data.load_data import *
 # from models.seq2seq import EncoderRNN
 from models.model import Seq2Seq
 # import matplotlib
@@ -69,9 +69,10 @@ if __name__ == '__main__':
     sess = raw_input('session name: ')
 
     # get the data
-    inputs, vocabs = get_atomic_sents(device, get_vocabs=True)
+    inputs, vocabs = get_k1_sents(device, get_vocabs=True)
     src_inputs, tar_inputs = inputs
     src_vocab, tar_vocab = vocabs
+
     X_train, X_test, y_train, y_test = train_test_split(src_inputs, tar_inputs, test_size=0.1)
 
     # load the model
@@ -93,8 +94,24 @@ if __name__ == '__main__':
     print 'done.'
 
     print 'training the model...'
-    history = model.train(X_train, y_train)
+    history = model.train(X_train[:100], y_train[:100],
+                          epochs=10)
     print 'done.'
 
     with open('logs/sessions/%s.json' % sess.replace(' ', '_'), 'w') as w:
         w.write(json.dumps(history))
+
+    model.save('%s_final.json' % sess)
+
+    preds = model.predict(X_test)
+    nl_sents = [src_vocab.reverse(nl_sent) for nl_sent in X_test]
+    fol_forms = [tar_vocab.reverse(fol_form) for fol_form in y_test]
+    fol_preds = [tar_vocab.reverse(fol_pred) for fol_pred in preds]
+
+    with open('logs/sessions/%s.out' % sess.replace(' ', '_'), 'w') as w:
+        for nl_sent, fol_form, fol_pred in zip(nl_sents, fol_forms, fol_preds):
+            print nl_sent
+            print fol_form
+            print fol_pred
+            print
+            w.write('%s\t%s\t%s\t\n' % (nl_sent, fol_form, fol_pred))
