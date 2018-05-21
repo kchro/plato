@@ -128,8 +128,8 @@ class Seq2Seq:
                 if len(X_batch) < batch_size:
                     continue
 
-                X_batch = torch.tensor(X_batch, dtype=torch.long, device=self.device)
-                y_batch = torch.tensor(y_batch, dtype=torch.long, device=self.device)
+                X_batch = torch.LongTensor(X_batch, device=self.device)
+                y_batch = torch.LongTensor(y_batch, device=self.device)
 
                 loss = self.run_epoch(X_batch, y_batch,
                                       batch_size=batch_size)
