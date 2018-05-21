@@ -90,7 +90,7 @@ if __name__ == '__main__':
 
     print 'training the model...'
     history = model.train(X_train, y_train,
-                          batch_size=64,
+                          batch_size=1024,
                           epochs=100)
     print 'done.'
 
