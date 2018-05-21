@@ -15,12 +15,12 @@ class Encoder(nn.Module):
         self.embedding_size = hidden_size # embedding_size
         self.hidden_size = hidden_size
         self.embed = nn.Embedding(input_size, hidden_size)
-        self.lstm = nn.LSTM(hidden_size, hidden_size)
+        self.lstm = nn.LSTM(hidden_size, hidden_size, batch_first=True)
         self.device = device
 
-    def forward(self, sent, hidden=None):
+    def forward(self, text, hidden=None, batch_size=1):
         # sent = torch.tensor(sent, dtype=torch.long, device=self.device)
-        inputs = self.embed(sent).view(len(sent), 1, -1)
+        inputs = self.embed(text).view(batch_size, len(text[0]), -1)
         output, hidden = self.lstm(inputs, hidden)
         return output, hidden
 
@@ -35,16 +35,16 @@ class Decoder(nn.Module):
         # self.embedding_size = hidden_size # embedding_size
         self.hidden_size = hidden_size
         self.embed = nn.Embedding(output_size, hidden_size)
-        self.lstm = nn.LSTM(hidden_size, hidden_size)
+        self.lstm = nn.LSTM(hidden_size, hidden_size, batch_first=True)
         self.out = nn.Linear(hidden_size, output_size)
         self.softmax = nn.LogSoftmax(dim=1)
         self.device = device
 
-    def forward(self, input, hidden=None):
-        output = self.embed(input).view(1, 1, -1)
+    def forward(self, input, hidden=None, batch_size=1):
+        output = self.embed(input).view(batch_size, 1, -1)
         output = F.relu(output)
         output, hidden = self.lstm(output, hidden)
-        output = self.softmax(self.out(output[0]))
+        output = self.softmax(self.out(output[:, 0]))
         return output, hidden
 
 class Seq2Seq:
@@ -72,15 +72,18 @@ class Seq2Seq:
         self.src_vocab = src_vocab
         self.tar_vocab = tar_vocab
 
-    def run_epoch(self, src_input, tar_output):
+    def run_epoch(self, src_input, tar_output, batch_size=20):
         self.encoder_opt.zero_grad()
         self.decoder_opt.zero_grad()
 
         # encode the source input
-        encoder_output, encoder_hidden = self.encoder(src_input)
+        encoder_output, encoder_hidden = self.encoder(src_input, batch_size=batch_size)
 
         SOS_token = self.tar_vocab.word_to_index['<S>']
-        decoder_input = torch.LongTensor([[SOS_token]], device=self.device)
+        decoder_input = torch.LongTensor([SOS_token]*batch_size,
+                                         device=self.device).view(-1, 1)
+
+        #decoder_input = torch.LongTensor([[SOS_token]], device=self.device)
         decoder_hidden = encoder_hidden
 
         loss = 0
@@ -89,9 +92,12 @@ class Seq2Seq:
         tar_len = self.tar_vocab.max_len
         for di in range(tar_len):
             decoder_output, decoder_hidden = self.decoder(decoder_input,
-                                                          decoder_hidden)
-            loss += self.criterion(decoder_output, tar_output[di:di+1])
-            decoder_input = tar_output[di] # Teacher forcing
+                                                          decoder_hidden,
+                                                          batch_size=batch_size)
+
+            targets = tar_output[:, di:di+1].view(-1)
+            loss += self.criterion(decoder_output, targets)
+            decoder_input = tar_output[:, di:di+1] # Teacher forcing
 
         loss.backward()
         self.encoder_opt.step()
@@ -99,7 +105,7 @@ class Seq2Seq:
 
         return loss.item() / tar_len
 
-    def train(self, X_train, y_train, epochs=10, loss_update=10):
+    def train(self, X_train, y_train, epochs=10, batch_size=20, loss_update=10):
         cum_loss = 0
         history = {}
         losses = []
@@ -115,8 +121,18 @@ class Seq2Seq:
 
             print 'Epoch %d/%d' % (epoch, epochs)
 
-            for i in range(len(X_train)):
-                loss = self.run_epoch(X_train[i], y_train[i])
+            for i in range(0, len(X_train), batch_size):
+                X_batch = X_train[i:i+batch_size]
+                y_batch = y_train[i:i+batch_size]
+
+                if len(X_batch) < batch_size:
+                    continue
+
+                X_batch = torch.tensor(X_batch, dtype=torch.long, device=self.device)
+                y_batch = torch.tensor(y_batch, dtype=torch.long, device=self.device)
+
+                loss = self.run_epoch(X_batch, y_batch,
+                                      batch_size=batch_size)
                 cum_loss += loss
                 epoch_loss += loss
 
@@ -135,9 +151,12 @@ class Seq2Seq:
     def predict(self, X_test):
         with torch.no_grad():
             decoded_text = []
+
             for i in range(len(X_test)):
+                src_input = torch.LongTensor(X_test[i], device=self.device).view(1, -1)
+
                 # encode the source input
-                encoder_output, encoder_hidden = self.encoder(X_test[i])
+                encoder_output, encoder_hidden = self.encoder(src_input)
 
                 SOS_token = self.tar_vocab.word_to_index['<S>']
                 EOS_token = self.tar_vocab.word_to_index['</S>']
@@ -153,8 +172,6 @@ class Seq2Seq:
                     idx = topi.item()
                     decoded_seq.append(idx)
                     decoder_input = topi.squeeze().detach()
-                decoded_seq = torch.tensor(decoded_seq,
-                                           dtype=torch.long,
-                                           device=self.device)
+                decoded_seq = torch.LongTensor(decoded_seq, device=self.device)
                 decoded_text.append(decoded_seq)
         return decoded_text

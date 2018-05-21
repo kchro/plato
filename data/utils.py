@@ -65,13 +65,18 @@ class Vocab(object):
         tensors = []
         for aug in self.augment_text(text):
             idx = [self.word_to_index[word] for word in aug]
-            idx = torch.tensor(idx, dtype=torch.long, device=self.device)
+            # idx = torch.tensor(idx, dtype=torch.long, device=self.device)
             tensors.append(idx)
         # tensors = torch.Tensor(tensors, device=self.device)
         return tensors
 
     def reverse(self, seq):
-        idxs = [num.item() for num in seq]
+        idxs = []
+        for num in seq:
+            if isinstance(num, int):
+                idxs.append(num)
+            else:
+                idxs.append(num.item())
         sent = [self.index_to_word[idx] for idx in idxs]
         sent = self.join.join(sent)
         return sent

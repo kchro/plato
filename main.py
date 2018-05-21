@@ -4,8 +4,8 @@ import torch
 import torch.nn as nn
 import json
 # deprecate soon...
-from keras.optimizers import *
-from keras.initializers import *
+# from keras.optimizers import *
+# from keras.initializers import *
 from models.utils import NLVocab, FOLVocab
 ###################
 from sklearn.model_selection import train_test_split
@@ -36,7 +36,7 @@ def baseline():
     tar_vocab = FOLVocab(target)
     tar_inputs = tar_vocab.preprocess(target)
 
-    X_train, X_test, y_train, y_test = train_test_split(src_inputs, tar_inputs, test_size=0.9)
+    X_train, X_test, y_train, y_test = train_test_split(src_inputs[:100], tar_inputs[:100], test_size=0.9)
 
     _, input_length, input_dim = src_inputs.shape
     _, output_length, output_dim = tar_inputs.shape
@@ -69,7 +69,7 @@ if __name__ == '__main__':
     sess = raw_input('session name: ')
 
     # get the data
-    inputs, vocabs = get_k1_sents(device, get_vocabs=True)
+    inputs, vocabs = get_atomic_sents(device, get_vocabs=True)
     src_inputs, tar_inputs = inputs
     src_vocab, tar_vocab = vocabs
 
@@ -90,7 +90,8 @@ if __name__ == '__main__':
 
     print 'training the model...'
     history = model.train(X_train, y_train,
-                          epochs=100)
+                          batch_size=64,
+                          epochs=10)
     print 'done.'
 
     with open('logs/sessions/%s.json' % sess.replace(' ', '_'), 'w') as w:
