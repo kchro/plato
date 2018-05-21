@@ -69,7 +69,7 @@ if __name__ == '__main__':
     sess = raw_input('session name: ')
 
     # get the data
-    inputs, vocabs = get_atomic_sents(device, get_vocabs=True)
+    inputs, vocabs = get_k1_sents(device, get_vocabs=True)
     src_inputs, tar_inputs = inputs
     src_vocab, tar_vocab = vocabs
 
