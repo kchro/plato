@@ -91,7 +91,7 @@ if __name__ == '__main__':
     print 'training the model...'
     history = model.train(X_train, y_train,
                           batch_size=1024,
-                          epochs=100)
+                          epochs=50)
     print 'done.'
 
     with open('logs/sessions/%s.json' % sess.replace(' ', '_'), 'w') as w:
