@@ -69,11 +69,13 @@ if __name__ == '__main__':
     sess = raw_input('session name: ')
 
     # get the data
-    inputs, vocabs = get_k1_sents(device, get_vocabs=True)
+    #inputs, vocabs = get_k1_sents(device, get_vocabs=True)
+    inputs, vocabs = get_custom_sents(device, filename="custom.out", get_vocabs=True)
     src_inputs, tar_inputs = inputs
     src_vocab, tar_vocab = vocabs
+    X_test, y_test = src_inputs, tar_inputs
 
-    X_train, X_test, y_train, y_test = train_test_split(src_inputs, tar_inputs, test_size=0.1)
+    # X_train, X_test, y_train, y_test = train_test_split(src_inputs, tar_inputs, test_size=0.1)
 
     # load the model
     embedding_size = 100
@@ -102,8 +104,6 @@ if __name__ == '__main__':
     # model.save('%s_final.json' % sess)
 
     print 'running inference...',
-    X_test[0] = 'a and b and c are cubes'
-    y_test[0] = '(cube(a)&cube(b))&cube(c)'
 
     preds = model.predict(X_test[:10])
     print 'done.'
