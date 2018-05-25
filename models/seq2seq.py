@@ -145,8 +145,6 @@ class Seq2Seq:
         n = 0
         for iter in tqdm(range(n_iters)):
             while n < len(X_train[:100]):
-                # X_batch = torch.stack(X_train[n:n+batch_size])
-                # y_batch = torch.stack(y_train[n:n+batch_size])
                 X_batch = X_train[n]
                 y_batch = y_train[n]
 

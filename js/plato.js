@@ -106,14 +106,6 @@ function createCORSRequest(method, url){
  * post
  */
 function post(fol, params, callback) {
-  // let formData = {
-  //   "sig": fol,
-  //   "rules": params.rules,
-  //   "rulefile": params.rulefile,
-  //   "blockrules": params.blockrules,
-  //   "blockfile": params.blockfile
-  // };
-
   let formData = new FormData();
   formData.append("sig", fol);
   formData.append("rules", params.rules);
@@ -121,21 +113,7 @@ function post(fol, params, callback) {
   formData.append("blockrules", params.blockrules);
   formData.append("blockfile", params.blockfile);
 
-  // $.ajax({
-  //   type: 'POST',
-  //   contentType: 'application/json',
-  //   crossOrigin: true,
-  //   data: JSON.stringify(d),
-  //   // dataType: 'json',
-  //   url: 'https://www.cypriot.stanford.edu:8080/ace/',
-  //   success: function(data) {
-  //     console.log(data);
-  //   }
-  // });
-  // window.location.reload(true);
-  // let request = new XMLHttpRequest();
   let request = createCORSRequest('POST', 'http://cypriot.stanford.edu:8080/ace/');
-  // request.open('POST', 'http://localhost:8000/ace/', true);
   request.onreadystatechange = function() {
     if (request.readyState == 4 && request.status == 200) {
       callback(request);
@@ -148,20 +126,53 @@ function post(fol, params, callback) {
   request.send(formData);
 }
 
+function renderErrors(root, state) {
+  if (state.error_log[state.problem] === undefined) {
+    state.error_log[state.problem] = [];
+  }
+  const children = [];
+  state.error_log[state.problem].forEach(function(error) {
+    const child = {
+      'element': 'div',
+      'innerHTML': error
+    }
+    children.push(child);
+  });
+  const errorLog = renderObject({
+    'element': 'div',
+    'className': 'plato-answer-errorlog',
+    'children': children
+  });
+  return errorLog;
+}
+
 /**
  *
  */
 function renderTrans(root, state) {
-  const translation = document.createElement("div");
-  translation.className = "plato-translation";
+  // const translation = document.createElement("div");
+  // translation.className = "plato-translation";
+  const translation = renderObject({
+    'element': 'div',
+    'className': 'plato-translation'
+  });
 
-  const prompt = document.createElement("div");
-  prompt.className = "plato-prompt";
-  const promptLabel = document.createElement("div");
-  promptLabel.className = "plato-prompt-label";
-  promptLabel.innerHTML = "English";
-  const promptText = document.createElement("div");
-  promptText.className = "plato-prompt-text";
+  const prompt = renderObject({
+    'element': 'div',
+    'className': 'plato-prompt',
+    'children': [
+      {
+        'element': 'div',
+        'className': 'plato-prompt-label',
+        'innerHTML': 'English'
+      }
+    ]
+  });
+
+  const promptText = renderObject({
+    'element': 'div',
+    'className': 'plato-prompt-text'
+  });
 
   // promptText.innerHTML = data.problems[state.problem].prompt;
   post(data.problems[state.problem].answer, data.config, function(response) {
@@ -174,24 +185,32 @@ function renderTrans(root, state) {
     promptText.innerHTML = prompts[index];
   });
 
-  prompt.appendChild(promptLabel);
   prompt.appendChild(promptText);
 
-  const answer = document.createElement("div");
-  answer.className = "plato-answer";
-  const answerLabel = document.createElement("div");
-  answerLabel.className = "plato-answer-label";
-  answerLabel.innerHTML = "First-Order Logic";
-  const answerText = document.createElement("input");
-  answerText.placeholder = "Enter FOL Translation";
-  answerText.className = "plato-answer-text";
-  answer.appendChild(answerLabel);
-  answer.appendChild(answerText);
+  const answer = renderObject({
+    'element': 'div',
+    'className': 'plato-answer',
+    'children': [
+      {
+        'element': 'div',
+        'className': 'plato-answer-label',
+        'innerHTML': 'First-Order Logic'
+      },
+      renderErrors(root, state),
+      {
+        'element': 'input',
+        'className': 'plato-answer-text',
+        'placeholder': 'Enter FOL Translation'
+      }
+    ]
+  })
 
-  const submit = document.createElement("button");
-  submit.type = "button";
-  submit.className = "btn btn-primary plato-submit";
-  submit.innerHTML = "submit";
+  const submit = renderObject({
+    'element': 'button',
+    'type': 'button',
+    'className': 'btn btn-primary plato-submit',
+    'innerHTML': 'submit'
+  });
 
   let alert;
   $(submit).on("click", function() {
@@ -199,7 +218,7 @@ function renderTrans(root, state) {
       translation.removeChild(alert);
     }
 
-    const submission = $(answerText).val();
+    const submission = $('.plato-answer-text').val();
     if (submission == data.problems[state.problem].answer) {
       state.analytics[0].value++;
 
@@ -215,10 +234,14 @@ function renderTrans(root, state) {
     } else {
       state.analytics[1].value++;
 
+      state.error_log[state.problem].push(submission);
+
+      render(root, state);
       alert = displayFeedback(translation, state);
     }
   });
 
+  // compile
   translation.appendChild(prompt);
   translation.appendChild(answer);
   translation.appendChild(submit);
@@ -233,12 +256,15 @@ function renderProgress(state) {
 
   const progress = document.createElement("div");
   progress.className = "progress plato-progress";
+
   const progbar = document.createElement("div");
   progbar.className = "progress-bar";
   progbar.role = "progressbar";
   $(progbar).attr("aria-valuemin", 0);
   $(progbar).attr("aria-valuemax", 100.00);
   $(progbar).attr("aria-valuenow", value).css("width", value+"%");
+
+  // compile
   progress.appendChild(progbar);
   return progress;
 }
@@ -247,20 +273,25 @@ function renderProgress(state) {
  *
  */
 function renderApp(root, state) {
-  const app = document.createElement("div");
-  app.className = "plato-app";
-  const problem = document.createElement("div");
-  problem.className = "plato-problem";
-  const problemHeader = document.createElement("div");
-  problemHeader.className = "plato-problem-header";
-  problemHeader.innerHTML = data.problems[state.problem].label;
-  const translation = renderTrans(root, state);
-  problem.appendChild(problemHeader);
-  problem.appendChild(translation);
-  app.appendChild(problem);
-
-  const progress = renderProgress(state);
-  app.appendChild(progress);
+  const app = renderObject({
+    'element': 'div',
+    'className': 'plato-app',
+    'children': [
+      {
+        'element': 'div',
+        'className': 'plato-problem',
+        'children': [
+          {
+            'element': 'div',
+            'className': 'plato-problem-header',
+            'innerHTML': data.problems[state.problem].label
+          },
+          renderTrans(root, state)
+        ]
+      },
+      renderProgress(state)
+    ]
+  });
 
   return app;
 }
@@ -270,30 +301,58 @@ function renderApp(root, state) {
  */
 function render(root, state) {
   let app, body;
+
   if (state.init == false) {
+    /*
+     * render the application structure
+     */
     app = renderApp(root, state);
     body = $(root).find(".card-body")[0];
     body.appendChild(app);
+
+    // structure is built
     state.init = true;
+
   } else if (state.problem >= data.problems.length) {
     body = $(root).find(".card-body")[0];
     $(body).empty();
 
-    const wrapper = document.createElement("div");
-    wrapper.className = "plato-analytics-wrapper";
-    const analytics = document.createElement("div");
-    analytics.className = "plato-analytics";
-    const header = document.createElement("div");
-    header.className = "plato-analytics-header";
-    header.innerHTML = "Results";
-    analytics.appendChild(header);
-    wrapper.appendChild(analytics);
-    body.appendChild(wrapper);
+    const analytics = renderObject({
+      'element': 'div',
+      'className': 'plato-analytics-wrapper',
+      'children': [
+        {
+          'element': 'div',
+          'className': 'plato-analytics',
+          'children': [
+            {
+              'element': 'div',
+              'className': 'plato-analytics-header',
+              'innerHTML': 'Results'
+            }
+          ]
+        },
+        renderProgress(state)
+      ]
+    });
+
+    // const wrapper = document.createElement("div");
+    // wrapper.className = "plato-analytics-wrapper";
+    // const analytics = document.createElement("div");
+    // analytics.className = "plato-analytics";
+    // const header = document.createElement("div");
+    // header.className = "plato-analytics-header";
+    // header.innerHTML = "Results";
+    // analytics.appendChild(header);
+    // wrapper.appendChild(analytics);
+    // body.appendChild(wrapper);
+
+    body.appendChild(analytics);
 
     displayAnalytics(analytics, state);
 
-    const progress = renderProgress(state);
-    wrapper.appendChild(progress);
+    // const progress = renderProgress(state);
+    // wrapper.appendChild(progress);
   } else {
     body = $(root).find(".card-body")[0];
     $(body).empty();
@@ -312,7 +371,8 @@ $(function() {
 
   const state = {
     "init": false,
-    "problem": 0,
+    "problem": 2,
+    "random": true,
     "analytics": [
       {
         "label":"correct",
@@ -322,9 +382,9 @@ $(function() {
         "label":"incorrect",
         "value":0
       }
-    ]
+    ],
+    "error_log": {}
   };
 
   render(root, state);
-
 });

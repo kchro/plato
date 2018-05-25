@@ -88,19 +88,24 @@ if __name__ == '__main__':
     model.set_vocab(src_vocab, tar_vocab)
     print 'done.'
 
-    print 'training the model...'
-    history = model.train(X_train, y_train,
-                          batch_size=1024,
-                          epochs=50)
-    print 'done.'
+    # print 'training the model...'
+    # history = model.train(X_train, y_train,
+    #                       batch_size=1024,
+    #                       epochs=50)
+    # print 'done.'
 
-    with open('logs/sessions/%s.json' % sess.replace(' ', '_'), 'w') as w:
-        w.write(json.dumps(history))
+    model.load('batch_k1_final.json')
 
-    model.save('%s_final.json' % sess)
+    # with open('logs/sessions/%s.json' % sess.replace(' ', '_'), 'w') as w:
+    #     w.write(json.dumps(history))
+    #
+    # model.save('%s_final.json' % sess)
 
     print 'running inference...',
-    preds = model.predict(X_test)
+    X_test[0] = 'a and b and c are cubes'
+    y_test[0] = '(cube(a)&cube(b))&cube(c)'
+
+    preds = model.predict(X_test[:10])
     print 'done.'
     nl_sents = [src_vocab.reverse(nl_sent) for nl_sent in X_test]
     fol_forms = [tar_vocab.reverse(fol_form) for fol_form in y_test]

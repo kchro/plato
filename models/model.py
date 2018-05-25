@@ -5,47 +5,8 @@ import torch.optim as optim
 import sys
 from tqdm import tqdm
 
-class Encoder(nn.Module):
-    def __init__(self,
-                 input_size=20000,
-                 # embedding_size=100,
-                 hidden_size=100,
-                 device='cpu'):
-        super(Encoder, self).__init__()
-        self.embedding_size = hidden_size # embedding_size
-        self.hidden_size = hidden_size
-        self.embed = nn.Embedding(input_size, hidden_size)
-        self.lstm = nn.LSTM(hidden_size, hidden_size, batch_first=True)
-        self.device = device
-
-    def forward(self, text, hidden=None, batch_size=1):
-        # sent = torch.tensor(sent, dtype=torch.long, device=self.device)
-        inputs = self.embed(text).view(batch_size, len(text[0]), -1)
-        output, hidden = self.lstm(inputs, hidden)
-        return output, hidden
-
-class Decoder(nn.Module):
-    def __init__(self,
-                 # vocab_size=20000,
-                 # embedding_size=100,
-                 hidden_size=100,
-                 output_size=20000,
-                 device='cpu'):
-        super(Decoder, self).__init__()
-        # self.embedding_size = hidden_size # embedding_size
-        self.hidden_size = hidden_size
-        self.embed = nn.Embedding(output_size, hidden_size)
-        self.lstm = nn.LSTM(hidden_size, hidden_size, batch_first=True)
-        self.out = nn.Linear(hidden_size, output_size)
-        self.softmax = nn.LogSoftmax(dim=1)
-        self.device = device
-
-    def forward(self, input, hidden=None, batch_size=1):
-        output = self.embed(input).view(batch_size, 1, -1)
-        output = F.relu(output)
-        output, hidden = self.lstm(output, hidden)
-        output = self.softmax(self.out(output[:, 0]))
-        return output, hidden
+from encoder import Encoder
+from decoder import Decoder
 
 class Seq2Seq:
     def __init__(self, input_size=0, hidden_size=0, output_size=0,
@@ -164,13 +125,18 @@ class Seq2Seq:
                 decoder_hidden = encoder_hidden
 
                 decoded_seq = []
-                tar_len = self.tar_vocab.max_len
-                for di in range(tar_len):
+                # tar_len = self.tar_vocab.max_len
+                # for di in range(tar_len):
+                while True:
                     decoder_output, decoder_hidden = self.decoder(decoder_input,
                                                                   decoder_hidden)
                     topv, topi = decoder_output.data.topk(1)
                     idx = topi.item()
                     decoded_seq.append(idx)
+
+                    if idx == EOS_token:
+                        break
+
                     decoder_input = topi.squeeze().detach()
                 decoded_seq = torch.LongTensor(decoded_seq, device=self.device)
                 decoded_text.append(decoded_seq)
