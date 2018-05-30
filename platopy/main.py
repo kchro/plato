@@ -119,7 +119,7 @@ def generate_depth_k_sentences(k=0, filename='', dropout=0.1):
     prev = atoms
     curr = []
 
-    for n in range(k+1):
+    for n in range(k):
         if n == 0:
             # write subtrees of depth 0
             with open(tmpdir+'total.out', 'a') as total:
@@ -140,7 +140,7 @@ def generate_depth_k_sentences(k=0, filename='', dropout=0.1):
                         with open(tmpdir+'prev.out', 'r') as prev:
                             for line in prev:
                                 # dropout some of the negations
-                                if random.random() < dropout:
+                                if random.random() < dropout*n:
                                     continue
 
                                 subtree = line.rstrip()
@@ -150,7 +150,7 @@ def generate_depth_k_sentences(k=0, filename='', dropout=0.1):
                         with open(tmpdir+'prev.out', 'r') as prev:
                             for line in prev:
                                 # dropout some of the prevs connections
-                                if random.random() < dropout:
+                                if random.random() < dropout*n:
                                     continue
 
                                 subtree_prev = line.rstrip()
@@ -158,11 +158,11 @@ def generate_depth_k_sentences(k=0, filename='', dropout=0.1):
                                     for line2 in total:
 
                                         # dropout some of the prev-total connections
-                                        if random.random() < dropout:
+                                        if random.random() < dropout*n:
                                             continue
 
                                         subtree_total = line2.rstrip()
-                                        if n == k:
+                                        if n == k-1:
                                             curr.write('%s%s%s\n' % (subtree_prev, op, subtree_total))
                                             # reverse order
                                             curr.write('%s%s%s\n' % (subtree_total, op, subtree_prev))
@@ -176,19 +176,30 @@ def generate_depth_k_sentences(k=0, filename='', dropout=0.1):
                     with open(tmpdir+'prev.out', 'w') as prev:
                         for line in curr:
                             # dropout some of the prev-total connections
-                            if random.random() < dropout:
+                            if random.random() < dropout*n:
                                 continue
 
                             total.write(line)
-                            prev.write(line)
+                            if n < k-1:
+                                prev.write(line)
+
+    with open(tmpdir+'total.out', 'r') as total:
+        with open(tmpdir+filename, 'w') as final:
+            for line in total:
+                final.write(line)
+                        
+    with open(tmpdir+'total.out') as total:
+        with open(tmpdir+'curr.out') as curr:
+            with open(tmpdir+'prev.out') as prev:
+                pass
 
 if __name__ == '__main__':
     """
     generate all the formulas of depth k
     """
-    # generate_depth_k_sentences(k=2, filename='k2_formulas.out', dropout=0)
+    generate_depth_k_sentences(k=3, filename='k3_formulas.out', dropout=0.1)
 
-    generate_depth_k_sentences(k=3, filename='k3_formulas.out', dropout=0.4)
+    # generate_depth_k_sentences(k=3, filename='k3_formulas.out', dropout=0.33)
 
     # with open('k2_formulas.out', 'w') as w:
     #     for formula in generate_depth_k_sentences(k=2):
