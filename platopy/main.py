@@ -139,13 +139,21 @@ def generate_depth_k_sentences(k=0, filename='', dropout=0.1):
                         # write to curr: negated subtrees of prev
                         with open(tmpdir+'prev.out', 'r') as prev:
                             for line in prev:
+                                # dropout some of the negations
+                                if random.random() < dropout:
+                                    continue
+
                                 subtree = line.rstrip()
                                 curr.write('%s(%s)\n' % (op, subtree))
                     else:
                         # write to curr: joined subtrees of prev and total
                         with open(tmpdir+'prev.out', 'r') as prev:
                             for line in prev:
-                                subtree_prev = line.rsplit()
+                                # dropout some of the prevs connections
+                                if random.random() < dropout:
+                                    continue
+
+                                subtree_prev = line.rstrip()
                                 with open(tmpdir+'total.out', 'r') as total:
                                     for line2 in total:
 
@@ -153,7 +161,7 @@ def generate_depth_k_sentences(k=0, filename='', dropout=0.1):
                                         if random.random() < dropout:
                                             continue
 
-                                        subtree_total = line2.rsplit()
+                                        subtree_total = line2.rstrip()
                                         if n == k:
                                             curr.write('%s%s%s\n' % (subtree_prev, op, subtree_total))
                                             # reverse order
@@ -167,6 +175,10 @@ def generate_depth_k_sentences(k=0, filename='', dropout=0.1):
                 with open(tmpdir+'total.out', 'a') as total:
                     with open(tmpdir+'prev.out', 'w') as prev:
                         for line in curr:
+                            # dropout some of the prev-total connections
+                            if random.random() < dropout:
+                                continue
+
                             total.write(line)
                             prev.write(line)
 
