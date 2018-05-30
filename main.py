@@ -69,8 +69,8 @@ if __name__ == '__main__':
     sess = raw_input('session name: ')
 
     # get the data
-    #inputs, vocabs = get_k1_sents(device, get_vocabs=True)
-    inputs, vocabs = get_custom_sents(device, filename="custom.out", get_vocabs=True)
+    inputs, vocabs = get_k1_sents(device, get_vocabs=True)
+    inputs = get_custom_sents(device, filename="custom.out", get_vocabs=False)
     src_inputs, tar_inputs = inputs
     src_vocab, tar_vocab = vocabs
     X_test, y_test = src_inputs, tar_inputs

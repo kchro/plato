@@ -46,4 +46,10 @@ def read_atom_file(filename='atoms.out'):
     return read_file(filename)
 
 def read_operator_file(filename):
-    return read_file(filename)
+    with open(filename, 'r') as f:
+        operators = []
+        for line in f:
+            op, arity = line.split(',')
+            arity = int(arity)
+            operators.append((op, arity))
+    return operators

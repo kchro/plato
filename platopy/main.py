@@ -6,69 +6,76 @@ from tqdm import tqdm
 
 NUM_SENTENCES = 10
 
-def generate_depth_k_sentences(k=1):
-    # build the template formulas
-    predicates = read_predicate_file('folgen/predicates.txt')
-    constants = read_constant_file('folgen/constants.txt')
-    preds = [
-        "%s(%s)" % (pred, ','.join(['%s' for _ in range(arity)]))
-        for pred, arity in predicates
-    ]
-
-    operators = read_operator_file('folgen/operators.txt')
-
-    # memoize results
-    memo = {}
-
-    def recurse(depth):
-        if depth == 0:
-            return preds
-
-        if depth in memo:
-            return memo[depth]
-
-        # generate all depth k trees
-        if depth-1 not in memo:
-            subtrees = recurse(depth-1)
-            memo[depth-1] = tuple(subtrees)
-        else:
-            subtrees = memo[depth-1]
-
-        ret = []
-        for operator in operators:
-            for i in range(len(subtrees)):
-                for j in range(len(subtrees)):
-                    if depth == k:
-                        ret.append('%s%s%s' % (subtrees[i], operator, subtrees[j]))
-                    else:
-                        ret.append('(%s%s%s)' % (subtrees[i], operator, subtrees[j]))
-
-        memo[depth] = ret
-        return ret
-
-    depth_k_trees = recurse(k)
-    for tree in depth_k_trees[:5]:
-        print tree
-
-    count = 0
-    for tree in depth_k_trees:
-        count += (tree.count('%s') * NUM_SENTENCES)
-
-    # get
-    arg_train = [constants[i%len(constants)] for i in range(count)]
-    random.shuffle(arg_train)
-
-    with open('folgen/k%d_sents.out' % k, 'w') as w:
-        for tree in tqdm(depth_k_trees):
-            n = tree.count('%s')
-            for i in range(NUM_SENTENCES):
-                formula = tree % tuple(arg_train[:n])
-                arg_train = arg_train[n+1:]
-                sents = get_post_request(formula)
-                for sent in set(sents):
-                    if len(sent) == 0:
-                        continue
-                    w.write(sent+'\t'+formula+'\n')
+# def generate_depth_k_sentences(k=1):
+#     # build the template formulas
+#     predicates = read_predicate_file('folgen/predicates.txt')
+#     constants = read_constant_file('folgen/constants.txt')
+#     preds = tuple([
+#         "%s(%s)" % (pred, ','.join(['%s' for _ in range(arity)]))
+#         for pred, arity in predicates
+#     ])
+#
+#     operators = read_operator_file('folgen/operators.txt')
+#
+#     # memoize results
+#     memo = {}
+#
+#     def recurse(depth):
+#         if depth == 0:
+#             return preds
+#
+#         if depth in memo:
+#             return memo[depth]
+#
+#         # generate all depth k trees
+#         if depth-1 not in memo:
+#             subtrees = recurse(depth-1)
+#             memo[depth-1] = tuple(subtrees)
+#         else:
+#             subtrees = memo[depth-1]
+#
+#         ret = []
+#         for operator, arity in operators:
+#             if arity == 1:
+#                 for i in range(len(subtrees)):
+#                     if depth == k:
+#                         ret.append('%s%s' % (operator, subtrees[i]))
+#                     else:
+#                         ret.append('%s(%s)' % (operator, subtrees[i]))
+#             if arity == 2:
+#                 for i in range(len(subtrees)):
+#                     for j in range(len(subtrees)):
+#                         if depth == k:
+#                             ret.append('%s%s%s' % (subtrees[i], operator, subtrees[j]))
+#                         else:
+#                             ret.append('(%s%s%s)' % (subtrees[i], operator, subtrees[j]))
+#
+#         memo[depth] = ret
+#         return ret
+#
+#     depth_k_trees = recurse(k)
+#     for tree in depth_k_trees[:5]:
+#         print tree
+#
+#     count = 0
+#     for tree in depth_k_trees:
+#         count += (tree.count('%s') * NUM_SENTENCES)
+#
+#     # get
+#     arg_train = [constants[i%len(constants)] for i in range(count)]
+#     random.shuffle(arg_train)
+#
+#     with open('folgen/k%d_sents.out' % k, 'w') as w:
+#         for tree in tqdm(depth_k_trees):
+#             n = tree.count('%s')
+#             for i in range(NUM_SENTENCES):
+#                 formula = tree % tuple(arg_train[:n])
+#                 arg_train = arg_train[n+1:]
+#                 sents = get_post_request(formula)
+#                 for sent in set(sents):
+#                     if len(sent) == 0:
+#                         continue
+#                     w.write(sent+'\t'+formula+'\n')
 
 def get_post_request(fol):
     url = 'http://cypriot.stanford.edu:8080/ace/'
@@ -95,7 +102,58 @@ def generate_atomic_sentences():
                         continue
                     w.write(sent+'\t'+atom+'\n')
 
+def generate_depth_k_sentences(k=0):
+    # all trees depth <= k
+    predicates = read_predicate_file('folgen/predicates.txt')
+    constants = read_constant_file('folgen/constants.txt')
+    operators = read_operator_file('folgen/operators.txt')
+
+    atoms = [
+        "%s(%s)" % (pred, ','.join(['%s' for _ in range(arity)]))
+        for pred, arity in predicates
+    ]
+
+    prev = atoms
+    total = set(atoms)
+    curr = []
+
+    for n in range(1, k+1):
+        for op, arity in operators:
+            if arity == 1:
+                # add unary operator on subtrees of depth == (n-1)
+                curr += ['%s(%s)' % (op, subtree) for subtree in prev]
+            elif arity == 2:
+                # subtree of depth n-1
+                for i in range(len(prev)):
+                    # subtree of depth <= n-1
+                    for j in range(len(total)):
+                        if n == k:
+                            curr.append('%s%s%s' % (prev[i], op, total[j]))
+                            # reverse order
+                            curr.append('%s%s%s' % (total[j], op, prev[i]))
+                        else:
+                            curr.append('(%s%s%s)' % (prev[i], op, total[j]))
+                            # reverse order
+                            curr.append('(%s%s%s)' % (total[j], op, prev[i]))
+        for formula in curr:
+            total.add(formula)
+        prev = curr
+        curr = []
+
+    return total
+
 if __name__ == '__main__':
+    """
+    generate all the formulas of depth k
+    """
+    with open('k2_formulas.out', 'w') as w:
+        for formula in generate_depth_k_sentences(k=2):
+            w.write(formula+'\n')
+
+    with open('k3_formulas.out', 'w') as w:
+        for formula in generate_depth_k_sentences(k=3):
+            w.write(formula+'\n')
+
     # predicates = read_predicate_file('folgen/predicates.txt')
     # constants = read_constant_file('folgen/constants.txt')
     # atoms = generate_all_atoms(predicates, constants)
@@ -105,5 +163,5 @@ if __name__ == '__main__':
 
     # generate_all_sentences()
     # generate_atomic_sentences()
-    generate_depth_k_sentences(k=1)
+    # generate_depth_k_sentences(k=1)
     # print get_post_request('(tet(FORMAT)&tet(FORMAT))')
