@@ -15,3 +15,6 @@ logs/sessions/
 treelstm.pytorch/
 *.pyc
 error_log*
+platopy/curr.out
+platopy/prev.out
+platopy/total.out
