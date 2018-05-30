@@ -102,7 +102,7 @@ def generate_atomic_sentences():
                         continue
                     w.write(sent+'\t'+atom+'\n')
 
-def generate_depth_k_sentences(k=0):
+def generate_depth_k_sentences(k=0, dropout=0.1):
     # all trees depth <= k
     predicates = read_predicate_file('folgen/predicates.txt')
     constants = read_constant_file('folgen/constants.txt')
@@ -123,12 +123,20 @@ def generate_depth_k_sentences(k=0):
             print op
             if arity == 1:
                 # add unary operator on subtrees of depth == (n-1)
-                curr += ['%s(%s)' % (op, subtree) for subtree in prev]
+                for subtree in prev:
+                    if random.random() < dropout:
+                        continue
+                    curr.append('%s(%s)' % (op, subtree))
+
             elif arity == 2:
                 # subtree of depth n-1
                 for i in tqdm(range(len(prev))):
+                    if random.random() < dropout:
+                        continue
                     # subtree of depth <= n-1
                     for subtree in total:
+                        if random.random() < dropout:
+                            continue
                         if n == k:
                             curr.append('%s%s%s' % (prev[i], op, subtree))
                             # reverse order
@@ -137,7 +145,10 @@ def generate_depth_k_sentences(k=0):
                             curr.append('(%s%s%s)' % (prev[i], op, subtree))
                             # reverse order
                             curr.append('(%s%s%s)' % (subtree, op, prev[i]))
+
         for formula in curr:
+            if random.random() < dropout:
+                continue
             total.add(formula)
         prev = curr
         curr = []
