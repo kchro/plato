@@ -7,8 +7,11 @@ data/raw/
 platopy/nlgen_scripts/dat/
 
 platopy/folgen/k1_sents.out
+platopy/k2_formulas.out
+platopy/k3_formulas.out
 data.zip
 data 2/
 logs/sessions/
 treelstm.pytorch/
 *.pyc
+error_log*
