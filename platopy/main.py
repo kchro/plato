@@ -3,6 +3,7 @@ from nlgen_scripts.runfol import runfol
 import random
 import requests
 from tqdm import tqdm
+import sys
 
 NUM_SENTENCES = 10
 
@@ -102,7 +103,7 @@ def generate_atomic_sentences():
                         continue
                     w.write(sent+'\t'+atom+'\n')
 
-def generate_depth_k_sentences(k=0, dropout=0.1):
+def generate_depth_k_sentences(k=0, filename='', dropout=0.1):
     # all trees depth <= k
     predicates = read_predicate_file('folgen/predicates.txt')
     constants = read_constant_file('folgen/constants.txt')
@@ -114,58 +115,74 @@ def generate_depth_k_sentences(k=0, dropout=0.1):
     ]
 
     prev = atoms
-    total = set(atoms)
     curr = []
 
-    for n in range(1, k+1):
-        print 'depth %d' % n
-        for op, arity in operators:
-            print op
-            if arity == 1:
-                # add unary operator on subtrees of depth == (n-1)
-                for subtree in prev:
-                    if random.random() < dropout:
-                        continue
-                    curr.append('%s(%s)' % (op, subtree))
+    for n in range(k+1):
+        if n == 0:
+            # write subtrees of depth 0
+            with open('total.out', 'a') as total:
+                for atom in atoms:
+                    total.write(atom+'\n')
+            # write subtrees of depth 0 to prev
+            with open('prev.out', 'w') as prev:
+                for atom in atoms:
+                    prev.write(atom+'\n')
+        else:
+            print 'depth %d' % n
 
-            elif arity == 2:
-                # subtree of depth n-1
-                for i in tqdm(range(len(prev))):
-                    if random.random() < dropout:
-                        continue
-                    # subtree of depth <= n-1
-                    for subtree in total:
-                        if random.random() < dropout:
-                            continue
-                        if n == k:
-                            curr.append('%s%s%s' % (prev[i], op, subtree))
-                            # reverse order
-                            curr.append('%s%s%s' % (subtree, op, prev[i]))
-                        else:
-                            curr.append('(%s%s%s)' % (prev[i], op, subtree))
-                            # reverse order
-                            curr.append('(%s%s%s)' % (subtree, op, prev[i]))
+            with open('curr.out', 'w') as curr:
+                for op, arity in operators:
+                    print op
+                    if arity == 1:
+                        # write to curr: negated subtrees of prev
+                        with open('prev.out', 'r') as prev:
+                            for line in prev:
+                                subtree = line.rstrip()
+                                curr.write('%s(%s)\n' % (op, subtree))
+                    else:
+                        # write to curr: joined subtrees of prev and total
+                        with open('prev.out', 'r') as prev:
+                            for line in prev:
+                                subtree_prev = line.rsplit()
+                                with open('total.out', 'r') as total:
+                                    for line2 in total:
 
-        for formula in curr:
-            if random.random() < dropout:
-                continue
-            total.add(formula)
-        prev = curr
-        curr = []
+                                        # dropout some of the prev-total connections
+                                        if random.random() < dropout:
+                                            continue
 
-    return total
+                                        subtree_total = line2.rsplit()
+                                        if n == k:
+                                            curr.write('%s%s%s\n' % (subtree_prev, op, subtree_total))
+                                            # reverse order
+                                            curr.write('%s%s%s\n' % (subtree_total, op, subtree_prev))
+                                        else:
+                                            curr.write('(%s%s%s)\n' % (subtree_prev, op, subtree_total))
+                                            # reverse order
+                                            curr.write('(%s%s%s)\n' % (subtree_total, op, subtree_prev))
+
+            with open('curr.out', 'r') as curr:
+                with open('total.out', 'a') as total:
+                    with open('prev.out', 'w') as prev:
+                        for line in curr:
+                            total.write(line)
+                            prev.write(line)
 
 if __name__ == '__main__':
     """
     generate all the formulas of depth k
     """
-    with open('k2_formulas.out', 'w') as w:
-        for formula in generate_depth_k_sentences(k=2):
-            w.write(formula+'\n')
+    generate_depth_k_sentences(k=2, filename='k2_formulas.out', dropout=0)
 
-    with open('k3_formulas.out', 'w') as w:
-        for formula in generate_depth_k_sentences(k=3):
-            w.write(formula+'\n')
+    generate_depth_k_sentences(k=3, filename='k3_formulas.out', dropout=0.4)
+
+    # with open('k2_formulas.out', 'w') as w:
+    #     for formula in generate_depth_k_sentences(k=2):
+    #         w.write(formula+'\n')
+    #
+    # with open('k3_formulas.out', 'w') as w:
+    #     for formula in generate_depth_k_sentences(k=3):
+    #         w.write(formula+'\n')
 
     # predicates = read_predicate_file('folgen/predicates.txt')
     # constants = read_constant_file('folgen/constants.txt')
