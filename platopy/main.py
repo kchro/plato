@@ -118,13 +118,15 @@ def generate_depth_k_sentences(k=0):
     curr = []
 
     for n in range(1, k+1):
+        print 'depth %d' % n
         for op, arity in operators:
+            print op
             if arity == 1:
                 # add unary operator on subtrees of depth == (n-1)
                 curr += ['%s(%s)' % (op, subtree) for subtree in prev]
             elif arity == 2:
                 # subtree of depth n-1
-                for i in range(len(prev)):
+                for i in tqdm(range(len(prev))):
                     # subtree of depth <= n-1
                     for subtree in total:
                         if n == k:
