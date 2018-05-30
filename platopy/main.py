@@ -126,15 +126,15 @@ def generate_depth_k_sentences(k=0):
                 # subtree of depth n-1
                 for i in range(len(prev)):
                     # subtree of depth <= n-1
-                    for j in range(len(total)):
+                    for subtree in total:
                         if n == k:
-                            curr.append('%s%s%s' % (prev[i], op, total[j]))
+                            curr.append('%s%s%s' % (prev[i], op, subtree))
                             # reverse order
-                            curr.append('%s%s%s' % (total[j], op, prev[i]))
+                            curr.append('%s%s%s' % (subtree, op, prev[i]))
                         else:
-                            curr.append('(%s%s%s)' % (prev[i], op, total[j]))
+                            curr.append('(%s%s%s)' % (prev[i], op, subtree))
                             # reverse order
-                            curr.append('(%s%s%s)' % (total[j], op, prev[i]))
+                            curr.append('(%s%s%s)' % (subtree, op, prev[i]))
         for formula in curr:
             total.add(formula)
         prev = curr
