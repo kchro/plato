@@ -6,7 +6,21 @@ import torch
 # load atomic sents
 DATADIR = 'data/raw/'
 
-def get_custom_sents(device, filename='', get_vocabs=True):
+def load_file(filename='',
+              encoder='seq',
+              decoder='seq',
+              device='cpu',
+              get_vocabs=True):
+    """
+    all purpose file-loader
+    @params
+        filename    (str)
+        encoder     ('seq' or 'tree')
+        decoder     ('seq' or 'tree')
+        device      ('cpu' or 'gpu')
+        get_vocabs  (bool)
+        - return the vocab or not
+    """
     filename = os.path.join(DATADIR, filename)
     def normalize_src(s):
         s = s.replace('|', '')
@@ -18,9 +32,12 @@ def get_custom_sents(device, filename='', get_vocabs=True):
     tar = []
     with open(filename, 'r') as f:
         for line in f:
-            nl_sent, fol_form = line.rstrip().split('\t')
+            nl_sent, fol_form, pol_form = line.rstrip().split('\t')
             src.append(normalize_src(nl_sent))
-            tar.append(fol_form)
+            if decoder == 'seq':
+                tar.append(fol_form)
+            else:
+                tar.append(pol_form)
 
     rand_src, rand_tar = random.choice(list(zip(src, tar)))
     print 'ex. NL sentence:', rand_src
@@ -31,7 +48,10 @@ def get_custom_sents(device, filename='', get_vocabs=True):
     src_inputs = src_vocab.get_idx_tensor(src)
 
     tar_vocab = FOLVocab(tar)
-    tar_inputs = tar_vocab.get_idx_tensor(tar)
+    if decoder == 'seq':
+        tar_inputs = tar_vocab.get_idx_tensor(tar)
+    else:
+        tar_inputs = tar
     print 'done.'
 
     if get_vocabs:

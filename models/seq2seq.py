@@ -6,11 +6,12 @@ import sys
 from tqdm import tqdm
 
 from encoder import Encoder
-from decoder import Decoder, TreeDecoder
+from decoder import Decoder
 
 class Seq2Seq:
     def __init__(self, input_size=None, hidden_size=None, output_size=None,
                  optimizer=optim.Adam, criterion=nn.NLLLoss, lr=0.0001,
+                 src_vocab=None, tar_vocab=None,
                  sess='', device='cpu'):
         self.encoder = Encoder(input_size, hidden_size, device)
         self.decoder = Decoder(hidden_size, output_size, device)
@@ -18,6 +19,10 @@ class Seq2Seq:
         self.encoder_opt = optimizer(self.encoder.parameters(), lr=lr)
         self.decoder_opt = optimizer(self.decoder.parameters(), lr=lr)
         self.criterion = criterion()
+
+        self.src_vocab = src_vocab
+        self.tar_vocab = tar_vocab
+
         self.sess = sess
         self.device = device
 
@@ -28,10 +33,6 @@ class Seq2Seq:
     def load(self, filename):
         self.encoder.load_state_dict(torch.load('logs/sessions/enc_%s' % filename))
         self.decoder.load_state_dict(torch.load('logs/sessions/dec_%s' % filename))
-
-    def set_vocab(self, src_vocab, tar_vocab):
-        self.src_vocab = src_vocab
-        self.tar_vocab = tar_vocab
 
     def run_epoch(self, src_input, tar_output, batch_size=20):
         self.encoder_opt.zero_grad()

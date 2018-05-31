@@ -35,20 +35,13 @@ class TreeDecoder(nn.Module):
         self.hidden_size = hidden_size
         self.embed = nn.Embedding(output_size, hidden_size)
         # double the size of the LSTM (we append the parent <n> hidden state to input)
-        self.lstm = nn.LSTM(hidden_size*2, hidden_size*2, batch_first=True)
-        self.out = nn.Linear(hidden_size*2, output_size)
+        self.lstm = nn.LSTM(hidden_size*2, hidden_size, batch_first=True)
+        self.out = nn.Linear(hidden_size, output_size)
         self.softmax = nn.LogSoftmax(dim=1)
         self.device = device
 
-    def forward(self, input, parent=None, hidden=None, batch_size=1):
+    def forward(self, input, hidden=None, parent=None, batch_size=1):
         output = self.embed(input).view(batch_size, 1, -1)
-
-        # create or embed the parent hidden state
-        if parent is None:
-            parent = torch.zeros(batch_size, 1, hidden_size)
-        else:
-            parent = self.embed(parent).view(batch_size, 1, -1)
-
         output = torch.cat([output, parent], dim=2)
         output = F.relu(output)
         output, hidden = self.lstm(output, hidden)

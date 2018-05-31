@@ -20,6 +20,9 @@ class Vocab(object):
         vocab.add('<PAD>')
         vocab.add('<UNK>')
 
+        # nonterminal for the target vocab (tree)
+        vocab.add('<N>')
+
         self.vocab = sorted(vocab)
         self.word_to_index = { self.vocab[i]: i for i in range(len(self.vocab)) }
         self.index_to_word = { i: self.vocab[i] for i in range(len(self.vocab)) }
@@ -56,8 +59,11 @@ class Vocab(object):
 
         return aug_text
 
-    def sent_to_idx(self, sent):
-        aug = self.augment_sent(sent)
+    def sent_to_idx(self, sent, augmented=False):
+        if augmented:
+            aug = sent
+        else:
+            aug = self.augment_sent(sent)
         idx = [self.word_to_index[word] for word in aug]
         return idx
 
