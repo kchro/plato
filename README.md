@@ -5,8 +5,8 @@ Stanford CS+Philosophy Senior Project
 Pipeline:
 
 Front-End:
-- [ ] new problem button
-- [ ] display the user's errors
+- [x] new problem button
+- [x] display the user's errors
 - [ ] show the feedback errors
 - [x] connect to the server
 
@@ -31,29 +31,20 @@ Back-End:
       - [x] what does xmlify do?
 - [x] set up the AWS
 - [x] get all the source code
-- [ ] platopy
-  - [ ] might be hopeless, but code refactoring from java to python
-    - [ ] why refactor? plato.jar doesn't work, and it'll take longer to learn the openproof framework than to write up lightweight python classes
-    - [ ] server that controls a lifecycle
-      - [ ] user
-        - [ ] request new learning goal
-        - [ ] request higher/lower difficulty
-        - [ ] answer problem
-      - [ ] instructor
-        - [ ] learning goal
-        - [ ] difficulty
-        - [ ] generate new problem
-        - [ ] check solution
-        - [ ] feedback policy
-        - [ ] rule policy
-          - [ ] load rule files
-  - [ ] start with model/
-    - [ ] Answer.py
-      - [ ] StringToFormulaParser.java
-    - [ ] LinguisticPhenom.py
-    - [ ] Policy.py
-    - [ ] Problem.py
-    - [ ] ResultType.py
+- [x] platopy
+  - [ ] server that controls a lifecycle
+    - [ ] user
+      - [ ] request new learning goal
+      - [ ] request higher/lower difficulty
+      - [ ] answer problem
+    - [ ] instructor
+      - [ ] learning goal
+      - [ ] difficulty
+      - [ ] generate new problem
+      - [ ] check solution
+      - [ ] feedback policy
+      - [ ] rule policy
+        - [ ] load rule files
 - [x] communicate with the cypriot server
   - [x] configure the server.py
 
@@ -64,7 +55,7 @@ Machine-Learning:
   - [ ] getting k=2 trees (probably unreasonably expensive)
 - [ ] decide on objective function
 - [x] create baseline model
-  - [ ] make pytorch seq2seq
+  - [x] make pytorch seq2seq
   - [ ] make pytorch seq2seq character level embeddings
   - [ ] extend to pytorch seq2tree
   - [ ] extend to pytorch deptree2logtree

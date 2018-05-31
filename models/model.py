@@ -1,19 +1,11 @@
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import torch.optim as optim
-import sys
-from tqdm import tqdm
 
-from encoder import Encoder
-from decoder import Decoder
 
-class Seq2Seq:
+class Seq2Tree:
     def __init__(self, input_size=0, hidden_size=0, output_size=0,
                  optimizer=optim.Adam, criterion=nn.NLLLoss, lr=0.0001,
                  sess='', device='cpu'):
         self.encoder = Encoder(input_size, hidden_size, device)
-        self.decoder = Decoder(hidden_size, output_size, device)
+        self.decoder = TreeDecoder(hidden_size, output_size, device)
 
         self.encoder_opt = optimizer(self.encoder.parameters(), lr=lr)
         self.decoder_opt = optimizer(self.decoder.parameters(), lr=lr)
@@ -33,6 +25,12 @@ class Seq2Seq:
         self.src_vocab = src_vocab
         self.tar_vocab = tar_vocab
 
+    def get_idx(self, decoder_output):
+        topv, topi = decoder_output.data.topk(1)
+        idx = topi.item()
+        decoder_input = topi.squeeze().detach()
+        return idx, decoder_input
+
     def run_epoch(self, src_input, tar_output, batch_size=20):
         self.encoder_opt.zero_grad()
         self.decoder_opt.zero_grad()
@@ -41,24 +39,66 @@ class Seq2Seq:
         encoder_output, encoder_hidden = self.encoder(src_input, batch_size=batch_size)
 
         SOS_token = self.tar_vocab.word_to_index['<S>']
-        decoder_input = torch.LongTensor([SOS_token]*batch_size,
-                                         device=self.device).view(-1, 1)
-
-        #decoder_input = torch.LongTensor([[SOS_token]], device=self.device)
-        decoder_hidden = encoder_hidden
+        EOS_token = self.tar_vocab.word_to_index['</S>']
+        NON_token = self.tar_vocab.word_to_index['<N>']
+        SON_token = self.tar_vocab.word_to_index['(']
 
         loss = 0
 
-        # Teacher forcing: Feed the target as the next input
-        tar_len = self.tar_vocab.max_len
-        for di in range(tar_len):
-            decoder_output, decoder_hidden = self.decoder(decoder_input,
-                                                          decoder_hidden,
-                                                          batch_size=batch_size)
+        decoder_hidden = encoder_hidden
 
-            targets = tar_output[:, di:di+1].view(-1)
-            loss += self.criterion(decoder_output, targets)
-            decoder_input = tar_output[:, di:di+1] # Teacher forcing
+        # see Dong et al. (2016) [Algorithm 1]
+        root = {
+            'parent': None,
+            'hidden': decoder_hidden,
+            'sos': SOS_token,
+            'children': []
+        }
+
+        queue = [root]
+        while queue:
+            # until no more nonterminals
+            subtree = queue.pop(0)
+
+            # get the starting input [either <S> or '(']
+            idx = subtree['idx']
+
+            # NOTE: batch_size is 1
+            decoder_input = torch.LongTensor([idx], device=self.device).view(-1, 1)
+
+            # get the hidden
+            parent_input = subtree['parent']
+
+            # parse the formula until a </S> token
+            while idx != EOS_token:
+                # decode the input sequence
+                decoder_output, decoder_hidden = self.decoder(decoder_input,
+                                                              decoder_hidden,
+                                                              parent_input)
+
+                # interpret the output
+                idx, decoder_input = self.get_idx(decoder_output)
+
+                # if we generate a non-terminal token
+                if idx == NON_token:
+                    # add a subtree to the queue
+                    ### parent: the previous state for <n>
+                    ### hidden: the context vector for <n>
+                    ### idx: the starting token ['(']
+                    ### children: subtrees
+                    nonterminal = {
+                        'parent': decoder_output,
+                        'hidden': decoder_hidden,
+                        'idx': SON_token,
+                        'children': []
+                    }
+
+                    queue.append(nonterminal)
+                    subtree['children'].append(nonterminal)
+                else:
+                    subtree['children'].append(idx)
+
+
 
         loss.backward()
         self.encoder_opt.step()
