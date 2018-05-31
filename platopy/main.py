@@ -147,99 +147,64 @@ def generate_formulas(filename, out='formulas.out'):
                     formula = line % tuple([random.choice(constants) for _ in range(num_constants)])
                     w.write(formula)
 
-operators = ['&', '|', '-->', '<->']
+def generate_dataset(infile, outfile):
+    # operators = [op for op, _ in read_operator_file('folgen/operators.txt')]
+    # NOTE: hard coding: could be a problem if we extend operators
+    operators = ['~', '&', '|', '-->', '<->']
 
-def count_operators(formula):
-    count = 0
-    for op in operators:
-        count += formula.count(op)
-    return count
+    def count_operators(formula):
+        count = 0
+        for op in operators:
+            count += formula.count(op)
+        return count
 
-def get_polish_formula(formula):
-    # base case:
-    # if no operators in formula
-    num_ops = count_operators(formula)
-    if num_ops == 0:
-        return formula
-    if num_ops == 1:
-        if formula[0] == '(' and formula[-1] == ')':
-            formula = formula[1:-1]
+    def get_polish_formula(formula):
+        # base case:
+        # if no operators in formula
+        num_ops = count_operators(formula)
+        if num_ops == 0:
+            return formula
+        if num_ops == 1:
+            if formula[0] == '(' and formula[-1] == ')':
+                formula = formula[1:-1]
 
-    # find the root operator
-    paren_count = 0
-    for i in range(len(formula)):
-        if formula[i] == '(':
-            paren_count += 1
-        elif formula[i] == ')':
-            paren_count -= 1
-        elif paren_count == 0:
-            for op in operators:
-                if formula[i:].startswith(op):
-                    left = get_polish_formula(formula[:i])
-                    operator = formula[i:i+len(op)]
-                    right = get_polish_formula(formula[i+len(op):])
-                    return '%s(%s,%s)' % (operator, left, right)
+        # find the root operator
+        paren_count = 0
+        for i in range(len(formula)):
+            if formula[i] == '(':
+                paren_count += 1
+            elif formula[i] == ')':
+                paren_count -= 1
+            elif paren_count == 0:
+                for op in operators:
+                    if op == '~':
+                        continue
+                    if formula[i:].startswith(op):
+                        left = get_polish_formula(formula[:i])
+                        operator = formula[i:i+len(op)]
+                        right = get_polish_formula(formula[i+len(op):])
+                        return '%s(%s,%s)' % (operator, left, right)
 
-    print formula
+        print formula
 
-# def generate_dataset(infile, outfile):
-#     # operators = [op for op, _ in read_operator_file('folgen/operators.txt')]
-#     # NOTE: hard coding: could be a problem if we extend operators
-#     operators = ['~', '&', '|', '-->', '<->']
-#
-#     def count_operators(formula):
-#         count = 0
-#         for op in operators:
-#             count += formula.count(op)
-#         return count
-#
-#     def get_polish_formula(formula):
-#         # base case:
-#         # if no operators in formula
-#         num_ops = count_operators(formula)
-#         if num_ops == 0:
-#             return formula
-#         if num_ops == 1:
-#             if formula[0] == '(' and formula[-1] == ')':
-#                 formula = formula[1:-1]
-#
-#         # find the root operator
-#         paren_count = 0
-#         for i in range(len(formula)):
-#             if formula[i] == '(':
-#                 paren_count += 1
-#             elif formula[i] == ')':
-#                 paren_count -= 1
-#             elif paren_count == 0:
-#                 for op in operators:
-#                     if op == '~':
-#                         continue
-#                     if formula[i:].startswith(op):
-#                         left = get_polish_formula(formula[:i])
-#                         operator = formula[i:i+len(op)]
-#                         right = get_polish_formula(formula[i+len(op):])
-#                         return '%s(%s,%s)' % (operator, left, right)
-#
-#         print formula
-#
-#     with open(outfile, 'w') as w:
-#         with open(infile, 'r') as f:
-#             start = time.time()
-#             print 'loading...'
-#             formulas = [line.rstrip() for line in f]
-#             formulas = [random.choice(formulas) for _ in range(10000)]
-#             # formulas = [f.readline().rstrip() for _ in range(100)]
-#             print 'done. %0.3f' % float(time.time() - start)
-#
-#             for fol in tqdm(formulas):
-#                 nl_sents = get_post_request(fol)
-#                 if not nl_sents:
-#                     continue
-#                 polish = get_polish_formula(fol)
-#                 if not polish:
-#                     continue
-#                 for sent in nl_sents:
-#                     w.write('%s\t%s\t%s\n' % (sent, fol, polish))
+    with open(outfile, 'w') as w:
+        with open(infile, 'r') as f:
+            start = time.time()
+            print 'loading...'
+            formulas = [line.rstrip() for line in f]
+            formulas = [random.choice(formulas) for _ in range(10000)]
+            # formulas = [f.readline().rstrip() for _ in range(100)]
+            print 'done. %0.3f' % float(time.time() - start)
+
+            for fol in tqdm(formulas):
+                nl_sents = get_post_request(fol)
+                if not nl_sents:
+                    continue
+                polish = get_polish_formula(fol)
+                if not polish:
+                    continue
+                for sent in nl_sents:
+                    w.write('%s\t%s\t%s\n' % (sent, fol, polish))
 
 if __name__ == '__main__':
     """
