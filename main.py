@@ -88,7 +88,7 @@ if __name__ == '__main__':
     input_size = len(src_vocab)
     hidden_size = 200
     output_size = len(tar_vocab)
-    model = models[name](input_size=input_size,
+    model = MODELS[name](input_size=input_size,
                          hidden_size=hidden_size,
                          output_size=output_size,
                          sess=sess, device=device)
