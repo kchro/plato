@@ -113,40 +113,6 @@ class Seq2Tree:
                 else:
                     subtree['children'].append(idx)
 
-            # # parse the formula until a </S> token
-            # while idx != EOS_token:
-            #     # decode the input sequence
-            #     decoder_output, decoder_hidden = self.decoder(decoder_input,
-            #                                                   hidden=decoder_hidden,
-            #                                                   parent=parent_input)
-            #
-            #     # interpret the output
-            #     idx, decoder_input = self.get_idx(decoder_output)
-            #
-            #     if len(subtree['children']) == 20:
-            #         idx = EOS_token
-            #
-            #
-            #
-            #     print self.tar_vocab.index_to_word[idx]
-            #
-            #     # if we generate a non-terminal token
-            #     if idx == NON_token:
-            #         # add a subtree to the queue
-            #         ### parent: the previous state for <n>
-            #         ### hidden: the hidden state for <n>
-            #         ### children: subtrees
-            #         nonterminal = {
-            #             'parent': decoder_hidden[0],
-            #             'hidden': decoder_hidden,
-            #             'children': []
-            #         }
-            #
-            #         queue.append(nonterminal)
-            #         subtree['children'].append(nonterminal)
-            #     else:
-            #         subtree['children'].append(idx)
-
         loss.backward()
         self.encoder_opt.step()
         self.decoder_opt.step()
@@ -294,7 +260,3 @@ class Seq2Tree:
     def load(self, filename):
         self.encoder.load_state_dict(torch.load('logs/sessions/enc_%s' % filename))
         self.decoder.load_state_dict(torch.load('logs/sessions/dec_%s' % filename))
-
-    def set_vocab(self, src_vocab, tar_vocab):
-        self.src_vocab = src_vocab
-        self.tar_vocab = tar_vocab

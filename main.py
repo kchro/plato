@@ -91,8 +91,9 @@ if __name__ == '__main__':
     model = MODELS[name](input_size=input_size,
                          hidden_size=hidden_size,
                          output_size=output_size,
+                         src_vocab=src_vocab,
+                         tar_vocab=tar_vocab,
                          sess=sess, device=device)
-    model.set_vocab(src_vocab, tar_vocab)
 
     # train the model
     print 'training the model...'
