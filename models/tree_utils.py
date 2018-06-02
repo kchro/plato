@@ -13,8 +13,9 @@ class Tree:
     def parse(self, formula):
         m = re.search('(.*?)\\((.*)\\)', formula)
         if m:
-            if m.group(1) not in '&|$~':
-                return Tree(val=m.group(0))
+            # NOTE: this was a huge fuckup
+            # if m.group(1) not in '&|$~':
+            #     return Tree(val=m.group(0))
             root = Tree(val=m.group(1))
             subformula = m.group(2)
             splits = []
