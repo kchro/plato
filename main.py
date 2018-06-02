@@ -46,6 +46,9 @@ def get_parser():
     parser.add_argument('-D', '--data',
                         required=True,
                         choices={'toy', 'sm', 'md', 'lg'})
+    parser.add_argument('-E', '--epochs',
+                        required=True,
+                        type=int)
     return parser
 
 def get_model_name(args):
@@ -100,7 +103,8 @@ if __name__ == '__main__':
 
     # train the model
     print 'training the model...'
-    history = model.train(X_train, y_train)
+    history = model.train(X_train, y_train,
+                          epochs=args.epochs)
     print 'done training the model.'
 
     # saving losses and model parameters
