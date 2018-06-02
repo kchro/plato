@@ -100,25 +100,6 @@ def generate_depth_k_formulas(k=0, filename='', dropout=0.1):
                                     else:
                                         curr.write('(%s%s%s)\n' % params)
 
-                                # with open(tmpdir+'total.out', 'r') as total:
-                                #     for line2 in total:
-                                #
-                                #         # dropout some of the prev-total connections
-                                #         if random.random() < dropout*n:
-                                #             continue
-                                #
-                                #         subtree_total = line2.rstrip()
-                                #         if random.random() < 0.5:
-                                #             params = (subtree_prev, op, subtree_total)
-                                #         else:
-                                #             params = (subtree_total, op, subtree_prev)
-                                #
-                                #         # curr.write('%s(%s,%s)\n' % (op, subtree_prev, subtree_total))
-                                #         if n == k-1:
-                                #             curr.write('%s%s%s\n' % (subtree_prev, op, subtree_total))
-                                #         else:
-                                #             curr.write('(%s%s%s)\n' % (subtree_prev, op, subtree_total))
-
             # overwrite prev.out with curr.out
             shutil.copy(tmpdir+'curr.out', tmpdir+'prev.out')
 
@@ -185,7 +166,7 @@ def generate_dataset(infile, outfile):
                         right = get_polish_formula(formula[i+len(op):])
                         return '%s(%s,%s)' % (operator, left, right)
 
-        print formula
+        return formula
 
     with open(outfile, 'w') as w:
         with open(infile, 'r') as f:

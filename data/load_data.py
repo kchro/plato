@@ -6,6 +6,43 @@ import torch
 # load atomic sents
 DATADIR = 'data/raw/'
 
+def get_polish_formula(formula):
+    operators = ['~', '&', '|', '-->', '<->']
+
+    def count_operators(formula):
+        count = 0
+        for op in operators:
+            count += formula.count(op)
+        return count
+
+    # base case:
+    # if no operators in formula
+    num_ops = count_operators(formula)
+    if num_ops == 0:
+        return formula
+    if num_ops == 1:
+        if formula[0] == '(' and formula[-1] == ')':
+            formula = formula[1:-1]
+
+    # find the root operator
+    paren_count = 0
+    for i in range(len(formula)):
+        if formula[i] == '(':
+            paren_count += 1
+        elif formula[i] == ')':
+            paren_count -= 1
+        elif paren_count == 0:
+            for op in operators:
+                if op == '~':
+                    continue
+                if formula[i:].startswith(op):
+                    left = get_polish_formula(formula[:i])
+                    operator = formula[i:i+len(op)]
+                    right = get_polish_formula(formula[i+len(op):])
+                    return '%s(%s,%s)' % (operator, left, right)
+
+    return formula
+
 def load_file(filename='',
               encoder='seq',
               decoder='seq',
@@ -32,11 +69,15 @@ def load_file(filename='',
     tar = []
     with open(filename, 'r') as f:
         for line in f:
-            nl_sent, fol_form, pol_form = line.rstrip().split('\t')
+            # kind of hacky, but whatever. i fucked up the dataset.
+            # some files are of form: <nl sent>\t<fol>\t<pol>
+            # others are            : <nl sent>\t<fol>
+            nl_sent, fol_form = line.rstrip().split('\t')[:2]
             src.append(normalize_src(nl_sent))
             if decoder == 'seq':
                 tar.append(fol_form)
             else:
+                pol_form = get_polish_formula(fol_form)
                 tar.append(pol_form)
 
     rand_src, rand_tar = random.choice(list(zip(src, tar)))

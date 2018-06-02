@@ -9,17 +9,21 @@ from models.tree2tree import Tree2Tree
 from data.load_data import load_file
 from sklearn.model_selection import train_test_split
 
-
 import torch
 
-models = {
+MODELS = {
     'seq2seq': Seq2Seq,
     'seq2tree': Seq2Tree,
     'tree2seq': Tree2Seq,
     'tree2tree': Tree2Tree
 }
 
-DATA = ''
+DATASETS = {
+    'toy': 'k3_tree_mini.out',
+    'sm': 'atomic_sents.out',
+    'md': 'k3_med.out',
+    'lg': 'k3_tree.out'
+}
 
 def get_parser():
     '''
@@ -38,10 +42,18 @@ def get_parser():
     parser.add_argument('-d', '--decoder',
                         required=True,
                         choices={'seq', 'tree'})
+    parser.add_argument('-D', '--data',
+                        required=True,
+                        choices={'toy', 'sm', 'md', 'lg'})
     return parser
 
 def get_model_name(args):
     return '%s2%s' % (args.encoder, args.decoder)
+
+def get_dataset_name(args):
+    if args.dataset in DATASETS:
+        return DATASETS[args.dataset]
+    return DATASETS['toy']
 
 if __name__ == '__main__':
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -54,9 +66,14 @@ if __name__ == '__main__':
 
     # model name
     name = get_model_name(args)
+    print 'running the %s model' % name
+
+    # select dataset
+    dataset = get_dataset_name(args)
+    print 'using the %s dataset' % dataset
 
     # load data
-    inputs, vocabs = load_file(filename='k3_tree_mini.out',
+    inputs, vocabs = load_file(filename=dataset,
                                encoder=args.encoder,
                                decoder=args.decoder,
                                device=device)
@@ -77,9 +94,25 @@ if __name__ == '__main__':
                          sess=sess, device=device)
     model.set_vocab(src_vocab, tar_vocab)
 
-    # model.train(X_train, y_train)
-    preds = model.predict(X_test)
+    # train the model
+    print 'training the model...'
+    history = model.train(X_train, y_train)
+    print 'done training the model.'
 
+    # saving losses and model parameters
+    print 'saving losses and model parameters...',
+    with open('logs/sessions/%s.json' % sess.replace(' ', '_'), 'w') as w:
+        w.write(json.dumps(history))
+
+    model.save('%s_final.json' % sess)
+    print 'done.'
+
+    # make the prediction
+    print 'running the model on test set...'
+    preds = model.predict(X_test)
+    print 'done.'
+
+    # turn this into an evaluation function later
     nl_sents = [src_vocab.reverse(nl_sent) for nl_sent in X_test]
     fol_forms = [fol_form for fol_form in y_test]
     fol_preds = [tar_vocab.reverse(fol_pred) for fol_pred in preds]
