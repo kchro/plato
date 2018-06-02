@@ -85,6 +85,8 @@ if __name__ == '__main__':
     # split data
     X_train, X_test, y_train, y_test = train_test_split(src_inputs, tar_inputs, test_size=0.1)
 
+    print '%d training examples & %d testing examples.' % (len(X_train), len(X_test))
+
     # load the model parameters
     input_size = len(src_vocab)
     hidden_size = 200
