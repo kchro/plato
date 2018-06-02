@@ -51,8 +51,8 @@ def get_model_name(args):
     return '%s2%s' % (args.encoder, args.decoder)
 
 def get_dataset_name(args):
-    if args.dataset in DATASETS:
-        return DATASETS[args.dataset]
+    if args.data in DATASETS:
+        return DATASETS[args.data]
     return DATASETS['toy']
 
 if __name__ == '__main__':
