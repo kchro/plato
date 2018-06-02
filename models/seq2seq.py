@@ -126,17 +126,13 @@ class Seq2Seq:
                 decoder_hidden = encoder_hidden
 
                 decoded_seq = []
-                # tar_len = self.tar_vocab.max_len
-                # for di in range(tar_len):
-                while True:
+                tar_len = self.tar_vocab.max_len
+                for di in range(tar_len):
                     decoder_output, decoder_hidden = self.decoder(decoder_input,
                                                                   decoder_hidden)
                     topv, topi = decoder_output.data.topk(1)
                     idx = topi.item()
                     decoded_seq.append(idx)
-
-                    if idx == EOS_token:
-                        break
 
                     decoder_input = topi.squeeze().detach()
                 decoded_seq = torch.LongTensor(decoded_seq, device=self.device)
