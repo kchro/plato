@@ -95,7 +95,7 @@ class Seq2Tree:
                 idx, decoder_input = self.get_idx(decoder_output)
 
                 loss += self.criterion(decoder_output, torch.tensor([tar_seq[i]],
-                                                                    device=device))
+                                                                    device=self.device))
 
                 # if we have a non-terminal token
                 if tar_seq[i] == NON_token:
@@ -253,6 +253,51 @@ class Seq2Tree:
                 decoded_text.append(decoded_seq)
 
         return decoded_text
+
+    def evaluate(self, X_test, y_test, preds, out=None):
+        """
+        for seq2tree models, X_test is going to be
+        lists of lists of indexes => [[idx]]
+
+        y_test and preds are going to be
+
+        """
+        if out:
+            outfile = out
+            errfile = 'err_'+out
+        else:
+            outfile = 'logs/sessions/%s.out' % self.sess
+            errfile = 'logs/sessions/err_%s.out' % self.sess
+
+        print 'logging to %s...' % outfile
+
+        num_correct = 0
+
+        def preprocess(fol_pred):
+            return fol_pred.replace('<S>', '').replace('</S>', '')
+
+        with open(outfile, 'w') as w:
+            with open(errfile, 'w') as err:
+                for nl_idx, fol_gold, fol_pred in zip(X_test, y_test, preds):
+                    nl_sent = self.src_vocab.reverse(nl_idx)
+
+                    fol_pred = preprocess(fol_pred)
+
+                    if fol_gold != fol_pred:
+                        err.write('input:  '+nl_sent+'\n')
+                        err.write('gold:   '+fol_gold+'\n')
+                        err.write('output: '+fol_pred+'\n')
+                        err.write('\n')
+                    else:
+                        num_correct += 1
+
+                    w.write('%s\t%s\t%s\t\n' % (nl_sent, fol_gold, fol_pred))
+
+        print '########################'
+        print '# Evaluation:'
+        print '# %d out of %d correct' % (num_correct, len(preds))
+        print '# %0.3f accuracy' % (float(num_correct) / len(preds))
+        print '########################'
 
     def save(self, filename):
         torch.save(self.encoder.state_dict(), 'logs/sessions/enc_%s' % filename)

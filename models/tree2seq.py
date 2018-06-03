@@ -8,6 +8,8 @@ from tqdm import tqdm
 from encoder import TreeEncoder
 from decoder import Decoder
 
+from tree_utils import DepTree
+
 class Tree2Seq:
     def __init__(self, input_size=None, hidden_size=None, output_size=None,
                  optimizer=optim.Adam, criterion=nn.NLLLoss, lr=0.0001,
@@ -40,6 +42,8 @@ class Tree2Seq:
 
         # encode the source input
         encoder_output, encoder_hidden = self.encoder(src_input, batch_size=batch_size)
+        #encoder_output = encoder_output.view(1, 1, -1)
+        #encoder_hidden = encoder_hidden[0].view(1, 1, -1), encoder_hidden[1].view(1, 1, -1)
 
         SOS_token = self.tar_vocab.word_to_index['<S>']
         decoder_input = torch.tensor([SOS_token]*batch_size,
@@ -68,8 +72,14 @@ class Tree2Seq:
 
         return loss.item() / tar_len
 
+    def str_to_deptree(self, sent):
+        deptree = DepTree(sent=sent,
+                          src_vocab=self.src_vocab,
+                          device=self.device)
+        return deptree
+
     def train(self, X_train, y_train, epochs=10,
-              batch_size=20, loss_update=10):
+              batch_size=1, loss_update=10):
         cum_loss = 0
         history = {}
         losses = []
@@ -80,21 +90,21 @@ class Tree2Seq:
             arrow = int(float(num)/den*length)
             return '='*(arrow-1)+'>'+'.'*(20-arrow)
 
+
         for epoch in range(epochs):
             epoch_loss = 0
 
             print 'Epoch %d/%d' % (epoch, epochs)
 
             for i in range(0, len(X_train), batch_size):
-                X_batch = X_train[i:i+batch_size]
+                if not isinstance(X_train[i], DepTree):
+                    for j in range(i, i+batch_size):
+                        X_train[j] = self.str_to_deptree(X_train[j])
+
+                X_batch = X_train[i]
+
                 y_batch = y_train[i:i+batch_size]
 
-                if len(X_batch) < batch_size:
-                    continue
-
-                X_batch = torch.tensor(X_batch,
-                                       dtype=torch.long,
-                                       device=self.device)
                 y_batch = torch.tensor(y_batch,
                                        dtype=torch.long,
                                        device=self.device)
@@ -121,7 +131,7 @@ class Tree2Seq:
             decoded_text = []
 
             for i in range(len(X_test)):
-                src_input = torch.LongTensor(X_test[i], device=self.device).view(1, -1)
+                src_input = self.str_to_deptree(X_test[i])
 
                 # encode the source input
                 encoder_output, encoder_hidden = self.encoder(src_input)

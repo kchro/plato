@@ -62,6 +62,7 @@ class TreeEncoder(nn.Module):
         self.hidden_size = hidden_size
         self.embed = nn.Embedding(input_size, hidden_size)
         self.lstm = TreeLSTMCell(hidden_size, hidden_size, batch_first=True)
+        self.device = device
 
     def forward(self, tree, batch_size=1):
         children_c = []
@@ -70,20 +71,18 @@ class TreeEncoder(nn.Module):
         if len(tree.children) == 0:
             # base case:
             children_c.append(torch.zeros(self.hidden_size,
-                                          requires_grad=False,
                                           device=self.device))
             children_h.append(torch.zeros(self.hidden_size,
-                                          requires_grad=False,
                                           device=self.device))
         else:
             # recursive case
             for child in tree.children:
                 _, (child_c, child_h) = self.forward(child)
                 # child_c, child_h = child_hidden
-                children_c.append(child_c)
-                children_h.append(child_h)
+                children_c.append(child_c.view(-1))
+                children_h.append(child_h.view(-1))
 
         output = self.embed(tree.input)
         hidden = torch.stack(children_c), torch.stack(children_h)
         output, hidden = self.lstm(output, hidden=hidden)
-        return output, hidden
+        return output.view(1, 1, -1), (hidden[0].view(1, 1, -1), hidden[1].view(1, 1, -1))
