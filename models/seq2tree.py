@@ -201,12 +201,9 @@ class Seq2Tree:
                                          dtype=torch.long,
                                          device=self.device).view(1, -1)
 
-                print src_input
-                raise
-
                 # encode the source input
                 encoder_output, encoder_hidden = self.encoder(src_input)
-
+                print 'what?'
                 SOS_token = self.tar_vocab.word_to_index['<S>']
                 EOS_token = self.tar_vocab.word_to_index['</S>']
                 NON_token = self.tar_vocab.word_to_index['<N>']
