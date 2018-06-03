@@ -1,4 +1,5 @@
 .ipynb_checkpoints/
+*.ipynb
 tmp/
 env/
 openproof/Server/venv/
