@@ -45,6 +45,8 @@ class Seq2Tree:
         self.encoder_opt.zero_grad()
         self.decoder_opt.zero_grad()
 
+        print src_input
+
         # encode the source input
         _, (encoder_h, encoder_c) = self.encoder(src_input,
                                                  batch_size=batch_size)
