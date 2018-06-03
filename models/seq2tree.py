@@ -168,7 +168,9 @@ class Seq2Tree:
                         root = Tree(formula=y_train[j])
                         y_train[j] = [self.tar_vocab.sent_to_idx(formula) for formula in root.inorder()]
 
-                X_batch = torch.LongTensor(X_batch)
+                X_batch = torch.tensor(X_batch,
+                                       dtype=torch.long,
+                                       device=self.device)
                 y_batch = y_train[i:i+batch_size]
 
                 loss = self.run_epoch(X_batch, y_batch,
