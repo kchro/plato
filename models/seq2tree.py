@@ -42,76 +42,76 @@ class Seq2Tree:
         self.decoder_opt.zero_grad()
 
         # encode the source input
-        _, encoder_hidden = self.encoder(src_input,
-                                         batch_size=batch_size)
+        _, (encoder_h, encoder_c) = self.encoder(src_input,
+                                                 batch_size=batch_size)
 
         SOS_token = self.tar_vocab.word_to_index['<S>']
         EOS_token = self.tar_vocab.word_to_index['</S>']
         NON_token = self.tar_vocab.word_to_index['<N>']
 
-        #decoder_input = torch.LongTensor([[SOS_token]], device=self.device)
-        decoder_hidden = encoder_hidden
-
         loss = 0
+        decoder_h = encoder_h.view(batch_size, 1, 1, -1)
+        decoder_c = encoder_c.view(batch_size, 1, 1, -1)
 
-        tar_root = Tree(formula=tar_output[0])
-        tar_queue = [
-            self.tar_vocab.sent_to_idx(formula)
-            for formula in tar_root.inorder()
-        ]
+        for batch in range(batch_size):
+            decoder_hidden = decoder_h[batch], decoder_c[batch]
 
-        # see Dong et al. (2016) [Algorithm 1]
-        root = {
-            'parent': decoder_hidden[0],    # (1, 1, 200)
-            'hidden': decoder_hidden,       # (1, 1, 200) * 2
-            'children': []
-        }
+            # see Dong et al. (2016) [Algorithm 1]
+            root = {
+                'parent': decoder_hidden[0],    # (1, 1, 200)
+                'hidden': decoder_hidden,       # (1, 1, 200) * 2
+                'children': []
+            }
 
-        queue = [root]
-        tar_count = 0
+            queue = [root]
+            tar_count = 0
 
-        while queue:
-            # until no more nonterminals
-            subtree = queue.pop(0)
-            tar_seq = tar_queue.pop(0)
-            tar_count += len(tar_seq)
+            tar_idx = 0
 
-            # initialize the sequence
-            # NOTE: batch_size is 1
-            decoder_input = torch.LongTensor([[SOS_token]], device=self.device)
+            while queue:
+                # until no more nonterminals
+                subtree = queue.pop(0)
+                tar_seq = tar_output[batch][tar_idx]
+                tar_idx += 1
+                tar_count += len(tar_seq)
 
-            # get the parent-feeding vector
-            parent_input = subtree['parent']
+                # initialize the sequence
+                # NOTE: batch_size is 1
+                decoder_input = torch.LongTensor([[SOS_token]], device=self.device)
 
-            idx = SOS_token
+                # get the parent-feeding vector
+                parent_input = subtree['parent']
 
-            # Teacher forcing with trees
-            for i in range(len(tar_seq)):
-                # decode the input sequence
-                decoder_output, decoder_hidden = self.decoder(decoder_input,
-                                                              hidden=decoder_hidden,
-                                                              parent=parent_input)
-                # interpret the output
-                idx, decoder_input = self.get_idx(decoder_output)
+                idx = SOS_token
 
-                loss += self.criterion(decoder_output, torch.tensor([tar_seq[i]]))
+                # Teacher forcing with trees
+                for i in range(len(tar_seq)):
+                    # decode the input sequence
+                    decoder_output, decoder_hidden = self.decoder(decoder_input,
+                                                                  hidden=decoder_hidden,
+                                                                  parent=parent_input)
+                    # interpret the output
+                    idx, decoder_input = self.get_idx(decoder_output)
 
-                # if we have a non-terminal token
-                if tar_seq[i] == NON_token:
-                    # add a subtree to the queue
-                    ### parent: the previous state for <n>
-                    ### hidden: the hidden state for <n>
-                    ### children: subtrees
-                    nonterminal = {
-                        'parent': decoder_hidden[0],
-                        'hidden': decoder_hidden,
-                        'children': []
-                    }
+                    loss += self.criterion(decoder_output, torch.tensor([tar_seq[i]],
+                                                                        device=self.device))
 
-                    queue.append(nonterminal)
-                    subtree['children'].append(nonterminal)
-                else:
-                    subtree['children'].append(idx)
+                    # if we have a non-terminal token
+                    if tar_seq[i] == NON_token:
+                        # add a subtree to the queue
+                        ### parent: the previous state for <n>
+                        ### hidden: the hidden state for <n>
+                        ### children: subtrees
+                        nonterminal = {
+                            'parent': decoder_hidden[0],
+                            'hidden': decoder_hidden,
+                            'children': []
+                        }
+
+                        queue.append(nonterminal)
+                        subtree['children'].append(nonterminal)
+                    else:
+                        subtree['children'].append(idx)
 
         loss.backward()
         self.encoder_opt.step()
@@ -119,7 +119,7 @@ class Seq2Tree:
 
         return loss.item() / tar_count
 
-    def train(self, X_train, y_train, epochs=10, batch_size=1, loss_update=10):
+    def train(self, X_train, y_train, epochs=10, batch_size=10, loss_update=10):
         cum_loss = 0
         history = {}
         losses = []
@@ -140,16 +140,22 @@ class Seq2Tree:
 
             for i in range(0, len(X_train), batch_size):
                 X_batch = X_train[i:i+batch_size]
-                y_batch = y_train[i:i+batch_size]
 
                 if len(X_batch) < batch_size:
                     continue
 
+                if epoch == 0:
+                    # initialize training data to trees
+                    for j in range(i, i+batch_size):
+                        root = Tree(formula=y_train[j])
+                        y_train[j] = [self.tar_vocab.sent_to_idx(formula) for formula in root.inorder()]
+
                 X_batch = torch.LongTensor(X_batch, device=self.device)
-                # y_batch = torch.LongTensor(y_batch, device=self.device)
+                y_batch = y_train[i:i+batch_size]
 
                 loss = self.run_epoch(X_batch, y_batch,
                                       batch_size=batch_size)
+
                 cum_loss += loss
                 epoch_loss += loss
 
@@ -252,6 +258,52 @@ class Seq2Tree:
                 decoded_text.append(decoded_seq)
 
         return decoded_text
+
+    def evaluate(self, X_test, y_test, preds, out=None):
+        """
+        for seq2tree models, X_test is going to be
+        lists of lists of indexes => [[idx]]
+
+        y_test and preds are going to be
+
+        """
+        if out:
+            outfile = out
+            errfile = 'err_'+out
+        else:
+            outfile = 'logs/sessions/%s.out' % self.sess
+            errfile = 'logs/sessions/err_%s.out' % self.sess
+
+        print 'logging to %s...' % outfile
+
+        num_correct = 0
+
+        def preprocess(fol_pred):
+            return self.tar_vocab.reverse(fol_pred)
+            # return fol_pred.replace('<S>', '').replace('</S>', '')
+
+        with open(outfile, 'w') as w:
+            with open(errfile, 'w') as err:
+                for nl_idx, fol_gold, fol_pred_idx in zip(X_test, y_test, preds):
+                    nl_sent = self.src_vocab.reverse(nl_idx)
+
+                    fol_pred = self.tar_vocab.reverse(fol_pred_idx)
+
+                    if fol_gold != fol_pred:
+                        err.write('input:  '+nl_sent+'\n')
+                        err.write('gold:   '+fol_gold+'\n')
+                        err.write('output: '+fol_pred+'\n')
+                        err.write('\n')
+                    else:
+                        num_correct += 1
+
+                    w.write('%s\t%s\t%s\t\n' % (nl_sent, fol_gold, fol_pred))
+
+        print '########################'
+        print '# Evaluation:'
+        print '# %d out of %d correct' % (num_correct, len(preds))
+        print '# %0.3f accuracy' % (float(num_correct) / len(preds))
+        print '########################'
 
     def save(self, filename):
         torch.save(self.encoder.state_dict(), 'logs/sessions/enc_%s' % filename)

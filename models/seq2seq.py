@@ -27,14 +27,23 @@ class Seq2Seq:
         self.device = device
 
     def save(self, filename):
+        """
+        save the model parameters to an enc & dec file
+        """
         torch.save(self.encoder.state_dict(), 'logs/sessions/enc_%s' % filename)
         torch.save(self.decoder.state_dict(), 'logs/sessions/dec_%s' % filename)
 
     def load(self, filename):
+        """
+        load the model parameters
+        """
         self.encoder.load_state_dict(torch.load('logs/sessions/enc_%s' % filename))
         self.decoder.load_state_dict(torch.load('logs/sessions/dec_%s' % filename))
 
     def run_epoch(self, src_input, tar_output, batch_size=20):
+        """
+        run one epoch
+        """
         self.encoder_opt.zero_grad()
         self.decoder_opt.zero_grad()
 
@@ -42,10 +51,10 @@ class Seq2Seq:
         encoder_output, encoder_hidden = self.encoder(src_input, batch_size=batch_size)
 
         SOS_token = self.tar_vocab.word_to_index['<S>']
-        decoder_input = torch.LongTensor([SOS_token]*batch_size,
-                                         device=self.device).view(-1, 1)
+        decoder_input = torch.tensor([SOS_token]*batch_size,
+                                     dtype=torch.long,
+                                     device=self.device).view(-1, 1)
 
-        #decoder_input = torch.LongTensor([[SOS_token]], device=self.device)
         decoder_hidden = encoder_hidden
 
         loss = 0
@@ -67,7 +76,11 @@ class Seq2Seq:
 
         return loss.item() / tar_len
 
-    def train(self, X_train, y_train, epochs=10, batch_size=20, loss_update=10):
+    def train(self, X_train, y_train, epochs=10,
+              batch_size=20, loss_update=10):
+        """
+        training function
+        """
         cum_loss = 0
         history = {}
         losses = []
@@ -90,8 +103,12 @@ class Seq2Seq:
                 if len(X_batch) < batch_size:
                     continue
 
-                X_batch = torch.LongTensor(X_batch, device=self.device)
-                y_batch = torch.LongTensor(y_batch, device=self.device)
+                X_batch = torch.tensor(X_batch,
+                                       dtype=torch.long,
+                                       device=self.device)
+                y_batch = torch.tensor(y_batch,
+                                       dtype=torch.long,
+                                       device=self.device)
 
                 loss = self.run_epoch(X_batch, y_batch,
                                       batch_size=batch_size)
@@ -111,6 +128,9 @@ class Seq2Seq:
         return history
 
     def predict(self, X_test):
+        """
+        run predictions on the test data
+        """
         with torch.no_grad():
             decoded_text = []
 
@@ -122,7 +142,9 @@ class Seq2Seq:
 
                 SOS_token = self.tar_vocab.word_to_index['<S>']
                 EOS_token = self.tar_vocab.word_to_index['</S>']
-                decoder_input = torch.LongTensor([[SOS_token]], device=self.device)
+                decoder_input = torch.tensor([[SOS_token]],
+                                             dtype=torch.long,
+                                             device=self.device)
                 decoder_hidden = encoder_hidden
 
                 decoded_seq = []
@@ -135,6 +157,47 @@ class Seq2Seq:
                     decoded_seq.append(idx)
 
                     decoder_input = topi.squeeze().detach()
-                decoded_seq = torch.LongTensor(decoded_seq, device=self.device)
+                decoded_seq = torch.tensor(decoded_seq,
+                                           dtype=torch.long,
+                                           device=self.device)
                 decoded_text.append(decoded_seq)
         return decoded_text
+
+    def evaluate(self, X_test, y_test, preds, out=None):
+        """
+        for seq2seq models, X_test, y_test, and preds are all going to be
+        lists of lists of indexes => [[idx]]
+        """
+        if out:
+            outfile = out
+            errfile = 'err_'+out
+        else:
+            outfile = 'logs/sessions/%s.out' % self.sess
+            errfile = 'logs/sessions/err_%s.out' % self.sess
+
+        print 'logging to %s...' % outfile
+
+        num_correct = 0
+
+        with open(outfile, 'w') as w:
+            with open(errfile, 'w') as err:
+                for nl_idx, fol_gold_idx, fol_pred_idx in zip(X_test, y_test, preds):
+                    nl_sent = self.src_vocab.reverse(nl_idx)
+                    fol_gold = self.tar_vocab.reverse(fol_gold_idx)
+                    fol_pred = self.tar_vocab.reverse(fol_pred_idx)
+
+                    if fol_gold != fol_pred:
+                        err.write('input:  '+nl_sent+'\n')
+                        err.write('gold:   '+fol_gold+'\n')
+                        err.write('output: '+fol_pred+'\n')
+                        err.write('\n')
+                    else:
+                        num_correct += 1
+
+                    w.write('%s\t%s\t%s\t\n' % (nl_sent, fol_gold, fol_pred))
+
+        print '########################'
+        print '# Evaluation:'
+        print '# %d out of %d correct' % (num_correct, len(preds))
+        print '# %0.3f accuracy' % (float(num_correct) / len(preds))
+        print '########################'

@@ -49,6 +49,12 @@ def get_parser():
     parser.add_argument('-E', '--epochs',
                         required=True,
                         type=int)
+    parser.add_argument('-B', '--batch',
+                        required=True,
+                        type=int)
+    parser.add_argument('-H', '--hidden',
+                        required=True,
+                        type=int)
     return parser
 
 def get_model_name(args):
@@ -92,7 +98,7 @@ if __name__ == '__main__':
 
     # load the model parameters
     input_size = len(src_vocab)
-    hidden_size = 200
+    hidden_size = args.hidden
     output_size = len(tar_vocab)
     model = MODELS[name](input_size=input_size,
                          hidden_size=hidden_size,
@@ -104,6 +110,7 @@ if __name__ == '__main__':
     # train the model
     print 'training the model...'
     history = model.train(X_train, y_train,
+                          batch_size=args.batch,
                           epochs=args.epochs)
     print 'done training the model.'
 
@@ -120,13 +127,7 @@ if __name__ == '__main__':
     preds = model.predict(X_test)
     print 'done.'
 
-    # turn this into an evaluation function later
-    nl_sents = [src_vocab.reverse(nl_sent) for nl_sent in X_test]
-    fol_forms = [fol_form for fol_form in y_test]
-    fol_preds = [tar_vocab.reverse(fol_pred) for fol_pred in preds]
-
-    print 'logging...',
-    with open('logs/sessions/%s.out' % sess.replace(' ', '_'), 'w') as w:
-        for nl_sent, fol_form, fol_pred in zip(nl_sents, fol_forms, fol_preds):
-            w.write('%s\t%s\t%s\t\n' % (nl_sent, fol_form, fol_pred))
+    # run evaluations
+    print 'evaluating the predictions:'
+    model.evaluate(X_test, y_test, preds)
     print 'done.'

@@ -23,74 +23,66 @@ class Encoder(nn.Module):
         output, hidden = self.lstm(inputs, hidden)
         return output, hidden
 
-class ChildSumTreeLSTM(nn.Module):
-    def __init__(self):
-        super(ChildSumTreeLSTM, self).__init__()
+class TreeLSTMCell(nn.Module):
+    def __init__(self, input_size, hidden_size, batch_first=True):
+        super(TreeLSTMCell, self).__init__()
         self.input_size = input_size
         self.hidden_size = hidden_size
+        self.embed = nn.Embedding(input_size, hidden_size)
         self.iou_x = nn.Linear(self.input_size, 3*self.hidden_size)
-        self.iou_h = nn.Linear(self.input_size, 3*self.hidden_size)
+        self.iou_h = nn.Linear(self.hidden_size, 3*self.hidden_size)
         self.f_x = nn.Linear(self.input_size, self.hidden_size)
         self.f_h = nn.Linear(self.hidden_size, self.hidden_size)
 
-    def node_forward(self, inputs, child_c, child_h):
-        # Eq 2: h_hat_j = \sum(h_k)
-        child_h_sum = torch.sum(child_h, dim=0, keepdim=True)
+    def forward(self, input, hidden):
+        children_h, children_c = hidden
 
-        # Eq 3: i_j = sigmoid(W x_j + U h_hat_j + b)
-        # Eq 5: o_j = sigmoid(W x_j + U h_hat_j + b)
-        # Eq 6: u_j =    tanh(W x_j + U h_hat_j + b)
-        iou = self.iou_x(inputs) + self.iou_h(child_h_sum)
-        i, o, u = torch.split(iou, int(iou.size(1) / 3), dim=1)
+        iou = self.iou_x(input) + self.iou_h(torch.sum(children_h, dim=0))
+        i, o, u = torch.split(iou, self.hidden_size)
         i, o, u = F.sigmoid(i), F.sigmoid(o), F.tanh(u)
 
-        # Eq 4: f_jk = sigmoid(W x_j + U h_k + b)
-        f = F.sigmoid(self.f_h(child_h) + self.f_x(inputs).repeat(len(child_h), 1))
+        # initialized to zero in case no children
+        f = []
+        for c_k, h_k in zip(children_c, children_h):
+            f_k = F.sigmoid(self.f_x(input) + self.f_h(h_k))
+            f.append(torch.mul(c_k, f_k))
+        f = torch.stack(f)
 
-        # Subeq 7: (f_jk x c_k)
-        f_c = torch.mul(f, child_c)
-
-        # Eq 7: c_j = i_j x u_j + \sum(f_jk x c_k)
-        c = torch.mul(i, u) + torch.sum(fc, dim=0, keepdim=True)
-
-        # Eq 8: h_j = o_j x tanh(c_j)
+        c = torch.mul(i, u) + torch.sum(f, dim=0)
         h = torch.mul(o, F.tanh(c))
-        return c, h
-
-    def forward(self, tree, inputs):
-        for idx in range(tree.num_children):
-            self.forward(tree.children[idx], inputs)
-
-        if tree.num_children == 0:
-            child_c = inputs[0].detach().new(1, self.hidden_size).fill_(0.).requires_grad_()
-            child_h = inputs[0].detach().new(1, self.mem_dim).fill_(0.).requires_grad_()
-        else:
-            child_c, child_h = zip(* map(lambda x: x.state, tree.children))
-            child_c, child_h = torch.cat(child_c, dim=0), torch.cat(child_h, dim=0)
-
-        tree.state = self.node_forward(inputs[tree.idx], child_c, child_h)
-        return tree.state
+        return o, (h, c)
 
 class TreeEncoder(nn.Module):
-    def __init__(self, vocab_size=0, input_size=0, mem_size=0, output_size=0,
-                 optimizer=optim.Adam, criterion=nn.NLLLoss, lr=0.0001,
-                 sess='', device='cpu'):
+    def __init__(self,
+                 input_size=20000,
+                 hidden_size=20,
+                 device='cpu'):
         super(TreeEncoder, self).__init__()
-        self.tree_module = ChildSumTreeLSTM(input_size=input_size,
-                                            mem_size=mem_size,
-                                            criterion=criterion,
-                                            device=device)
+        self.input_size = input_size
+        self.hidden_size = hidden_size
         self.embed = nn.Embedding(input_size, hidden_size)
-        self.childsumtree = ChildSumTreeLSTM(input_size, hidden)
+        self.lstm = TreeLSTMCell(hidden_size, hidden_size, batch_first=True)
+        self.device = device
 
-    def forward(self, tree, inputs, training = False):
-        """
-        TreeLSTMSentiment forward function
-        :param tree:
-        :param inputs: (sentence_length, 1, 300)
-        :param training:
-        :return:
-        """
-        tree_state, loss = self.tree_module(tree, inputs, training)
-        output = tree.output
-        return output, loss
+    def forward(self, tree, batch_size=1):
+        children_c = []
+        children_h = []
+
+        if len(tree.children) == 0:
+            # base case:
+            children_c.append(torch.zeros(self.hidden_size,
+                                          device=self.device))
+            children_h.append(torch.zeros(self.hidden_size,
+                                          device=self.device))
+        else:
+            # recursive case
+            for child in tree.children:
+                _, (child_h, child_c) = self.forward(child)
+                # child_c, child_h = child_hidden
+                children_c.append(child_c.view(-1))
+                children_h.append(child_h.view(-1))
+
+        output = self.embed(tree.input)
+        hidden = torch.stack(children_h), torch.stack(children_c)
+        output, (h, c) = self.lstm(output, hidden=hidden)
+        return output.view(1, 1, -1), (h.view(1, 1, -1), c.view(1, 1, -1))

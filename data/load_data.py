@@ -73,7 +73,11 @@ def load_file(filename='',
             # some files are of form: <nl sent>\t<fol>\t<pol>
             # others are            : <nl sent>\t<fol>
             nl_sent, fol_form = line.rstrip().split('\t')[:2]
+
+            # natural language source
             src.append(normalize_src(nl_sent))
+
+            # FOL target (polish or not)
             if decoder == 'seq':
                 tar.append(fol_form)
             else:
@@ -86,7 +90,10 @@ def load_file(filename='',
 
     print 'converting source and target to index tensors...',
     src_vocab = NLVocab(src)
-    src_inputs = src_vocab.get_idx_tensor(src)
+    if encoder == 'seq':
+        src_inputs = src_vocab.get_idx_tensor(src)
+    else:
+        src_inputs = src
 
     tar_vocab = FOLVocab(tar)
     if decoder == 'seq':

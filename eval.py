@@ -101,6 +101,11 @@ if __name__ == '__main__':
     model.load('%s.json' % sess)
     print 'done.'
 
+    preds = model.predict(X_test)
+    model.evaluate(X_test, y_test, preds, out='tmp')
+
+    raise
+
     # enter the input string
     while True:
         src_input = raw_input('enter sentence (Q to quit): ')

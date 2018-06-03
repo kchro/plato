@@ -2,7 +2,6 @@ from collections import Counter
 import numpy as np
 import re
 import torch
-from torchtext import data
 
 class Vocab(object):
     def __init__(self, text, n_words, charset, join, device):
