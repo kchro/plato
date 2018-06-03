@@ -197,7 +197,12 @@ class Seq2Tree:
             decoded_text = []
 
             for i in range(len(X_test)):
-                src_input = torch.LongTensor(X_test[i], device=self.device).view(1, -1)
+                src_input = torch.tensor(X_test[i],
+                                         dtype=torch.long,
+                                         device=self.device).view(1, -1)
+
+                print src_input
+                raise
 
                 # encode the source input
                 encoder_output, encoder_hidden = self.encoder(src_input)
