@@ -94,6 +94,10 @@ class Seq2Tree:
                 for i in range(len(tar_seq)):
                     # decode the input sequence
                     print 'failed?'
+                    print decoder_input.shape
+                    print decoder_hidden[0].shape
+                    print decoder_hidden[1].shape
+                    print parent_input.shape
                     decoder_output, decoder_hidden = self.decoder(decoder_input,
                                                                   hidden=decoder_hidden,
                                                                   parent=parent_input)
