@@ -98,7 +98,7 @@ if __name__ == '__main__':
 
     # load the saved model
     print 'loading model parameters...',
-    model.load('%s' % sess)
+    model.load('%s_final.json' % sess)
     print 'done.'
 
     # enter the input string
