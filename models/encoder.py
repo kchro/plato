@@ -13,8 +13,8 @@ class Encoder(nn.Module):
         super(Encoder, self).__init__()
         self.embedding_size = hidden_size # embedding_size
         self.hidden_size = hidden_size
-        self.embed = nn.Embedding(input_size, hidden_size).cuda(device)
-        self.lstm = nn.LSTM(hidden_size, hidden_size, batch_first=True).cuda(device)
+        self.embed = nn.Embedding(input_size, hidden_size)
+        self.lstm = nn.LSTM(hidden_size, hidden_size, batch_first=True)
         self.device = device
 
     def forward(self, text, hidden=None, batch_size=1):

@@ -18,6 +18,10 @@ class Seq2Tree:
         self.encoder = Encoder(input_size, hidden_size, device)
         self.decoder = TreeDecoder(hidden_size, output_size, device)
 
+        if device not 'cpu':
+            self.encoder.cuda()
+            self.decoder.cuda()
+
         self.encoder_opt = optimizer(self.encoder.parameters(), lr=lr)
         self.decoder_opt = optimizer(self.decoder.parameters(), lr=lr)
         self.criterion = criterion()
@@ -94,10 +98,10 @@ class Seq2Tree:
                 for i in range(len(tar_seq)):
                     # decode the input sequence
                     print 'failed?'
-                    print decoder_input.shape
-                    print decoder_hidden[0].shape
-                    print decoder_hidden[1].shape
-                    print parent_input.shape
+                    print decoder_input
+                    print decoder_hidden[0]
+                    print decoder_hidden[1]
+                    print parent_input
                     decoder_output, decoder_hidden = self.decoder(decoder_input,
                                                                   hidden=decoder_hidden,
                                                                   parent=parent_input)
@@ -162,7 +166,7 @@ class Seq2Tree:
                         root = Tree(formula=y_train[j])
                         y_train[j] = [self.tar_vocab.sent_to_idx(formula) for formula in root.inorder()]
 
-                X_batch = torch.LongTensor(X_batch, device=self.device)
+                X_batch = torch.LongTensor(X_batch)
                 y_batch = y_train[i:i+batch_size]
 
                 loss = self.run_epoch(X_batch, y_batch,

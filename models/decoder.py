@@ -33,10 +33,10 @@ class TreeDecoder(nn.Module):
                  device='cpu'):
         super(TreeDecoder, self).__init__()
         self.hidden_size = hidden_size
-        self.embed = nn.Embedding(output_size, hidden_size).cuda(device)
+        self.embed = nn.Embedding(output_size, hidden_size)
         # double the size of the LSTM (we append the parent <n> hidden state to input)
-        self.lstm = nn.LSTM(hidden_size*2, hidden_size, batch_first=True).cuda(device)
-        self.out = nn.Linear(hidden_size, output_size).cuda(device)
+        self.lstm = nn.LSTM(hidden_size*2, hidden_size, batch_first=True)
+        self.out = nn.Linear(hidden_size, output_size)
         self.softmax = nn.LogSoftmax(dim=1)
         self.device = device
 
