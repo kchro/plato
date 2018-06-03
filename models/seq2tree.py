@@ -203,7 +203,7 @@ class Seq2Tree:
 
                 # encode the source input
                 encoder_output, encoder_hidden = self.encoder(src_input)
-                print 'what?'
+                
                 SOS_token = self.tar_vocab.word_to_index['<S>']
                 EOS_token = self.tar_vocab.word_to_index['</S>']
                 NON_token = self.tar_vocab.word_to_index['<N>']
@@ -225,7 +225,9 @@ class Seq2Tree:
 
                     # initialize the sequence
                     # NOTE: batch_size is 1
-                    decoder_input = torch.LongTensor([[SOS_token]], device=self.device)
+                    decoder_input = torch.tensor([[SOS_token]],
+                                                 dtype=torch.long,
+                                                 device=self.device)
 
                     # get the parent-feeding vector
                     parent_input = subtree['parent']
@@ -237,6 +239,7 @@ class Seq2Tree:
                         decoder_output, decoder_hidden = self.decoder(decoder_input,
                                                                       hidden=decoder_hidden,
                                                                       parent=parent_input)
+
                         # interpret the output
                         idx, decoder_input = self.get_idx(decoder_output)
 
