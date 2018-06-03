@@ -54,6 +54,7 @@ class Seq2Tree:
         decoder_c = encoder_c.view(batch_size, 1, 1, -1)
 
         for batch in range(batch_size):
+            print batch
             decoder_hidden = decoder_h[batch], decoder_c[batch]
 
             # see Dong et al. (2016) [Algorithm 1]
@@ -72,12 +73,17 @@ class Seq2Tree:
                 # until no more nonterminals
                 subtree = queue.pop(0)
                 tar_seq = tar_output[batch][tar_idx]
+
+                print 'tar_seq', tar_seq
+
                 tar_idx += 1
                 tar_count += len(tar_seq)
 
                 # initialize the sequence
                 # NOTE: batch_size is 1
-                decoder_input = torch.LongTensor([[SOS_token]], device=self.device)
+                decoder_input = torch.tensor([[SOS_token]],
+                                             dtype=torch.long,
+                                             device=self.device)
 
                 # get the parent-feeding vector
                 parent_input = subtree['parent']
@@ -92,9 +98,8 @@ class Seq2Tree:
                                                                   parent=parent_input)
                     # interpret the output
                     idx, decoder_input = self.get_idx(decoder_output)
-
-                    loss += self.criterion(decoder_output, torch.tensor([tar_seq[i]],
-                                                                        device=self.device))
+                    print 'calc loss'
+                    loss += self.criterion(decoder_output, torch.tensor([tar_seq[i]], device=self.device))
 
                     # if we have a non-terminal token
                     if tar_seq[i] == NON_token:
