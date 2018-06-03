@@ -94,7 +94,8 @@ class Seq2Tree:
                 # interpret the output
                 idx, decoder_input = self.get_idx(decoder_output)
 
-                loss += self.criterion(decoder_output, torch.tensor([tar_seq[i]]))
+                loss += self.criterion(decoder_output, torch.tensor([tar_seq[i]],
+                                                                    device=device))
 
                 # if we have a non-terminal token
                 if tar_seq[i] == NON_token:

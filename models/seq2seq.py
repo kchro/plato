@@ -42,8 +42,9 @@ class Seq2Seq:
         encoder_output, encoder_hidden = self.encoder(src_input, batch_size=batch_size)
 
         SOS_token = self.tar_vocab.word_to_index['<S>']
-        decoder_input = torch.LongTensor([SOS_token]*batch_size,
-                                         device=self.device).view(-1, 1)
+        decoder_input = torch.tensor([SOS_token]*batch_size,
+                                     dtype=torch.long,
+                                     device=self.device).view(-1, 1)
 
         #decoder_input = torch.LongTensor([[SOS_token]], device=self.device)
         decoder_hidden = encoder_hidden
@@ -67,7 +68,8 @@ class Seq2Seq:
 
         return loss.item() / tar_len
 
-    def train(self, X_train, y_train, epochs=10, batch_size=20, loss_update=10):
+    def train(self, X_train, y_train, epochs=10,
+              batch_size=20, loss_update=10):
         cum_loss = 0
         history = {}
         losses = []
@@ -90,8 +92,12 @@ class Seq2Seq:
                 if len(X_batch) < batch_size:
                     continue
 
-                X_batch = torch.LongTensor(X_batch, device=self.device)
-                y_batch = torch.LongTensor(y_batch, device=self.device)
+                X_batch = torch.tensor(X_batch,
+                                       dtype=torch.long,
+                                       device=self.device)
+                y_batch = torch.tensor(y_batch,
+                                       dtype=torch.long,
+                                       device=self.device)
 
                 loss = self.run_epoch(X_batch, y_batch,
                                       batch_size=batch_size)
@@ -122,7 +128,9 @@ class Seq2Seq:
 
                 SOS_token = self.tar_vocab.word_to_index['<S>']
                 EOS_token = self.tar_vocab.word_to_index['</S>']
-                decoder_input = torch.LongTensor([[SOS_token]], device=self.device)
+                decoder_input = torch.tensor([[SOS_token]],
+                                             dtype=torch.long,
+                                             device=self.device)
                 decoder_hidden = encoder_hidden
 
                 decoded_seq = []
@@ -135,6 +143,8 @@ class Seq2Seq:
                     decoded_seq.append(idx)
 
                     decoder_input = topi.squeeze().detach()
-                decoded_seq = torch.LongTensor(decoded_seq, device=self.device)
+                decoded_seq = torch.tensor(decoded_seq,
+                                           dtype=torch.long,
+                                           device=self.device)
                 decoded_text.append(decoded_seq)
         return decoded_text

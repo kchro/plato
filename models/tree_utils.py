@@ -1,4 +1,6 @@
 import re
+import spacy
+import torch
 
 class Tree:
     def __init__(self, val=None, formula=None):
@@ -70,3 +72,32 @@ class Tree:
             ret += [ '\t' + child_s for child_s in str(child).split('\n') ]
 
         return ('\n').join(ret)
+
+nlp = spacy.load('en')
+
+class DepTree:
+    def __init__(self, sent=None, node=None, src_vocab=None, device='cpu'):
+        self.device = device
+        self.src_vocab = src_vocab
+
+        if sent:
+            doc = nlp(unicode(sent))
+            node = self.get_root(doc)
+        if node:
+            self.val = node.text
+            self.pos = node.pos_
+            self.idx = src_vocab.word_to_index[node.text.lower()]
+            self.input = torch.tensor(self.idx,
+                                      dtype=torch.long,
+                                      device=device)
+            self.children = []
+            for child in node.children:
+                self.children.append(DepTree(node=child,
+                                             src_vocab=src_vocab,
+                                             device=device))
+
+    def get_root(self, doc):
+        for token in doc:
+            if token.dep_ == 'ROOT':
+                return token
+        raise
