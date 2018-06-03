@@ -35,7 +35,7 @@ class TreeLSTMCell(nn.Module):
         self.f_h = nn.Linear(self.hidden_size, self.hidden_size)
 
     def forward(self, input, hidden):
-        children_c, children_h = hidden
+        children_h, children_c = hidden
 
         iou = self.iou_x(input) + self.iou_h(torch.sum(children_h, dim=0))
         i, o, u = torch.split(iou, self.hidden_size)
@@ -50,7 +50,7 @@ class TreeLSTMCell(nn.Module):
 
         c = torch.mul(i, u) + torch.sum(f, dim=0)
         h = torch.mul(o, F.tanh(c))
-        return o, (c, h)
+        return o, (h, c)
 
 class TreeEncoder(nn.Module):
     def __init__(self,
@@ -77,12 +77,12 @@ class TreeEncoder(nn.Module):
         else:
             # recursive case
             for child in tree.children:
-                _, (child_c, child_h) = self.forward(child)
+                _, (child_h, child_c) = self.forward(child)
                 # child_c, child_h = child_hidden
                 children_c.append(child_c.view(-1))
                 children_h.append(child_h.view(-1))
 
         output = self.embed(tree.input)
-        hidden = torch.stack(children_c), torch.stack(children_h)
-        output, hidden = self.lstm(output, hidden=hidden)
-        return output.view(1, 1, -1), (hidden[0].view(1, 1, -1), hidden[1].view(1, 1, -1))
+        hidden = torch.stack(children_h), torch.stack(children_c)
+        output, (h, c) = self.lstm(output, hidden=hidden)
+        return output.view(1, 1, -1), (h.view(1, 1, -1), c.view(1, 1, -1))
