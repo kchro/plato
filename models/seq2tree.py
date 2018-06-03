@@ -60,7 +60,6 @@ class Seq2Tree:
         decoder_c = encoder_c.view(batch_size, 1, 1, -1)
 
         for batch in range(batch_size):
-            print batch
             decoder_hidden = decoder_h[batch], decoder_c[batch]
 
             # see Dong et al. (2016) [Algorithm 1]
@@ -80,8 +79,6 @@ class Seq2Tree:
                 subtree = queue.pop(0)
                 tar_seq = tar_output[batch][tar_idx]
 
-                print 'tar_seq', tar_seq
-
                 tar_idx += 1
                 tar_count += len(tar_seq)
 
@@ -99,17 +96,13 @@ class Seq2Tree:
                 # Teacher forcing with trees
                 for i in range(len(tar_seq)):
                     # decode the input sequence
-                    print 'failed?'
-                    print decoder_input
-                    print decoder_hidden[0]
-                    print decoder_hidden[1]
-                    print parent_input
+
                     decoder_output, decoder_hidden = self.decoder(decoder_input,
                                                                   hidden=decoder_hidden,
                                                                   parent=parent_input)
                     # interpret the output
                     idx, decoder_input = self.get_idx(decoder_output)
-                    print 'calc loss'
+
                     loss += self.criterion(decoder_output, torch.tensor([tar_seq[i]],
                                                                         dtype=torch.long,
                                                                         device=self.device))
