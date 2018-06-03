@@ -18,7 +18,7 @@ class Seq2Tree:
         self.encoder = Encoder(input_size, hidden_size, device)
         self.decoder = TreeDecoder(hidden_size, output_size, device)
 
-        if device not 'cpu':
+        if torch.cuda.is_available():
             self.encoder.cuda()
             self.decoder.cuda()
 
