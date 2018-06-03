@@ -98,7 +98,7 @@ if __name__ == '__main__':
 
     # load the saved model
     print 'loading model parameters...',
-    model.load('%s_final.json' % sess)
+    model.load('%s.json' % sess)
     print 'done.'
 
     # enter the input string
@@ -109,8 +109,13 @@ if __name__ == '__main__':
     preds = model.predict(x_test)
     print 'done.'
 
+    print x_test
+    print preds
+
     fol_preds = [tar_vocab.reverse(fol_pred) for fol_pred in preds]
 
-    for nl_sent, fol_pred in zip(x_test, preds):
+    print fol_preds
+
+    for nl_sent, fol_pred in zip(x_test, fol_preds):
         print 'input: ' + nl_sent
         print 'output: ' + fol_pred
