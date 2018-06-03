@@ -64,7 +64,7 @@ class TreeEncoder(nn.Module):
         self.lstm = TreeLSTMCell(hidden_size, hidden_size, batch_first=True)
         self.device = device
 
-    def forward(self, tree, batch_size=1):
+    def forward(self, tree):
         children_c = []
         children_h = []
 

@@ -18,6 +18,10 @@ class Tree2Seq:
         self.encoder = TreeEncoder(input_size, hidden_size, device)
         self.decoder = Decoder(hidden_size, output_size, device)
 
+        if torch.cuda.is_available():
+            self.encoder.cuda()
+            self.decoder.cuda()
+
         self.encoder_opt = optimizer(self.encoder.parameters(), lr=lr)
         self.decoder_opt = optimizer(self.decoder.parameters(), lr=lr)
         self.criterion = criterion()
@@ -41,9 +45,14 @@ class Tree2Seq:
         self.decoder_opt.zero_grad()
 
         # encode the source input
-        encoder_output, encoder_hidden = self.encoder(src_input, batch_size=batch_size)
-        #encoder_output = encoder_output.view(1, 1, -1)
-        #encoder_hidden = encoder_hidden[0].view(1, 1, -1), encoder_hidden[1].view(1, 1, -1)
+        decoder_h = []
+        decoder_c = []
+        for i in range(len(src_input)):
+            _, (encoder_h, encoder_c) = self.encoder(src_input[i])
+            decoder_h.append(encoder_h)
+            decoder_c.append(encoder_c)
+        decoder_h = torch.cat(decoder_h, dim=1)
+        decoder_c = torch.cat(decoder_c, dim=1)
 
         SOS_token = self.tar_vocab.word_to_index['<S>']
         decoder_input = torch.tensor([SOS_token]*batch_size,
@@ -51,7 +60,7 @@ class Tree2Seq:
                                      device=self.device).view(-1, 1)
 
         #decoder_input = torch.LongTensor([[SOS_token]], device=self.device)
-        decoder_hidden = encoder_hidden
+        decoder_hidden = decoder_h, decoder_c
 
         loss = 0
 
@@ -90,22 +99,22 @@ class Tree2Seq:
             arrow = int(float(num)/den*length)
             return '='*(arrow-1)+'>'+'.'*(20-arrow)
 
-
         for epoch in range(epochs):
             epoch_loss = 0
 
             print 'Epoch %d/%d' % (epoch, epochs)
 
             for i in range(0, len(X_train), batch_size):
-                if not isinstance(X_train[i], DepTree):
+                if i+batch_size > len(X_train):
+                    continue
+
+                if epoch == 0:
                     for j in range(i, i+batch_size):
                         X_train[j] = self.str_to_deptree(X_train[j])
 
-                X_batch = X_train[i]
+                X_batch = X_train[i:i+batch_size]
 
-                y_batch = y_train[i:i+batch_size]
-
-                y_batch = torch.tensor(y_batch,
+                y_batch = torch.tensor(y_train[i:i+batch_size],
                                        dtype=torch.long,
                                        device=self.device)
 
@@ -158,3 +167,44 @@ class Tree2Seq:
                                            device=self.device)
                 decoded_text.append(decoded_seq)
         return decoded_text
+
+    def evaluate(self, X_test, y_test, preds, out=None):
+        """
+        for seq2tree models,
+        X_test is going to be a list of sents
+        list of sents => [sents]
+        y_test, and preds are going to be
+        lists of lists of indexes => [[idx]]
+        """
+        if out:
+            outfile = out
+            errfile = 'err_'+out
+        else:
+            outfile = 'logs/sessions/%s.out' % self.sess
+            errfile = 'logs/sessions/err_%s.out' % self.sess
+
+        print 'logging to %s...' % outfile
+
+        num_correct = 0
+
+        with open(outfile, 'w') as w:
+            with open(errfile, 'w') as err:
+                for nl_sent, fol_gold_idx, fol_pred_idx in zip(X_test, y_test, preds):
+                    fol_gold = self.tar_vocab.reverse(fol_gold_idx)
+                    fol_pred = self.tar_vocab.reverse(fol_pred_idx)
+
+                    if fol_gold != fol_pred:
+                        err.write('input:  '+nl_sent+'\n')
+                        err.write('gold:   '+fol_gold+'\n')
+                        err.write('output: '+fol_pred+'\n')
+                        err.write('\n')
+                    else:
+                        num_correct += 1
+
+                    w.write('%s\t%s\t%s\t\n' % (nl_sent, fol_gold, fol_pred))
+
+        print '########################'
+        print '# Evaluation:'
+        print '# %d out of %d correct' % (num_correct, len(preds))
+        print '# %0.3f accuracy' % (float(num_correct) / len(preds))
+        print '########################'
