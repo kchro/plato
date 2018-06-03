@@ -102,8 +102,8 @@ if __name__ == '__main__':
     print 'done.'
 
     # enter the input string
-    x_test = raw_input('enter Natural Language sentence: ')
-    x_test = src_vocab.get_idx_tensor([x_test])
+    src_input = raw_input('enter Natural Language sentence: ')
+    x_test = src_vocab.get_idx_tensor([src_input])
     # make the prediction
     print 'running the model on test set...'
     preds = model.predict(x_test)
@@ -116,6 +116,6 @@ if __name__ == '__main__':
 
     print fol_preds
 
-    for nl_sent, fol_pred in zip(x_test, fol_preds):
+    for nl_sent, fol_pred in zip([src_input], fol_preds):
         print 'input: ' + nl_sent
         print 'output: ' + fol_pred
