@@ -90,7 +90,10 @@ def load_file(filename='',
 
     print 'converting source and target to index tensors...',
     src_vocab = NLVocab(src)
-    src_inputs = src_vocab.get_idx_tensor(src)
+    if encoder == 'seq':
+        src_inputs = src_vocab.get_idx_tensor(src)
+    else:
+        src_inputs = src
 
     tar_vocab = FOLVocab(tar)
     if decoder == 'seq':
