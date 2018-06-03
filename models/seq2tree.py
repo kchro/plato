@@ -93,15 +93,16 @@ class Seq2Tree:
                 # Teacher forcing with trees
                 for i in range(len(tar_seq)):
                     # decode the input sequence
+                    print 'failed?'
                     decoder_output, decoder_hidden = self.decoder(decoder_input,
                                                                   hidden=decoder_hidden,
                                                                   parent=parent_input)
+                    print 'failed?'
                     # interpret the output
                     idx, decoder_input = self.get_idx(decoder_output)
                     print 'calc loss'
                     loss += self.criterion(decoder_output, torch.tensor([tar_seq[i]],
-                                                                        dtype=torch.long,
-                                                                        device='cpu'))
+                                                                        dtype=torch.long))
 
                     # if we have a non-terminal token
                     if tar_seq[i] == NON_token:
