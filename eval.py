@@ -102,20 +102,16 @@ if __name__ == '__main__':
     print 'done.'
 
     # enter the input string
-    src_input = raw_input('enter Natural Language sentence: ')
-    x_test = src_vocab.get_idx_tensor([src_input])
-    # make the prediction
-    print 'running the model on test set...'
-    preds = model.predict(x_test)
-    print 'done.'
+    while True:
+        src_input = raw_input('enter sentence (Q to quit): ')
+        if src_input == 'Q':
+            break
 
-    print x_test
-    print preds
+        x_test = src_vocab.get_idx_tensor([src_input])
+        # make the prediction
+        print 'running the model on test set...'
+        preds = model.predict(x_test)
+        print 'done.'
 
-    fol_preds = [tar_vocab.reverse(fol_pred) for fol_pred in preds]
-
-    print fol_preds
-
-    for nl_sent, fol_pred in zip([src_input], fol_preds):
-        print 'input: ' + nl_sent
-        print 'output: ' + fol_pred
+        print 'input: ' + src_input
+        print 'output: ' + tar_vocab.reverse(preds[0])
