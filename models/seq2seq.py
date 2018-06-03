@@ -16,6 +16,10 @@ class Seq2Seq:
         self.encoder = Encoder(input_size, hidden_size, device)
         self.decoder = Decoder(hidden_size, output_size, device)
 
+        if torch.cuda.is_available():
+            self.encoder.cuda()
+            self.decoder.cuda()
+
         self.encoder_opt = optimizer(self.encoder.parameters(), lr=lr)
         self.decoder_opt = optimizer(self.decoder.parameters(), lr=lr)
         self.criterion = criterion()
