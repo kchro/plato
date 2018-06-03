@@ -109,10 +109,6 @@ if __name__ == '__main__':
     preds = model.predict(x_test)
     print 'done.'
 
-    print x_test
-
-    print preds
-
     fol_preds = [tar_vocab.reverse(fol_pred) for fol_pred in preds]
 
     for nl_sent, fol_pred in zip(x_test, preds):
