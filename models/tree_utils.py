@@ -84,9 +84,11 @@ class DepTree:
             doc = nlp(unicode(sent))
             node = self.get_root(doc)
         if node:
-            self.val = node.text
-            self.pos = node.pos_
-            self.idx = src_vocab.word_to_index[node.text.lower()]
+            self.val = node.text.lower()
+            if self.val not in self.src_vocab.vocab:
+                self.val = '<UNK>'
+            self.idx = src_vocab.word_to_index[self.val]
+
             self.input = torch.tensor(self.idx,
                                       dtype=torch.long,
                                       device=device)
