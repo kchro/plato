@@ -93,15 +93,6 @@ class Tree2Tree:
             # Teacher forcing with trees
             for i in range(len(tar_seq)):
                 # decode the input sequence
-                print decoder_input
-
-                print decoder_hidden[0]
-
-                print decoder_hidden[1]
-
-                print parent_input
-                raise
-
                 decoder_output, decoder_hidden = self.decoder(decoder_input,
                                                               hidden=decoder_hidden,
                                                               parent=parent_input)
