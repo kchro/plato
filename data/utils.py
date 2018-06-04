@@ -6,7 +6,7 @@ import spacy
 
 class Vocab(object):
     def __init__(self, text, n_words, charset, join, device):
-        def split(self, sent):
+        def split(sent):
             for ch in charset:
                 sent = sent.replace(ch, ' %s ' % ch)
             return sent.split()
