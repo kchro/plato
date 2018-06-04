@@ -2,16 +2,11 @@ from collections import Counter
 import numpy as np
 import re
 import torch
+import spacy
 
 class Vocab(object):
     def __init__(self, text, n_words, charset, join, device):
-        def split(sent):
-            for ch in charset:
-                sent = sent.replace(ch, ' %s ' % ch)
-            return sent.split()
-
-        self.split = split
-        freq = Counter([w for sent in text for w in split(sent)])
+        freq = Counter([w for sent in text for w in self.split(sent)])
         freq = freq.most_common(n_words) if n_words else freq.items()
         vocab = {w for w, c in freq}
         vocab.add('<S>')
@@ -25,6 +20,7 @@ class Vocab(object):
         self.vocab = sorted(vocab)
         self.word_to_index = { self.vocab[i]: i for i in range(len(self.vocab)) }
         self.index_to_word = { i: self.vocab[i] for i in range(len(self.vocab)) }
+        self.charset = charset
         self.join = join
         self.device = device
 
@@ -32,6 +28,11 @@ class Vocab(object):
         for ch in chars:
             s = s.replace(ch, ' %s ' % ch)
         return s
+
+    def split(self, sent):
+        for ch in self.charset:
+            sent = sent.replace(ch, ' %s ' % ch)
+        return sent.split()
 
     def augment_sent(self, sent):
         aug = []
