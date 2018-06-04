@@ -69,6 +69,10 @@ def load_file(filename='',
     tar = []
     with open(filename, 'r') as f:
         for line in f:
+            if encoder == 'tree':
+                if 'failed' in line:
+                    continue
+            
             # kind of hacky, but whatever. i fucked up the dataset.
             # some files are of form: <nl sent>\t<fol>\t<pol>
             # others are            : <nl sent>\t<fol>
