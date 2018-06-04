@@ -11,6 +11,7 @@ from sklearn.model_selection import train_test_split
 
 import torch
 import json
+import random
 
 MODELS = {
     'seq2seq': Seq2Seq,
@@ -101,10 +102,18 @@ if __name__ == '__main__':
     model.load('%s.json' % sess)
     print 'done.'
 
+    test = random.sample(list(zip(X_test, y_test)), 100)
+    X_test = [t[0] for t in test]
+    y_test = [t[1] for t in test]
+
     preds = model.predict(X_test)
     model.evaluate(X_test, y_test, preds, out='tmp')
 
     raise
+
+    import random
+    for i in range(10):
+        print random.choice(X_test)
 
     # enter the input string
     while True:
@@ -113,6 +122,7 @@ if __name__ == '__main__':
             break
 
         x_test = src_vocab.get_idx_tensor([src_input])
+        
         # make the prediction
         print 'running the model on test set...'
         preds = model.predict(x_test)
