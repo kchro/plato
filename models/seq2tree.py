@@ -203,7 +203,7 @@ class Seq2Tree:
 
                 # encode the source input
                 encoder_output, encoder_hidden = self.encoder(src_input)
-                
+
                 SOS_token = self.tar_vocab.word_to_index['<S>']
                 EOS_token = self.tar_vocab.word_to_index['</S>']
                 NON_token = self.tar_vocab.word_to_index['<N>']
@@ -277,11 +277,11 @@ class Seq2Tree:
 
     def evaluate(self, X_test, y_test, preds, out=None):
         """
-        for seq2tree models, X_test is going to be
+        for seq2tree models, X_test and preds are going to be
         lists of lists of indexes => [[idx]]
 
-        y_test and preds are going to be
-
+        y_test is going to be
+        list of sents => [sent]
         """
         if out:
             outfile = out

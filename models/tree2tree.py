@@ -18,6 +18,10 @@ class Tree2Tree:
         self.encoder = TreeEncoder(input_size, hidden_size, device)
         self.decoder = TreeDecoder(hidden_size, output_size, device)
 
+        if torch.cuda.is_available():
+            self.encoder.cuda()
+            self.decoder.cuda()
+
         self.encoder_opt = optimizer(self.encoder.parameters(), lr=lr)
         self.decoder_opt = optimizer(self.decoder.parameters(), lr=lr)
         self.criterion = criterion()
@@ -42,8 +46,7 @@ class Tree2Tree:
         self.decoder_opt.zero_grad()
 
         # encode the source input
-        _, encoder_hidden = self.encoder(src_input,
-                                         batch_size=batch_size)
+        _, encoder_hidden = self.encoder(src_input)
 
         SOS_token = self.tar_vocab.word_to_index['<S>']
         EOS_token = self.tar_vocab.word_to_index['</S>']
@@ -95,6 +98,7 @@ class Tree2Tree:
                 idx, decoder_input = self.get_idx(decoder_output)
 
                 loss += self.criterion(decoder_output, torch.tensor([tar_seq[i]],
+                                                                    dtype=torch.long,
                                                                     device=self.device))
 
                 # if we have a non-terminal token
@@ -146,7 +150,10 @@ class Tree2Tree:
             print 'Epoch %d/%d' % (epoch, epochs)
 
             for i in range(0, len(X_train), batch_size):
-                if not isinstance(X_train[i], DepTree):
+                if i+batch_size > len(X_train):
+                    continue
+
+                if epoch == 0:
                     for j in range(i, i+batch_size):
                         X_train[j] = self.str_to_deptree(X_train[j])
 
@@ -258,6 +265,46 @@ class Tree2Tree:
                 decoded_text.append(decoded_seq)
 
         return decoded_text
+
+    def evaluate(self, X_test, y_test, preds, out=None):
+        """
+        for tree2tree models,
+        X_test, y_test is going to be a list of sents
+        list of sents => [sents]
+        preds are going to be
+        lists of lists of indexes => [[idx]]
+        """
+        if out:
+            outfile = out
+            errfile = 'err_'+out
+        else:
+            outfile = 'logs/sessions/%s.out' % self.sess
+            errfile = 'logs/sessions/err_%s.out' % self.sess
+
+        print 'logging to %s...' % outfile
+
+        num_correct = 0
+
+        with open(outfile, 'w') as w:
+            with open(errfile, 'w') as err:
+                for nl_sent, fol_gold, fol_pred_idx in zip(X_test, y_test, preds):
+                    fol_pred = self.tar_vocab.reverse(fol_pred_idx)
+
+                    if fol_gold != fol_pred:
+                        err.write('input:  '+nl_sent+'\n')
+                        err.write('gold:   '+fol_gold+'\n')
+                        err.write('output: '+fol_pred+'\n')
+                        err.write('\n')
+                    else:
+                        num_correct += 1
+
+                    w.write('%s\t%s\t%s\t\n' % (nl_sent, fol_gold, fol_pred))
+
+        print '########################'
+        print '# Evaluation:'
+        print '# %d out of %d correct' % (num_correct, len(preds))
+        print '# %0.3f accuracy' % (float(num_correct) / len(preds))
+        print '########################'
 
     def save(self, filename):
         torch.save(self.encoder.state_dict(), 'logs/sessions/enc_%s' % filename)
