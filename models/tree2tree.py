@@ -81,7 +81,9 @@ class Tree2Tree:
 
             # initialize the sequence
             # NOTE: batch_size is 1
-            decoder_input = torch.LongTensor([[SOS_token]], device=self.device)
+            decoder_input = torch.tensor([[SOS_token]],
+                                         dtype=torch.long,
+                                         device=self.device)
 
             # get the parent-feeding vector
             parent_input = subtree['parent']
@@ -91,6 +93,15 @@ class Tree2Tree:
             # Teacher forcing with trees
             for i in range(len(tar_seq)):
                 # decode the input sequence
+                print decoder_input
+
+                print decoder_hidden[0]
+
+                print decoder_hidden[1]
+
+                print parent_input
+                raise
+
                 decoder_output, decoder_hidden = self.decoder(decoder_input,
                                                               hidden=decoder_hidden,
                                                               parent=parent_input)

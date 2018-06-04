@@ -91,12 +91,13 @@ class DepTree:
 
             self.input = torch.tensor(self.idx,
                                       dtype=torch.long,
-                                      device=device)
+                                      device=self.device)
+
             self.children = []
             for child in node.children:
                 self.children.append(DepTree(node=child,
                                              src_vocab=src_vocab,
-                                             device=device))
+                                             device=self.device))
 
     def get_root(self, doc):
         for token in doc:
