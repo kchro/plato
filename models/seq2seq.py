@@ -139,7 +139,9 @@ class Seq2Seq:
             decoded_text = []
 
             for i in range(len(X_test)):
-                src_input = torch.LongTensor(X_test[i], device=self.device).view(1, -1)
+                src_input = torch.tensor(X_test[i],
+                                         dtype=torch.long,
+                                         device=self.device).view(1, -1)
 
                 # encode the source input
                 encoder_output, encoder_hidden = self.encoder(src_input)
