@@ -69,7 +69,9 @@ if __name__ == '__main__':
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print 'running on the %s' % device
     sess = raw_input('session name: ')
-
+    #sess = 't2t_bug'
+    print sess
+    
     # parse arguments
     parser = get_parser()
     args = parser.parse_args()
