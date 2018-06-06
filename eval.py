@@ -45,6 +45,8 @@ def get_parser():
     parser.add_argument('-D', '--data',
                         required=True,
                         choices={'toy', 'sm', 'md', 'lg'})
+    parser.add_argument('--hidden',
+                        required=True, type=int)
     return parser
 
 def get_model_name(args):
@@ -88,7 +90,8 @@ if __name__ == '__main__':
 
     # load the model parameters
     input_size = len(src_vocab)
-    hidden_size = 200
+    #hidden_size = 200
+    hidden_size = args.hidden
     output_size = len(tar_vocab)
     model = MODELS[name](input_size=input_size,
                          hidden_size=hidden_size,
