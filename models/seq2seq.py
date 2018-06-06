@@ -80,7 +80,7 @@ class Seq2Seq:
 
         return loss.item() / tar_len
 
-    def train(self, X_train, y_train, epochs=10,
+    def train(self, X_train, y_train, retrain=0, epochs=10,
               batch_size=20, loss_update=10):
         """
         training function
@@ -95,7 +95,7 @@ class Seq2Seq:
             arrow = int(float(num)/den*length)
             return '='*(arrow-1)+'>'+'.'*(20-arrow)
 
-        for epoch in range(epochs):
+        for epoch in range(retrain, epochs):
             epoch_loss = 0
 
             print 'Epoch %d/%d' % (epoch, epochs)

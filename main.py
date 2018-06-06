@@ -33,8 +33,7 @@ def get_parser():
         parser: (ArgumentParser) the created parser
     '''
     parser = argparse.ArgumentParser()
-    parser.add_argument('--train',
-                        action='store_true')
+    parser.add_argument('--retrain', type=int)
     parser.add_argument('--eval_only',
                         action='store_true')
     parser.add_argument('-e', '--encoder',
@@ -71,7 +70,7 @@ if __name__ == '__main__':
     sess = raw_input('session name: ')
     #sess = 't2t_bug'
     print 'using session: %s' % sess
-    
+
     # parse arguments
     parser = get_parser()
     args = parser.parse_args()
@@ -109,12 +108,25 @@ if __name__ == '__main__':
                          tar_vocab=tar_vocab,
                          sess=sess, device=device)
 
-    # train the model
-    print 'training the model...'
-    history = model.train(X_train, y_train,
-                          batch_size=args.batch,
-                          epochs=args.epochs)
-    print 'done training the model.'
+    if args.retrain:
+        # load the saved model
+        print 'loading model parameters...',
+        model.load('%s_epoch_%d.json' % (sess, args.retrain))
+        print 'done.'
+        # train the model
+        print 'training the model from epoch %d...' % args.retrain
+        history = model.train(X_train, y_train,
+                              batch_size=args.batch,
+                              retrain=args.retrain,
+                              epochs=args.epochs)
+        print 'done training the model.'
+    else:
+        # train the model
+        print 'training the model...'
+        history = model.train(X_train, y_train,
+                              batch_size=args.batch,
+                              epochs=args.epochs)
+        print 'done training the model.'
 
     # saving losses and model parameters
     print 'saving losses and model parameters...',
