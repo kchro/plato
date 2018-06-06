@@ -132,7 +132,7 @@ class Tree2Tree:
                           device=self.device)
         return deptree
 
-    def train(self, X_train, y_train, epochs=10, batch_size=1, loss_update=10):
+    def train(self, X_train, y_train, epochs=10, retrain=0, batch_size=1, loss_update=10):
         cum_loss = 0
         history = {}
         losses = []
@@ -146,7 +146,7 @@ class Tree2Tree:
             arrow = int(float(num)/den*length)
             return '='*(arrow-1)+'>'+'.'*(20-arrow)
 
-        for epoch in range(epochs):
+        for epoch in range(retrain, epochs):
             epoch_loss = 0
 
             print 'Epoch %d/%d' % (epoch, epochs)

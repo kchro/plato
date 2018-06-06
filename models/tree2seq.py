@@ -87,7 +87,7 @@ class Tree2Seq:
                           device=self.device)
         return deptree
 
-    def train(self, X_train, y_train, epochs=10,
+    def train(self, X_train, y_train, epochs=10, retrain=0,
               batch_size=1, loss_update=10):
         cum_loss = 0
         history = {}
@@ -99,7 +99,7 @@ class Tree2Seq:
             arrow = int(float(num)/den*length)
             return '='*(arrow-1)+'>'+'.'*(20-arrow)
 
-        for epoch in range(epochs):
+        for epoch in range(retrain, epochs):
             epoch_loss = 0
 
             print 'Epoch %d/%d' % (epoch, epochs)

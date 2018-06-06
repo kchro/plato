@@ -94,7 +94,6 @@ class Seq2Tree:
                 # Teacher forcing with trees
                 for i in range(len(tar_seq)):
                     # decode the input sequence
-
                     decoder_output, decoder_hidden = self.decoder(decoder_input,
                                                                   hidden=decoder_hidden,
                                                                   parent=parent_input)
@@ -128,7 +127,7 @@ class Seq2Tree:
 
         return loss.item() / tar_count
 
-    def train(self, X_train, y_train, epochs=10, batch_size=10, loss_update=10):
+    def train(self, X_train, y_train, epochs=10, retrain=0, batch_size=10, loss_update=10):
         cum_loss = 0
         history = {}
         losses = []
@@ -142,7 +141,7 @@ class Seq2Tree:
             arrow = int(float(num)/den*length)
             return '='*(arrow-1)+'>'+'.'*(20-arrow)
 
-        for epoch in range(epochs):
+        for epoch in range(retrain, epochs):
             epoch_loss = 0
 
             print 'Epoch %d/%d' % (epoch, epochs)
