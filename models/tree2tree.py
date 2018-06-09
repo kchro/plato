@@ -9,6 +9,7 @@ from encoder import TreeEncoder
 from decoder import TreeDecoder
 
 from tree_utils import DepTree, Tree
+from tqdm import tqdm
 
 class Tree2Tree:
     def __init__(self, input_size=None, hidden_size=None, output_size=None,
@@ -57,26 +58,24 @@ class Tree2Tree:
 
         loss = 0
 
-        tar_root = Tree(formula=tar_output[0])
-        tar_queue = [
-            self.tar_vocab.sent_to_idx(formula)
-            for formula in tar_root.inorder()
-        ]
-
         # see Dong et al. (2016) [Algorithm 1]
         root = {
             'parent': decoder_hidden[0],    # (1, 1, 200)
             'hidden': decoder_hidden,       # (1, 1, 200) * 2
-            'children': []
         }
 
         queue = [root]
+
+        tar_idx = 0
         tar_count = 0
 
         while queue:
             # until no more nonterminals
             subtree = queue.pop(0)
-            tar_seq = tar_queue.pop(0)
+            # get the next subtree in tar_output
+            tar_seq = tar_output[tar_idx]
+
+            # count items in sequence (for averaging loss)
             tar_count += len(tar_seq)
 
             # initialize the sequence
@@ -91,7 +90,7 @@ class Tree2Tree:
             idx = SOS_token
 
             # Teacher forcing with trees
-            for i in range(len(tar_seq)):
+            for i in range(1, len(tar_seq)):
                 # decode the input sequence
                 decoder_output, decoder_hidden = self.decoder(decoder_input,
                                                               hidden=decoder_hidden,
@@ -99,26 +98,30 @@ class Tree2Tree:
                 # interpret the output
                 idx, decoder_input = self.get_idx(decoder_output)
 
-                loss += self.criterion(decoder_output, torch.tensor([tar_seq[i]],
-                                                                    dtype=torch.long,
-                                                                    device=self.device))
+                # get the desired output
+                target_output = torch.tensor([tar_seq[i]],
+                                             dtype=torch.long,
+                                             device=self.device)
+
+                # calculate loss
+                loss += self.criterion(decoder_output, target_output)
 
                 # if we have a non-terminal token
                 if tar_seq[i] == NON_token:
                     # add a subtree to the queue
                     ### parent: the previous state for <n>
                     ### hidden: the hidden state for <n>
-                    ### children: subtrees
                     nonterminal = {
                         'parent': decoder_hidden[0],
-                        'hidden': decoder_hidden,
-                        'children': []
+                        'hidden': decoder_hidden
                     }
 
                     queue.append(nonterminal)
-                    subtree['children'].append(nonterminal)
-                else:
-                    subtree['children'].append(idx)
+
+                decoder_input = target_output # teacher forcing
+
+            # next subtree in tar_output
+            tar_idx += 1
 
         loss.backward()
         self.encoder_opt.step()
@@ -146,25 +149,28 @@ class Tree2Tree:
             arrow = int(float(num)/den*length)
             return '='*(arrow-1)+'>'+'.'*(20-arrow)
 
+        # preprocess inputs and outputs
+        print 'preprocessing inputs and outputs...'
+        for i in tqdm(range(len(X_train))):
+            X_train[i] = self.str_to_deptree(X_train[i])
+            root = Tree(formula=y_train[i])
+            y_train[i] = [
+                self.tar_vocab.sent_to_idx(formula)
+                for formula in root.inorder()
+            ]
+
         for epoch in range(retrain, epochs):
             epoch_loss = 0
 
             print 'Epoch %d/%d' % (epoch, epochs)
 
-            for i in range(0, len(X_train), batch_size):
+            for i in range(len(X_train)):
                 if i+batch_size > len(X_train):
                     continue
 
-                if epoch == 0:
-                    for j in range(i, i+batch_size):
-                        X_train[j] = self.str_to_deptree(X_train[j])
-
-                X_batch = X_train[i]
-
-                y_batch = y_train[i:i+batch_size]
-
-                loss = self.run_epoch(X_batch, y_batch,
-                                      batch_size=batch_size)
+                # NOTE: batch size forced to 1
+                loss = self.run_epoch(X_train[i], y_train[i],
+                                      batch_size=1)
                 cum_loss += loss
                 epoch_loss += loss
 

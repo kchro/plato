@@ -38,7 +38,7 @@ class Seq2Tree:
         decoder_input = topi.squeeze().detach()
         return idx, decoder_input
 
-    def run_epoch(self, src_input, tar_output, batch_size=1):
+    def run_epoch(self, src_inputs, tar_outputs, batch_size=1):
         """
         one training epoch
         """
@@ -46,8 +46,11 @@ class Seq2Tree:
         self.decoder_opt.zero_grad()
 
         # encode the source input
-        _, (encoder_h, encoder_c) = self.encoder(src_input,
+        _, (encoder_h, encoder_c) = self.encoder(src_inputs,
                                                  batch_size=batch_size)
+
+        # print encoder_h.shape # (1, 20, 10)
+        # print encoder_c.shape # (1, 20, 10)
 
         SOS_token = self.tar_vocab.word_to_index['<S>']
         EOS_token = self.tar_vocab.word_to_index['</S>']
@@ -57,27 +60,29 @@ class Seq2Tree:
         decoder_h = encoder_h.view(batch_size, 1, 1, -1)
         decoder_c = encoder_c.view(batch_size, 1, 1, -1)
 
+        tar_count = 0
+
         for batch in range(batch_size):
             decoder_hidden = decoder_h[batch], decoder_c[batch]
+            # (1, 1, hidden), (1, 1, hidden)
 
             # see Dong et al. (2016) [Algorithm 1]
             root = {
                 'parent': decoder_hidden[0],    # (1, 1, 200)
                 'hidden': decoder_hidden,       # (1, 1, 200) * 2
-                'children': []
             }
 
             queue = [root]
-            tar_count = 0
 
             tar_idx = 0
 
             while queue:
                 # until no more nonterminals
                 subtree = queue.pop(0)
-                tar_seq = tar_output[batch][tar_idx]
+                # get the next subtree in tar_output
+                tar_seq = tar_outputs[batch][tar_idx]
 
-                tar_idx += 1
+                # count items in sequence (for averaging loss)
                 tar_count += len(tar_seq)
 
                 # initialize the sequence
@@ -92,7 +97,7 @@ class Seq2Tree:
                 idx = SOS_token
 
                 # Teacher forcing with trees
-                for i in range(len(tar_seq)):
+                for i in range(1, len(tar_seq)):
                     # decode the input sequence
                     decoder_output, decoder_hidden = self.decoder(decoder_input,
                                                                   hidden=decoder_hidden,
@@ -100,9 +105,13 @@ class Seq2Tree:
                     # interpret the output
                     idx, decoder_input = self.get_idx(decoder_output)
 
-                    loss += self.criterion(decoder_output, torch.tensor([tar_seq[i]],
-                                                                        dtype=torch.long,
-                                                                        device=self.device))
+                    # get the desired output
+                    target_output = torch.tensor([tar_seq[i]],
+                                                 dtype=torch.long,
+                                                 device=self.device)
+
+                    # calculate loss
+                    loss += self.criterion(decoder_output, target_output)
 
                     # if we have a non-terminal token
                     if tar_seq[i] == NON_token:
@@ -113,13 +122,15 @@ class Seq2Tree:
                         nonterminal = {
                             'parent': decoder_hidden[0],
                             'hidden': decoder_hidden,
-                            'children': []
+                            # 'children': []
                         }
 
                         queue.append(nonterminal)
-                        subtree['children'].append(nonterminal)
-                    else:
-                        subtree['children'].append(idx)
+
+                    decoder_input = target_output # Teacher forcing
+
+                # next subtree in tar_output
+                tar_idx += 1
 
         loss.backward()
         self.encoder_opt.step()
