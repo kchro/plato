@@ -227,7 +227,9 @@ class Tree2Tree:
 
                     # initialize the sequence
                     # NOTE: batch_size is 1
-                    decoder_input = torch.LongTensor([[SOS_token]], device=self.device)
+                    decoder_input = torch.tensor([[SOS_token]],
+                                                 dtype=torch.long,
+                                                 device=self.device)
 
                     # get the parent-feeding vector
                     parent_input = subtree['parent']
@@ -293,10 +295,14 @@ class Tree2Tree:
 
         num_correct = 0
 
+        def preprocess(fol_pred_idx):
+            fol_pred = self.tar_vocab.reverse(fol_pred_idx)
+            return fol_pred.replace('<S>', '').replace('</S>', '')
+
         with open(outfile, 'w') as w:
             with open(errfile, 'w') as err:
                 for nl_sent, fol_gold, fol_pred_idx in zip(X_test, y_test, preds):
-                    fol_pred = self.tar_vocab.reverse(fol_pred_idx)
+                    fol_pred = preprocess(fol_pred_idx)
 
                     if fol_gold != fol_pred:
                         err.write('input:  '+nl_sent+'\n')
