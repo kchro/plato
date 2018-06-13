@@ -72,9 +72,9 @@ class Seq2Tree:
                 'hidden': decoder_hidden,       # (1, 1, 200) * 2
             }
 
-            queue = [root]
-
             tar_idx = 0
+
+            queue = [root]
 
             while queue:
                 # until no more nonterminals
@@ -304,16 +304,16 @@ class Seq2Tree:
 
         num_correct = 0
 
-        def preprocess(fol_pred):
-            return self.tar_vocab.reverse(fol_pred)
-            # return fol_pred.replace('<S>', '').replace('</S>', '')
+        def preprocess(fol_pred_idx):
+            fol_pred = self.tar_vocab.reverse(fol_pred_idx)
+            return fol_pred.replace('<S>', '').replace('</S>', '')
 
         with open(outfile, 'w') as w:
             with open(errfile, 'w') as err:
                 for nl_idx, fol_gold, fol_pred_idx in zip(X_test, y_test, preds):
                     nl_sent = self.src_vocab.reverse(nl_idx)
 
-                    fol_pred = self.tar_vocab.reverse(fol_pred_idx)
+                    fol_pred = preprocess(fol_pred_idx)
 
                     if fol_gold != fol_pred:
                         err.write('input:  '+nl_sent+'\n')
